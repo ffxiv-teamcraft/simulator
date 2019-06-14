@@ -41,7 +41,7 @@ export class HeartOfTheCrafter extends BuffAction {
     return 0;
   }
 
-  protected getTick(): (simulation: Simulation, linear?: boolean) => void {
+  protected getTick(): ((simulation: Simulation, linear?: boolean) => void) | undefined {
     return undefined;
   }
 

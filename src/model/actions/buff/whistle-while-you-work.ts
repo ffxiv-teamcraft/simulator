@@ -42,7 +42,7 @@ export class WhistleWhileYouWork extends BuffAction {
     return 11;
   }
 
-  protected getTick(): (simulation: Simulation, linear?: boolean) => void {
+  protected getTick(): ((simulation: Simulation, linear?: boolean) => void) | undefined {
     return (simulation, linear) => {
       const stepsForGood = simulation.hasBuff(Buff.HEART_OF_CRAFTER) ? 2 : 4;
       // If we're in linear mode, consider one out of 4 steps as matching the condition, as you can't have each turn GOOD, ever.
