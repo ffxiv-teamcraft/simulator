@@ -30,5 +30,5 @@ export interface ActionResult {
     cpDifference: number;
     // Solidity added to the craft (negative if removed)
     solidityDifference: number;
-  }
+  };
 }

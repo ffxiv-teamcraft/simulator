@@ -4,6 +4,6 @@ export interface Ingredient {
   quality?: number;
   stepid?: string;
   part?: string;
-  phase?: number
+  phase?: number;
   custom?: boolean;
 }
