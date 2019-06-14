@@ -95,6 +95,14 @@ export abstract class CraftingAction {
     // Base onFail does nothing, override to implement it, as it wont be used in most cases.
   }
 
+  /**
+   * Checks if this action is an instance of a given other action.
+   * @param actionClass
+   */
+  is(actionClass: Class<CraftingAction>): boolean {
+    return this instanceof actionClass;
+  }
+
   protected getLevelDifference(simulation: Simulation): number {
     let recipeLevel = simulation.recipe.rlvl;
     const stats: CrafterStats = simulation.crafterStats;
@@ -205,7 +213,6 @@ export abstract class CraftingAction {
     return baseProgress * (1 + levelCorrectionFactor) * (1 + recipeLevelPenalty);
   }
 
-
   protected getBaseQuality(simulation: Simulation): number {
     const stats = simulation.crafterStats;
     const crafterLevel: number = Tables.LEVEL_TABLE[stats.level] || stats.level;
@@ -258,13 +265,5 @@ export abstract class CraftingAction {
       levelCorrectionFactor = 0.05 * Math.max(levelDifference, -10);
     }
     return baseQuality * (1 + levelCorrectionFactor) * (1 + recipeLevelPenalty);
-  }
-
-  /**
-   * Checks if this action is an instance of a given other action.
-   * @param actionClass
-   */
-  is(actionClass: Class<CraftingAction>): boolean {
-    return this instanceof actionClass;
   }
 }

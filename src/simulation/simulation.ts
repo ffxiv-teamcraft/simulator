@@ -1,124 +1,124 @@
-import { CraftingAction } from '../model/actions/crafting-action'
-import { ActionResult } from '../model/action-result'
-import { CrafterStats } from '../model/crafter-stats'
-import { EffectiveBuff } from '../model/effective-buff'
-import { Buff } from '../model/buff.enum'
-import { SimulationResult } from './simulation-result'
-import { SimulationReliabilityReport } from './simulation-reliability-report'
-import { Tables } from '../model/tables'
-import { Reclaim } from '../model/actions/buff/reclaim'
-import { SimulationFailCause } from '../model/simulation-fail-cause.enum'
-import { Craft } from '../model/craft'
+import { CraftingAction } from '../model/actions/crafting-action';
+import { ActionResult } from '../model/action-result';
+import { CrafterStats } from '../model/crafter-stats';
+import { EffectiveBuff } from '../model/effective-buff';
+import { Buff } from '../model/buff.enum';
+import { SimulationResult } from './simulation-result';
+import { SimulationReliabilityReport } from './simulation-reliability-report';
+import { Tables } from '../model/tables';
+import { Reclaim } from '../model/actions/buff/reclaim';
+import { SimulationFailCause } from '../model/simulation-fail-cause.enum';
+import { Craft } from '../model/craft';
 
 export class Simulation {
 
-  public progression = 0
-  public quality = 0
-  public startingQuality = 0
+  public progression = 0;
+  public quality = 0;
+  public startingQuality = 0;
   // Durability of the craft
-  public durability: number
+  public durability: number;
 
-  public state: 'NORMAL' | 'EXCELLENT' | 'GOOD' | 'POOR' = 'NORMAL'
+  public state: 'NORMAL' | 'EXCELLENT' | 'GOOD' | 'POOR' = 'NORMAL';
 
-  public availableCP: number
-  public maxCP: number
+  public availableCP: number;
+  public maxCP: number;
 
-  public buffs: EffectiveBuff[] = []
+  public buffs: EffectiveBuff[] = [];
 
-  public success: boolean | undefined = undefined
+  public success: boolean | undefined = undefined;
 
-  public steps: ActionResult[] = []
+  public steps: ActionResult[] = [];
 
-  public lastPossibleReclaimStep: number = -1 // equals the index of the last step where you have CP/durability for Reclaim,
+  public lastPossibleReclaimStep: number = -1; // equals the index of the last step where you have CP/durability for Reclaim,
   // or -1 if Reclaim is uncastable (i.e. not enough CP)
 
-  public safe = false
+  public safe = false;
 
   constructor(public readonly recipe: Craft, public actions: CraftingAction[], private _crafterStats: CrafterStats,
               private hqIngredients: { id: number, amount: number }[] = [], private forceFailed: number[] = []) {
-    this.durability = recipe.durability
-    this.availableCP = this._crafterStats.cp
-    this.maxCP = this.availableCP
+    this.durability = recipe.durability;
+    this.availableCP = this._crafterStats.cp;
+    this.maxCP = this.availableCP;
     for (const ingredient of this.hqIngredients) {
       // Get the ingredient in the recipe
-      const ingredientDetails = this.recipe.ingredients.find(i => i.id === ingredient.id)
+      const ingredientDetails = this.recipe.ingredients.find(i => i.id === ingredient.id);
       // Check that the ingredient in included in the recipe
       if (ingredientDetails !== undefined && ingredientDetails.quality) {
-        this.quality += ingredientDetails.quality * ingredient.amount
+        this.quality += ingredientDetails.quality * ingredient.amount;
       }
     }
-    this.startingQuality = this.quality
+    this.startingQuality = this.quality;
   }
 
   public get lastStep(): ActionResult {
-    return this.steps[this.steps.length - 1]
+    return this.steps[this.steps.length - 1];
   }
 
   public get crafterStats(): CrafterStats {
-    return this._crafterStats
+    return this._crafterStats;
   }
 
   public getReliabilityReport(): SimulationReliabilityReport {
-    this.reset()
-    const results: SimulationResult[] = []
+    this.reset();
+    const results: SimulationResult[] = [];
     // Let's run the simulation 200 times.
     for (let i = 0; i < 200; i++) {
-      results.push(this.run(false))
-      this.reset()
+      results.push(this.run(false));
+      this.reset();
     }
-    const successPercent = (results.filter(res => res.success).length / results.length) * 100
-    const hqPercent = results.reduce((p, c) => p + c.hqPercent, 0) / results.length
-    let hqMedian = 0
-    results.map(res => res.hqPercent).sort((a, b) => a - b)
+    const successPercent = (results.filter(res => res.success).length / results.length) * 100;
+    const hqPercent = results.reduce((p, c) => p + c.hqPercent, 0) / results.length;
+    let hqMedian = 0;
+    results.map(res => res.hqPercent).sort((a, b) => a - b);
     if (results.length % 2) {
-      hqMedian = results[results.length / 2].hqPercent
+      hqMedian = results[results.length / 2].hqPercent;
     } else {
-      hqMedian = (results[Math.floor(results.length / 2)].hqPercent + results[Math.ceil(results.length / 2)].hqPercent) / 2
+      hqMedian = (results[Math.floor(results.length / 2)].hqPercent + results[Math.ceil(results.length / 2)].hqPercent) / 2;
     }
     return {
       rawData: results,
       successPercent: Math.round(successPercent),
       averageHQPercent: Math.round(hqPercent),
       medianHQPercent: hqMedian
-    }
+    };
   }
 
   public getMinStats(): { control: number, craftsmanship: number, cp: number } {
-    const originalHqPercent = this.run(true).hqPercent
+    const originalHqPercent = this.run(true).hqPercent;
     // Three loops, one per stat
     while (this.run(true).success) {
-      this.crafterStats.craftsmanship--
-      this.reset()
+      this.crafterStats.craftsmanship--;
+      this.reset();
     }
-    this.crafterStats.craftsmanship++
+    this.crafterStats.craftsmanship++;
     while (this.run(true).hqPercent >= originalHqPercent && originalHqPercent > 1 && this.crafterStats._control > 0) {
-      this.crafterStats._control--
-      this.reset()
+      this.crafterStats._control--;
+      this.reset();
     }
-    this.crafterStats._control++
+    this.crafterStats._control++;
     while (this.run(true).success) {
-      this.crafterStats.cp--
-      this.reset()
+      this.crafterStats.cp--;
+      this.reset();
     }
-    this.crafterStats.cp++
+    this.crafterStats.cp++;
     return {
       control: this.crafterStats._control,
       craftsmanship: this.crafterStats.craftsmanship,
       cp: this.crafterStats.cp
-    }
+    };
   }
 
   public reset(): void {
-    delete this.success
-    this.progression = 0
-    this.durability = this.recipe.durability
-    this.quality = this.startingQuality
-    this.buffs = []
-    this.steps = []
-    this.maxCP = this.crafterStats.cp
-    this.availableCP = this.maxCP
-    this.state = 'NORMAL'
-    this.safe = false
+    delete this.success;
+    this.progression = 0;
+    this.durability = this.recipe.durability;
+    this.quality = this.startingQuality;
+    this.buffs = [];
+    this.steps = [];
+    this.maxCP = this.crafterStats.cp;
+    this.availableCP = this.maxCP;
+    this.state = 'NORMAL';
+    this.safe = false;
   }
 
   /**
@@ -129,8 +129,8 @@ export class Simulation {
    * @returns {ActionResult[]}
    */
   public run(linear = false, maxTurns = Infinity, safeMode = false): SimulationResult {
-    this.lastPossibleReclaimStep = -1
-    const reclaimAction = new Reclaim()
+    this.lastPossibleReclaimStep = -1;
+    const reclaimAction = new Reclaim();
     this.actions.filter(a => a !== undefined).forEach((action: CraftingAction, index: number) => {
       // If we're starting and the crafter is specialist
       if (index === 0 && this.crafterStats.specialist && this.crafterStats.level >= 70) {
@@ -140,26 +140,26 @@ export class Simulation {
           stacks: 0,
           duration: Infinity,
           appliedStep: -1
-        })
+        });
         // Apply stroke of genius manually in the stats
-        this.availableCP += 15
-        this.maxCP += 15
+        this.availableCP += 15;
+        this.maxCP += 15;
       }
-      let result: ActionResult
-      let failCause: SimulationFailCause | undefined = undefined
-      const canUseAction = action.canBeUsed(this, linear)
+      let result: ActionResult;
+      let failCause: SimulationFailCause | undefined = undefined;
+      const canUseAction = action.canBeUsed(this, linear);
       if (!canUseAction) {
-        failCause = action.getFailCause(this, linear, safeMode)
+        failCause = action.getFailCause(this, linear, safeMode);
       }
-      const hasEnoughCP = action.getBaseCPCost(this) <= this.availableCP
+      const hasEnoughCP = action.getBaseCPCost(this) <= this.availableCP;
       if (!hasEnoughCP) {
-        failCause = SimulationFailCause.NOT_ENOUGH_CP
+        failCause = SimulationFailCause.NOT_ENOUGH_CP;
       }
       // If we can use the action
       if (this.success === undefined && hasEnoughCP && this.steps.length < maxTurns && canUseAction) {
-        result = this.runAction(action, linear, safeMode, index)
+        result = this.runAction(action, linear, safeMode, index);
         if (reclaimAction.getBaseCPCost(this) <= this.availableCP && reclaimAction.canBeUsed(this, linear)) {
-          this.lastPossibleReclaimStep = index
+          this.lastPossibleReclaimStep = index;
         }
       } else {
         // If we can't, add the step to the result but skip it.
@@ -173,15 +173,15 @@ export class Simulation {
           solidityDifference: 0,
           state: this.state,
           failCause: failCause
-        }
+        };
       }
       if (this.steps.length <= maxTurns) {
-        const qualityBefore = this.quality
-        const progressionBefore = this.progression
-        const durabilityBefore = this.durability
-        const cpBefore = this.availableCP
+        const qualityBefore = this.quality;
+        const progressionBefore = this.progression;
+        const durabilityBefore = this.durability;
+        const cpBefore = this.availableCP;
         // Tick buffs after checking synth result, so if we reach 0 durability, synth fails.
-        this.tickBuffs(linear)
+        this.tickBuffs(linear);
         result.afterBuffTick = {
           // Amount of progression added to the craft
           addedProgression: this.progression - progressionBefore,
@@ -191,28 +191,28 @@ export class Simulation {
           cpDifference: this.availableCP - cpBefore,
           // Solidity added to the craft (negative if removed)
           solidityDifference: this.durability - durabilityBefore
-        }
+        };
       }
       // Tick state to change it for next turn if not in linear mode
       if (!linear) {
-        this.tickState()
+        this.tickState();
       }
 
-      this.steps.push(result)
-    })
+      this.steps.push(result);
+    });
     // HQ percent to quality percent formulae: https://github.com/Ermad/ffxiv-craft-opt-web/blob/master/app/js/ffxivcraftmodel.js#L1455
 
-    const failedAction = this.steps.find(step => step.failCause !== undefined)
+    const failedAction = this.steps.find(step => step.failCause !== undefined);
     const res: SimulationResult = {
       steps: this.steps,
       hqPercent: this.getHQPercent(),
       success: this.progression >= this.recipe.progress,
       simulation: this
-    }
+    };
     if (failedAction !== undefined && failedAction.failCause) {
-      res.failCause = SimulationFailCause[failedAction.failCause]
+      res.failCause = SimulationFailCause[failedAction.failCause];
     }
-    return res
+    return res;
   }
 
   /**
@@ -224,40 +224,40 @@ export class Simulation {
    */
   public runAction(action: CraftingAction, linear = false, safeMode = false, index: number = -1): ActionResult {
     // The roll for the current action's success rate, 0 if ideal mode, as 0 will even match a 1% chances.
-    let probabilityRoll = linear ? 0 : Math.random() * 100
+    let probabilityRoll = linear ? 0 : Math.random() * 100;
     if (this.forceFailed.some(i => i === index)) {
       // Impossible to succeed
-      probabilityRoll = 101
+      probabilityRoll = 101;
     }
-    const qualityBefore = this.quality
-    const progressionBefore = this.progression
-    const durabilityBefore = this.durability
-    const cpBefore = this.availableCP
-    let failCause: SimulationFailCause | undefined = undefined
-    let success = false
+    const qualityBefore = this.quality;
+    const progressionBefore = this.progression;
+    const durabilityBefore = this.durability;
+    const cpBefore = this.availableCP;
+    let failCause: SimulationFailCause | undefined = undefined;
+    let success = false;
     if (safeMode && action.getSuccessRate(this) < 100) {
-      failCause = SimulationFailCause.UNSAFE_ACTION
-      action.onFail(this)
-      this.safe = false
+      failCause = SimulationFailCause.UNSAFE_ACTION;
+      action.onFail(this);
+      this.safe = false;
     } else {
       if (action.getSuccessRate(this) >= probabilityRoll) {
-        action.execute(this)
-        success = true
+        action.execute(this);
+        success = true;
       } else {
-        action.onFail(this)
+        action.onFail(this);
       }
     }
 
     // Even if the action failed, we have to remove the durability cost
-    this.durability -= action.getDurabilityCost(this)
+    this.durability -= action.getDurabilityCost(this);
     // Even if the action failed, CP has to be consumed too
-    this.availableCP -= action.getCPCost(this, linear)
+    this.availableCP -= action.getCPCost(this, linear);
     if (this.progression >= this.recipe.progress) {
-      this.success = true
+      this.success = true;
     } else if (this.durability <= 0) {
-      failCause = SimulationFailCause.DURABILITY_REACHED_ZERO
+      failCause = SimulationFailCause.DURABILITY_REACHED_ZERO;
       // Check durability to see if the craft is failed or not
-      this.success = false
+      this.success = false;
     }
     // return action result
     return {
@@ -270,36 +270,40 @@ export class Simulation {
       solidityDifference: this.durability - durabilityBefore,
       state: this.state,
       failCause: failCause
-    }
+    };
   }
 
   public hasBuff(buff: Buff): boolean {
-    return this.buffs.find(row => row.buff === buff) !== undefined
+    return this.buffs.find(row => row.buff === buff) !== undefined;
   }
 
   public getBuff(buff: Buff): EffectiveBuff {
-    return this.buffs.find(row => row.buff === buff) as EffectiveBuff
+    return this.buffs.find(row => row.buff === buff) as EffectiveBuff;
   }
 
   public removeBuff(buff: Buff): void {
-    this.buffs = this.buffs.filter(row => row.buff !== buff)
+    this.buffs = this.buffs.filter(row => row.buff !== buff);
   }
 
   public repair(amount: number): void {
-    this.durability += amount
+    this.durability += amount;
     if (this.durability > this.recipe.durability) {
-      this.durability = this.recipe.durability
+      this.durability = this.recipe.durability;
     }
   }
 
+  clone(): Simulation {
+    return new Simulation(this.recipe, this.actions, this.crafterStats, this.hqIngredients);
+  }
+
   private getHQPercent(): number {
-    const qualityPercent = Math.min(this.quality / this.recipe.quality, 1) * 100
+    const qualityPercent = Math.min(this.quality / this.recipe.quality, 1) * 100;
     if (qualityPercent === 0) {
-      return 1
+      return 1;
     } else if (qualityPercent >= 100) {
-      return 100
+      return 100;
     } else {
-      return Tables.HQ_TABLE[Math.floor(qualityPercent)]
+      return Tables.HQ_TABLE[Math.floor(qualityPercent)];
     }
   }
 
@@ -310,12 +314,12 @@ export class Simulation {
       if (effectiveBuff.appliedStep < this.steps.length) {
         // If the buff has something to do, let it do it
         if (effectiveBuff.tick !== undefined) {
-          effectiveBuff.tick(this, linear)
+          effectiveBuff.tick(this, linear);
         }
-        effectiveBuff.duration--
+        effectiveBuff.duration--;
       }
     }
-    this.buffs = this.buffs.filter(buff => buff.duration > 0)
+    this.buffs = this.buffs.filter(buff => buff.duration > 0);
   }
 
   /**
@@ -325,54 +329,50 @@ export class Simulation {
   private tickState(): void {
     // If current state is EXCELLENT, then next one is poor
     if (this.state === 'EXCELLENT') {
-      this.state = 'POOR'
-      return
+      this.state = 'POOR';
+      return;
     }
 
     // Good
-    const recipeLevel = this.recipe.rlvl
-    const qualityAssurance = this.crafterStats.level >= 63
-    let goodChances = 0
+    const recipeLevel = this.recipe.rlvl;
+    const qualityAssurance = this.crafterStats.level >= 63;
+    let goodChances = 0;
     if (recipeLevel >= 300) { // 70*+
-      goodChances = qualityAssurance ? 0.11 : 0.10
+      goodChances = qualityAssurance ? 0.11 : 0.10;
     } else if (recipeLevel >= 276) { // 65+
-      goodChances = qualityAssurance ? 0.17 : 0.15
+      goodChances = qualityAssurance ? 0.17 : 0.15;
     } else if (recipeLevel >= 255) { // 61+
-      goodChances = qualityAssurance ? 0.22 : 0.20
+      goodChances = qualityAssurance ? 0.22 : 0.20;
     } else if (recipeLevel >= 150) { // 60+
-      goodChances = qualityAssurance ? 0.11 : 0.10
+      goodChances = qualityAssurance ? 0.11 : 0.10;
     } else if (recipeLevel >= 136) { // 55+
-      goodChances = qualityAssurance ? 0.17 : 0.15
+      goodChances = qualityAssurance ? 0.17 : 0.15;
     } else {
-      goodChances = qualityAssurance ? 0.27 : 0.25
+      goodChances = qualityAssurance ? 0.27 : 0.25;
     }
 
     // Excellent
-    let excellentChances = 0
+    let excellentChances = 0;
     if (recipeLevel >= 300) { // 70*+
-      excellentChances = 0.01
+      excellentChances = 0.01;
     } else if (recipeLevel >= 255) { // 61+
-      excellentChances = 0.02
+      excellentChances = 0.02;
     } else if (recipeLevel >= 150) { // 60+
-      excellentChances = 0.01
+      excellentChances = 0.01;
     } else {
-      excellentChances = 0.02
+      excellentChances = 0.02;
     }
 
-    const exRandom = Math.random()
+    const exRandom = Math.random();
     if (exRandom <= excellentChances) {
-      this.state = 'EXCELLENT'
+      this.state = 'EXCELLENT';
     } else {
-      const goodRandom = Math.random()
+      const goodRandom = Math.random();
       if (goodRandom <= goodChances) {
-        this.state = 'GOOD'
+        this.state = 'GOOD';
       } else {
-        this.state = 'NORMAL'
+        this.state = 'NORMAL';
       }
     }
-  }
-
-  clone(): Simulation {
-    return new Simulation(this.recipe, this.actions, this.crafterStats, this.hqIngredients)
   }
 }

@@ -3,5 +3,11 @@
     "tslint-config-standard",
     "tslint-config-prettier"
   ],
-  "semicolon": [true, "always"]
+  "rules": {
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "strict-type-predicates": false
+  }
 }

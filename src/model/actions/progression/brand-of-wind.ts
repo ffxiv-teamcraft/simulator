@@ -1,7 +1,7 @@
 import { BrandAction } from './brand-action';
 import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
-import { RecipeElement } from '../../recipe-element'
+import { RecipeElement } from '../../recipe-element';
 
 export class BrandOfWind extends BrandAction {
 

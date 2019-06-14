@@ -1,5 +1,5 @@
-import { Ingredient } from './ingredient'
-import { RecipeElement } from './recipe-element'
+import { Ingredient } from './ingredient';
+import { RecipeElement } from './recipe-element';
 
 export interface Craft {
   id: string;

@@ -55,7 +55,7 @@ jobs:
           name: Testing
           command: npm run test
       - run:
-          name: Codecov upload
+          name: Coveralls upload
           command: npm run report-coverage
 
 

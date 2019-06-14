@@ -10,7 +10,7 @@ export class Tables {
     18, 19, 19, 20, 20, 21, 22, 23, 24, 26,
     28, 31, 34, 38, 42, 47, 52, 58, 64, 68,
     71, 74, 76, 78, 80, 81, 82, 83, 84, 85,
-    86, 87, 88, 89, 90, 91, 92, 94, 96, 98, 100]
+    86, 87, 88, 89, 90, 91, 92, 94, 96, 98, 100];
 
   // source: https://github.com/Ermad/ffxiv-craft-opt-web/blob/master/app/js/ffxivcraftmodel.js#L1942
   public static readonly NYMEIAS_WHEEL_TABLE: { [index: number]: number } = {
@@ -25,7 +25,7 @@ export class Tables {
     9: 10,
     10: 10,
     11: 10
-  }
+  };
 
   // source: https://github.com/Ermad/ffxiv-craft-opt-web/blob/master/app/js/ffxivcraftmodel.js#L1823
   public static readonly LEVEL_TABLE: { [index: number]: number } = {
@@ -59,7 +59,7 @@ export class Tables {
     78: 415,
     79: 418,
     80: 420
-  }
+  };
 
   // source: https://github.com/Ermad/ffxiv-craft-opt-web/blob/master/app/js/ffxivcraftmodel.js#L1956
   // 80 1-3 star is 430/450/480, not sure if 4-star will be 510 or 520
@@ -71,7 +71,7 @@ export class Tables {
     320: -0.02,
     350: -0.035,
     380: -0.05
-  }
+  };
 
   // source: https://github.com/Ermad/ffxiv-craft-opt-web/blob/master/app/js/ffxivcraftmodel.js#L1846
   public static readonly INGENUITY_RLVL_TABLE: { [index: number]: number } = {
@@ -135,7 +135,7 @@ export class Tables {
     430: 421,   // 80_1star projection
     450: 422,   // 80_2star projection
     480: 423   // 80_3star projection
-  }
+  };
 
   // source: https://github.com/Ermad/ffxiv-craft-opt-web/blob/master/app/js/ffxivcraftmodel.js#L1894
   public static readonly INGENUITY_II_RLVL_TABLE: { [index: number]: number } = {
@@ -199,7 +199,7 @@ export class Tables {
     430: 420,   // 80_1star projection
     450: 421,   // 80_2star projection
     480: 422   // 80_3star projection
-  }
+  };
 
   // source: https://github.com/Ermad/ffxiv-craft-opt-web/blob/master/app/js/ffxivcraftmodel.js#L1965
   public static QUALITY_PENALTY_TABLE: { [index: number]: number } = {
@@ -213,5 +213,5 @@ export class Tables {
     310: -0.10,
     340: -0.11,
     370: -0.12
-  }
+  };
 }
