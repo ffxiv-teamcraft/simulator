@@ -2,7 +2,7 @@
   "name": "@ffxiv-teamcraft/simulator",
   "version": "1.0.0",
   "description": "A FINAL FANTASY XIV crafting simulator",
-  "keywords": [],
+  "keywords": ["ffxiv", "simulator", "final fantasy xiv"],
   "main": "dist/simulator.umd.js",
   "module": "dist/simulator.es5.js",
   "typings": "dist/types/simulator.d.ts",

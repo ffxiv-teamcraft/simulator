@@ -77,6 +77,15 @@ jobs:
             - simulator/*
             - .cache/*
 
+  deploy-docs:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Deploy docs
+          command: npm run deploy-docs
+
 workflows:
   version: 2
   flow:
