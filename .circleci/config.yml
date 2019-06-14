@@ -1,0 +1,95 @@
+defaults: &defaults
+  working_directory: ~/simulator
+  docker:
+    - image: circleci/node:10.0
+
+
+version: 2
+jobs:
+  setup:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Show current branch
+          command: echo ${CIRCLE_BRANCH}
+      - run:
+          name: Update npm
+          command: sudo npm i -g npm
+      - restore_cache:
+          keys:
+            - v2-deps-{ .Branch }-{ checksum "package.json" }
+            - v2-deps-{ .Branch }
+            - v2-deps
+      - run:
+          name: Install local dependencies
+          command: npm ci
+      - save_cache:
+          key: v2-deps-{ .Branch }-{ checksum "package.json" }
+          paths:
+            - ~/.cache
+            - ~/.npm
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - simulator/*
+            - .cache/*
+
+
+  lint:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Lint code and JSON
+          command: npm run lint
+
+
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Testing
+          command: npm run test
+      - run:
+          name: Codecov upload
+          command: npm run report-coverage
+
+
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Building
+          command: npm run build
+      - save_cache:
+          key: dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - dist
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - simulator/*
+            - .cache/*
+
+workflows:
+  version: 2
+  flow:
+    jobs:
+      - setup
+      - lint:
+          requires:
+            - setup
+      - test:
+          requires:
+            - setup
+      - build:
+          requires:
+            - lint
+            - test
+
