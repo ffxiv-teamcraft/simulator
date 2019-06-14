@@ -1,7 +1,8 @@
 import { ProgressAction } from '../progress-action';
 import { Simulation } from '../../../simulation/simulation';
 import { Buff } from '../../buff.enum';
-import { RecipeElement } from '../../../../../model/garland-tools/recipe-element';
+
+import { RecipeElement } from '../../recipe-element'
 
 export abstract class BrandAction extends ProgressAction {
 

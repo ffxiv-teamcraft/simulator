@@ -41,7 +41,6 @@ import { SpecialtyRefurbish } from './actions/other/specialty-refurbish';
 import { SpecialtyReinforce } from './actions/other/specialty-reinforce';
 import { SpecialtyReflect } from './actions/other/specialty-reflect';
 import { Observe } from './actions/other/observe';
-import { Injectable } from '@angular/core';
 import { ByregotsMiracle } from './actions/quality/byregots-miracle';
 import { ByregotsBrow } from './actions/quality/byregots-brow';
 import { WhistleWhileYouWork } from './actions/buff/whistle-while-you-work';
@@ -66,7 +65,7 @@ import { WasteNotII } from './actions/buff/waste-not-ii';
 import { IngenuityII } from './actions/buff/ingenuity-ii';
 import { Reclaim } from './actions/buff/reclaim';
 
-@Injectable()
+
 export class CraftingActionsRegistry {
 
   private static ACTION_IMPORT_NAMES: { short: string, full: string }[] = [
@@ -217,12 +216,12 @@ export class CraftingActionsRegistry {
     { name: 'Reclaim', action: new Reclaim() }
   ];
 
-  public getActionsByType(type: ActionType): CraftingAction[] {
+  public static getActionsByType(type: ActionType): CraftingAction[] {
     return CraftingActionsRegistry.ALL_ACTIONS.filter(row => row.action.getType() === type)
       .map(row => row.action);
   }
 
-  public importFromCraftOpt(importArray: string[]): CraftingAction[] {
+  public static importFromCraftOpt(importArray: string[]): CraftingAction[] {
     return importArray.map(row => {
       const found = CraftingActionsRegistry.ACTION_IMPORT_NAMES
         .find(action => action.short === row);
@@ -235,10 +234,10 @@ export class CraftingActionsRegistry {
         });
     })
       .filter(action => action !== undefined)
-      .map(row => row.action);
+      .map((row: any) => row.action);
   }
 
-  public exportToCraftOpt(actionNames: string[]): string {
+  public static exportToCraftOpt(actionNames: string[]): string {
     return JSON.stringify(actionNames.map(actionName => {
       return CraftingActionsRegistry.ACTION_IMPORT_NAMES
         .find(el => {
@@ -246,10 +245,10 @@ export class CraftingActionsRegistry {
         });
     })
       .filter(action => action !== undefined)
-      .map(row => row.short));
+      .map((row: any) => row.short));
   }
 
-  public createFromIds(ids: number[]): CraftingAction[] {
+  public static createFromIds(ids: number[]): CraftingAction[] {
     return ids.map(id => {
       const found = CraftingActionsRegistry.ALL_ACTIONS.find(row => row.action.getIds().indexOf(id) > -1);
       if (found !== undefined) {
@@ -257,22 +256,24 @@ export class CraftingActionsRegistry {
       }
       return undefined;
     })
-      .filter(action => action !== undefined);
+      .filter(action => action !== undefined) as CraftingAction[];
   }
 
-  public serializeRotation(rotation: CraftingAction[]): string[] {
+  public static serializeRotation(rotation: CraftingAction[]): string[] {
     return rotation.map(action => {
-      const actionRow = CraftingActionsRegistry.ALL_ACTIONS.find(row => row.action === action);
+      const actionRow = CraftingActionsRegistry.ALL_ACTIONS
+        .find(row => row.action === action);
       if (actionRow !== undefined) {
         return actionRow.name;
       }
       return undefined;
-    }).filter(action => action !== undefined);
+    })
+      .filter(action => action !== undefined) as string[];
   }
 
-  public deserializeRotation(rotation: string[]): CraftingAction[] {
+  public static deserializeRotation(rotation: string[]): CraftingAction[] {
     return rotation.map(actionName => CraftingActionsRegistry.ALL_ACTIONS.find(row => row.name === actionName))
       .filter(action => action !== undefined)
-      .map(row => row.action);
+      .map((row: any) => row.action);
   }
 }
