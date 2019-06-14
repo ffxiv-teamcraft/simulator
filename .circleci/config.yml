@@ -53,7 +53,10 @@ jobs:
           at: ~/
       - run:
           name: Testing
-          command: npm run test:ci
+          command: npm run test
+      - run:
+          name: Testing
+          command: npm run report-coverage
 
 
   build:
