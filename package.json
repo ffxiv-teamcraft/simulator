@@ -12,7 +12,7 @@
   "author": "Supamiu <contact@flavien-normand.fr>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/ffxiv-teamcraft/simulator"
   },
   "license": "MIT",
   "engines": {
@@ -33,7 +33,7 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-    "generate-barrels": "barrelsby --delete -e /node_modules/.* -e rollup\\.config -e /tools/ -e /test/ -q"
+    "generate-barrels": "barrelsby --delete -e /node_modules/.* -e rollup\\.config -e /tools/ -e /test/ -q -n simulator.ts -d src"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
