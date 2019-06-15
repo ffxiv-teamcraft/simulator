@@ -1,6 +1,6 @@
 {
   "name": "@ffxiv-teamcraft/simulator",
-  "version": "0.0.2",
+  "version": "1.0.1",
   "description": "A FINAL FANTASY XIV crafting simulator",
   "keywords": [
     "ffxiv",
@@ -10,9 +10,6 @@
   "main": "dist/simulator.umd.js",
   "module": "dist/simulator.es5.js",
   "typings": "dist/types/simulator.d.ts",
-  "files": [
-    "dist"
-  ],
   "author": "Supamiu <contact@flavien-normand.fr>",
   "repository": {
     "type": "git",
@@ -27,18 +24,17 @@
     "lint:fix": "tslint -c tsconfig.json --fix --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
     "copyfiles": "copyfiles package.json LICENSE README.md CHANGELOG.md dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "build": "tsc --module commonjs --declaration && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage --maxWorkers=2",
     "test:watch": "jest --coverage --watch",
     "release": "npm run generate-barrels && standard-version && git push --follow-tags origin master",
-    "release:npm": "npm run build:dist && npm run copyfiles && npm publish dist",
+    "release:npm": "npm run copyfiles && npm publish dist",
     "test:prod": "npm run lint && npm run test -- --no-cache",
     "deploy-docs": "ts-node tools/gh-pages-publish",
     "report-coverage": "codecov",
     "commit": "git-cz",
-    "semantic-release": "semantic-release",
-    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
+    "standard-version": "standard-version",
     "precommit": "lint-staged",
     "generate-barrels": "barrelsby --delete -e /node_modules/.* -e rollup\\.config -e /tools/ -e /test/ -q -n simulator.ts -d src"
   },
