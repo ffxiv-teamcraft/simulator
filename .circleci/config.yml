@@ -77,6 +77,19 @@ jobs:
             - simulator/*
             - .cache/*
 
+  release:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/rep
+      - run:
+          name: Release on npm
+          command: npm run release:npm
+
+
   deploy-docs:
     <<: *defaults
     steps:
@@ -101,4 +114,14 @@ workflows:
           requires:
             - lint
             - test
+      - release:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+      - deploy-docs:
+          requires:
+            -release
+
 
