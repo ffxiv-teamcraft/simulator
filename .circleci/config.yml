@@ -122,6 +122,4 @@ workflows:
               only: master
       - deploy-docs:
           requires:
-            -release
-
-
+            - release
