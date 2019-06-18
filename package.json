@@ -28,7 +28,7 @@
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage --maxWorkers=2",
     "test:watch": "jest --coverage --watch",
-    "release:git": "npm run generate-barrels && standard-version && git push --follow-tags origin master",
+    "release:git": "npm run build && standard-version && git push --follow-tags origin master",
     "release:npm": "npm run copyfiles && npm publish dist",
     "release": "npm run release:git && npm run release:npm",
     "test:prod": "npm run lint && npm run test -- --no-cache",
