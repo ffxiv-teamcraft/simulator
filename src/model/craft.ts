@@ -16,11 +16,6 @@ export interface Craft {
   craftsmanshipReq?: number;
   unlockId?: number;
   ingredients: Ingredient[];
-  complexity: {
-    nq: number;
-    hq: number;
-  };
-  fc?: number;
   yield?: number;
   element?: RecipeElement;
 }
