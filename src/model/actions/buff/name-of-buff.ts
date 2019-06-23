@@ -5,7 +5,7 @@ import { Buff } from '../../buff.enum';
 export abstract class NameOfBuff extends BuffAction {
   _canBeUsed(simulation: Simulation): boolean {
     return (
-      !simulation.actions.some(action => action.is(NameOfBuff)) &&
+      simulation.actions.filter(action => action.is(NameOfBuff)).length === 1 &&
       !simulation.hasBuff(Buff.NAME_OF_FIRE) &&
       !simulation.hasBuff(Buff.NAME_OF_LIGHTNING) &&
       !simulation.hasBuff(Buff.NAME_OF_WATER) &&
