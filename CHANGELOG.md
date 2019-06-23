@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.4](https://github.com/ffxiv-teamcraft/simulator/compare/v1.0.3...v1.0.4) (2019-06-23)
+
+
+### Bug Fixes
+
+* fixed a bug allowing you to use Name of XXX twice in a rotation ([925335e](https://github.com/ffxiv-teamcraft/simulator/commit/925335e))
+
+
+
 ### [1.0.3](https://github.com/ffxiv-teamcraft/simulator/compare/v1.0.2...v1.0.3) (2019-06-18)
 
 
