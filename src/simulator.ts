@@ -78,7 +78,6 @@ export * from './model/actions/progression/whistle-end-progression-tick';
 export * from './model/actions/quality/advanced-touch';
 export * from './model/actions/quality/basic-touch';
 export * from './model/actions/quality/byregots-blessing';
-export * from './model/actions/quality/byregots-brow';
 export * from './model/actions/quality/byregots-miracle';
 export * from './model/actions/quality/focused-touch';
 export * from './model/actions/quality/hasty-touch-ii';

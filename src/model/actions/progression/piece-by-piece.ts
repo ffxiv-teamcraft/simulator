@@ -7,7 +7,6 @@ import { CraftingJob } from '../../crafting-job.enum';
  * PbP is not considered as a progression action as it isn't afected by progression buffs (Ingenuity, Ingenuity II, etc)
  */
 export class PieceByPiece extends GeneralAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ARM, level: 50 };
   }
@@ -22,7 +21,7 @@ export class PieceByPiece extends GeneralAction {
 
   execute(simulation: Simulation): void {
     const remainingProgress = simulation.recipe.progress - simulation.progression;
-    simulation.progression += Math.floor(remainingProgress * 0.33);
+    simulation.progression += Math.max(Math.floor(remainingProgress * 0.33), 1000);
   }
 
   getBaseCPCost(simulationState: Simulation): number {
@@ -44,5 +43,4 @@ export class PieceByPiece extends GeneralAction {
   getPotency(): number {
     return 0;
   }
-
 }

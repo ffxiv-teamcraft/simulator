@@ -4,9 +4,8 @@ import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class SteadyHandII extends BuffAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.CUL, level: 37 };
+    return { job: CraftingJob.ANY, level: 37 };
   }
 
   getBaseCPCost(simulationState: Simulation): number {
@@ -37,5 +36,4 @@ export class SteadyHandII extends BuffAction {
   protected getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
   }
-
 }

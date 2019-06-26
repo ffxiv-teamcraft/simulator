@@ -5,16 +5,22 @@ import { CraftingJob } from '../../crafting-job.enum';
 import { SimulationFailCause } from '../../simulation-fail-cause.enum';
 
 export class HeartOfTheCrafter extends BuffAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 60 };
   }
 
   _canBeUsed(simulation: Simulation): boolean {
-    return simulation.crafterStats.specialist;
+    return (
+      simulation.crafterStats.specialist &&
+      simulation.actions.filter(a => a.is(HeartOfTheCrafter)).length <= 5
+    );
   }
 
-  getFailCause(simulationState: Simulation, linear?: boolean, safeMode?: boolean): SimulationFailCause | undefined {
+  getFailCause(
+    simulationState: Simulation,
+    linear?: boolean,
+    safeMode?: boolean
+  ): SimulationFailCause | undefined {
     if (!simulationState.crafterStats.specialist) {
       return SimulationFailCause.NOT_SPECIALIST;
     }
@@ -44,5 +50,4 @@ export class HeartOfTheCrafter extends BuffAction {
   protected getTick(): ((simulation: Simulation, linear?: boolean) => void) | undefined {
     return undefined;
   }
-
 }

@@ -42,7 +42,6 @@ import { SpecialtyReinforce } from './actions/other/specialty-reinforce';
 import { SpecialtyReflect } from './actions/other/specialty-reflect';
 import { Observe } from './actions/other/observe';
 import { ByregotsMiracle } from './actions/quality/byregots-miracle';
-import { ByregotsBrow } from './actions/quality/byregots-brow';
 import { WhistleWhileYouWork } from './actions/buff/whistle-while-you-work';
 import { Satisfaction } from './actions/other/satisfaction';
 import { NymeiasWheel } from './actions/other/nymeias-wheel';
@@ -65,10 +64,8 @@ import { WasteNotII } from './actions/buff/waste-not-ii';
 import { IngenuityII } from './actions/buff/ingenuity-ii';
 import { Reclaim } from './actions/buff/reclaim';
 
-
 export class CraftingActionsRegistry {
-
-  private static ACTION_IMPORT_NAMES: { short: string, full: string }[] = [
+  private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
     { short: 'observe', full: 'Observe' },
     { short: 'basicSynth', full: 'BasicSynthesis' },
     { short: 'standardSynthesis', full: 'StandardSynthesis' },
@@ -136,7 +133,7 @@ export class CraftingActionsRegistry {
     { short: 'reclaim', full: 'Reclaim' }
   ];
 
-  private static readonly ALL_ACTIONS: { name: string, action: CraftingAction }[] = [
+  private static readonly ALL_ACTIONS: { name: string; action: CraftingAction }[] = [
     // Progress actions
     { name: 'BasicSynthesis', action: new BasicSynthesis() },
     { name: 'StandardSynthesis', action: new StandardSynthesis() },
@@ -149,12 +146,6 @@ export class CraftingActionsRegistry {
     { name: 'RapidSynthesisII', action: new RapidSynthesisII() },
     { name: 'FocusedSynthesis', action: new FocusedSynthesis() },
     { name: 'MuscleMemory', action: new MuscleMemory() },
-    { name: 'BrandOfWind', action: new BrandOfWind() },
-    { name: 'BrandOfFire', action: new BrandOfFire() },
-    { name: 'BrandOfIce', action: new BrandOfIce() },
-    { name: 'BrandOfEarth', action: new BrandOfEarth() },
-    { name: 'BrandOfLightning', action: new BrandOfLightning() },
-    { name: 'BrandOfWater', action: new BrandOfWater() },
 
     // Quality actions
     { name: 'BasicTouch', action: new BasicTouch() },
@@ -163,7 +154,6 @@ export class CraftingActionsRegistry {
     { name: 'HastyTouch', action: new HastyTouch() },
     { name: 'HastyTouchII', action: new HastyTouchII() },
     { name: 'ByregotsBlessing', action: new ByregotsBlessing() },
-    { name: 'ByregotsBrow', action: new ByregotsBrow() },
     { name: 'ByregotsMiracle', action: new ByregotsMiracle() },
     { name: 'PreciseTouch', action: new PreciseTouch() },
     { name: 'FocusedTouch', action: new FocusedTouch() },
@@ -198,12 +188,6 @@ export class CraftingActionsRegistry {
     { name: 'InitialPreparations', action: new InitialPreparations() },
     { name: 'WhistleWhileYouWork', action: new WhistleWhileYouWork() },
     { name: 'HeartOfTheCrafter', action: new HeartOfTheCrafter() },
-    { name: 'NameOfTheWind', action: new NameOfTheWind() },
-    { name: 'NameOfFire', action: new NameOfFire() },
-    { name: 'NameOfIce', action: new NameOfIce() },
-    { name: 'NameOfEarth', action: new NameOfEarth() },
-    { name: 'NameOfLightning', action: new NameOfLightning() },
-    { name: 'NameOfWater', action: new NameOfWater() },
 
     // Specialties
     { name: 'SpecialtyRefurbish', action: new SpecialtyRefurbish() },
@@ -217,62 +201,70 @@ export class CraftingActionsRegistry {
   ];
 
   public static getActionsByType(type: ActionType): CraftingAction[] {
-    return CraftingActionsRegistry.ALL_ACTIONS.filter(row => row.action.getType() === type)
-      .map(row => row.action);
+    return CraftingActionsRegistry.ALL_ACTIONS.filter(row => row.action.getType() === type).map(
+      row => row.action
+    );
   }
 
   public static importFromCraftOpt(importArray: string[]): CraftingAction[] {
-    return importArray.map(row => {
-      const found = CraftingActionsRegistry.ACTION_IMPORT_NAMES
-        .find(action => action.short === row);
-      if (found === undefined) {
-        return undefined;
-      }
-      return CraftingActionsRegistry.ALL_ACTIONS
-        .find(el => {
+    return importArray
+      .map(row => {
+        const found = CraftingActionsRegistry.ACTION_IMPORT_NAMES.find(
+          action => action.short === row
+        );
+        if (found === undefined) {
+          return undefined;
+        }
+        return CraftingActionsRegistry.ALL_ACTIONS.find(el => {
           return el.name === found.full;
         });
-    })
+      })
       .filter(action => action !== undefined)
       .map((row: any) => row.action);
   }
 
   public static exportToCraftOpt(actionNames: string[]): string {
-    return JSON.stringify(actionNames.map(actionName => {
-      return CraftingActionsRegistry.ACTION_IMPORT_NAMES
-        .find(el => {
-          return el.full === actionName;
-        });
-    })
-      .filter(action => action !== undefined)
-      .map((row: any) => row.short));
+    return JSON.stringify(
+      actionNames
+        .map(actionName => {
+          return CraftingActionsRegistry.ACTION_IMPORT_NAMES.find(el => {
+            return el.full === actionName;
+          });
+        })
+        .filter(action => action !== undefined)
+        .map((row: any) => row.short)
+    );
   }
 
   public static createFromIds(ids: number[]): CraftingAction[] {
-    return ids.map(id => {
-      const found = CraftingActionsRegistry.ALL_ACTIONS.find(row => row.action.getIds().indexOf(id) > -1);
-      if (found !== undefined) {
-        return found.action;
-      }
-      return undefined;
-    })
+    return ids
+      .map(id => {
+        const found = CraftingActionsRegistry.ALL_ACTIONS.find(
+          row => row.action.getIds().indexOf(id) > -1
+        );
+        if (found !== undefined) {
+          return found.action;
+        }
+        return undefined;
+      })
       .filter(action => action !== undefined) as CraftingAction[];
   }
 
   public static serializeRotation(rotation: CraftingAction[]): string[] {
-    return rotation.map(action => {
-      const actionRow = CraftingActionsRegistry.ALL_ACTIONS
-        .find(row => row.action === action);
-      if (actionRow !== undefined) {
-        return actionRow.name;
-      }
-      return undefined;
-    })
+    return rotation
+      .map(action => {
+        const actionRow = CraftingActionsRegistry.ALL_ACTIONS.find(row => row.action === action);
+        if (actionRow !== undefined) {
+          return actionRow.name;
+        }
+        return undefined;
+      })
       .filter(action => action !== undefined) as string[];
   }
 
   public static deserializeRotation(rotation: string[]): CraftingAction[] {
-    return rotation.map(actionName => CraftingActionsRegistry.ALL_ACTIONS.find(row => row.name === actionName))
+    return rotation
+      .map(actionName => CraftingActionsRegistry.ALL_ACTIONS.find(row => row.name === actionName))
       .filter(action => action !== undefined)
       .map((row: any) => row.action);
   }

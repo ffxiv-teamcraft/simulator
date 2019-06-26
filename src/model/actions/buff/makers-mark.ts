@@ -4,7 +4,6 @@ import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class MakersMark extends BuffAction {
-
   getWaitDuration(): number {
     return 3;
   }
@@ -18,7 +17,7 @@ export class MakersMark extends BuffAction {
   }
 
   getDuration(simulation: Simulation): number {
-    return Math.floor(simulation.recipe.progress / 100) + 1;
+    return Math.max(25, Math.floor(simulation.recipe.progress / 100) + 1);
   }
 
   getIds(): number[] {
@@ -40,6 +39,4 @@ export class MakersMark extends BuffAction {
   protected getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
   }
-
-
 }
