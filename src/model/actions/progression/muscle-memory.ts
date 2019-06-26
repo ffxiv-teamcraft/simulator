@@ -1,4 +1,3 @@
-import { PieceByPiece } from './piece-by-piece';
 import { Simulation } from '../../../simulation/simulation';
 import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
@@ -30,7 +29,7 @@ export class MuscleMemory extends CraftingAction {
 
   execute(simulation: Simulation): void {
     const remainingProgress = simulation.recipe.progress - simulation.progression;
-    simulation.progression += Math.max(Math.floor(remainingProgress * 0.33), 1000);
+    simulation.progression += Math.min(Math.floor(remainingProgress * 0.33), 1000);
   }
 
   getDurabilityCost(simulationState: Simulation): number {

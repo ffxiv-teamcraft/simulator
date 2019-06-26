@@ -21,7 +21,7 @@ export class PieceByPiece extends GeneralAction {
 
   execute(simulation: Simulation): void {
     const remainingProgress = simulation.recipe.progress - simulation.progression;
-    simulation.progression += Math.max(Math.floor(remainingProgress * 0.33), 1000);
+    simulation.progression += Math.min(Math.floor(remainingProgress * 0.33), 1000);
   }
 
   getBaseCPCost(simulationState: Simulation): number {
