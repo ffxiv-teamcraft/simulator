@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0-beta.0](https://github.com/ffxiv-teamcraft/simulator/compare/v1.0.5...v1.1.0-beta.0) (2019-06-26)
+
+
+### Features
+
+* implemented changes from preliminary 5.0 patch notes ([147192b](https://github.com/ffxiv-teamcraft/simulator/commit/147192b))
+
+
+
 ### [1.0.5](https://github.com/ffxiv-teamcraft/simulator/compare/v1.0.4...v1.0.5) (2019-06-23)
 
 
