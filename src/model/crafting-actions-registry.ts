@@ -47,22 +47,12 @@ import { Satisfaction } from './actions/other/satisfaction';
 import { NymeiasWheel } from './actions/other/nymeias-wheel';
 import { TrainedHand } from './actions/other/trained-hand';
 import { HeartOfTheCrafter } from './actions/buff/heart-of-the-crafter';
-import { BrandOfFire } from './actions/progression/brand-of-fire';
-import { BrandOfWind } from './actions/progression/brand-of-wind';
-import { BrandOfEarth } from './actions/progression/brand-of-earth';
-import { BrandOfIce } from './actions/progression/brand-of-ice';
-import { BrandOfLightning } from './actions/progression/brand-of-lightning';
-import { BrandOfWater } from './actions/progression/brand-of-water';
-import { NameOfEarth } from './actions/buff/name-of-earth';
-import { NameOfIce } from './actions/buff/name-of-ice';
-import { NameOfFire } from './actions/buff/name-of-fire';
-import { NameOfTheWind } from './actions/buff/name-of-the-wind';
-import { NameOfLightning } from './actions/buff/name-of-lightning';
-import { NameOfWater } from './actions/buff/name-of-water';
 import { WasteNot } from './actions/buff/waste-not';
 import { WasteNotII } from './actions/buff/waste-not-ii';
 import { IngenuityII } from './actions/buff/ingenuity-ii';
 import { Reclaim } from './actions/buff/reclaim';
+import { BrandOfTheElements } from './actions/progression/brand-of-the-elements';
+import { NameOfTheElements } from './actions/buff/name-of-the-elements';
 
 export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
@@ -104,18 +94,18 @@ export class CraftingActionsRegistry {
     { short: 'nymeiasWheel', full: 'NymeiasWheel' },
     { short: 'byregotsMiracle', full: 'ByregotsMiracle' },
     { short: 'trainedHand', full: 'TrainedHand' },
-    { short: 'brandOfEarth', full: 'BrandOfEarth' },
-    { short: 'brandOfFire', full: 'BrandOfFire' },
-    { short: 'brandOfIce', full: 'BrandOfIce' },
-    { short: 'brandOfLightning', full: 'BrandOfLightning' },
-    { short: 'brandOfWater', full: 'BrandOfWater' },
-    { short: 'brandOfWind', full: 'BrandOfWind' },
-    { short: 'nameOfEarth', full: 'NameOfEarth' },
-    { short: 'nameOfFire', full: 'NameOfFire' },
-    { short: 'nameOfIce', full: 'NameOfIce' },
-    { short: 'nameOfLightning', full: 'NameOfLightning' },
-    { short: 'nameOfWater', full: 'NameOfWater' },
-    { short: 'nameOfWind', full: 'NameOfTheWind' },
+    { short: 'brandOfEarth', full: 'BrandOfTheElements' },
+    { short: 'brandOfFire', full: 'BrandOfTheElements' },
+    { short: 'brandOfIce', full: 'BrandOfTheElements' },
+    { short: 'brandOfLightning', full: 'BrandOfTheElements' },
+    { short: 'brandOfWater', full: 'BrandOfTheElements' },
+    { short: 'brandOfWind', full: 'BrandOfTheElements' },
+    { short: 'nameOfEarth', full: 'NameOfTheElements' },
+    { short: 'nameOfFire', full: 'NameOfTheElements' },
+    { short: 'nameOfIce', full: 'NameOfTheElements' },
+    { short: 'nameOfLightning', full: 'NameOfTheElements' },
+    { short: 'nameOfWater', full: 'NameOfTheElements' },
+    { short: 'nameOfWind', full: 'NameOfTheElements' },
     { short: 'hastyTouch2', full: 'HastyTouchII' },
     { short: 'carefulSynthesis3', full: 'CarefulSynthesisIII' },
     { short: 'rapidSynthesis2', full: 'RapidSynthesisII' },
@@ -146,6 +136,7 @@ export class CraftingActionsRegistry {
     { name: 'RapidSynthesisII', action: new RapidSynthesisII() },
     { name: 'FocusedSynthesis', action: new FocusedSynthesis() },
     { name: 'MuscleMemory', action: new MuscleMemory() },
+    { name: 'BrandOfTheElements', action: new BrandOfTheElements() },
 
     // Quality actions
     { name: 'BasicTouch', action: new BasicTouch() },
@@ -188,6 +179,7 @@ export class CraftingActionsRegistry {
     { name: 'InitialPreparations', action: new InitialPreparations() },
     { name: 'WhistleWhileYouWork', action: new WhistleWhileYouWork() },
     { name: 'HeartOfTheCrafter', action: new HeartOfTheCrafter() },
+    { name: 'NameOfTheElements', action: new NameOfTheElements() },
 
     // Specialties
     { name: 'SpecialtyRefurbish', action: new SpecialtyRefurbish() },
