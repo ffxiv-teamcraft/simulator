@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0-beta.5](https://github.com/ffxiv-teamcraft/simulator/compare/v1.1.0-beta.4...v1.1.0-beta.5) (2019-06-28)
+
+
+### Bug Fixes
+
+* fixed an issue with delicate synthesis being unusable ([eabe4f6](https://github.com/ffxiv-teamcraft/simulator/commit/eabe4f6))
+
+
+
 ## [1.1.0-beta.4](https://github.com/ffxiv-teamcraft/simulator/compare/v1.1.0-beta.3...v1.1.0-beta.4) (2019-06-28)
 
 
