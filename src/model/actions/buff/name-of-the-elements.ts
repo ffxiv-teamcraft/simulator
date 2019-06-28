@@ -29,8 +29,7 @@ export class NameOfTheElements extends BuffAction {
   }
 
   getIds(): number[] {
-    // TODO replace with real id, this is name of lightning
-    return [4572];
+    return [4615, 4616, 4617, 4618, 4619, 4620, 4621, 4622];
   }
 
   getLevelRequirement(): { job: CraftingJob; level: number } {

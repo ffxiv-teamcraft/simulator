@@ -53,6 +53,12 @@ import { IngenuityII } from './actions/buff/ingenuity-ii';
 import { Reclaim } from './actions/buff/reclaim';
 import { BrandOfTheElements } from './actions/progression/brand-of-the-elements';
 import { NameOfTheElements } from './actions/buff/name-of-the-elements';
+import { TrainedEye } from './actions/quality/trained-eye';
+import { TrainedInstinct } from './actions/quality/trained-instinct';
+import { PreparatoryTouch } from './actions/quality/preparatory-touch';
+import { RapidSynthesisIII } from './actions/progression/rapid-synthesis-iii';
+import { IntensiveSynthesis } from './actions/progression/intensive-synthesis';
+import { DelicateSynthesis } from './actions/other/delicate-synthesis';
 
 export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
@@ -123,7 +129,7 @@ export class CraftingActionsRegistry {
     { short: 'reclaim', full: 'Reclaim' }
   ];
 
-  private static readonly ALL_ACTIONS: { name: string; action: CraftingAction }[] = [
+  public static readonly ALL_ACTIONS: { name: string; action: CraftingAction }[] = [
     // Progress actions
     { name: 'BasicSynthesis', action: new BasicSynthesis() },
     { name: 'StandardSynthesis', action: new StandardSynthesis() },
@@ -134,9 +140,11 @@ export class CraftingActionsRegistry {
     { name: 'PieceByPiece', action: new PieceByPiece() },
     { name: 'RapidSynthesis', action: new RapidSynthesis() },
     { name: 'RapidSynthesisII', action: new RapidSynthesisII() },
+    { name: 'RapidSynthesisIII', action: new RapidSynthesisIII() },
     { name: 'FocusedSynthesis', action: new FocusedSynthesis() },
     { name: 'MuscleMemory', action: new MuscleMemory() },
     { name: 'BrandOfTheElements', action: new BrandOfTheElements() },
+    { name: 'IntensiveSynthesis', action: new IntensiveSynthesis() },
 
     // Quality actions
     { name: 'BasicTouch', action: new BasicTouch() },
@@ -151,6 +159,9 @@ export class CraftingActionsRegistry {
     { name: 'PatientTouch', action: new PatientTouch() },
     { name: 'PrudentTouch', action: new PrudentTouch() },
     { name: 'InnovativeTouch', action: new InnovativeTouch() },
+    { name: 'TrainedEye', action: new TrainedEye() },
+    { name: 'TrainedInstinct', action: new TrainedInstinct() },
+    { name: 'PreparatoryTouch', action: new PreparatoryTouch() },
 
     // CP recovery
     { name: 'ComfortZone', action: new ComfortZone() },
@@ -189,6 +200,7 @@ export class CraftingActionsRegistry {
     // Other
     { name: 'Observe', action: new Observe() },
     { name: 'TrainedHand', action: new TrainedHand() },
+    { name: 'DelicateSynthesis', action: new DelicateSynthesis() },
     { name: 'Reclaim', action: new Reclaim() }
   ];
 

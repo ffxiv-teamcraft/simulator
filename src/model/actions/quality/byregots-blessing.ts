@@ -42,7 +42,7 @@ export class ByregotsBlessing extends QualityAction {
   }
 
   getIds(): number[] {
-    return [100009];
+    return [100339, 100340, 100341, 100342, 100343, 100344, 100345, 100346];
   }
 
   getPotency(simulation: Simulation): number {

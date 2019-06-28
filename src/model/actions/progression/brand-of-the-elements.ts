@@ -29,8 +29,7 @@ export class BrandOfTheElements extends ProgressAction {
   }
 
   getIds(): number[] {
-    // TODO replace with real id, this is brand of lightning
-    return [100066];
+    return [100331, 100332, 100333, 100334, 100335, 100336, 100337, 100338];
   }
 
   getLevelRequirement(): { job: CraftingJob; level: number } {
