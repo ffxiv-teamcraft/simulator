@@ -14,18 +14,19 @@ export class DelicateSynthesis extends GeneralAction {
   }
 
   execute(simulation: Simulation): void {
-    const baseQualityIncrease = this.getBaseQuality(simulation);
     const baseProgressIncrease = this.getBaseProgression(simulation);
-    const qualityPotency = this.getPotency(simulation);
     // Progress
     let progressPotency = this.getPotency(simulation);
-    if (simulation.getBuff(Buff.WHISTLE_WHILE_YOU_WORK).stacks % 3 === 0) {
+    if (
+      simulation.getBuff(Buff.WHISTLE_WHILE_YOU_WORK) &&
+      simulation.getBuff(Buff.WHISTLE_WHILE_YOU_WORK).stacks % 3 === 0
+    ) {
       progressPotency += 50;
     }
     simulation.progression += Math.floor((baseProgressIncrease * progressPotency) / 100);
 
     // Quality
-    if (simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
+    if (simulation.getBuff(Buff.INNER_QUIET) && simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
       simulation.getBuff(Buff.INNER_QUIET).stacks++;
     }
     let qualityIncrease = (this.getBaseQuality(simulation) * this.getPotency(simulation)) / 100;
