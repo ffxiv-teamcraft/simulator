@@ -26,9 +26,6 @@ export class DelicateSynthesis extends GeneralAction {
     simulation.progression += Math.floor((baseProgressIncrease * progressPotency) / 100);
 
     // Quality
-    if (simulation.getBuff(Buff.INNER_QUIET) && simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
-      simulation.getBuff(Buff.INNER_QUIET).stacks++;
-    }
     let qualityIncrease = (this.getBaseQuality(simulation) * this.getPotency(simulation)) / 100;
     switch (simulation.state) {
       case 'EXCELLENT':
