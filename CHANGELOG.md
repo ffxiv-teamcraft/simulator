@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0-beta.4](https://github.com/ffxiv-teamcraft/simulator/compare/v1.1.0-beta.3...v1.1.0-beta.4) (2019-06-28)
+
+
+### Features
+
+* added new skills from the shadowbringers patch ([545d827](https://github.com/ffxiv-teamcraft/simulator/commit/545d827))
+
+
+
 ## [1.1.0-beta.3](https://github.com/ffxiv-teamcraft/simulator/compare/v1.1.0-beta.2...v1.1.0-beta.3) (2019-06-27)
 
 
