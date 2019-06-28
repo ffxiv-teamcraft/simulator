@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0-beta.6](https://github.com/ffxiv-teamcraft/simulator/compare/v1.1.0-beta.5...v1.1.0-beta.6) (2019-06-28)
+
+
+### Bug Fixes
+
+* **delicate-synthesis:** fixed an issue making it give 2 stacks instead of only one ([48e96ff](https://github.com/ffxiv-teamcraft/simulator/commit/48e96ff))
+
+
+
 ## [1.1.0-beta.5](https://github.com/ffxiv-teamcraft/simulator/compare/v1.1.0-beta.4...v1.1.0-beta.5) (2019-06-28)
 
 
