@@ -31,5 +31,6 @@ export enum Buff {
 
   NAME_OF_THE_ELEMENTS,
 
-  RECLAIM
+  RECLAIM,
+  REUSE
 }

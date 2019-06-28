@@ -59,6 +59,7 @@ import { PreparatoryTouch } from './actions/quality/preparatory-touch';
 import { RapidSynthesisIII } from './actions/progression/rapid-synthesis-iii';
 import { IntensiveSynthesis } from './actions/progression/intensive-synthesis';
 import { DelicateSynthesis } from './actions/other/delicate-synthesis';
+import { Reuse } from './actions/buff/reuse';
 
 export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
@@ -201,7 +202,8 @@ export class CraftingActionsRegistry {
     { name: 'Observe', action: new Observe() },
     { name: 'TrainedHand', action: new TrainedHand() },
     { name: 'DelicateSynthesis', action: new DelicateSynthesis() },
-    { name: 'Reclaim', action: new Reclaim() }
+    { name: 'Reclaim', action: new Reclaim() },
+    { name: 'Reuse', action: new Reuse() }
   ];
 
   public static getActionsByType(type: ActionType): CraftingAction[] {
