@@ -1,6 +1,6 @@
 {
   "name": "@ffxiv-teamcraft/simulator",
-  "version": "1.0.5",
+  "version": "1.1.0-beta.7",
   "description": "A FINAL FANTASY XIV crafting simulator",
   "keywords": [
     "ffxiv",
@@ -29,6 +29,7 @@
     "test": "jest --coverage --maxWorkers=2",
     "test:watch": "jest --coverage --watch",
     "release:git": "npm run build && standard-version && git push --follow-tags origin master",
+    "release:git:beta": "npm run build && standard-version --prerelease beta && git push --follow-tags origin master",
     "release:npm": "npm run copyfiles && npm publish dist",
     "release": "npm run release:git && npm run release:npm",
     "test:prod": "npm run lint && npm run test -- --no-cache",

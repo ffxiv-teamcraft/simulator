@@ -42,33 +42,27 @@ import { SpecialtyReinforce } from './actions/other/specialty-reinforce';
 import { SpecialtyReflect } from './actions/other/specialty-reflect';
 import { Observe } from './actions/other/observe';
 import { ByregotsMiracle } from './actions/quality/byregots-miracle';
-import { ByregotsBrow } from './actions/quality/byregots-brow';
 import { WhistleWhileYouWork } from './actions/buff/whistle-while-you-work';
 import { Satisfaction } from './actions/other/satisfaction';
 import { NymeiasWheel } from './actions/other/nymeias-wheel';
 import { TrainedHand } from './actions/other/trained-hand';
 import { HeartOfTheCrafter } from './actions/buff/heart-of-the-crafter';
-import { BrandOfFire } from './actions/progression/brand-of-fire';
-import { BrandOfWind } from './actions/progression/brand-of-wind';
-import { BrandOfEarth } from './actions/progression/brand-of-earth';
-import { BrandOfIce } from './actions/progression/brand-of-ice';
-import { BrandOfLightning } from './actions/progression/brand-of-lightning';
-import { BrandOfWater } from './actions/progression/brand-of-water';
-import { NameOfEarth } from './actions/buff/name-of-earth';
-import { NameOfIce } from './actions/buff/name-of-ice';
-import { NameOfFire } from './actions/buff/name-of-fire';
-import { NameOfTheWind } from './actions/buff/name-of-the-wind';
-import { NameOfLightning } from './actions/buff/name-of-lightning';
-import { NameOfWater } from './actions/buff/name-of-water';
 import { WasteNot } from './actions/buff/waste-not';
 import { WasteNotII } from './actions/buff/waste-not-ii';
 import { IngenuityII } from './actions/buff/ingenuity-ii';
 import { Reclaim } from './actions/buff/reclaim';
-
+import { BrandOfTheElements } from './actions/progression/brand-of-the-elements';
+import { NameOfTheElements } from './actions/buff/name-of-the-elements';
+import { TrainedEye } from './actions/quality/trained-eye';
+import { TrainedInstinct } from './actions/quality/trained-instinct';
+import { PreparatoryTouch } from './actions/quality/preparatory-touch';
+import { RapidSynthesisIII } from './actions/progression/rapid-synthesis-iii';
+import { IntensiveSynthesis } from './actions/progression/intensive-synthesis';
+import { DelicateSynthesis } from './actions/other/delicate-synthesis';
+import { Reuse } from './actions/buff/reuse';
 
 export class CraftingActionsRegistry {
-
-  private static ACTION_IMPORT_NAMES: { short: string, full: string }[] = [
+  private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
     { short: 'observe', full: 'Observe' },
     { short: 'basicSynth', full: 'BasicSynthesis' },
     { short: 'standardSynthesis', full: 'StandardSynthesis' },
@@ -107,18 +101,18 @@ export class CraftingActionsRegistry {
     { short: 'nymeiasWheel', full: 'NymeiasWheel' },
     { short: 'byregotsMiracle', full: 'ByregotsMiracle' },
     { short: 'trainedHand', full: 'TrainedHand' },
-    { short: 'brandOfEarth', full: 'BrandOfEarth' },
-    { short: 'brandOfFire', full: 'BrandOfFire' },
-    { short: 'brandOfIce', full: 'BrandOfIce' },
-    { short: 'brandOfLightning', full: 'BrandOfLightning' },
-    { short: 'brandOfWater', full: 'BrandOfWater' },
-    { short: 'brandOfWind', full: 'BrandOfWind' },
-    { short: 'nameOfEarth', full: 'NameOfEarth' },
-    { short: 'nameOfFire', full: 'NameOfFire' },
-    { short: 'nameOfIce', full: 'NameOfIce' },
-    { short: 'nameOfLightning', full: 'NameOfLightning' },
-    { short: 'nameOfWater', full: 'NameOfWater' },
-    { short: 'nameOfWind', full: 'NameOfTheWind' },
+    { short: 'brandOfEarth', full: 'BrandOfTheElements' },
+    { short: 'brandOfFire', full: 'BrandOfTheElements' },
+    { short: 'brandOfIce', full: 'BrandOfTheElements' },
+    { short: 'brandOfLightning', full: 'BrandOfTheElements' },
+    { short: 'brandOfWater', full: 'BrandOfTheElements' },
+    { short: 'brandOfWind', full: 'BrandOfTheElements' },
+    { short: 'nameOfEarth', full: 'NameOfTheElements' },
+    { short: 'nameOfFire', full: 'NameOfTheElements' },
+    { short: 'nameOfIce', full: 'NameOfTheElements' },
+    { short: 'nameOfLightning', full: 'NameOfTheElements' },
+    { short: 'nameOfWater', full: 'NameOfTheElements' },
+    { short: 'nameOfWind', full: 'NameOfTheElements' },
     { short: 'hastyTouch2', full: 'HastyTouchII' },
     { short: 'carefulSynthesis3', full: 'CarefulSynthesisIII' },
     { short: 'rapidSynthesis2', full: 'RapidSynthesisII' },
@@ -136,7 +130,7 @@ export class CraftingActionsRegistry {
     { short: 'reclaim', full: 'Reclaim' }
   ];
 
-  private static readonly ALL_ACTIONS: { name: string, action: CraftingAction }[] = [
+  public static readonly ALL_ACTIONS: { name: string; action: CraftingAction }[] = [
     // Progress actions
     { name: 'BasicSynthesis', action: new BasicSynthesis() },
     { name: 'StandardSynthesis', action: new StandardSynthesis() },
@@ -147,14 +141,11 @@ export class CraftingActionsRegistry {
     { name: 'PieceByPiece', action: new PieceByPiece() },
     { name: 'RapidSynthesis', action: new RapidSynthesis() },
     { name: 'RapidSynthesisII', action: new RapidSynthesisII() },
+    { name: 'RapidSynthesisIII', action: new RapidSynthesisIII() },
     { name: 'FocusedSynthesis', action: new FocusedSynthesis() },
     { name: 'MuscleMemory', action: new MuscleMemory() },
-    { name: 'BrandOfWind', action: new BrandOfWind() },
-    { name: 'BrandOfFire', action: new BrandOfFire() },
-    { name: 'BrandOfIce', action: new BrandOfIce() },
-    { name: 'BrandOfEarth', action: new BrandOfEarth() },
-    { name: 'BrandOfLightning', action: new BrandOfLightning() },
-    { name: 'BrandOfWater', action: new BrandOfWater() },
+    { name: 'BrandOfTheElements', action: new BrandOfTheElements() },
+    { name: 'IntensiveSynthesis', action: new IntensiveSynthesis() },
 
     // Quality actions
     { name: 'BasicTouch', action: new BasicTouch() },
@@ -163,13 +154,15 @@ export class CraftingActionsRegistry {
     { name: 'HastyTouch', action: new HastyTouch() },
     { name: 'HastyTouchII', action: new HastyTouchII() },
     { name: 'ByregotsBlessing', action: new ByregotsBlessing() },
-    { name: 'ByregotsBrow', action: new ByregotsBrow() },
     { name: 'ByregotsMiracle', action: new ByregotsMiracle() },
     { name: 'PreciseTouch', action: new PreciseTouch() },
     { name: 'FocusedTouch', action: new FocusedTouch() },
     { name: 'PatientTouch', action: new PatientTouch() },
     { name: 'PrudentTouch', action: new PrudentTouch() },
     { name: 'InnovativeTouch', action: new InnovativeTouch() },
+    { name: 'TrainedEye', action: new TrainedEye() },
+    { name: 'TrainedInstinct', action: new TrainedInstinct() },
+    { name: 'PreparatoryTouch', action: new PreparatoryTouch() },
 
     // CP recovery
     { name: 'ComfortZone', action: new ComfortZone() },
@@ -198,12 +191,7 @@ export class CraftingActionsRegistry {
     { name: 'InitialPreparations', action: new InitialPreparations() },
     { name: 'WhistleWhileYouWork', action: new WhistleWhileYouWork() },
     { name: 'HeartOfTheCrafter', action: new HeartOfTheCrafter() },
-    { name: 'NameOfTheWind', action: new NameOfTheWind() },
-    { name: 'NameOfFire', action: new NameOfFire() },
-    { name: 'NameOfIce', action: new NameOfIce() },
-    { name: 'NameOfEarth', action: new NameOfEarth() },
-    { name: 'NameOfLightning', action: new NameOfLightning() },
-    { name: 'NameOfWater', action: new NameOfWater() },
+    { name: 'NameOfTheElements', action: new NameOfTheElements() },
 
     // Specialties
     { name: 'SpecialtyRefurbish', action: new SpecialtyRefurbish() },
@@ -213,66 +201,76 @@ export class CraftingActionsRegistry {
     // Other
     { name: 'Observe', action: new Observe() },
     { name: 'TrainedHand', action: new TrainedHand() },
-    { name: 'Reclaim', action: new Reclaim() }
+    { name: 'DelicateSynthesis', action: new DelicateSynthesis() },
+    { name: 'Reclaim', action: new Reclaim() },
+    { name: 'Reuse', action: new Reuse() }
   ];
 
   public static getActionsByType(type: ActionType): CraftingAction[] {
-    return CraftingActionsRegistry.ALL_ACTIONS.filter(row => row.action.getType() === type)
-      .map(row => row.action);
+    return CraftingActionsRegistry.ALL_ACTIONS.filter(row => row.action.getType() === type).map(
+      row => row.action
+    );
   }
 
   public static importFromCraftOpt(importArray: string[]): CraftingAction[] {
-    return importArray.map(row => {
-      const found = CraftingActionsRegistry.ACTION_IMPORT_NAMES
-        .find(action => action.short === row);
-      if (found === undefined) {
-        return undefined;
-      }
-      return CraftingActionsRegistry.ALL_ACTIONS
-        .find(el => {
+    return importArray
+      .map(row => {
+        const found = CraftingActionsRegistry.ACTION_IMPORT_NAMES.find(
+          action => action.short === row
+        );
+        if (found === undefined) {
+          return undefined;
+        }
+        return CraftingActionsRegistry.ALL_ACTIONS.find(el => {
           return el.name === found.full;
         });
-    })
+      })
       .filter(action => action !== undefined)
       .map((row: any) => row.action);
   }
 
   public static exportToCraftOpt(actionNames: string[]): string {
-    return JSON.stringify(actionNames.map(actionName => {
-      return CraftingActionsRegistry.ACTION_IMPORT_NAMES
-        .find(el => {
-          return el.full === actionName;
-        });
-    })
-      .filter(action => action !== undefined)
-      .map((row: any) => row.short));
+    return JSON.stringify(
+      actionNames
+        .map(actionName => {
+          return CraftingActionsRegistry.ACTION_IMPORT_NAMES.find(el => {
+            return el.full === actionName;
+          });
+        })
+        .filter(action => action !== undefined)
+        .map((row: any) => row.short)
+    );
   }
 
   public static createFromIds(ids: number[]): CraftingAction[] {
-    return ids.map(id => {
-      const found = CraftingActionsRegistry.ALL_ACTIONS.find(row => row.action.getIds().indexOf(id) > -1);
-      if (found !== undefined) {
-        return found.action;
-      }
-      return undefined;
-    })
+    return ids
+      .map(id => {
+        const found = CraftingActionsRegistry.ALL_ACTIONS.find(
+          row => row.action.getIds().indexOf(id) > -1
+        );
+        if (found !== undefined) {
+          return found.action;
+        }
+        return undefined;
+      })
       .filter(action => action !== undefined) as CraftingAction[];
   }
 
   public static serializeRotation(rotation: CraftingAction[]): string[] {
-    return rotation.map(action => {
-      const actionRow = CraftingActionsRegistry.ALL_ACTIONS
-        .find(row => row.action === action);
-      if (actionRow !== undefined) {
-        return actionRow.name;
-      }
-      return undefined;
-    })
+    return rotation
+      .map(action => {
+        const actionRow = CraftingActionsRegistry.ALL_ACTIONS.find(row => row.action === action);
+        if (actionRow !== undefined) {
+          return actionRow.name;
+        }
+        return undefined;
+      })
       .filter(action => action !== undefined) as string[];
   }
 
   public static deserializeRotation(rotation: string[]): CraftingAction[] {
-    return rotation.map(actionName => CraftingActionsRegistry.ALL_ACTIONS.find(row => row.name === actionName))
+    return rotation
+      .map(actionName => CraftingActionsRegistry.ALL_ACTIONS.find(row => row.name === actionName))
       .filter(action => action !== undefined)
       .map((row: any) => row.action);
   }

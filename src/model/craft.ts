@@ -17,5 +17,4 @@ export interface Craft {
   unlockId?: number;
   ingredients: Ingredient[];
   yield?: number;
-  element?: RecipeElement;
 }

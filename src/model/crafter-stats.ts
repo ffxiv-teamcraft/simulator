@@ -4,7 +4,6 @@ import { Buff } from './buff.enum';
 export type CrafterLevels = [number, number, number, number, number, number, number, number];
 
 export class CrafterStats {
-
   constructor(
     public readonly jobId: number,
     public craftsmanship: number,
@@ -13,8 +12,7 @@ export class CrafterStats {
     public readonly specialist: boolean,
     public readonly level: number,
     public readonly levels: CrafterLevels
-  ) {
-  }
+  ) {}
 
   public getControl(simulationState: Simulation): number {
     let control = this._control;
@@ -27,6 +25,7 @@ export class CrafterStats {
     if (simulationState.hasBuff(Buff.INNOVATION)) {
       control += 0.5 * this._control;
     }
-    return control;
+    // Total bonus is capped at 3k, we need to keep track of it.
+    return Math.min(control, this._control + 3000);
   }
 }

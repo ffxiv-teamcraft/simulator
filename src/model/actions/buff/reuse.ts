@@ -1,38 +1,34 @@
 import { BuffAction } from '../buff-action';
+import { CraftingJob } from '../../crafting-job.enum';
 import { Simulation } from '../../../simulation/simulation';
 import { Buff } from '../../buff.enum';
-import { CraftingJob } from '../../crafting-job.enum';
 
-export class SteadyHandII extends BuffAction {
+export class Reuse extends BuffAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.ANY, level: 37 };
+    return { job: CraftingJob.ANY, level: 74 };
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 25;
+    return 60;
   }
 
   getDuration(simulation: Simulation): number {
-    return 5;
+    return Infinity;
   }
 
   getIds(): number[] {
-    return [4607, 4608, 4609, 4610, 4611, 4612, 4613, 46104];
-  }
-
-  public getOverrides(): Buff[] {
-    return super.getOverrides().concat(Buff.STEADY_HAND);
+    return [4597, 4598, 4599, 4600, 4601, 4602, 4603, 4604];
   }
 
   protected getBuff(): Buff {
-    return Buff.STEADY_HAND_II;
+    return Buff.REUSE;
   }
 
   protected getInitialStacks(): number {
     return 0;
   }
 
-  // Steady hand has no tick.
+  // Reuse doesn't tick.
   protected getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
   }

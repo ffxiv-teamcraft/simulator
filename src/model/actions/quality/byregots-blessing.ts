@@ -5,16 +5,19 @@ import { CraftingJob } from '../../crafting-job.enum';
 import { SimulationFailCause } from '../../simulation-fail-cause.enum';
 
 export class ByregotsBlessing extends QualityAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.CRP, level: 50 };
+    return { job: CraftingJob.ANY, level: 50 };
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
     return simulationState.hasBuff(Buff.INNER_QUIET);
   }
 
-  getFailCause(simulationState: Simulation, linear?: boolean, safeMode?: boolean): SimulationFailCause | undefined {
+  getFailCause(
+    simulationState: Simulation,
+    linear?: boolean,
+    safeMode?: boolean
+  ): SimulationFailCause | undefined {
     if (!simulationState.hasBuff(Buff.INNER_QUIET)) {
       return SimulationFailCause.NO_INNER_QUIET;
     }
@@ -39,11 +42,10 @@ export class ByregotsBlessing extends QualityAction {
   }
 
   getIds(): number[] {
-    return [100009];
+    return [100339, 100340, 100341, 100342, 100343, 100344, 100345, 100346];
   }
 
   getPotency(simulation: Simulation): number {
     return 100 + (simulation.getBuff(Buff.INNER_QUIET).stacks - 1) * 20;
   }
-
 }

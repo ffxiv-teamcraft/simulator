@@ -1,18 +1,11 @@
 import { BuffAction } from '../buff-action';
 import { Simulation } from '../../../simulation/simulation';
 import { Buff } from '../../buff.enum';
+import { CraftingJob } from '../../crafting-job.enum';
 
-export abstract class NameOfBuff extends BuffAction {
+export class NameOfTheElements extends BuffAction {
   _canBeUsed(simulation: Simulation): boolean {
-    return (
-      simulation.actions.filter(action => action.is(NameOfBuff)).length === 1 &&
-      !simulation.hasBuff(Buff.NAME_OF_FIRE) &&
-      !simulation.hasBuff(Buff.NAME_OF_LIGHTNING) &&
-      !simulation.hasBuff(Buff.NAME_OF_WATER) &&
-      !simulation.hasBuff(Buff.NAME_OF_EARTH) &&
-      !simulation.hasBuff(Buff.NAME_OF_ICE) &&
-      !simulation.hasBuff(Buff.NAME_OF_THE_WIND)
-    );
+    return simulation.actions.filter(action => action.is(NameOfTheElements)).length <= 1;
   }
 
   getBaseCPCost(simulationState: Simulation): number {
@@ -29,5 +22,17 @@ export abstract class NameOfBuff extends BuffAction {
 
   protected getTick(): ((simulation: Simulation, linear?: boolean) => void) | undefined {
     return undefined;
+  }
+
+  protected getBuff(): Buff {
+    return Buff.NAME_OF_THE_ELEMENTS;
+  }
+
+  getIds(): number[] {
+    return [4615, 4616, 4617, 4618, 4619, 4620, 4621, 4622];
+  }
+
+  getLevelRequirement(): { job: CraftingJob; level: number } {
+    return { job: CraftingJob.ANY, level: 37 };
   }
 }
