@@ -17,10 +17,9 @@ export class RapidSynthesisIII extends ProgressAction {
     ) {
       potency += 50;
     }
-    // TODO figure out exact penalty for then durability is < 20, we'll assume divided by 4 for now.
     if (simulation.durability < 20) {
       simulation.progression += Math.floor(
-        (this.getBaseProgression(simulation) * potency) / 4 / 100
+        (this.getBaseProgression(simulation) * potency) / 3 / 100
       );
     } else {
       simulation.progression += Math.floor((this.getBaseProgression(simulation) * potency) / 100);
