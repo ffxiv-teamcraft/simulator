@@ -14,7 +14,6 @@ import { Class } from '@kaiu/serializer';
  * This is the parent class of all actions in the simulator.
  */
 export abstract class CraftingAction {
-
   /**
    * checks if the action can be moved inside the simulation state,
    * this is meant to prevent moving automatic actions (looking at you Whistle end progression tick).
@@ -33,7 +32,7 @@ export abstract class CraftingAction {
     return this.getType() === ActionType.BUFF ? 2 : 3;
   }
 
-  abstract getLevelRequirement(): { job: CraftingJob, level: number };
+  abstract getLevelRequirement(): { job: CraftingJob; level: number };
 
   abstract getType(): ActionType;
 
@@ -46,19 +45,34 @@ export abstract class CraftingAction {
     if (safeMode && this.getSuccessRate(simulationState) < 100) {
       return false;
     }
-    if (levelRequirement.job !== CraftingJob.ANY && simulationState.crafterStats.levels[levelRequirement.job] !== undefined) {
-      return simulationState.crafterStats.levels[levelRequirement.job] >= levelRequirement.level
-        && this._canBeUsed(simulationState, linear);
+    if (
+      levelRequirement.job !== CraftingJob.ANY &&
+      simulationState.crafterStats.levels[levelRequirement.job] !== undefined
+    ) {
+      return (
+        simulationState.crafterStats.levels[levelRequirement.job] >= levelRequirement.level &&
+        this._canBeUsed(simulationState, linear)
+      );
     }
-    return simulationState.crafterStats.level >= levelRequirement.level && this._canBeUsed(simulationState, linear);
+    return (
+      simulationState.crafterStats.level >= levelRequirement.level &&
+      this._canBeUsed(simulationState, linear)
+    );
   }
 
-  getFailCause(simulationState: Simulation, linear?: boolean, safeMode?: boolean): SimulationFailCause | undefined {
+  getFailCause(
+    simulationState: Simulation,
+    linear?: boolean,
+    safeMode?: boolean
+  ): SimulationFailCause | undefined {
     const levelRequirement = this.getLevelRequirement();
     if (safeMode && this.getSuccessRate(simulationState) < 100) {
       return SimulationFailCause.UNSAFE_ACTION;
     }
-    if (levelRequirement.job !== CraftingJob.ANY && simulationState.crafterStats.levels[levelRequirement.job] !== undefined) {
+    if (
+      levelRequirement.job !== CraftingJob.ANY &&
+      simulationState.crafterStats.levels[levelRequirement.job] !== undefined
+    ) {
       if (simulationState.crafterStats.levels[levelRequirement.job] < levelRequirement.level) {
         return SimulationFailCause.MISSING_LEVEL_REQUIREMENT;
       }
@@ -110,7 +124,8 @@ export abstract class CraftingAction {
     let levelDifference = crafterLevel - recipeLevel;
     // If ingenuity 2
     if (simulation.hasBuff(Buff.INGENUITY_II)) {
-      recipeLevel = Tables.INGENUITY_II_RLVL_TABLE[simulation.recipe.rlvl] || simulation.recipe.rlvl - 7;
+      recipeLevel =
+        Tables.INGENUITY_II_RLVL_TABLE[simulation.recipe.rlvl] || simulation.recipe.rlvl - 7;
       levelDifference = crafterLevel - recipeLevel;
       if (levelDifference < 0) {
         levelDifference = Math.max(levelDifference, -5);
@@ -118,7 +133,8 @@ export abstract class CraftingAction {
     }
     // If ingenuity
     if (simulation.hasBuff(Buff.INGENUITY)) {
-      recipeLevel = Tables.INGENUITY_RLVL_TABLE[simulation.recipe.rlvl] || simulation.recipe.rlvl - 5;
+      recipeLevel =
+        Tables.INGENUITY_RLVL_TABLE[simulation.recipe.rlvl] || simulation.recipe.rlvl - 5;
       levelDifference = crafterLevel - recipeLevel;
       if (levelDifference < 0) {
         levelDifference = Math.max(levelDifference, -6);
@@ -127,16 +143,19 @@ export abstract class CraftingAction {
     return levelDifference;
   }
 
-  protected getBaseProgression(simulation: Simulation): number {
+  public getBaseProgression(simulation: Simulation): number {
     const stats = simulation.crafterStats;
     const crafterLevel = Tables.LEVEL_TABLE[stats.level] || stats.level;
-    const formula = progressFormulas.find(entry => entry.CharLevel === crafterLevel && entry.RecipeLevel === simulation.recipe.rlvl);
+    const formula = progressFormulas.find(
+      entry => entry.CharLevel === crafterLevel && entry.RecipeLevel === simulation.recipe.rlvl
+    );
     // If we don't have a formula for this combination, fallback.
     if (formula === undefined) {
       return this.getBaseProgressionFallback(simulation);
     }
     const craftsmanship = simulation.crafterStats.craftsmanship;
-    let result = craftsmanship * craftsmanship * formula.Ax2 + craftsmanship * formula.Bx + formula.C;
+    let result =
+      craftsmanship * craftsmanship * formula.Ax2 + craftsmanship * formula.Bx + formula.C;
     if (simulation.hasBuff(Buff.INGENUITY)) {
       result *= this.getIngenuityMultiplier(crafterLevel, simulation.recipe.rlvl, 'Progress', 1);
     } else if (simulation.hasBuff(Buff.INGENUITY_II)) {
@@ -145,16 +164,23 @@ export abstract class CraftingAction {
     return result;
   }
 
-  protected getIngenuityMultiplier(clvl: number, rlvl: number, type: 'Quality' | 'Progress', level: 1 | 2): number {
+  protected getIngenuityMultiplier(
+    clvl: number,
+    rlvl: number,
+    type: 'Quality' | 'Progress',
+    level: 1 | 2
+  ): number {
     let id = clvl - rlvl;
     let ingenuityEntry: any = ingenuityData.find(row => row.Id === id);
-    let ingenuityMultiplier = ingenuityEntry === undefined ? undefined : ingenuityEntry[`${type}Ingenuity${level}`];
+    let ingenuityMultiplier =
+      ingenuityEntry === undefined ? undefined : ingenuityEntry[`${type}Ingenuity${level}`];
     let tries = 0;
-    while (ingenuityMultiplier === null || ingenuityMultiplier === undefined && tries < 100) {
+    while (ingenuityMultiplier === null || (ingenuityMultiplier === undefined && tries < 100)) {
       tries++;
       id > 0 ? id++ : id--;
       ingenuityEntry = ingenuityData.find(row => row.Id === id);
-      ingenuityMultiplier = ingenuityEntry === undefined ? undefined : ingenuityEntry[`${type}Ingenuity${level}`];
+      ingenuityMultiplier =
+        ingenuityEntry === undefined ? undefined : ingenuityEntry[`${type}Ingenuity${level}`];
     }
     // If we tried too many times, just return 1, we don't have ingenuity data for that.
     if (tries >= 100) {
@@ -178,9 +204,15 @@ export abstract class CraftingAction {
     let levelCorrectionFactor = 0;
     let recipeLevelPenalty = 0;
     if (crafterLevel > 250) {
-      baseProgress = 1.834712812e-5 * stats.craftsmanship * stats.craftsmanship + 1.904074773e-1 * stats.craftsmanship + 1.544103837;
+      baseProgress =
+        1.834712812e-5 * stats.craftsmanship * stats.craftsmanship +
+        1.904074773e-1 * stats.craftsmanship +
+        1.544103837;
     } else if (crafterLevel > 110) {
-      baseProgress = 2.09860e-5 * stats.craftsmanship * stats.craftsmanship + 0.196184 * stats.craftsmanship + 2.68452;
+      baseProgress =
+        2.0986e-5 * stats.craftsmanship * stats.craftsmanship +
+        0.196184 * stats.craftsmanship +
+        2.68452;
     } else {
       baseProgress = 0.214959 * stats.craftsmanship + 1.6;
     }
@@ -190,7 +222,7 @@ export abstract class CraftingAction {
       levelCorrectionFactor += (0.25 / 5) * Math.min(levelDifference, 5);
     }
     if (levelDifference > 5) {
-      levelCorrectionFactor += (0.10 / 5) * Math.min(levelDifference - 5, 10);
+      levelCorrectionFactor += (0.1 / 5) * Math.min(levelDifference - 5, 10);
     }
     if (levelDifference > 15) {
       levelCorrectionFactor += (0.05 / 5) * Math.min(levelDifference - 15, 5);
@@ -213,10 +245,12 @@ export abstract class CraftingAction {
     return baseProgress * (1 + levelCorrectionFactor) * (1 + recipeLevelPenalty);
   }
 
-  protected getBaseQuality(simulation: Simulation): number {
+  public getBaseQuality(simulation: Simulation): number {
     const stats = simulation.crafterStats;
     const crafterLevel: number = Tables.LEVEL_TABLE[stats.level] || stats.level;
-    const formula = qualityFormulas.find(entry => entry.CharLevel === crafterLevel && entry.RecipeLevel === simulation.recipe.rlvl);
+    const formula = qualityFormulas.find(
+      entry => entry.CharLevel === crafterLevel && entry.RecipeLevel === simulation.recipe.rlvl
+    );
     // If we don't have a formula for this combination, fallback.
     if (formula === undefined) {
       return this.getBaseQualityFallback(simulation);
@@ -238,22 +272,22 @@ export abstract class CraftingAction {
     let levelCorrectionFactor = 0;
     const levelDifference = this.getLevelDifference(simulation);
 
-    const baseQuality = 3.46e-5 * stats.getControl(simulation) * stats.getControl(simulation)
-      + 0.3514 * stats.getControl(simulation)
-      + 34.66;
+    const baseQuality =
+      3.46e-5 * stats.getControl(simulation) * stats.getControl(simulation) +
+      0.3514 * stats.getControl(simulation) +
+      34.66;
 
     if (recipeLevel > 50) {
       // Starts at base penalty amount depending on recipe tier
       let recipeLevelPenaltyLevel = 0;
-      Object.keys(Tables.QUALITY_PENALTY_TABLE)
-        .forEach((key) => {
-          const penaltyLevel = +key;
-          const penaltyValue: number = Tables.QUALITY_PENALTY_TABLE[penaltyLevel];
-          if (recipeLevel >= penaltyLevel && penaltyLevel >= recipeLevelPenaltyLevel) {
-            recipeLevelPenalty = penaltyValue;
-            recipeLevelPenaltyLevel = penaltyLevel;
-          }
-        });
+      Object.keys(Tables.QUALITY_PENALTY_TABLE).forEach(key => {
+        const penaltyLevel = +key;
+        const penaltyValue: number = Tables.QUALITY_PENALTY_TABLE[penaltyLevel];
+        if (recipeLevel >= penaltyLevel && penaltyLevel >= recipeLevelPenaltyLevel) {
+          recipeLevelPenalty = penaltyValue;
+          recipeLevelPenaltyLevel = penaltyLevel;
+        }
+      });
       // Smaller penalty applied for additional recipe levels within the tier
       recipeLevelPenalty += (recipeLevel - recipeLevelPenaltyLevel) * -0.0002;
     } else {
