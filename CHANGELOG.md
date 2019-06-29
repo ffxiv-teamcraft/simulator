@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/ffxiv-teamcraft/simulator/compare/v1.1.0-beta.7...v1.1.0) (2019-06-29)
+
+
+### Features
+
+* **rapid-synthesis-iii:** fixed potency penalty for when durability < 20 ([a1b895b](https://github.com/ffxiv-teamcraft/simulator/commit/a1b895b))
+
+
+
 ## [1.1.0-beta.7](https://github.com/ffxiv-teamcraft/simulator/compare/v1.1.0-beta.6...v1.1.0-beta.7) (2019-06-28)
 
 
