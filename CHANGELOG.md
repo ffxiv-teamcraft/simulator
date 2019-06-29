@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/ffxiv-teamcraft/simulator/compare/v1.1.0...v1.1.1) (2019-06-29)
+
+
+### Bug Fixes
+
+* getBaseProgression and getBaseQuality are now public for UI purpose ([d6c13f4](https://github.com/ffxiv-teamcraft/simulator/commit/d6c13f4))
+
+
+
 ## [1.1.0](https://github.com/ffxiv-teamcraft/simulator/compare/v1.1.0-beta.7...v1.1.0) (2019-06-29)
 
 
