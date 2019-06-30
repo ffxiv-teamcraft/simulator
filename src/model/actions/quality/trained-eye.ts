@@ -6,7 +6,7 @@ import { ActionType } from '../action-type';
 export class TrainedEye extends CraftingAction {
   _canBeUsed(simulationState: Simulation, linear?: boolean): boolean {
     return (
-      simulationState.crafterStats.level - simulationState.recipe.lvl <= 10 &&
+      simulationState.crafterStats.level - simulationState.recipe.lvl >= 10 &&
       simulationState.steps.length === 0
     );
   }

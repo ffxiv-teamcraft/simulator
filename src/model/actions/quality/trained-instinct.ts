@@ -6,13 +6,13 @@ import { ActionType } from '../action-type';
 export class TrainedInstinct extends CraftingAction {
   _canBeUsed(simulationState: Simulation, linear?: boolean): boolean {
     return (
-      simulationState.crafterStats.level - simulationState.recipe.lvl <= 10 &&
+      simulationState.crafterStats.level - simulationState.recipe.lvl >= 10 &&
       simulationState.steps.length === 0
     );
   }
 
   execute(simulation: Simulation): void {
-    simulation.quality += simulation.recipe.quality;
+    simulation.quality += Math.floor(simulation.recipe.quality * 0.3);
   }
 
   getBaseCPCost(simulationState: Simulation): number {
