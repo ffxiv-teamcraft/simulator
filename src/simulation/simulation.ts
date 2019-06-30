@@ -11,7 +11,6 @@ import { SimulationFailCause } from '../model/simulation-fail-cause.enum';
 import { Craft } from '../model/craft';
 
 export class Simulation {
-
   public progression = 0;
   public quality = 0;
   public startingQuality = 0;
@@ -34,8 +33,13 @@ export class Simulation {
 
   public safe = false;
 
-  constructor(public readonly recipe: Craft, public actions: CraftingAction[], private _crafterStats: CrafterStats,
-              private hqIngredients: { id: number, amount: number }[] = [], private forceFailed: number[] = []) {
+  constructor(
+    public readonly recipe: Craft,
+    public actions: CraftingAction[],
+    private _crafterStats: CrafterStats,
+    private hqIngredients: { id: number; amount: number }[] = [],
+    private forceFailed: number[] = []
+  ) {
     this.durability = recipe.durability;
     this.availableCP = this._crafterStats.cp;
     this.maxCP = this.availableCP;
@@ -47,6 +51,7 @@ export class Simulation {
         this.quality += ingredientDetails.quality * ingredient.amount;
       }
     }
+    this.quality = Math.floor(this.quality);
     this.startingQuality = this.quality;
   }
 
@@ -73,7 +78,10 @@ export class Simulation {
     if (results.length % 2) {
       hqMedian = results[results.length / 2].hqPercent;
     } else {
-      hqMedian = (results[Math.floor(results.length / 2)].hqPercent + results[Math.ceil(results.length / 2)].hqPercent) / 2;
+      hqMedian =
+        (results[Math.floor(results.length / 2)].hqPercent +
+          results[Math.ceil(results.length / 2)].hqPercent) /
+        2;
     }
     return {
       rawData: results,
@@ -83,7 +91,7 @@ export class Simulation {
     };
   }
 
-  public getMinStats(): { control: number, craftsmanship: number, cp: number } {
+  public getMinStats(): { control: number; craftsmanship: number; cp: number } {
     const originalHqPercent = this.run(true).hqPercent;
     // Three loops, one per stat
     while (this.run(true).success) {
@@ -91,7 +99,11 @@ export class Simulation {
       this.reset();
     }
     this.crafterStats.craftsmanship++;
-    while (this.run(true).hqPercent >= originalHqPercent && originalHqPercent > 1 && this.crafterStats._control > 0) {
+    while (
+      this.run(true).hqPercent >= originalHqPercent &&
+      originalHqPercent > 1 &&
+      this.crafterStats._control > 0
+    ) {
       this.crafterStats._control--;
       this.reset();
     }
@@ -131,75 +143,85 @@ export class Simulation {
   public run(linear = false, maxTurns = Infinity, safeMode = false): SimulationResult {
     this.lastPossibleReclaimStep = -1;
     const reclaimAction = new Reclaim();
-    this.actions.filter(a => a !== undefined).forEach((action: CraftingAction, index: number) => {
-      // If we're starting and the crafter is specialist
-      if (index === 0 && this.crafterStats.specialist && this.crafterStats.level >= 70) {
-        // Push stroke of genius buff
-        this.buffs.push({
-          buff: Buff.STROKE_OF_GENIUS,
-          stacks: 0,
-          duration: Infinity,
-          appliedStep: -1
-        });
-        // Apply stroke of genius manually in the stats
-        this.availableCP += 15;
-        this.maxCP += 15;
-      }
-      let result: ActionResult;
-      let failCause: SimulationFailCause | undefined = undefined;
-      const canUseAction = action.canBeUsed(this, linear);
-      if (!canUseAction) {
-        failCause = action.getFailCause(this, linear, safeMode);
-      }
-      const hasEnoughCP = action.getBaseCPCost(this) <= this.availableCP;
-      if (!hasEnoughCP) {
-        failCause = SimulationFailCause.NOT_ENOUGH_CP;
-      }
-      // If we can use the action
-      if (this.success === undefined && hasEnoughCP && this.steps.length < maxTurns && canUseAction) {
-        result = this.runAction(action, linear, safeMode, index);
-        if (reclaimAction.getBaseCPCost(this) <= this.availableCP && reclaimAction.canBeUsed(this, linear)) {
-          this.lastPossibleReclaimStep = index;
+    this.actions
+      .filter(a => a !== undefined)
+      .forEach((action: CraftingAction, index: number) => {
+        // If we're starting and the crafter is specialist
+        if (index === 0 && this.crafterStats.specialist && this.crafterStats.level >= 70) {
+          // Push stroke of genius buff
+          this.buffs.push({
+            buff: Buff.STROKE_OF_GENIUS,
+            stacks: 0,
+            duration: Infinity,
+            appliedStep: -1
+          });
+          // Apply stroke of genius manually in the stats
+          this.availableCP += 15;
+          this.maxCP += 15;
         }
-      } else {
-        // If we can't, add the step to the result but skip it.
-        result = {
-          action: action,
-          success: null,
-          addedQuality: 0,
-          addedProgression: 0,
-          cpDifference: 0,
-          skipped: true,
-          solidityDifference: 0,
-          state: this.state,
-          failCause: failCause
-        };
-      }
-      if (this.steps.length <= maxTurns) {
-        const qualityBefore = this.quality;
-        const progressionBefore = this.progression;
-        const durabilityBefore = this.durability;
-        const cpBefore = this.availableCP;
-        // Tick buffs after checking synth result, so if we reach 0 durability, synth fails.
-        this.tickBuffs(linear);
-        result.afterBuffTick = {
-          // Amount of progression added to the craft
-          addedProgression: this.progression - progressionBefore,
-          // Amount of quality added to the craft
-          addedQuality: this.quality - qualityBefore,
-          // CP added to the craft (negative if removed)
-          cpDifference: this.availableCP - cpBefore,
-          // Solidity added to the craft (negative if removed)
-          solidityDifference: this.durability - durabilityBefore
-        };
-      }
-      // Tick state to change it for next turn if not in linear mode
-      if (!linear) {
-        this.tickState();
-      }
+        let result: ActionResult;
+        let failCause: SimulationFailCause | undefined = undefined;
+        const canUseAction = action.canBeUsed(this, linear);
+        if (!canUseAction) {
+          failCause = action.getFailCause(this, linear, safeMode);
+        }
+        const hasEnoughCP = action.getBaseCPCost(this) <= this.availableCP;
+        if (!hasEnoughCP) {
+          failCause = SimulationFailCause.NOT_ENOUGH_CP;
+        }
+        // If we can use the action
+        if (
+          this.success === undefined &&
+          hasEnoughCP &&
+          this.steps.length < maxTurns &&
+          canUseAction
+        ) {
+          result = this.runAction(action, linear, safeMode, index);
+          if (
+            reclaimAction.getBaseCPCost(this) <= this.availableCP &&
+            reclaimAction.canBeUsed(this, linear)
+          ) {
+            this.lastPossibleReclaimStep = index;
+          }
+        } else {
+          // If we can't, add the step to the result but skip it.
+          result = {
+            action: action,
+            success: null,
+            addedQuality: 0,
+            addedProgression: 0,
+            cpDifference: 0,
+            skipped: true,
+            solidityDifference: 0,
+            state: this.state,
+            failCause: failCause
+          };
+        }
+        if (this.steps.length <= maxTurns) {
+          const qualityBefore = this.quality;
+          const progressionBefore = this.progression;
+          const durabilityBefore = this.durability;
+          const cpBefore = this.availableCP;
+          // Tick buffs after checking synth result, so if we reach 0 durability, synth fails.
+          this.tickBuffs(linear);
+          result.afterBuffTick = {
+            // Amount of progression added to the craft
+            addedProgression: this.progression - progressionBefore,
+            // Amount of quality added to the craft
+            addedQuality: this.quality - qualityBefore,
+            // CP added to the craft (negative if removed)
+            cpDifference: this.availableCP - cpBefore,
+            // Solidity added to the craft (negative if removed)
+            solidityDifference: this.durability - durabilityBefore
+          };
+        }
+        // Tick state to change it for next turn if not in linear mode
+        if (!linear) {
+          this.tickState();
+        }
 
-      this.steps.push(result);
-    });
+        this.steps.push(result);
+      });
     // HQ percent to quality percent formulae: https://github.com/Ermad/ffxiv-craft-opt-web/blob/master/app/js/ffxivcraftmodel.js#L1455
 
     const failedAction = this.steps.find(step => step.failCause !== undefined);
@@ -222,7 +244,12 @@ export class Simulation {
    * @param {boolean} safeMode
    * @param index
    */
-  public runAction(action: CraftingAction, linear = false, safeMode = false, index: number = -1): ActionResult {
+  public runAction(
+    action: CraftingAction,
+    linear = false,
+    safeMode = false,
+    index: number = -1
+  ): ActionResult {
     // The roll for the current action's success rate, 0 if ideal mode, as 0 will even match a 1% chances.
     let probabilityRoll = linear ? 0 : Math.random() * 100;
     if (this.forceFailed.some(i => i === index)) {
@@ -337,15 +364,20 @@ export class Simulation {
     const recipeLevel = this.recipe.rlvl;
     const qualityAssurance = this.crafterStats.level >= 63;
     let goodChances = 0;
-    if (recipeLevel >= 300) { // 70*+
-      goodChances = qualityAssurance ? 0.11 : 0.10;
-    } else if (recipeLevel >= 276) { // 65+
+    if (recipeLevel >= 300) {
+      // 70*+
+      goodChances = qualityAssurance ? 0.11 : 0.1;
+    } else if (recipeLevel >= 276) {
+      // 65+
       goodChances = qualityAssurance ? 0.17 : 0.15;
-    } else if (recipeLevel >= 255) { // 61+
-      goodChances = qualityAssurance ? 0.22 : 0.20;
-    } else if (recipeLevel >= 150) { // 60+
-      goodChances = qualityAssurance ? 0.11 : 0.10;
-    } else if (recipeLevel >= 136) { // 55+
+    } else if (recipeLevel >= 255) {
+      // 61+
+      goodChances = qualityAssurance ? 0.22 : 0.2;
+    } else if (recipeLevel >= 150) {
+      // 60+
+      goodChances = qualityAssurance ? 0.11 : 0.1;
+    } else if (recipeLevel >= 136) {
+      // 55+
       goodChances = qualityAssurance ? 0.17 : 0.15;
     } else {
       goodChances = qualityAssurance ? 0.27 : 0.25;
@@ -353,11 +385,14 @@ export class Simulation {
 
     // Excellent
     let excellentChances = 0;
-    if (recipeLevel >= 300) { // 70*+
+    if (recipeLevel >= 300) {
+      // 70*+
       excellentChances = 0.01;
-    } else if (recipeLevel >= 255) { // 61+
+    } else if (recipeLevel >= 255) {
+      // 61+
       excellentChances = 0.02;
-    } else if (recipeLevel >= 150) { // 60+
+    } else if (recipeLevel >= 150) {
+      // 60+
       excellentChances = 0.01;
     } else {
       excellentChances = 0.02;
