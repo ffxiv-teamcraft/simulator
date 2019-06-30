@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/ffxiv-teamcraft/simulator/compare/v1.1.1...v1.2.0) (2019-06-30)
+
+
+### Bug Fixes
+
+* fixed an issue with trained actions being usable when they shouldn't ([5969ab9](https://github.com/ffxiv-teamcraft/simulator/commit/5969ab9))
+* fixed broken id on steady hand II for CUL ([d3943b5](https://github.com/ffxiv-teamcraft/simulator/commit/d3943b5))
+* fixed wrong precision with HQ ingredients quality ([e68ddad](https://github.com/ffxiv-teamcraft/simulator/commit/e68ddad))
+
+
+### Features
+
+* implemented real ingame formula into the simulator ([3e2a778](https://github.com/ffxiv-teamcraft/simulator/commit/3e2a778))
+
+
+
 ### [1.1.1](https://github.com/ffxiv-teamcraft/simulator/compare/v1.1.0...v1.1.1) (2019-06-29)
 
 
