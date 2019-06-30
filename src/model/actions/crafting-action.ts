@@ -119,15 +119,16 @@ export abstract class CraftingAction {
     let recipeLevel = simulation.recipe.rlvl;
     const stats: CrafterStats = simulation.crafterStats;
     const crafterLevel = Tables.LEVEL_TABLE[stats.level] || stats.level;
-    // If ingenuity 2
-    if (simulation.hasBuff(Buff.INGENUITY_II)) {
-      recipeLevel = simulation.recipe.rlvl - 12;
-    }
+    let levelDifference = crafterLevel - recipeLevel;
+    const originalLevelDifference = crafterLevel - recipeLevel;
     // If ingenuity
     if (simulation.hasBuff(Buff.INGENUITY)) {
-      recipeLevel = simulation.recipe.rlvl - 11;
+      levelDifference = Math.max(levelDifference + 12, Math.floor(originalLevelDifference / 20));
     }
-    let levelDifference = crafterLevel - recipeLevel;
+    // If ingenuity 2
+    if (simulation.hasBuff(Buff.INGENUITY_II)) {
+      levelDifference = Math.max(levelDifference + 12, Math.floor(originalLevelDifference / 15));
+    }
     let difference = CraftLevelDifference.find(entry => entry.Difference === levelDifference);
     if (difference === undefined) {
       difference =

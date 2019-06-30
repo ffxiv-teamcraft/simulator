@@ -22,10 +22,17 @@ import {
   acchanStats,
   alc70i331Stats,
   alc70i350Stats,
+  enchantedTruegoldInkRecipe,
+  fake395Recipe,
+  fake400Recipe,
+  fake403Recipe,
   gradeIIInfusionOfStrRecipe,
   infusionOfMindRecipe,
   refinedNatronRecipe,
-  riettyStats
+  riettyStats,
+  starchGlueRecipe,
+  test1440CraftClvl70,
+  test1610CraftClvl70
 } from './mocks';
 import { ComfortZone } from '../src/model/actions/buff/comfort-zone';
 import { SpecialtyReflect } from '../src/model/actions/other/specialty-reflect';
@@ -58,6 +65,14 @@ describe('Craft simulator tests', () => {
       );
       simulation.run(true);
       expect(simulation.progression).toBe(237);
+
+      const simulation2 = new Simulation(
+        enchantedTruegoldInkRecipe,
+        [new BasicSynthesis()],
+        alc70i331Stats
+      );
+      simulation2.run(true);
+      expect(simulation2.progression).toBe(253);
     });
 
     it('should be able to predict correct quality increase on action', () => {
@@ -216,39 +231,101 @@ describe('Craft simulator tests', () => {
 
     describe('Ingenuities', () => {
       it('should properly reduce recipe level with Ingenuity, influencing progression', () => {
-        const simulation = new Simulation(
-          infusionOfMindRecipe,
-          [new SteadyHand(), new Ingenuity(), new BasicSynthesis()],
-          alc70i331Stats
-        );
-        simulation.run();
-        expect(simulation.progression).toBe(487);
+        const results = [
+          {
+            recipe: refinedNatronRecipe,
+            stats: riettyStats,
+            expected: 557
+          },
+          {
+            recipe: enchantedTruegoldInkRecipe,
+            stats: alc70i331Stats,
+            expected: 294
+          },
+          {
+            recipe: refinedNatronRecipe,
+            stats: riettyStats,
+            expected: 557
+          },
+          {
+            recipe: starchGlueRecipe,
+            stats: alc70i331Stats,
+            expected: 248
+          },
+          {
+            recipe: fake395Recipe,
+            stats: test1610CraftClvl70,
+            expected: 260
+          },
+          {
+            recipe: fake400Recipe,
+            stats: test1440CraftClvl70,
+            expected: 227
+          },
+          {
+            recipe: fake403Recipe,
+            stats: test1610CraftClvl70,
+            expected: 257
+          }
+        ];
 
-        const simulation2 = new Simulation(
-          refinedNatronRecipe,
-          [new SteadyHand(), new Ingenuity(), new BasicSynthesis()],
-          riettyStats
-        );
-        simulation2.run();
-        expect(simulation2.progression).toBe(557);
+        for (const entry of results) {
+          const simulation = new Simulation(
+            entry.recipe,
+            [new SteadyHand(), new Ingenuity(), new BasicSynthesis()],
+            entry.stats
+          );
+          simulation.run(true);
+          if (simulation.progression !== entry.expected) {
+            console.log(entry.recipe.rlvl, entry.stats.craftsmanship);
+          }
+          expect(simulation.progression).toBe(entry.expected);
+        }
       });
 
       it('should properly reduce recipe level with Ingenuity II, influencing progression', () => {
-        const simulation = new Simulation(
-          infusionOfMindRecipe,
-          [new SteadyHand(), new IngenuityII(), new BasicSynthesis()],
-          alc70i331Stats
-        );
-        simulation.run();
-        expect(simulation.progression).toBe(494);
+        const results = [
+          {
+            recipe: refinedNatronRecipe,
+            stats: riettyStats,
+            expected: 557
+          },
+          {
+            recipe: enchantedTruegoldInkRecipe,
+            stats: alc70i331Stats,
+            expected: 304
+          },
+          {
+            recipe: starchGlueRecipe,
+            stats: alc70i331Stats,
+            expected: 248
+          },
+          {
+            recipe: fake395Recipe,
+            stats: test1610CraftClvl70,
+            expected: 266
+          },
+          {
+            recipe: fake400Recipe,
+            stats: test1440CraftClvl70,
+            expected: 227
+          },
+          {
+            recipe: fake403Recipe,
+            stats: test1610CraftClvl70,
+            expected: 257
+          }
+        ];
 
-        const simulation2 = new Simulation(
-          refinedNatronRecipe,
-          [new SteadyHand(), new IngenuityII(), new BasicSynthesis()],
-          riettyStats
-        );
-        simulation2.run();
-        expect(simulation2.progression).toBe(557);
+        for (const entry of results) {
+          const simulation = new Simulation(
+            entry.recipe,
+            [new SteadyHand(), new IngenuityII(), new BasicSynthesis()],
+            entry.stats
+          );
+          simulation.run(true);
+          expect(simulation.progression).toBe(entry.expected);
+        }
       });
     });
 

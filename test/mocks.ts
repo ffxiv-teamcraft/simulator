@@ -125,6 +125,161 @@ export const refinedNatronRecipe: Craft = {
   ]
 };
 
+export const enchantedTruegoldInkRecipe: Craft = {
+  id: '3856',
+  job: 14,
+  rlvl: 390,
+  durability: 40,
+  quality: 14071,
+  progress: 1574,
+  lvl: 71,
+  suggestedCraftsmanship: 1320,
+  suggestedControl: 1220,
+  hq: 1,
+  quickSynth: 1,
+  ingredients: [
+    {
+      id: 27696,
+      amount: 3,
+      quality: 2245.37231
+    },
+    {
+      id: 27764,
+      amount: 1,
+      quality: 2245.37231
+    },
+    {
+      id: 19872,
+      amount: 1,
+      quality: 1571.76062
+    },
+    {
+      id: 13,
+      amount: 6
+    }
+  ]
+};
+
+export const fake395Recipe: Craft = {
+  id: '3864',
+  job: 14,
+  rlvl: 395,
+  durability: 40,
+  quality: 16557,
+  progress: 1733,
+  lvl: 75,
+  suggestedCraftsmanship: 1388,
+  suggestedControl: 1425,
+  hq: 1,
+  quickSynth: 1,
+  ingredients: [
+    {
+      id: 27773,
+      amount: 2,
+      quality: 3104.4375
+    },
+    {
+      id: 27774,
+      amount: 2,
+      quality: 3104.4375
+    },
+    {
+      id: 13,
+      amount: 7
+    }
+  ]
+};
+
+export const fake400Recipe: Craft = {
+  id: '3864',
+  job: 14,
+  rlvl: 400,
+  durability: 40,
+  quality: 16557,
+  progress: 1733,
+  lvl: 75,
+  suggestedCraftsmanship: 1457,
+  suggestedControl: 1425,
+  hq: 1,
+  quickSynth: 1,
+  ingredients: [
+    {
+      id: 27773,
+      amount: 2,
+      quality: 3104.4375
+    },
+    {
+      id: 27774,
+      amount: 2,
+      quality: 3104.4375
+    },
+    {
+      id: 13,
+      amount: 7
+    }
+  ]
+};
+
+export const fake403Recipe: Craft = {
+  id: '3864',
+  job: 14,
+  rlvl: 403,
+  durability: 40,
+  quality: 16557,
+  progress: 1733,
+  lvl: 75,
+  suggestedCraftsmanship: 1498,
+  suggestedControl: 1425,
+  hq: 1,
+  quickSynth: 1,
+  ingredients: [
+    {
+      id: 27773,
+      amount: 2,
+      quality: 3104.4375
+    },
+    {
+      id: 27774,
+      amount: 2,
+      quality: 3104.4375
+    },
+    {
+      id: 13,
+      amount: 7
+    }
+  ]
+};
+
+export const starchGlueRecipe: Craft = {
+  id: '3864',
+  job: 14,
+  rlvl: 406,
+  durability: 40,
+  quality: 16557,
+  progress: 1733,
+  lvl: 75,
+  suggestedCraftsmanship: 1539,
+  suggestedControl: 1425,
+  hq: 1,
+  quickSynth: 1,
+  ingredients: [
+    {
+      id: 27773,
+      amount: 2,
+      quality: 3104.4375
+    },
+    {
+      id: 27774,
+      amount: 2,
+      quality: 3104.4375
+    },
+    {
+      id: 13,
+      amount: 7
+    }
+  ]
+};
+
 export const alc70i350Stats: CrafterStats = new CrafterStats(14, 1467, 1468, 474, true, 70, [
   70,
   70,
@@ -159,6 +314,28 @@ export const riettyStats: CrafterStats = new CrafterStats(14, 1736, 1624, 493, t
 ]);
 
 export const acchanStats: CrafterStats = new CrafterStats(14, 1500, 1536, 539, true, 70, [
+  70,
+  70,
+  70,
+  70,
+  70,
+  70,
+  70,
+  70
+]);
+
+export const test1610CraftClvl70 = new CrafterStats(14, 1610, 1536, 539, true, 70, [
+  70,
+  70,
+  70,
+  70,
+  70,
+  70,
+  70,
+  70
+]);
+
+export const test1440CraftClvl70 = new CrafterStats(14, 1440, 1536, 539, true, 70, [
   70,
   70,
   70,
