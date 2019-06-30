@@ -17,7 +17,7 @@ export class SteadyHandII extends BuffAction {
   }
 
   getIds(): number[] {
-    return [4607, 4608, 4609, 4610, 4611, 4612, 4613, 46104];
+    return [4607, 4608, 4609, 4610, 4611, 4612, 4613, 4614];
   }
 
   public getOverrides(): Buff[] {
