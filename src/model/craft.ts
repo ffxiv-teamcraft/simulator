@@ -9,6 +9,8 @@ export interface Craft {
   quality: number;
   progress: number;
   lvl: number;
+  suggestedCraftsmanship: number;
+  suggestedControl: number;
   stars?: number;
   hq: 1 | 0;
   quickSynth: 1 | 0;

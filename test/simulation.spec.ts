@@ -20,9 +20,12 @@ import { HastyTouch } from '../src/model/actions/quality/hasty-touch';
 import { RapidSynthesisII } from '../src/model/actions/progression/rapid-synthesis-ii';
 import {
   acchanStats,
+  alc70i331Stats,
   alc70i350Stats,
   gradeIIInfusionOfStrRecipe,
-  infusionOfMindRecipe
+  infusionOfMindRecipe,
+  refinedNatronRecipe,
+  riettyStats
 } from './mocks';
 import { ComfortZone } from '../src/model/actions/buff/comfort-zone';
 import { SpecialtyReflect } from '../src/model/actions/other/specialty-reflect';
@@ -216,20 +219,36 @@ describe('Craft simulator tests', () => {
         const simulation = new Simulation(
           infusionOfMindRecipe,
           [new SteadyHand(), new Ingenuity(), new BasicSynthesis()],
-          alc70i350Stats
+          alc70i331Stats
         );
         simulation.run();
-        expect(simulation.progression).toBe(414);
+        expect(simulation.progression).toBe(487);
+
+        const simulation2 = new Simulation(
+          refinedNatronRecipe,
+          [new SteadyHand(), new Ingenuity(), new BasicSynthesis()],
+          riettyStats
+        );
+        simulation2.run();
+        expect(simulation2.progression).toBe(557);
       });
 
       it('should properly reduce recipe level with Ingenuity II, influencing progression', () => {
         const simulation = new Simulation(
           infusionOfMindRecipe,
           [new SteadyHand(), new IngenuityII(), new BasicSynthesis()],
-          alc70i350Stats
+          alc70i331Stats
         );
         simulation.run();
-        expect(simulation.progression).toBe(459);
+        expect(simulation.progression).toBe(494);
+
+        const simulation2 = new Simulation(
+          refinedNatronRecipe,
+          [new SteadyHand(), new IngenuityII(), new BasicSynthesis()],
+          riettyStats
+        );
+        simulation2.run();
+        expect(simulation2.progression).toBe(557);
       });
     });
 
@@ -324,8 +343,8 @@ describe('Craft simulator tests', () => {
       ];
       const simulation = new Simulation(gradeIIInfusionOfStrRecipe, acchanMacro, acchanStats);
       simulation.run(true);
-      expect(simulation.progression).toBe(3441);
-      expect(simulation.quality).toBe(22030);
+      expect(simulation.progression).toBe(3443);
+      expect(simulation.quality).toBe(22028);
       expect(simulation.availableCP).toBe(0);
     });
   });
