@@ -23,16 +23,10 @@ import {
   alc70i331Stats,
   alc70i350Stats,
   enchantedTruegoldInkRecipe,
-  fake395Recipe,
-  fake400Recipe,
-  fake403Recipe,
+  generateRecipeForIngenuityTests,
+  generateStatsForIngenuityTests,
   gradeIIInfusionOfStrRecipe,
-  infusionOfMindRecipe,
-  refinedNatronRecipe,
-  riettyStats,
-  starchGlueRecipe,
-  test1440CraftClvl70,
-  test1610CraftClvl70
+  infusionOfMindRecipe
 } from './mocks';
 import { ComfortZone } from '../src/model/actions/buff/comfort-zone';
 import { SpecialtyReflect } from '../src/model/actions/other/specialty-reflect';
@@ -233,39 +227,64 @@ describe('Craft simulator tests', () => {
       it('should properly reduce recipe level with Ingenuity, influencing progression', () => {
         const results = [
           {
-            recipe: refinedNatronRecipe,
-            stats: riettyStats,
+            recipe: generateRecipeForIngenuityTests(409),
+            stats: generateStatsForIngenuityTests(80, 1736),
             expected: 557
           },
           {
-            recipe: enchantedTruegoldInkRecipe,
-            stats: alc70i331Stats,
+            recipe: generateRecipeForIngenuityTests(390),
+            stats: generateStatsForIngenuityTests(70, 1567),
             expected: 294
           },
           {
-            recipe: refinedNatronRecipe,
-            stats: riettyStats,
-            expected: 557
-          },
-          {
-            recipe: starchGlueRecipe,
-            stats: alc70i331Stats,
+            recipe: generateRecipeForIngenuityTests(406),
+            stats: generateStatsForIngenuityTests(70, 1567),
             expected: 248
           },
           {
-            recipe: fake395Recipe,
-            stats: test1610CraftClvl70,
+            recipe: generateRecipeForIngenuityTests(395),
+            stats: generateStatsForIngenuityTests(70, 1610),
             expected: 260
           },
           {
-            recipe: fake400Recipe,
-            stats: test1440CraftClvl70,
+            recipe: generateRecipeForIngenuityTests(400),
+            stats: generateStatsForIngenuityTests(70, 1440),
             expected: 227
           },
           {
-            recipe: fake403Recipe,
-            stats: test1610CraftClvl70,
+            recipe: generateRecipeForIngenuityTests(403),
+            stats: generateStatsForIngenuityTests(70, 1610),
             expected: 257
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(390, 1320),
+            stats: generateStatsForIngenuityTests(72, 1699),
+            expected: 556
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(403),
+            stats: generateStatsForIngenuityTests(76, 1843),
+            expected: 601
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(403),
+            stats: generateStatsForIngenuityTests(77, 1843),
+            expected: 601
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(409),
+            stats: generateStatsForIngenuityTests(77, 1843),
+            expected: 596
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(418),
+            stats: generateStatsForIngenuityTests(76, 1741),
+            expected: 553
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(420),
+            stats: generateStatsForIngenuityTests(76, 1741),
+            expected: 545
           }
         ];
 
@@ -286,34 +305,64 @@ describe('Craft simulator tests', () => {
       it('should properly reduce recipe level with Ingenuity II, influencing progression', () => {
         const results = [
           {
-            recipe: refinedNatronRecipe,
-            stats: riettyStats,
+            recipe: generateRecipeForIngenuityTests(409),
+            stats: generateStatsForIngenuityTests(80, 1736),
             expected: 557
           },
           {
-            recipe: enchantedTruegoldInkRecipe,
-            stats: alc70i331Stats,
+            recipe: generateRecipeForIngenuityTests(390),
+            stats: generateStatsForIngenuityTests(70, 1567),
             expected: 304
           },
           {
-            recipe: starchGlueRecipe,
-            stats: alc70i331Stats,
+            recipe: generateRecipeForIngenuityTests(406),
+            stats: generateStatsForIngenuityTests(70, 1567),
             expected: 248
           },
           {
-            recipe: fake395Recipe,
-            stats: test1610CraftClvl70,
+            recipe: generateRecipeForIngenuityTests(395),
+            stats: generateStatsForIngenuityTests(70, 1610),
             expected: 266
           },
           {
-            recipe: fake400Recipe,
-            stats: test1440CraftClvl70,
+            recipe: generateRecipeForIngenuityTests(400),
+            stats: generateStatsForIngenuityTests(70, 1440),
             expected: 227
           },
           {
-            recipe: fake403Recipe,
-            stats: test1610CraftClvl70,
+            recipe: generateRecipeForIngenuityTests(403),
+            stats: generateStatsForIngenuityTests(70, 1610),
             expected: 257
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(390),
+            stats: generateStatsForIngenuityTests(72, 1699),
+            expected: 556
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(403),
+            stats: generateStatsForIngenuityTests(76, 1843),
+            expected: 601
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(403),
+            stats: generateStatsForIngenuityTests(77, 1843),
+            expected: 601
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(409),
+            stats: generateStatsForIngenuityTests(77, 1843),
+            expected: 596
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(418),
+            stats: generateStatsForIngenuityTests(76, 1741),
+            expected: 553
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(420),
+            stats: generateStatsForIngenuityTests(76, 1741),
+            expected: 545
           }
         ];
 
@@ -420,8 +469,8 @@ describe('Craft simulator tests', () => {
       ];
       const simulation = new Simulation(gradeIIInfusionOfStrRecipe, acchanMacro, acchanStats);
       simulation.run(true);
-      expect(simulation.progression).toBe(3443);
-      expect(simulation.quality).toBe(22028);
+      expect(simulation.progression).toBe(3355);
+      expect(simulation.quality).toBe(19935);
       expect(simulation.availableCP).toBe(0);
     });
   });

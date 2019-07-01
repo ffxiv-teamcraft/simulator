@@ -123,20 +123,31 @@ export abstract class CraftingAction {
     const originalLevelDifference = crafterLevel - recipeLevel;
     // If ingenuity
     if (simulation.hasBuff(Buff.INGENUITY)) {
-      levelDifference = Math.max(levelDifference + 12, Math.floor(originalLevelDifference / 20));
+      if (levelDifference < 0) {
+        const cap = Math.abs(originalLevelDifference) <= 100 ? -5 : -20;
+        levelDifference = Math.max(levelDifference + Math.floor(recipeLevel / 10), cap);
+      } else {
+        levelDifference += Math.floor(recipeLevel / 21.5);
+      }
     }
     // If ingenuity 2
     if (simulation.hasBuff(Buff.INGENUITY_II)) {
-      levelDifference = Math.max(levelDifference + 12, Math.floor(originalLevelDifference / 15));
+      if (levelDifference < 0) {
+        let cap = -20;
+        if (Math.abs(originalLevelDifference) <= 100) {
+          cap = -4;
+        } else if (Math.abs(originalLevelDifference) < 110) {
+          cap = -9;
+        }
+        levelDifference = Math.max(levelDifference + Math.floor(recipeLevel / 9), cap);
+      } else {
+        levelDifference += Math.floor(recipeLevel / 21);
+      }
     }
-    let difference = CraftLevelDifference.find(entry => entry.Difference === levelDifference);
-    if (difference === undefined) {
-      difference =
-        levelDifference < 0
-          ? CraftLevelDifference[0]
-          : CraftLevelDifference[CraftLevelDifference.length - 1];
-    }
-    return difference;
+    levelDifference = Math.min(49, Math.max(-20, levelDifference));
+    return CraftLevelDifference.find(
+      entry => entry.Difference === levelDifference
+    ) as LevelDifference;
   }
 
   public getBaseProgression(simulation: Simulation): number {

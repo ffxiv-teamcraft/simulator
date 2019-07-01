@@ -95,36 +95,6 @@ export const infusionOfMindRecipe: Craft = {
   ]
 };
 
-export const refinedNatronRecipe: Craft = {
-  id: '3865',
-  job: 14,
-  rlvl: 409,
-  durability: 40,
-  quality: 17024,
-  progress: 1763,
-  lvl: 76,
-  suggestedCraftsmanship: 1580,
-  suggestedControl: 1464,
-  hq: 1,
-  quickSynth: 1,
-  ingredients: [
-    {
-      id: 27776,
-      amount: 1,
-      quality: 7492.26953
-    },
-    {
-      id: 19907,
-      amount: 1,
-      quality: 5275.73047
-    },
-    {
-      id: 13,
-      amount: 7
-    }
-  ]
-};
-
 export const enchantedTruegoldInkRecipe: Craft = {
   id: '3856',
   job: 14,
@@ -160,126 +130,6 @@ export const enchantedTruegoldInkRecipe: Craft = {
   ]
 };
 
-export const fake395Recipe: Craft = {
-  id: '3864',
-  job: 14,
-  rlvl: 395,
-  durability: 40,
-  quality: 16557,
-  progress: 1733,
-  lvl: 75,
-  suggestedCraftsmanship: 1388,
-  suggestedControl: 1425,
-  hq: 1,
-  quickSynth: 1,
-  ingredients: [
-    {
-      id: 27773,
-      amount: 2,
-      quality: 3104.4375
-    },
-    {
-      id: 27774,
-      amount: 2,
-      quality: 3104.4375
-    },
-    {
-      id: 13,
-      amount: 7
-    }
-  ]
-};
-
-export const fake400Recipe: Craft = {
-  id: '3864',
-  job: 14,
-  rlvl: 400,
-  durability: 40,
-  quality: 16557,
-  progress: 1733,
-  lvl: 75,
-  suggestedCraftsmanship: 1457,
-  suggestedControl: 1425,
-  hq: 1,
-  quickSynth: 1,
-  ingredients: [
-    {
-      id: 27773,
-      amount: 2,
-      quality: 3104.4375
-    },
-    {
-      id: 27774,
-      amount: 2,
-      quality: 3104.4375
-    },
-    {
-      id: 13,
-      amount: 7
-    }
-  ]
-};
-
-export const fake403Recipe: Craft = {
-  id: '3864',
-  job: 14,
-  rlvl: 403,
-  durability: 40,
-  quality: 16557,
-  progress: 1733,
-  lvl: 75,
-  suggestedCraftsmanship: 1498,
-  suggestedControl: 1425,
-  hq: 1,
-  quickSynth: 1,
-  ingredients: [
-    {
-      id: 27773,
-      amount: 2,
-      quality: 3104.4375
-    },
-    {
-      id: 27774,
-      amount: 2,
-      quality: 3104.4375
-    },
-    {
-      id: 13,
-      amount: 7
-    }
-  ]
-};
-
-export const starchGlueRecipe: Craft = {
-  id: '3864',
-  job: 14,
-  rlvl: 406,
-  durability: 40,
-  quality: 16557,
-  progress: 1733,
-  lvl: 75,
-  suggestedCraftsmanship: 1539,
-  suggestedControl: 1425,
-  hq: 1,
-  quickSynth: 1,
-  ingredients: [
-    {
-      id: 27773,
-      amount: 2,
-      quality: 3104.4375
-    },
-    {
-      id: 27774,
-      amount: 2,
-      quality: 3104.4375
-    },
-    {
-      id: 13,
-      amount: 7
-    }
-  ]
-};
-
 export const alc70i350Stats: CrafterStats = new CrafterStats(14, 1467, 1468, 474, true, 70, [
   70,
   70,
@@ -302,17 +152,6 @@ export const alc70i331Stats: CrafterStats = new CrafterStats(14, 1567, 1591, 493
   70
 ]);
 
-export const riettyStats: CrafterStats = new CrafterStats(14, 1736, 1624, 493, true, 80, [
-  75,
-  71,
-  71,
-  71,
-  71,
-  71,
-  80,
-  74
-]);
-
 export const acchanStats: CrafterStats = new CrafterStats(14, 1500, 1536, 539, true, 70, [
   70,
   70,
@@ -324,24 +163,62 @@ export const acchanStats: CrafterStats = new CrafterStats(14, 1500, 1536, 539, t
   70
 ]);
 
-export const test1610CraftClvl70 = new CrafterStats(14, 1610, 1536, 539, true, 70, [
-  70,
-  70,
-  70,
-  70,
-  70,
-  70,
-  70,
-  70
-]);
+export function generateRecipeForIngenuityTests(
+  rlvl: number,
+  suggestedCraftsmanship?: number
+): Craft {
+  const suggested: { [index: number]: number } = {
+    390: 1320,
+    395: 1388,
+    400: 1457,
+    403: 1498,
+    406: 1539,
+    409: 1580,
+    412: 0,
+    415: 0,
+    418: 1702,
+    420: 1866
+  };
+  return {
+    id: '3864',
+    job: 14,
+    rlvl: rlvl,
+    durability: 40,
+    quality: 16557,
+    progress: 1733,
+    lvl: 75,
+    suggestedCraftsmanship: suggestedCraftsmanship || suggested[rlvl] || 0,
+    suggestedControl: 1425,
+    hq: 1,
+    quickSynth: 1,
+    ingredients: [
+      {
+        id: 27773,
+        amount: 2,
+        quality: 3104.4375
+      },
+      {
+        id: 27774,
+        amount: 2,
+        quality: 3104.4375
+      },
+      {
+        id: 13,
+        amount: 7
+      }
+    ]
+  };
+}
 
-export const test1440CraftClvl70 = new CrafterStats(14, 1440, 1536, 539, true, 70, [
-  70,
-  70,
-  70,
-  70,
-  70,
-  70,
-  70,
-  70
-]);
+export function generateStatsForIngenuityTests(level: number, craftsmanship: number): CrafterStats {
+  return new CrafterStats(14, craftsmanship, 1536, 539, true, level, [
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70
+  ]);
+}
