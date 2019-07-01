@@ -7,6 +7,7 @@ import { CraftingJob } from '../crafting-job.enum';
 import { SimulationFailCause } from '../simulation-fail-cause.enum';
 import { Class } from '@kaiu/serializer';
 import { CraftLevelDifference, LevelDifference } from '../formulas/craft-level-difference';
+import { recipeStars } from '../formulas/recipe-stars';
 
 /**
  * This is the parent class of all actions in the simulator.
@@ -123,16 +124,28 @@ export abstract class CraftingAction {
     const originalLevelDifference = crafterLevel - recipeLevel;
     // If ingenuity
     if (simulation.hasBuff(Buff.INGENUITY)) {
-      if (levelDifference < 0) {
+      if (levelDifference < 0 && recipeLevel >= 390) {
         const cap = Math.abs(originalLevelDifference) <= 100 ? -5 : -20;
         levelDifference = Math.max(levelDifference + Math.floor(recipeLevel / 10), cap);
       } else {
-        levelDifference += Math.floor(recipeLevel / 21.5);
+        // Shadowbringers
+        if (recipeLevel >= 390) {
+          levelDifference += Math.floor(recipeLevel / 21.5);
+        } else {
+          if (recipeLevel === 290) {
+            levelDifference += 10;
+          } else if (recipeLevel === 300) {
+            levelDifference += 9;
+          } else {
+            levelDifference += 11;
+          }
+          levelDifference = Math.max(levelDifference, -1 * (recipeStars[recipeLevel] || 5));
+        }
       }
     }
     // If ingenuity 2
     if (simulation.hasBuff(Buff.INGENUITY_II)) {
-      if (levelDifference < 0) {
+      if (levelDifference < 0 && recipeLevel >= 390) {
         let cap = -20;
         if (Math.abs(originalLevelDifference) <= 100) {
           cap = -4;
@@ -141,9 +154,22 @@ export abstract class CraftingAction {
         }
         levelDifference = Math.max(levelDifference + Math.floor(recipeLevel / 9), cap);
       } else {
-        levelDifference += Math.floor(recipeLevel / 21);
+        // Shadowbringers
+        if (recipeLevel >= 390) {
+          levelDifference += Math.floor(recipeLevel / 21);
+        } else {
+          if (recipeLevel === 290) {
+            levelDifference += 11;
+          } else if (recipeLevel === 300) {
+            levelDifference += 10;
+          } else {
+            levelDifference += 12;
+          }
+          levelDifference = Math.max(levelDifference, -1 * (recipeStars[recipeLevel] - 1 || 5));
+        }
       }
     }
+
     levelDifference = Math.min(49, Math.max(-20, levelDifference));
     return CraftLevelDifference.find(
       entry => entry.Difference === levelDifference

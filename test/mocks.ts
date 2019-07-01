@@ -168,6 +168,15 @@ export function generateRecipeForIngenuityTests(
   suggestedCraftsmanship?: number
 ): Craft {
   const suggested: { [index: number]: number } = {
+    279: 1056,
+    282: 1063,
+    285: 1069,
+    288: 1075,
+    290: 1079,
+    300: 1100,
+    320: 1320,
+    350: 1500,
+    380: 1650,
     390: 1320,
     395: 1388,
     400: 1457,
