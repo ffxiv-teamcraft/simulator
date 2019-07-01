@@ -11,7 +11,6 @@ export * from './model/crafting-job.enum';
 export * from './model/effective-buff';
 export * from './model/gear-set';
 export * from './model/ingredient';
-export * from './model/recipe-element';
 export * from './model/simulation-fail-cause.enum';
 export * from './model/tables';
 export * from './model/actions/action-type';

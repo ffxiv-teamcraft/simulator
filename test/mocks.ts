@@ -95,32 +95,37 @@ export const infusionOfMindRecipe: Craft = {
   ]
 };
 
-export const refinedNatronRecipe: Craft = {
-  id: '3865',
+export const enchantedTruegoldInkRecipe: Craft = {
+  id: '3856',
   job: 14,
-  rlvl: 409,
+  rlvl: 390,
   durability: 40,
-  quality: 17024,
-  progress: 1763,
-  lvl: 76,
-  suggestedCraftsmanship: 1580,
-  suggestedControl: 1464,
+  quality: 14071,
+  progress: 1574,
+  lvl: 71,
+  suggestedCraftsmanship: 1320,
+  suggestedControl: 1220,
   hq: 1,
   quickSynth: 1,
   ingredients: [
     {
-      id: 27776,
-      amount: 1,
-      quality: 7492.26953
+      id: 27696,
+      amount: 3,
+      quality: 2245.37231
     },
     {
-      id: 19907,
+      id: 27764,
       amount: 1,
-      quality: 5275.73047
+      quality: 2245.37231
+    },
+    {
+      id: 19872,
+      amount: 1,
+      quality: 1571.76062
     },
     {
       id: 13,
-      amount: 7
+      amount: 6
     }
   ]
 };
@@ -147,17 +152,6 @@ export const alc70i331Stats: CrafterStats = new CrafterStats(14, 1567, 1591, 493
   70
 ]);
 
-export const riettyStats: CrafterStats = new CrafterStats(14, 1736, 1624, 493, true, 80, [
-  75,
-  71,
-  71,
-  71,
-  71,
-  71,
-  80,
-  74
-]);
-
 export const acchanStats: CrafterStats = new CrafterStats(14, 1500, 1536, 539, true, 70, [
   70,
   70,
@@ -168,3 +162,72 @@ export const acchanStats: CrafterStats = new CrafterStats(14, 1500, 1536, 539, t
   70,
   70
 ]);
+
+export function generateRecipeForIngenuityTests(
+  rlvl: number,
+  suggestedCraftsmanship?: number
+): Craft {
+  const suggested: { [index: number]: number } = {
+    279: 1056,
+    282: 1063,
+    285: 1069,
+    288: 1075,
+    290: 1079,
+    300: 1100,
+    320: 1320,
+    350: 1500,
+    380: 1650,
+    390: 1320,
+    395: 1388,
+    400: 1457,
+    403: 1498,
+    406: 1539,
+    409: 1580,
+    412: 0,
+    415: 0,
+    418: 1702,
+    420: 1866
+  };
+  return {
+    id: '3864',
+    job: 14,
+    rlvl: rlvl,
+    durability: 40,
+    quality: 16557,
+    progress: 1733,
+    lvl: 75,
+    suggestedCraftsmanship: suggestedCraftsmanship || suggested[rlvl] || 0,
+    suggestedControl: 1425,
+    hq: 1,
+    quickSynth: 1,
+    ingredients: [
+      {
+        id: 27773,
+        amount: 2,
+        quality: 3104.4375
+      },
+      {
+        id: 27774,
+        amount: 2,
+        quality: 3104.4375
+      },
+      {
+        id: 13,
+        amount: 7
+      }
+    ]
+  };
+}
+
+export function generateStatsForIngenuityTests(level: number, craftsmanship: number): CrafterStats {
+  return new CrafterStats(14, craftsmanship, 1536, 539, true, level, [
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70
+  ]);
+}
