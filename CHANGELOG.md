@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.1...v1.2.2) (2019-07-03)
+
+
+### Bug Fixes
+
+* **patient-touch:** fixed a bug with patient touch onFail method ([be16f33](https://github.com/ffxiv-teamcraft/simulator/commit/be16f33))
+
+
+
 ### [1.2.1](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.0...v1.2.1) (2019-07-01)
 
 
