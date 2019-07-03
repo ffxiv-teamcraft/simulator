@@ -24,7 +24,7 @@ exec('git init');
 exec('git add .');
 exec('git config user.name "Supamiu"');
 exec('git config user.email "contact@flavien-normand.fr"');
-exec('git commit -m "[skip ci]docs(docs): update gh-pages"');
+exec('git commit -m "docs(docs): update gh-pages"');
 exec(
   `git push --force --quiet "https://${ghToken}@${repository}" master:gh-pages`
 );
