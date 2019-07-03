@@ -259,7 +259,9 @@ export class CraftingActionsRegistry {
   public static serializeRotation(rotation: CraftingAction[]): string[] {
     return rotation
       .map(action => {
-        const actionRow = CraftingActionsRegistry.ALL_ACTIONS.find(row => row.action === action);
+        const actionRow = CraftingActionsRegistry.ALL_ACTIONS.find(
+          row => row.action.getIds()[0] === action.getIds()[0]
+        );
         if (actionRow !== undefined) {
           return actionRow.name;
         }
