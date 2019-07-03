@@ -564,4 +564,25 @@ describe('Craft simulator tests', () => {
       expect(simulation.availableCP).toBe(0);
     });
   });
+
+  describe('Tests from issues', () => {
+    it('Should not reproduce behavior from issue #3', () => {
+      const simulation = new Simulation(
+        infusionOfMindRecipe,
+        [
+          new Observe(),
+          new FocusedTouch(),
+          new Observe(),
+          new FocusedSynthesis(),
+          new Observe(),
+          new FocusedSynthesis()
+        ],
+        alc70i350Stats
+      );
+      simulation.run();
+      expect(
+        simulation.steps.some(step => isNaN(step.addedQuality) || isNaN(step.addedProgression))
+      ).toBeFalsy();
+    });
+  });
 });
