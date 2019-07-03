@@ -4,7 +4,6 @@ import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class PatientTouch extends QualityAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 64 };
   }
@@ -17,7 +16,11 @@ export class PatientTouch extends QualityAction {
   }
 
   onFail(simulation: Simulation): void {
-    simulation.getBuff(Buff.INNER_QUIET).stacks = Math.floor(simulation.getBuff(Buff.INNER_QUIET).stacks / 2);
+    if (simulation.getBuff(Buff.INNER_QUIET)) {
+      simulation.getBuff(Buff.INNER_QUIET).stacks = Math.floor(
+        simulation.getBuff(Buff.INNER_QUIET).stacks / 2
+      );
+    }
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
@@ -43,5 +46,4 @@ export class PatientTouch extends QualityAction {
   getPotency(simulation: Simulation): number {
     return 100;
   }
-
 }
