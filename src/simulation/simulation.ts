@@ -254,7 +254,7 @@ export class Simulation {
     let probabilityRoll = linear ? 0 : Math.random() * 100;
     if (this.forceFailed.some(i => i === index)) {
       // Impossible to succeed
-      probabilityRoll = 101;
+      probabilityRoll = 999;
     }
     const qualityBefore = this.quality;
     const progressionBefore = this.progression;
