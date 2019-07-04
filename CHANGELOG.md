@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.4](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.3...v1.2.4) (2019-07-04)
+
+
+### Bug Fixes
+
+* fixed an issue with force failed actions not being failed properly ([0c96e4b](https://github.com/ffxiv-teamcraft/simulator/commit/0c96e4b))
+
+
+
 ### [1.2.3](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.2...v1.2.3) (2019-07-03)
 
 
