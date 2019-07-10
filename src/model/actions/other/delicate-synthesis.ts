@@ -6,7 +6,7 @@ import { CraftingJob } from '../../crafting-job.enum';
 
 export class DelicateSynthesis extends GeneralAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.ANY, level: 72 };
+    return { job: CraftingJob.ANY, level: 76 };
   }
 
   _canBeUsed(simulation: Simulation, linear?: boolean): boolean {
