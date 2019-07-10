@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.5](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.4...v1.2.5) (2019-07-10)
+
+
+### Bug Fixes
+
+* fixed wrong level for Delicate Synthesis ([0ec8ae0](https://github.com/ffxiv-teamcraft/simulator/commit/0ec8ae0))
+
+
+
 ### [1.2.4](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.3...v1.2.4) (2019-07-04)
 
 
