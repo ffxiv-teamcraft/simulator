@@ -107,12 +107,14 @@ export class CraftingActionsRegistry {
     { short: 'brandOfLightning', full: 'BrandOfTheElements' },
     { short: 'brandOfWater', full: 'BrandOfTheElements' },
     { short: 'brandOfWind', full: 'BrandOfTheElements' },
+    { short: 'brandOfTheElements', full: 'BrandOfTheElements' },
     { short: 'nameOfEarth', full: 'NameOfTheElements' },
     { short: 'nameOfFire', full: 'NameOfTheElements' },
     { short: 'nameOfIce', full: 'NameOfTheElements' },
     { short: 'nameOfLightning', full: 'NameOfTheElements' },
     { short: 'nameOfWater', full: 'NameOfTheElements' },
     { short: 'nameOfWind', full: 'NameOfTheElements' },
+    { short: 'nameOfTheElements', full: 'NameOfTheElements' },
     { short: 'hastyTouch2', full: 'HastyTouchII' },
     { short: 'carefulSynthesis3', full: 'CarefulSynthesisIII' },
     { short: 'rapidSynthesis2', full: 'RapidSynthesisII' },
@@ -127,7 +129,11 @@ export class CraftingActionsRegistry {
     { short: 'specialtyReflect', full: 'SpecialtyReflect' },
     { short: 'strokeOfGenius', full: 'StrokeOfGenius' },
     { short: 'finishingTouches', full: 'FinishingTouches' },
-    { short: 'reclaim', full: 'Reclaim' }
+    { short: 'reclaim', full: 'Reclaim' },
+    { short: 'rapidSynthesis2', full: 'RapidSynthesisIII' },
+    { short: 'intensiveSynthesis', full: 'IntensiveSynthesis' },
+    { short: 'preparatoryTouch', full: 'PreparatoryTouch' },
+    { short: 'delicateSynthesis', full: 'DelicateSynthesis' }
   ];
 
   public static readonly ALL_ACTIONS: { name: string; action: CraftingAction }[] = [
