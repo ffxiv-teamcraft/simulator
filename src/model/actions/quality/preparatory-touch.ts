@@ -32,7 +32,7 @@ export class PreparatoryTouch extends QualityAction {
   }
 
   getIds(): number[] {
-    return [100299, 100300, 100301, 100302, 100303, 100305, 100306];
+    return [100299, 100300, 100301, 100302, 100303, 100304, 100305, 100306];
   }
 
   getPotency(simulation: Simulation): number {
