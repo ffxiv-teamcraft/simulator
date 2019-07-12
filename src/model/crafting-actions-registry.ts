@@ -130,7 +130,7 @@ export class CraftingActionsRegistry {
     { short: 'strokeOfGenius', full: 'StrokeOfGenius' },
     { short: 'finishingTouches', full: 'FinishingTouches' },
     { short: 'reclaim', full: 'Reclaim' },
-    { short: 'rapidSynthesis2', full: 'RapidSynthesisIII' },
+    { short: 'rapidSynthesis3', full: 'RapidSynthesisIII' },
     { short: 'intensiveSynthesis', full: 'IntensiveSynthesis' },
     { short: 'preparatoryTouch', full: 'PreparatoryTouch' },
     { short: 'delicateSynthesis', full: 'DelicateSynthesis' }
