@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.6](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.5...v1.2.6) (2019-07-12)
+
+
+### Bug Fixes
+
+* fixed missing id for preparatory touch ([09ed2cf](https://github.com/ffxiv-teamcraft/simulator/commit/09ed2cf))
+* **registry:** added missing craft optimizer import entries ([2dff767](https://github.com/ffxiv-teamcraft/simulator/commit/2dff767))
+* **registry:** fixed wrong shortName for rapid synth 3 ([aeebf26](https://github.com/ffxiv-teamcraft/simulator/commit/aeebf26))
+
+
+
 ### [1.2.5](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.4...v1.2.5) (2019-07-10)
 
 
