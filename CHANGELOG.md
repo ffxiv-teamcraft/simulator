@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.7](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.6...v1.2.7) (2019-07-12)
+
+
+### Bug Fixes
+
+* made buff action buff and initial stacks public ([ac6b407](https://github.com/ffxiv-teamcraft/simulator/commit/ac6b407))
+
+
+
 ### [1.2.6](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.5...v1.2.6) (2019-07-12)
 
 
