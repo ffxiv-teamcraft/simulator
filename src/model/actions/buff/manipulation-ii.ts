@@ -5,7 +5,6 @@ import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class ManipulationII extends BuffAction {
-
   getWaitDuration(): number {
     return 2;
   }
@@ -34,11 +33,11 @@ export class ManipulationII extends BuffAction {
     return super.getOverrides().concat(Buff.MANIPULATION);
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.MANIPULATION_II;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 0;
   }
 
@@ -47,5 +46,4 @@ export class ManipulationII extends BuffAction {
       simulation.repair(5);
     };
   }
-
 }

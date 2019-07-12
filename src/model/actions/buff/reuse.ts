@@ -20,11 +20,11 @@ export class Reuse extends BuffAction {
     return [4597, 4598, 4599, 4600, 4601, 4602, 4603, 4604];
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.REUSE;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 0;
   }
 

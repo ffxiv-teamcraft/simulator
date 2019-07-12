@@ -5,7 +5,6 @@ import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class ComfortZone extends BuffAction {
-
   getWaitDuration(): number {
     return 2;
   }
@@ -30,21 +29,20 @@ export class ComfortZone extends BuffAction {
     return [286];
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.COMFORT_ZONE;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 0;
   }
 
   protected getTick(): ((simulation: Simulation) => void) | undefined {
-    return (simulation) => {
+    return simulation => {
       simulation.availableCP += 8;
       if (simulation.availableCP > simulation.maxCP) {
         simulation.availableCP = simulation.maxCP;
       }
     };
   }
-
 }

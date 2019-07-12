@@ -39,9 +39,9 @@ export abstract class BuffAction extends CraftingAction {
     return [this.getBuff()];
   }
 
-  public abstract getBuff(): Buff;
+  abstract getBuff(): Buff;
 
-  public abstract getInitialStacks(): number;
+  abstract getInitialStacks(): number;
 
   protected abstract getTick(): ((simulation: Simulation, linear?: boolean) => void) | undefined;
 

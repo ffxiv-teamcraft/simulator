@@ -28,11 +28,11 @@ export class MakersMark extends BuffAction {
     return super._canBeUsed(simulation) && simulation.steps.length === 0;
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.MAKERS_MARK;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 0;
   }
 

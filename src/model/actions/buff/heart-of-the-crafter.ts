@@ -39,11 +39,11 @@ export class HeartOfTheCrafter extends BuffAction {
     return [100179, 100180, 100181, 100182, 100183, 100184, 100185, 100186];
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.HEART_OF_CRAFTER;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 0;
   }
 

@@ -4,7 +4,6 @@ import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class IngenuityII extends BuffAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.BSM, level: 50 };
   }
@@ -25,11 +24,11 @@ export class IngenuityII extends BuffAction {
     return super.getOverrides().concat(Buff.INGENUITY);
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.INGENUITY_II;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 0;
   }
 

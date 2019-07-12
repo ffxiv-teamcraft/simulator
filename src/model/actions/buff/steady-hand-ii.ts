@@ -24,11 +24,11 @@ export class SteadyHandII extends BuffAction {
     return super.getOverrides().concat(Buff.STEADY_HAND);
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.STEADY_HAND_II;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 0;
   }
 

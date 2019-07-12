@@ -5,7 +5,6 @@ import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class Manipulation extends BuffAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.GSM, level: 15 };
   }
@@ -34,11 +33,11 @@ export class Manipulation extends BuffAction {
     return super.getOverrides().concat(Buff.MANIPULATION_II);
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.MANIPULATION;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 0;
   }
 
@@ -47,5 +46,4 @@ export class Manipulation extends BuffAction {
       simulation.repair(10);
     };
   }
-
 }

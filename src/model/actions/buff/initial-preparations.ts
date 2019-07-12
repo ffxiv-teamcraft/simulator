@@ -4,7 +4,6 @@ import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class InitialPreparations extends BuffAction {
-
   getWaitDuration(): number {
     return 3;
   }
@@ -30,16 +29,15 @@ export class InitialPreparations extends BuffAction {
     return super._canBeUsed(simulation) && simulation.steps.length === 0;
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.INITIAL_PREPARATIONS;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 0;
   }
 
   protected getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
   }
-
 }

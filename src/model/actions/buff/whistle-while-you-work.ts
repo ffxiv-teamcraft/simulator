@@ -6,7 +6,6 @@ import { CraftingJob } from '../../crafting-job.enum';
 import { SimulationFailCause } from '../../simulation-fail-cause.enum';
 
 export class WhistleWhileYouWork extends BuffAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 55 };
   }
@@ -15,7 +14,11 @@ export class WhistleWhileYouWork extends BuffAction {
     return simulation.crafterStats.specialist && !simulation.hasBuff(Buff.WHISTLE_WHILE_YOU_WORK);
   }
 
-  getFailCause(simulationState: Simulation, linear?: boolean, safeMode?: boolean): SimulationFailCause | undefined {
+  getFailCause(
+    simulationState: Simulation,
+    linear?: boolean,
+    safeMode?: boolean
+  ): SimulationFailCause | undefined {
     if (!simulationState.crafterStats.specialist) {
       return SimulationFailCause.NOT_SPECIALIST;
     }
@@ -34,11 +37,11 @@ export class WhistleWhileYouWork extends BuffAction {
     return [100187, 100188, 100189, 100190, 100190, 100192, 100193, 100194];
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.WHISTLE_WHILE_YOU_WORK;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 11;
   }
 
@@ -46,9 +49,11 @@ export class WhistleWhileYouWork extends BuffAction {
     return (simulation, linear) => {
       const stepsForGood = simulation.hasBuff(Buff.HEART_OF_CRAFTER) ? 2 : 4;
       // If we're in linear mode, consider one out of 4 steps as matching the condition, as you can't have each turn GOOD, ever.
-      if ((linear && simulation.steps.length % stepsForGood === 0 && simulation.steps.length > 0)
-        || (simulation.lastStep !== undefined && simulation.lastStep.state === 'GOOD')
-        || (simulation.lastStep !== undefined && simulation.lastStep.state === 'EXCELLENT')) {
+      if (
+        (linear && simulation.steps.length % stepsForGood === 0 && simulation.steps.length > 0) ||
+        (simulation.lastStep !== undefined && simulation.lastStep.state === 'GOOD') ||
+        (simulation.lastStep !== undefined && simulation.lastStep.state === 'EXCELLENT')
+      ) {
         simulation.getBuff(Buff.WHISTLE_WHILE_YOU_WORK).stacks--;
       }
       // When it reaches the end, progress is increased
@@ -59,5 +64,4 @@ export class WhistleWhileYouWork extends BuffAction {
       }
     };
   }
-
 }

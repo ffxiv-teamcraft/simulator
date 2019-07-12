@@ -4,7 +4,6 @@ import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class InnerQuiet extends BuffAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 11 };
   }
@@ -26,11 +25,11 @@ export class InnerQuiet extends BuffAction {
     return [252, 253, 254, 255, 256, 257, 258, 259];
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.INNER_QUIET;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 1;
   }
 

@@ -4,7 +4,6 @@ import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class SteadyHand extends BuffAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 9 };
   }
@@ -25,11 +24,11 @@ export class SteadyHand extends BuffAction {
     return super.getOverrides().concat(Buff.STEADY_HAND_II);
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.STEADY_HAND;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 0;
   }
 
@@ -37,6 +36,4 @@ export class SteadyHand extends BuffAction {
   protected getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
   }
-
-
 }

@@ -4,7 +4,6 @@ import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class WasteNot extends BuffAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.LTW, level: 15 };
   }
@@ -25,16 +24,15 @@ export class WasteNot extends BuffAction {
     return super.getOverrides().concat(Buff.WASTE_NOT_II);
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.WASTE_NOT;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 0;
   }
 
   protected getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
   }
-
 }

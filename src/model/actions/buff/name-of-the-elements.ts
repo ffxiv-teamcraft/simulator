@@ -16,7 +16,7 @@ export class NameOfTheElements extends BuffAction {
     return 5;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 0;
   }
 
@@ -24,7 +24,7 @@ export class NameOfTheElements extends BuffAction {
     return undefined;
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.NAME_OF_THE_ELEMENTS;
   }
 

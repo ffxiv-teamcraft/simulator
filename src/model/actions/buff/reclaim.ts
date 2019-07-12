@@ -4,7 +4,6 @@ import { Simulation } from '../../../simulation/simulation';
 import { Buff } from '../../buff.enum';
 
 export class Reclaim extends BuffAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.CUL, level: 50 };
   }
@@ -21,11 +20,11 @@ export class Reclaim extends BuffAction {
     return [287];
   }
 
-  protected getBuff(): Buff {
+  getBuff(): Buff {
     return Buff.RECLAIM;
   }
 
-  protected getInitialStacks(): number {
+  getInitialStacks(): number {
     return 0;
   }
 
@@ -33,6 +32,4 @@ export class Reclaim extends BuffAction {
   protected getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
   }
-
-
 }
