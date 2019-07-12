@@ -38,6 +38,7 @@ import { Innovation } from '../src/model/actions/buff/innovation';
 import { ByregotsMiracle } from '../src/model/actions/quality/byregots-miracle';
 import { Rumination } from '../src/model/actions/other/rumination';
 import { CarefulSynthesisIII } from '../src/model/actions/progression/careful-synthesis-iii';
+import { StandardSynthesis } from '../src/model/actions/progression/standard-synthesis';
 
 describe('Craft simulator tests', () => {
   describe('Base tests', () => {
@@ -330,13 +331,19 @@ describe('Craft simulator tests', () => {
             recipe: generateRecipeForIngenuityTests(380),
             stats: generateStatsForIngenuityTests(70, 1654),
             expected: 314
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(40, 136),
+            stats: generateStatsForIngenuityTests(35, 197),
+            expected: 65,
+            action: new StandardSynthesis()
           }
         ];
 
         for (const entry of results) {
           const simulation = new Simulation(
             entry.recipe,
-            [new SteadyHand(), new Ingenuity(), new BasicSynthesis()],
+            [new SteadyHand(), new Ingenuity(), entry.action || new BasicSynthesis()],
             entry.stats
           );
           simulation.run(true);

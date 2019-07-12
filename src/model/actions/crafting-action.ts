@@ -136,8 +136,10 @@ export abstract class CraftingAction {
             levelDifference += 10;
           } else if (recipeLevel === 300) {
             levelDifference += 9;
-          } else {
+          } else if (recipeLevel >= 120) {
             levelDifference += 11;
+          } else {
+            levelDifference += 5;
           }
           levelDifference = Math.max(levelDifference, -1 * (recipeStars[recipeLevel] || 5));
         }
@@ -162,8 +164,10 @@ export abstract class CraftingAction {
             levelDifference += 11;
           } else if (recipeLevel === 300) {
             levelDifference += 10;
-          } else {
+          } else if (recipeLevel >= 120) {
             levelDifference += 12;
+          } else {
+            levelDifference += 6;
           }
           levelDifference = Math.max(levelDifference, -1 * (recipeStars[recipeLevel] - 1 || 5));
         }
