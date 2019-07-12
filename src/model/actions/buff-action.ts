@@ -5,7 +5,6 @@ import { Buff } from '../buff.enum';
 import { ActionType } from './action-type';
 
 export abstract class BuffAction extends CraftingAction {
-
   public getType(): ActionType {
     return ActionType.BUFF;
   }
@@ -40,9 +39,9 @@ export abstract class BuffAction extends CraftingAction {
     return [this.getBuff()];
   }
 
-  protected abstract getBuff(): Buff;
+  public abstract getBuff(): Buff;
 
-  protected abstract getInitialStacks(): number;
+  public abstract getInitialStacks(): number;
 
   protected abstract getTick(): ((simulation: Simulation, linear?: boolean) => void) | undefined;
 
@@ -55,5 +54,4 @@ export abstract class BuffAction extends CraftingAction {
       appliedStep: simulation.steps.length
     };
   }
-
 }
