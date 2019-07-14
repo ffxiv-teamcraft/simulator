@@ -333,6 +333,11 @@ describe('Craft simulator tests', () => {
             expected: 314
           },
           {
+            recipe: generateRecipeForIngenuityTests(430),
+            stats: generateStatsForIngenuityTests(80, 2067),
+            expected: 665
+          },
+          {
             recipe: generateRecipeForIngenuityTests(40, 136),
             stats: generateStatsForIngenuityTests(35, 197),
             expected: 65,
@@ -455,6 +460,11 @@ describe('Craft simulator tests', () => {
             recipe: generateRecipeForIngenuityTests(350),
             stats: generateStatsForIngenuityTests(70, 1654),
             expected: 336
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(430),
+            stats: generateStatsForIngenuityTests(80, 2067),
+            expected: 665
           },
           {
             recipe: generateRecipeForIngenuityTests(380),

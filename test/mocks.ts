@@ -186,7 +186,8 @@ export function generateRecipeForIngenuityTests(
     412: 0,
     415: 0,
     418: 1702,
-    420: 1866
+    420: 1866,
+    430: 1866
   };
   return {
     id: '3864',
@@ -221,13 +222,13 @@ export function generateRecipeForIngenuityTests(
 
 export function generateStatsForIngenuityTests(level: number, craftsmanship: number): CrafterStats {
   return new CrafterStats(14, craftsmanship, 1536, 539, true, level, [
-    70,
-    70,
-    70,
-    70,
-    70,
-    70,
-    70,
-    70
+    level,
+    level,
+    level,
+    level,
+    level,
+    level,
+    level,
+    level
   ]);
 }
