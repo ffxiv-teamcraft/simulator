@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.9](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.8...v1.2.9) (2019-07-15)
+
+
+### Bug Fixes
+
+* fixed an issue with trained hand and delicate synthesis ceiling instead of flooring ([d4f1a53](https://github.com/ffxiv-teamcraft/simulator/commit/d4f1a53)), closes [#4](https://github.com/ffxiv-teamcraft/simulator/issues/4)
+
+
+
 ### [1.2.8](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.7...v1.2.8) (2019-07-12)
 
 
