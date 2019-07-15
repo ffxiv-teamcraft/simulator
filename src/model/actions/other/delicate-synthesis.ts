@@ -44,7 +44,7 @@ export class DelicateSynthesis extends GeneralAction {
       qualityIncrease *= 2;
       simulation.removeBuff(Buff.GREAT_STRIDES);
     }
-    simulation.quality += Math.ceil(qualityIncrease);
+    simulation.quality += Math.floor(qualityIncrease);
     if (simulation.hasBuff(Buff.INNER_QUIET) && simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
       simulation.getBuff(Buff.INNER_QUIET).stacks++;
     }

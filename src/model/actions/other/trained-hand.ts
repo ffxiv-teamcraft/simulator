@@ -5,14 +5,17 @@ import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class TrainedHand extends GeneralAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 59 };
   }
 
   _canBeUsed(simulation: Simulation, linear?: boolean): boolean {
-    return simulation.hasBuff(Buff.WHISTLE_WHILE_YOU_WORK) && simulation.hasBuff(Buff.INNER_QUIET) &&
-      simulation.getBuff(Buff.WHISTLE_WHILE_YOU_WORK).stacks === simulation.getBuff(Buff.INNER_QUIET).stacks;
+    return (
+      simulation.hasBuff(Buff.WHISTLE_WHILE_YOU_WORK) &&
+      simulation.hasBuff(Buff.INNER_QUIET) &&
+      simulation.getBuff(Buff.WHISTLE_WHILE_YOU_WORK).stacks ===
+        simulation.getBuff(Buff.INNER_QUIET).stacks
+    );
   }
 
   execute(simulation: Simulation): void {
@@ -24,13 +27,13 @@ export class TrainedHand extends GeneralAction {
     if (simulation.getBuff(Buff.WHISTLE_WHILE_YOU_WORK).stacks % 3 === 0) {
       progressPotency += 50;
     }
-    simulation.progression += Math.floor(baseProgressIncrease * progressPotency / 100);
+    simulation.progression += Math.floor((baseProgressIncrease * progressPotency) / 100);
 
     // Quality
     if (simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
       simulation.getBuff(Buff.INNER_QUIET).stacks++;
     }
-    let qualityIncrease = this.getBaseQuality(simulation) * this.getPotency(simulation) / 100;
+    let qualityIncrease = (this.getBaseQuality(simulation) * this.getPotency(simulation)) / 100;
     switch (simulation.state) {
       case 'EXCELLENT':
         qualityIncrease *= 4;
@@ -48,7 +51,7 @@ export class TrainedHand extends GeneralAction {
       qualityIncrease *= 2;
       simulation.removeBuff(Buff.GREAT_STRIDES);
     }
-    simulation.quality += Math.ceil(qualityIncrease);
+    simulation.quality += Math.floor(qualityIncrease);
     if (simulation.hasBuff(Buff.INNER_QUIET) && simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
       simulation.getBuff(Buff.INNER_QUIET).stacks++;
     }
@@ -78,5 +81,4 @@ export class TrainedHand extends GeneralAction {
   getType(): ActionType {
     return ActionType.OTHER;
   }
-
 }
