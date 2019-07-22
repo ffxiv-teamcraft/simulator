@@ -202,8 +202,10 @@ export class Simulation {
           const progressionBefore = this.progression;
           const durabilityBefore = this.durability;
           const cpBefore = this.availableCP;
-          // Tick buffs after checking synth result, so if we reach 0 durability, synth fails.
-          this.tickBuffs(linear);
+          if (this.success === undefined) {
+            // Tick buffs after checking synth result, so if we reach 0 durability, synth fails.
+            this.tickBuffs(linear);
+          }
           result.afterBuffTick = {
             // Amount of progression added to the craft
             addedProgression: this.progression - progressionBefore,
