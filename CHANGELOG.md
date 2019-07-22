@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.10](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.9...v1.2.10) (2019-07-22)
+
+
+### Bug Fixes
+
+* do not tick buffs if synth has already ended ([00a27b8](https://github.com/ffxiv-teamcraft/simulator/commit/00a27b8))
+
+
+
 ### [1.2.9](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.8...v1.2.9) (2019-07-15)
 
 
