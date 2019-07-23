@@ -91,7 +91,12 @@ export class Simulation {
     };
   }
 
-  public getMinStats(): { control: number; craftsmanship: number; cp: number } {
+  public getMinStats(): {
+    control: number;
+    craftsmanship: number;
+    cp: number;
+    maxCraftsmanship: number;
+  } {
     const originalHqPercent = this.run(true).hqPercent;
     // Three loops, one per stat
     while (this.run(true).success) {
@@ -99,6 +104,7 @@ export class Simulation {
       this.reset();
     }
     this.crafterStats.craftsmanship++;
+    const minimumCraftsmanship = this.crafterStats.craftsmanship;
     while (
       this.run(true).hqPercent >= originalHqPercent &&
       originalHqPercent > 1 &&
@@ -108,6 +114,11 @@ export class Simulation {
       this.reset();
     }
     this.crafterStats._control++;
+    while (this.run(true).hqPercent >= originalHqPercent && originalHqPercent > 1) {
+      this.crafterStats.craftsmanship++;
+      this.reset();
+    }
+    this.crafterStats.craftsmanship--;
     while (this.run(true).success) {
       this.crafterStats.cp--;
       this.reset();
@@ -115,8 +126,9 @@ export class Simulation {
     this.crafterStats.cp++;
     return {
       control: this.crafterStats._control,
-      craftsmanship: this.crafterStats.craftsmanship,
-      cp: this.crafterStats.cp
+      craftsmanship: minimumCraftsmanship,
+      cp: this.crafterStats.cp,
+      maxCraftsmanship: this.crafterStats.craftsmanship
     };
   }
 
