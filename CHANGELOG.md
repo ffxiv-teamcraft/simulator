@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.12](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.11...v1.2.12) (2019-07-24)
+
+
+### Bug Fixes
+
+* fixed an issue with stats being muted for min stats computing ([952f12a](https://github.com/ffxiv-teamcraft/simulator/commit/952f12a))
+
+
+
 ### [1.2.11](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.10...v1.2.11) (2019-07-23)
 
 
