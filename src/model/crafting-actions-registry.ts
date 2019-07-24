@@ -133,7 +133,10 @@ export class CraftingActionsRegistry {
     { short: 'rapidSynthesis3', full: 'RapidSynthesisIII' },
     { short: 'intensiveSynthesis', full: 'IntensiveSynthesis' },
     { short: 'preparatoryTouch', full: 'PreparatoryTouch' },
-    { short: 'delicateSynthesis', full: 'DelicateSynthesis' }
+    { short: 'delicateSynthesis', full: 'DelicateSynthesis' },
+    { short: 'reuse', full: 'Reuse' },
+    { short: 'trainedEye', full: 'TrainedEye' },
+    { short: 'trainedInstinct', full: 'TrainedInstinct' }
   ];
 
   public static readonly ALL_ACTIONS: { name: string; action: CraftingAction }[] = [
