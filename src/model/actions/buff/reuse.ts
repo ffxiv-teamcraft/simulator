@@ -28,6 +28,12 @@ export class Reuse extends BuffAction {
     return 0;
   }
 
+  _canBeUsed(simulationState: Simulation): boolean {
+    return (
+      super._canBeUsed(simulationState) && simulationState.quality >= simulationState.recipe.quality
+    );
+  }
+
   // Reuse doesn't tick.
   protected getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
