@@ -342,6 +342,11 @@ describe('Craft simulator tests', () => {
             stats: generateStatsForIngenuityTests(35, 197),
             expected: 65,
             action: new StandardSynthesis()
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(450),
+            stats: generateStatsForIngenuityTests(80, 2236),
+            expected: 712
           }
         ];
 
@@ -470,6 +475,11 @@ describe('Craft simulator tests', () => {
             recipe: generateRecipeForIngenuityTests(380),
             stats: generateStatsForIngenuityTests(70, 1654),
             expected: 321
+          },
+          {
+            recipe: generateRecipeForIngenuityTests(450),
+            stats: generateStatsForIngenuityTests(80, 2236),
+            expected: 712
           }
         ];
 

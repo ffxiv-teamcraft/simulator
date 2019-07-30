@@ -187,7 +187,8 @@ export function generateRecipeForIngenuityTests(
     415: 0,
     418: 1702,
     420: 1866,
-    430: 1866
+    430: 1866,
+    450: 2140
   };
   return {
     id: '3864',

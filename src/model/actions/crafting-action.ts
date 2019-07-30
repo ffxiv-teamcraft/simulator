@@ -126,7 +126,7 @@ export abstract class CraftingAction {
     if (simulation.hasBuff(Buff.INGENUITY)) {
       if (levelDifference < 0 && recipeLevel >= 390) {
         const cap = Math.abs(originalLevelDifference) <= 100 ? -5 : -20;
-        levelDifference = Math.max(levelDifference + Math.floor(recipeLevel / 10), cap);
+        levelDifference = Math.max(levelDifference + Math.floor(recipeLevel / 8), cap);
       } else {
         // Shadowbringers
         if (recipeLevel >= 390) {
@@ -154,7 +154,7 @@ export abstract class CraftingAction {
         } else if (Math.abs(originalLevelDifference) < 110) {
           cap = -9;
         }
-        levelDifference = Math.max(levelDifference + Math.floor(recipeLevel / 9), cap);
+        levelDifference = Math.max(levelDifference + Math.floor(recipeLevel / 7), cap);
       } else {
         // Shadowbringers
         if (recipeLevel >= 390) {
