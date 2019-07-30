@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.13](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.12...v1.2.13) (2019-07-30)
+
+
+### Bug Fixes
+
+* **ingenuity:** fixed ingenuities' accuracy for rlvl 450 ([16a015e](https://github.com/ffxiv-teamcraft/simulator/commit/16a015e))
+* **registry:** added missing actions from the import/export feature ([995a7f3](https://github.com/ffxiv-teamcraft/simulator/commit/995a7f3))
+* **reuse:** reuse can only be used if quality is 100% ([f0a6566](https://github.com/ffxiv-teamcraft/simulator/commit/f0a6566))
+
+
+
 ### [1.2.12](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.11...v1.2.12) (2019-07-24)
 
 
