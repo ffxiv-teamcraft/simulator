@@ -39,6 +39,10 @@ import { ByregotsMiracle } from '../src/model/actions/quality/byregots-miracle';
 import { Rumination } from '../src/model/actions/other/rumination';
 import { CarefulSynthesisIII } from '../src/model/actions/progression/careful-synthesis-iii';
 import { StandardSynthesis } from '../src/model/actions/progression/standard-synthesis';
+import { PatientTouch } from '../src/model/actions/quality/patient-touch';
+import { MastersMendII } from '../src/model/actions/other/masters-mend-ii';
+import { ByregotsBlessing } from '../src/model/actions/quality/byregots-blessing';
+import { Reuse } from '../src/model/actions/buff/reuse';
 
 describe('Craft simulator tests', () => {
   describe('Base tests', () => {
@@ -610,6 +614,26 @@ describe('Craft simulator tests', () => {
       expect(
         simulation.steps.some(step => isNaN(step.addedQuality) || isNaN(step.addedProgression))
       ).toBeFalsy();
+    });
+
+    it('Should be able to use Reuse with 100% quality', () => {
+      const simulation = new Simulation(
+        infusionOfMindRecipe,
+        [
+          new InnerQuiet(),
+          new PatientTouch(),
+          new PatientTouch(),
+          new PatientTouch(),
+          new PatientTouch(),
+          new MastersMendII(),
+          new GreatStrides(),
+          new ByregotsBlessing(),
+          new Reuse()
+        ],
+        generateStatsForIngenuityTests(80, 2000)
+      );
+      const res = simulation.run(true);
+      expect(res.steps[res.steps.length - 1].success).toBeTruthy();
     });
   });
 });

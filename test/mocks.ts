@@ -222,7 +222,7 @@ export function generateRecipeForIngenuityTests(
 }
 
 export function generateStatsForIngenuityTests(level: number, craftsmanship: number): CrafterStats {
-  return new CrafterStats(14, craftsmanship, 1536, 539, true, level, [
+  return new CrafterStats(14, craftsmanship, 3000, 539, true, level, [
     level,
     level,
     level,
