@@ -4,7 +4,6 @@ import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class TricksOfTheTrade extends CraftingAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ALC, level: 15 };
   }
@@ -24,9 +23,11 @@ export class TricksOfTheTrade extends CraftingAction {
   }
 
   execute(simulation: Simulation): void {
-    simulation.availableCP += 20;
-    if (simulation.availableCP > simulation.maxCP) {
-      simulation.availableCP = simulation.maxCP;
+    if (!simulation.safe) {
+      simulation.availableCP += 20;
+      if (simulation.availableCP > simulation.maxCP) {
+        simulation.availableCP = simulation.maxCP;
+      }
     }
   }
 
@@ -45,5 +46,4 @@ export class TricksOfTheTrade extends CraftingAction {
   getDurabilityCost(simulationState: Simulation): number {
     return 0;
   }
-
 }
