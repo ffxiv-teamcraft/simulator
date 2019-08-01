@@ -43,6 +43,7 @@ import { PatientTouch } from '../src/model/actions/quality/patient-touch';
 import { MastersMendII } from '../src/model/actions/other/masters-mend-ii';
 import { ByregotsBlessing } from '../src/model/actions/quality/byregots-blessing';
 import { Reuse } from '../src/model/actions/buff/reuse';
+import { CrafterStats } from '../src/model/crafter-stats';
 
 describe('Craft simulator tests', () => {
   describe('Base tests', () => {
@@ -635,5 +636,53 @@ describe('Craft simulator tests', () => {
       const res = simulation.run(true);
       expect(res.steps[res.steps.length - 1].success).toBeTruthy();
     });
+  });
+
+  it('Should be able to compute min stats', () => {
+    const acchanMacro = [
+      new InitialPreparations(),
+      new ComfortZone(),
+      new InnerQuiet(),
+      new SpecialtyReflect(),
+      new SteadyHandII(),
+      new PieceByPiece(),
+      new PrudentTouch(),
+      new PrudentTouch(),
+      new PrudentTouch(),
+      new PrudentTouch(),
+      new Observe(),
+      new FocusedTouch(),
+      new ManipulationII(),
+      new ComfortZone(),
+      new Ingenuity(),
+      new Observe(),
+      new FocusedTouch(),
+      new GreatStrides(),
+      new Observe(),
+      new FocusedTouch(),
+      new IngenuityII(),
+      new SteadyHandII(),
+      new Innovation(),
+      new PrudentTouch(),
+      new GreatStrides(),
+      new ByregotsMiracle(),
+      new PieceByPiece(),
+      new Rumination(),
+      new Ingenuity(),
+      new Observe(),
+      new FocusedSynthesis(),
+      new Observe(),
+      new FocusedSynthesis(),
+      new CarefulSynthesisIII()
+    ];
+    const simulation = new Simulation(
+      gradeIIInfusionOfStrRecipe,
+      acchanMacro,
+      new CrafterStats(14, 1850, 2000, 1000, true, 70, [70, 70, 70, 70, 70, 70, 70, 70])
+    );
+    const minStats = simulation.getMinStats();
+    expect(minStats.craftsmanship).toBeLessThan(1850);
+    expect(minStats.control).toBeLessThan(2000);
+    expect(minStats.cp).toBeLessThan(600);
   });
 });

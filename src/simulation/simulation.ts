@@ -94,44 +94,51 @@ export class Simulation {
   public getMinStats(): { control: number; craftsmanship: number; cp: number } {
     const originalHqPercent = this.run(true).hqPercent;
     const originalStats = { ...this.crafterStats };
-    // Three loops, one per stat
-    while (this.run(true).success) {
-      this.crafterStats.craftsmanship--;
-      this.reset();
-    }
-    this.crafterStats.craftsmanship++;
-    while (
-      this.run(true).hqPercent >= originalHqPercent &&
-      originalHqPercent > 1 &&
-      this.crafterStats._control > 0
-    ) {
-      this.crafterStats._control--;
-      this.reset();
-    }
-
-    if (originalHqPercent <= 1) {
-      this.crafterStats._control = 0;
-    } else {
-      this.crafterStats._control++;
-    }
-
-    while (
-      this.run(true).success &&
-      this.run(true).hqPercent >= originalHqPercent &&
-      this.crafterStats.cp >= 180
-    ) {
-      this.crafterStats.cp--;
-      this.reset();
-    }
-    this.crafterStats.cp++;
     const res = {
       control: this.crafterStats._control,
       craftsmanship: this.crafterStats.craftsmanship,
       cp: this.crafterStats.cp
     };
-    this.crafterStats._control = originalStats._control;
-    this.crafterStats.craftsmanship = originalStats.craftsmanship;
+
+    this.crafterStats.craftsmanship = 1;
+    this.reset();
+    let result = this.run(true);
+    // Three loops, one per stat
+    while (!result.success) {
+      this.crafterStats.craftsmanship++;
+      this.reset();
+      result = this.run(true);
+    }
+
+    res.craftsmanship = this.crafterStats.craftsmanship;
+
+    this.crafterStats._control = 1;
+    this.reset();
+    result = this.run(true);
+
+    while (result.hqPercent < originalHqPercent) {
+      this.crafterStats._control++;
+      this.reset();
+      result = this.run(true);
+    }
+
+    res.control = this.crafterStats._control;
+
+    this.crafterStats.cp = 180;
+    this.reset();
+    result = this.run(true);
+
+    while (!result.success || result.hqPercent < originalHqPercent) {
+      this.crafterStats.cp++;
+      this.reset();
+      result = this.run(true);
+    }
+
+    res.cp = this.crafterStats.cp;
+
     this.crafterStats.cp = originalStats.cp;
+    this.crafterStats.craftsmanship = originalStats.craftsmanship;
+    this.crafterStats._control = originalStats._control;
     return res;
   }
 
