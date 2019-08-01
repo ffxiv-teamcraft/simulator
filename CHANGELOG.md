@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.15](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.14...v1.2.15) (2019-08-01)
+
+
+### Bug Fixes
+
+* **minimum-stats:** fixed an issue with minimum stats not being accurate with quality (second time) ([e85b119](https://github.com/ffxiv-teamcraft/simulator/commit/e85b119))
+
+
+
 ### [1.2.14](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.13...v1.2.14) (2019-08-01)
 
 
