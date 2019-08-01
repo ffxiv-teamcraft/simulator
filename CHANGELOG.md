@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.17](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.16...v1.2.17) (2019-08-01)
+
+
+### Bug Fixes
+
+* **tricks of the trade:** don't add 20CP if simulation is in safe mode ([7559fcf](https://github.com/ffxiv-teamcraft/simulator/commit/7559fcf))
+
+
+
 ### [1.2.16](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.15...v1.2.16) (2019-08-01)
 
 
