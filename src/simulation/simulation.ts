@@ -91,23 +91,26 @@ export class Simulation {
     };
   }
 
-  public getMinStats(): { control: number; craftsmanship: number; cp: number } {
+  public getMinStats(): { control: number; craftsmanship: number; cp: number; found: boolean } {
+    let totalIterations = 0;
     const originalHqPercent = this.run(true).hqPercent;
     const originalStats = { ...this.crafterStats };
     const res = {
       control: this.crafterStats._control,
       craftsmanship: this.crafterStats.craftsmanship,
-      cp: this.crafterStats.cp
+      cp: this.crafterStats.cp,
+      found: true
     };
 
     this.crafterStats.craftsmanship = 1;
     this.reset();
     let result = this.run(true);
     // Three loops, one per stat
-    while (!result.success) {
+    while (!result.success && totalIterations < 10000) {
       this.crafterStats.craftsmanship++;
       this.reset();
       result = this.run(true);
+      totalIterations++;
     }
 
     res.craftsmanship = this.crafterStats.craftsmanship;
@@ -116,10 +119,11 @@ export class Simulation {
     this.reset();
     result = this.run(true);
 
-    while (result.hqPercent < originalHqPercent) {
+    while (result.hqPercent < originalHqPercent && totalIterations < 10000) {
       this.crafterStats._control++;
       this.reset();
       result = this.run(true);
+      totalIterations++;
     }
 
     res.control = this.crafterStats._control;
@@ -128,13 +132,18 @@ export class Simulation {
     this.reset();
     result = this.run(true);
 
-    while (!result.success || result.hqPercent < originalHqPercent) {
+    while (!result.success || (result.hqPercent < originalHqPercent && totalIterations < 10000)) {
       this.crafterStats.cp++;
       this.reset();
       result = this.run(true);
+      totalIterations++;
     }
 
     res.cp = this.crafterStats.cp;
+
+    if (totalIterations >= 10000) {
+      res.found = false;
+    }
 
     this.crafterStats.cp = originalStats.cp;
     this.crafterStats.craftsmanship = originalStats.craftsmanship;
