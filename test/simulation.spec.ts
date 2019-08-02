@@ -685,4 +685,15 @@ describe('Craft simulator tests', () => {
     expect(minStats.control).toBeLessThan(2000);
     expect(minStats.cp).toBeLessThan(600);
   });
+
+  it("Should be able to tell when it's not possible to compute min stats", () => {
+    const acchanMacro = [new InitialPreparations(), new ComfortZone()];
+    const simulation = new Simulation(
+      gradeIIInfusionOfStrRecipe,
+      acchanMacro,
+      new CrafterStats(14, 1850, 2000, 1000, true, 70, [70, 70, 70, 70, 70, 70, 70, 70])
+    );
+    const minStats = simulation.getMinStats();
+    expect(minStats.found).toBeFalsy();
+  });
 });

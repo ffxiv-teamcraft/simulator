@@ -132,7 +132,7 @@ export class Simulation {
     this.reset();
     result = this.run(true);
 
-    while (!result.success || (result.hqPercent < originalHqPercent && totalIterations < 10000)) {
+    while (totalIterations < 10000 && (!result.success || result.hqPercent < originalHqPercent)) {
       this.crafterStats.cp++;
       this.reset();
       result = this.run(true);
