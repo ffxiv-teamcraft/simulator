@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.20](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.19...v1.2.20) (2019-08-04)
+
+
+### Bug Fixes
+
+* **tricks of the trade:** fixed an issue making ToT still regen CP with safe mode ([db442d1](https://github.com/ffxiv-teamcraft/simulator/commit/db442d1))
+
+
+
 ### [1.2.19](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.18...v1.2.19) (2019-08-02)
 
 
