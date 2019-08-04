@@ -22,8 +22,8 @@ export class TricksOfTheTrade extends CraftingAction {
     return simulationState.state === 'GOOD' || simulationState.state === 'EXCELLENT';
   }
 
-  execute(simulation: Simulation): void {
-    if (!simulation.safe) {
+  execute(simulation: Simulation, safe: boolean): void {
+    if (!safe) {
       simulation.availableCP += 20;
       if (simulation.availableCP > simulation.maxCP) {
         simulation.availableCP = simulation.maxCP;

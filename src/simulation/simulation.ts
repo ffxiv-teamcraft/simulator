@@ -301,7 +301,7 @@ export class Simulation {
       this.safe = false;
     } else {
       if (action.getSuccessRate(this) >= probabilityRoll) {
-        action.execute(this);
+        action.execute(this, safeMode);
         success = true;
       } else {
         action.onFail(this);

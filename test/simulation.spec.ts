@@ -44,6 +44,7 @@ import { MastersMendII } from '../src/model/actions/other/masters-mend-ii';
 import { ByregotsBlessing } from '../src/model/actions/quality/byregots-blessing';
 import { Reuse } from '../src/model/actions/buff/reuse';
 import { CrafterStats } from '../src/model/crafter-stats';
+import { TricksOfTheTrade } from '../src/model/actions/other/tricks-of-the-trade';
 
 describe('Craft simulator tests', () => {
   describe('Base tests', () => {
@@ -695,5 +696,16 @@ describe('Craft simulator tests', () => {
     );
     const minStats = simulation.getMinStats();
     expect(minStats.found).toBeFalsy();
+  });
+
+  it('Should not regen CP with ToT on safe mode', () => {
+    const acchanMacro = [new SteadyHandII(), new TricksOfTheTrade()];
+    const simulation = new Simulation(
+      gradeIIInfusionOfStrRecipe,
+      acchanMacro,
+      new CrafterStats(14, 1850, 2000, 1000, false, 70, [70, 70, 70, 70, 70, 70, 70, 70])
+    );
+    const res = simulation.run(true, Infinity, true);
+    expect(res.simulation.availableCP).toBe(1000 - new SteadyHandII().getBaseCPCost(simulation));
   });
 });

@@ -102,7 +102,7 @@ export abstract class CraftingAction {
 
   abstract getDurabilityCost(simulationState: Simulation): number;
 
-  abstract execute(simulation: Simulation): void;
+  abstract execute(simulation: Simulation, safe?: boolean): void;
 
   public onFail(simulation: Simulation): void {
     // Base onFail does nothing, override to implement it, as it wont be used in most cases.
