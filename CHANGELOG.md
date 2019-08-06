@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.21](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.20...v1.2.21) (2019-08-06)
+
+
+### Bug Fixes
+
+* **iq:** fixed an issue with IQ stacks not applied properly in safe mode ([e2075a9](https://github.com/ffxiv-teamcraft/simulator/commit/e2075a9))
+
+
+
 ### [1.2.20](https://github.com/ffxiv-teamcraft/simulator/compare/v1.2.19...v1.2.20) (2019-08-04)
 
 
