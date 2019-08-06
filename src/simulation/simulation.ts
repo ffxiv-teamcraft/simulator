@@ -9,6 +9,7 @@ import { Tables } from '../model/tables';
 import { Reclaim } from '../model/actions/buff/reclaim';
 import { SimulationFailCause } from '../model/simulation-fail-cause.enum';
 import { Craft } from '../model/craft';
+import { StepState } from '../model/step-state';
 
 export class Simulation {
   public progression = 0;
@@ -38,7 +39,7 @@ export class Simulation {
     public actions: CraftingAction[],
     private _crafterStats: CrafterStats,
     private hqIngredients: { id: number; amount: number }[] = [],
-    private forceFailed: number[] = []
+    private stepStates: { [index: number]: StepState } = {}
   ) {
     this.durability = recipe.durability;
     this.availableCP = this._crafterStats.cp;
@@ -177,6 +178,22 @@ export class Simulation {
     this.actions
       .filter(a => a !== undefined)
       .forEach((action: CraftingAction, index: number) => {
+        if (this.stepStates[index] !== StepState.FAILED) {
+          switch (this.stepStates[index]) {
+            case StepState.EXCELLENT:
+              this.state = 'EXCELLENT';
+              break;
+            case StepState.GOOD:
+              this.state = 'GOOD';
+              break;
+            case StepState.POOR:
+              this.state = 'POOR';
+              break;
+            default:
+              this.state = 'NORMAL';
+              break;
+          }
+        }
         // If we're starting and the crafter is specialist
         if (index === 0 && this.crafterStats.specialist && this.crafterStats.level >= 70) {
           // Push stroke of genius buff
@@ -255,7 +272,6 @@ export class Simulation {
 
         this.steps.push(result);
       });
-    // HQ percent to quality percent formulae: https://github.com/Ermad/ffxiv-craft-opt-web/blob/master/app/js/ffxivcraftmodel.js#L1455
 
     const failedAction = this.steps.find(step => step.failCause !== undefined);
     const res: SimulationResult = {
@@ -285,7 +301,7 @@ export class Simulation {
   ): ActionResult {
     // The roll for the current action's success rate, 0 if ideal mode, as 0 will even match a 1% chances.
     let probabilityRoll = linear ? 0 : Math.random() * 100;
-    if (this.forceFailed.some(i => i === index)) {
+    if (this.stepStates[index] === StepState.FAILED) {
       // Impossible to succeed
       probabilityRoll = 999;
     }

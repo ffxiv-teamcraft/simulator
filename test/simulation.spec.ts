@@ -45,6 +45,7 @@ import { ByregotsBlessing } from '../src/model/actions/quality/byregots-blessing
 import { Reuse } from '../src/model/actions/buff/reuse';
 import { CrafterStats } from '../src/model/crafter-stats';
 import { TricksOfTheTrade } from '../src/model/actions/other/tricks-of-the-trade';
+import { StepState } from '../src/model/step-state';
 
 describe('Craft simulator tests', () => {
   describe('Base tests', () => {
@@ -596,9 +597,6 @@ describe('Craft simulator tests', () => {
       expect(simulation.quality).toBe(22028);
       expect(simulation.availableCP).toBe(0);
     });
-  });
-
-  describe('Tests from issues', () => {
     it('Should not reproduce behavior from issue #3', () => {
       const simulation = new Simulation(
         infusionOfMindRecipe,
@@ -707,6 +705,25 @@ describe('Craft simulator tests', () => {
     );
     const res = simulation.run(true, Infinity, true);
     expect(res.simulation.availableCP).toBe(1000 - new SteadyHandII().getBaseCPCost(simulation));
+  });
+
+  it('Should apply state changes', () => {
+    const acchanMacro = [new InnerQuiet(), new SteadyHandII(), new PrudentTouch()];
+    const simulationWithoutSteps = new Simulation(
+      gradeIIInfusionOfStrRecipe,
+      acchanMacro,
+      new CrafterStats(14, 1850, 2000, 1000, false, 70, [70, 70, 70, 70, 70, 70, 70, 70])
+    );
+    const simulation = new Simulation(
+      gradeIIInfusionOfStrRecipe,
+      acchanMacro,
+      new CrafterStats(14, 1850, 2000, 1000, false, 70, [70, 70, 70, 70, 70, 70, 70, 70]),
+      [],
+      [StepState.NORMAL, StepState.NORMAL, StepState.EXCELLENT]
+    );
+    const resWithoutSteps = simulationWithoutSteps.run(true, Infinity, true);
+    const res = simulation.run(true, Infinity, true);
+    expect(res.simulation.quality).toBe(4 * resWithoutSteps.simulation.quality);
   });
 
   it('Should increase IQ stacks with quality actions in safe mode', () => {
