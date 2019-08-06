@@ -708,4 +708,15 @@ describe('Craft simulator tests', () => {
     const res = simulation.run(true, Infinity, true);
     expect(res.simulation.availableCP).toBe(1000 - new SteadyHandII().getBaseCPCost(simulation));
   });
+
+  it('Should increase IQ stacks with quality actions in safe mode', () => {
+    const acchanMacro = [new InnerQuiet(), new SteadyHandII(), new PrudentTouch()];
+    const simulation = new Simulation(
+      gradeIIInfusionOfStrRecipe,
+      acchanMacro,
+      new CrafterStats(14, 1850, 2000, 1000, false, 70, [70, 70, 70, 70, 70, 70, 70, 70])
+    );
+    const res = simulation.run(true, Infinity, true);
+    expect(res.simulation.getBuff(Buff.INNER_QUIET).stacks).toBeGreaterThan(1);
+  });
 });

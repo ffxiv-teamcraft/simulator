@@ -5,7 +5,6 @@ import { CraftingJob } from '../../crafting-job.enum';
 import { SimulationFailCause } from '../../simulation-fail-cause.enum';
 
 export class ByregotsMiracle extends QualityAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 58 };
   }
@@ -14,7 +13,11 @@ export class ByregotsMiracle extends QualityAction {
     return simulationState.hasBuff(Buff.INNER_QUIET) && simulationState.crafterStats.specialist;
   }
 
-  getFailCause(simulationState: Simulation, linear?: boolean, safeMode?: boolean): SimulationFailCause | undefined {
+  getFailCause(
+    simulationState: Simulation,
+    linear?: boolean,
+    safeMode?: boolean
+  ): SimulationFailCause | undefined {
     if (!simulationState.hasBuff(Buff.INNER_QUIET)) {
       return SimulationFailCause.NO_INNER_QUIET;
     }
@@ -24,16 +27,20 @@ export class ByregotsMiracle extends QualityAction {
     super.getFailCause(simulationState, linear, safeMode);
   }
 
-  execute(simulation: Simulation): void {
+  execute(simulation: Simulation, safe: boolean): void {
     // Don't add stack now, We'll add it manually after the reduction is done.
-    super.execute(simulation, true);
+    super.execute(simulation, safe, true);
     // Stacks are divided by 2 and rounded up
-    simulation.getBuff(Buff.INNER_QUIET).stacks = Math.ceil(simulation.getBuff(Buff.INNER_QUIET).stacks / 2);
+    simulation.getBuff(Buff.INNER_QUIET).stacks = Math.ceil(
+      simulation.getBuff(Buff.INNER_QUIET).stacks / 2
+    );
   }
 
   onFail(simulation: Simulation): void {
     // Stacks are still reduced upon failing.
-    simulation.getBuff(Buff.INNER_QUIET).stacks = Math.floor(simulation.getBuff(Buff.INNER_QUIET).stacks / 2);
+    simulation.getBuff(Buff.INNER_QUIET).stacks = Math.floor(
+      simulation.getBuff(Buff.INNER_QUIET).stacks / 2
+    );
   }
 
   getBaseCPCost(simulationState: Simulation): number {

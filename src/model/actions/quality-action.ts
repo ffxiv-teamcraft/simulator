@@ -8,7 +8,7 @@ export abstract class QualityAction extends GeneralAction {
     return ActionType.QUALITY;
   }
 
-  execute(simulation: Simulation, skipStackAddition = false): void {
+  execute(simulation: Simulation, safe: boolean, skipStackAddition = false): void {
     let qualityIncrease = Math.floor(
       (this.getBaseQuality(simulation) * this.getPotency(simulation)) / 100
     );
