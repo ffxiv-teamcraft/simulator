@@ -23,8 +23,8 @@ import {
   alc70i331Stats,
   alc70i350Stats,
   enchantedTruegoldInkRecipe,
-  generateRecipeForIngenuityTests,
-  generateStatsForIngenuityTests,
+  generateRecipe,
+  generateStats,
   gradeIIInfusionOfStrRecipe,
   infusionOfMindRecipe
 } from './mocks';
@@ -46,6 +46,7 @@ import { Reuse } from '../src/model/actions/buff/reuse';
 import { CrafterStats } from '../src/model/crafter-stats';
 import { TricksOfTheTrade } from '../src/model/actions/other/tricks-of-the-trade';
 import { StepState } from '../src/model/step-state';
+import { PreparatoryTouch } from '../src/model/actions/quality/preparatory-touch';
 
 describe('Craft simulator tests', () => {
   describe('Base tests', () => {
@@ -359,7 +360,7 @@ describe('Craft simulator tests', () => {
           new ByregotsBlessing(),
           new Reuse()
         ],
-        generateStatsForIngenuityTests(80, 2000)
+        generateStats(80, 2000)
       );
       const res = simulation.run(true);
       expect(res.steps[res.steps.length - 1].success).toBeTruthy();
@@ -464,5 +465,25 @@ describe('Craft simulator tests', () => {
     );
     const res = simulation.run(true, Infinity, true);
     expect(res.simulation.getBuff(Buff.INNER_QUIET).stacks).toBeGreaterThan(1);
+  });
+
+  it('Should not reproduce issue #7 (progress accuracy issue)', () => {
+    const rotation = [
+      new InnerQuiet(),
+      new WasteNotII(),
+      new SteadyHandII(),
+      new PreparatoryTouch(),
+      new PreparatoryTouch(),
+      new GreatStrides(),
+      new ByregotsBlessing(),
+      new Observe(),
+      new FocusedSynthesis(),
+      new CarefulSynthesisIII()
+    ];
+    const stats = generateStats(80, 2216, 2207, 556);
+    const recipe = generateRecipe(68, 1069, 1043);
+
+    const res = new Simulation(recipe, rotation, stats).run(true);
+    expect(res.simulation.progression).toBe(2705);
   });
 });

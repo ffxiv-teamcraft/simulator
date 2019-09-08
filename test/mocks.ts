@@ -163,9 +163,10 @@ export const acchanStats: CrafterStats = new CrafterStats(14, 1500, 1536, 539, t
   70
 ]);
 
-export function generateRecipeForIngenuityTests(
+export function generateRecipe(
   rlvl: number,
-  suggestedCraftsmanship?: number
+  suggestedCraftsmanship?: number,
+  suggestedControl?: number
 ): Craft {
   const suggested: { [index: number]: number } = {
     279: 1056,
@@ -199,7 +200,7 @@ export function generateRecipeForIngenuityTests(
     progress: 1733,
     lvl: 75,
     suggestedCraftsmanship: suggestedCraftsmanship || suggested[rlvl] || 0,
-    suggestedControl: 1425,
+    suggestedControl: suggestedControl || 1425,
     hq: 1,
     quickSynth: 1,
     ingredients: [
@@ -221,8 +222,13 @@ export function generateRecipeForIngenuityTests(
   };
 }
 
-export function generateStatsForIngenuityTests(level: number, craftsmanship: number): CrafterStats {
-  return new CrafterStats(14, craftsmanship, 3000, 539, true, level, [
+export function generateStats(
+  level: number,
+  craftsmanship: number,
+  control = 3000,
+  cp = 539
+): CrafterStats {
+  return new CrafterStats(14, craftsmanship, control, cp, true, level, [
     level,
     level,
     level,

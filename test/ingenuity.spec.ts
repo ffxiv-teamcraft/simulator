@@ -1,4 +1,4 @@
-import { generateRecipeForIngenuityTests, generateStatsForIngenuityTests } from './mocks';
+import { generateRecipe, generateStats } from './mocks';
 import { StandardSynthesis } from '../src/model/actions/progression/standard-synthesis';
 import { Simulation } from '../src/simulation/simulation';
 import { SteadyHand } from '../src/model/actions/buff/steady-hand';
@@ -10,139 +10,139 @@ describe('Ingenuities', () => {
   it('should properly reduce recipe level with Ingenuity, influencing progression', () => {
     const results = [
       {
-        recipe: generateRecipeForIngenuityTests(409),
-        stats: generateStatsForIngenuityTests(80, 1736),
+        recipe: generateRecipe(409),
+        stats: generateStats(80, 1736),
         expected: 557
       },
       {
-        recipe: generateRecipeForIngenuityTests(390),
-        stats: generateStatsForIngenuityTests(70, 1567),
+        recipe: generateRecipe(390),
+        stats: generateStats(70, 1567),
         expected: 294
       },
       {
-        recipe: generateRecipeForIngenuityTests(406),
-        stats: generateStatsForIngenuityTests(70, 1567),
+        recipe: generateRecipe(406),
+        stats: generateStats(70, 1567),
         expected: 248
       },
       {
-        recipe: generateRecipeForIngenuityTests(395),
-        stats: generateStatsForIngenuityTests(70, 1610),
+        recipe: generateRecipe(395),
+        stats: generateStats(70, 1610),
         expected: 260
       },
       {
-        recipe: generateRecipeForIngenuityTests(400),
-        stats: generateStatsForIngenuityTests(70, 1440),
+        recipe: generateRecipe(400),
+        stats: generateStats(70, 1440),
         expected: 227
       },
       {
-        recipe: generateRecipeForIngenuityTests(403),
-        stats: generateStatsForIngenuityTests(70, 1610),
+        recipe: generateRecipe(403),
+        stats: generateStats(70, 1610),
         expected: 257
       },
       {
-        recipe: generateRecipeForIngenuityTests(390, 1320),
-        stats: generateStatsForIngenuityTests(72, 1699),
+        recipe: generateRecipe(390, 1320),
+        stats: generateStats(72, 1699),
         expected: 556
       },
       {
-        recipe: generateRecipeForIngenuityTests(403),
-        stats: generateStatsForIngenuityTests(76, 1843),
+        recipe: generateRecipe(403),
+        stats: generateStats(76, 1843),
         expected: 601
       },
       {
-        recipe: generateRecipeForIngenuityTests(403),
-        stats: generateStatsForIngenuityTests(77, 1843),
+        recipe: generateRecipe(403),
+        stats: generateStats(77, 1843),
         expected: 601
       },
       {
-        recipe: generateRecipeForIngenuityTests(409),
-        stats: generateStatsForIngenuityTests(77, 1843),
+        recipe: generateRecipe(409),
+        stats: generateStats(77, 1843),
         expected: 596
       },
       {
-        recipe: generateRecipeForIngenuityTests(418),
-        stats: generateStatsForIngenuityTests(76, 1741),
+        recipe: generateRecipe(418),
+        stats: generateStats(76, 1741),
         expected: 553
       },
       {
-        recipe: generateRecipeForIngenuityTests(420),
-        stats: generateStatsForIngenuityTests(76, 1741),
+        recipe: generateRecipe(420),
+        stats: generateStats(76, 1741),
         expected: 545
       },
       {
-        recipe: generateRecipeForIngenuityTests(279),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(279),
+        stats: generateStats(70, 1654),
         expected: 552
       },
       {
-        recipe: generateRecipeForIngenuityTests(282),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(282),
+        stats: generateStats(70, 1654),
         expected: 548
       },
       {
-        recipe: generateRecipeForIngenuityTests(285),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(285),
+        stats: generateStats(70, 1654),
         expected: 540
       },
       {
-        recipe: generateRecipeForIngenuityTests(288),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(288),
+        stats: generateStats(70, 1654),
         expected: 518
       },
       {
-        recipe: generateRecipeForIngenuityTests(290),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(290),
+        stats: generateStats(70, 1654),
         expected: 496
       },
       {
-        recipe: generateRecipeForIngenuityTests(300),
-        stats: generateStatsForIngenuityTests(70, 1658),
+        recipe: generateRecipe(300),
+        stats: generateStats(70, 1658),
         expected: 356
       },
       {
-        recipe: generateRecipeForIngenuityTests(320),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(320),
+        stats: generateStats(70, 1654),
         expected: 341
       },
       {
-        recipe: generateRecipeForIngenuityTests(350),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(350),
+        stats: generateStats(70, 1654),
         expected: 325
       },
       {
-        recipe: generateRecipeForIngenuityTests(380),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(380),
+        stats: generateStats(70, 1654),
         expected: 314
       },
       {
-        recipe: generateRecipeForIngenuityTests(430),
-        stats: generateStatsForIngenuityTests(80, 2067),
+        recipe: generateRecipe(430),
+        stats: generateStats(80, 2067),
         expected: 665
       },
       {
-        recipe: generateRecipeForIngenuityTests(40, 136),
-        stats: generateStatsForIngenuityTests(35, 197),
+        recipe: generateRecipe(40, 136),
+        stats: generateStats(35, 197),
         expected: 65,
         action: new StandardSynthesis()
       },
       {
-        recipe: generateRecipeForIngenuityTests(450),
-        stats: generateStatsForIngenuityTests(80, 2236),
+        recipe: generateRecipe(450),
+        stats: generateStats(80, 2236),
         expected: 712
       },
       {
-        recipe: generateRecipeForIngenuityTests(26, 99),
-        stats: generateStatsForIngenuityTests(26, 111),
+        recipe: generateRecipe(26, 99),
+        stats: generateStats(26, 111),
         expected: 31
       },
       {
-        recipe: generateRecipeForIngenuityTests(27, 99),
-        stats: generateStatsForIngenuityTests(26, 111),
+        recipe: generateRecipe(27, 99),
+        stats: generateStats(26, 111),
         expected: 30
       },
       {
-        recipe: generateRecipeForIngenuityTests(14, 67),
-        stats: generateStatsForIngenuityTests(14, 86),
+        recipe: generateRecipe(14, 67),
+        stats: generateStats(14, 86),
         expected: 20
       }
     ];
@@ -164,118 +164,118 @@ describe('Ingenuities', () => {
   it('should properly reduce recipe level with Ingenuity II, influencing progression', () => {
     const results = [
       {
-        recipe: generateRecipeForIngenuityTests(409),
-        stats: generateStatsForIngenuityTests(80, 1736),
+        recipe: generateRecipe(409),
+        stats: generateStats(80, 1736),
         expected: 557
       },
       {
-        recipe: generateRecipeForIngenuityTests(390),
-        stats: generateStatsForIngenuityTests(70, 1567),
+        recipe: generateRecipe(390),
+        stats: generateStats(70, 1567),
         expected: 304
       },
       {
-        recipe: generateRecipeForIngenuityTests(406),
-        stats: generateStatsForIngenuityTests(70, 1567),
+        recipe: generateRecipe(406),
+        stats: generateStats(70, 1567),
         expected: 248
       },
       {
-        recipe: generateRecipeForIngenuityTests(395),
-        stats: generateStatsForIngenuityTests(70, 1610),
+        recipe: generateRecipe(395),
+        stats: generateStats(70, 1610),
         expected: 266
       },
       {
-        recipe: generateRecipeForIngenuityTests(400),
-        stats: generateStatsForIngenuityTests(70, 1440),
+        recipe: generateRecipe(400),
+        stats: generateStats(70, 1440),
         expected: 227
       },
       {
-        recipe: generateRecipeForIngenuityTests(403),
-        stats: generateStatsForIngenuityTests(70, 1610),
+        recipe: generateRecipe(403),
+        stats: generateStats(70, 1610),
         expected: 257
       },
       {
-        recipe: generateRecipeForIngenuityTests(390),
-        stats: generateStatsForIngenuityTests(72, 1699),
+        recipe: generateRecipe(390),
+        stats: generateStats(72, 1699),
         expected: 556
       },
       {
-        recipe: generateRecipeForIngenuityTests(403),
-        stats: generateStatsForIngenuityTests(76, 1843),
+        recipe: generateRecipe(403),
+        stats: generateStats(76, 1843),
         expected: 601
       },
       {
-        recipe: generateRecipeForIngenuityTests(403),
-        stats: generateStatsForIngenuityTests(77, 1843),
+        recipe: generateRecipe(403),
+        stats: generateStats(77, 1843),
         expected: 601
       },
       {
-        recipe: generateRecipeForIngenuityTests(409),
-        stats: generateStatsForIngenuityTests(77, 1843),
+        recipe: generateRecipe(409),
+        stats: generateStats(77, 1843),
         expected: 596
       },
       {
-        recipe: generateRecipeForIngenuityTests(418),
-        stats: generateStatsForIngenuityTests(76, 1741),
+        recipe: generateRecipe(418),
+        stats: generateStats(76, 1741),
         expected: 553
       },
       {
-        recipe: generateRecipeForIngenuityTests(420),
-        stats: generateStatsForIngenuityTests(76, 1741),
+        recipe: generateRecipe(420),
+        stats: generateStats(76, 1741),
         expected: 545
       },
       {
-        recipe: generateRecipeForIngenuityTests(279),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(279),
+        stats: generateStats(70, 1654),
         expected: 552
       },
       {
-        recipe: generateRecipeForIngenuityTests(282),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(282),
+        stats: generateStats(70, 1654),
         expected: 552
       },
       {
-        recipe: generateRecipeForIngenuityTests(285),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(285),
+        stats: generateStats(70, 1654),
         expected: 540
       },
       {
-        recipe: generateRecipeForIngenuityTests(288),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(288),
+        stats: generateStats(70, 1654),
         expected: 525
       },
       {
-        recipe: generateRecipeForIngenuityTests(290),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(290),
+        stats: generateStats(70, 1654),
         expected: 503
       },
       {
-        recipe: generateRecipeForIngenuityTests(300),
-        stats: generateStatsForIngenuityTests(70, 1658),
+        recipe: generateRecipe(300),
+        stats: generateStats(70, 1658),
         expected: 367
       },
       {
-        recipe: generateRecipeForIngenuityTests(320),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(320),
+        stats: generateStats(70, 1654),
         expected: 348
       },
       {
-        recipe: generateRecipeForIngenuityTests(350),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(350),
+        stats: generateStats(70, 1654),
         expected: 336
       },
       {
-        recipe: generateRecipeForIngenuityTests(430),
-        stats: generateStatsForIngenuityTests(80, 2067),
+        recipe: generateRecipe(430),
+        stats: generateStats(80, 2067),
         expected: 665
       },
       {
-        recipe: generateRecipeForIngenuityTests(380),
-        stats: generateStatsForIngenuityTests(70, 1654),
+        recipe: generateRecipe(380),
+        stats: generateStats(70, 1654),
         expected: 321
       },
       {
-        recipe: generateRecipeForIngenuityTests(450),
-        stats: generateStatsForIngenuityTests(80, 2236),
+        recipe: generateRecipe(450),
+        stats: generateStats(80, 2236),
         expected: 712
       }
     ];
