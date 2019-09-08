@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.2](https://github.com/ffxiv-teamcraft/simulator/compare/v1.3.1...v1.3.2) (2019-09-08)
+
+
+### Bug Fixes
+
+* **core:** fixed an issue with missing floor in base quality/progression formula ([aa83993](https://github.com/ffxiv-teamcraft/simulator/commit/aa83993)), closes [#7](https://github.com/ffxiv-teamcraft/simulator/issues/7)
+
+
+
 ### [1.3.1](https://github.com/ffxiv-teamcraft/simulator/compare/v1.3.0...v1.3.1) (2019-08-06)
 
 
