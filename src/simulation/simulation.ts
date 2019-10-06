@@ -39,7 +39,8 @@ export class Simulation {
     public actions: CraftingAction[],
     private _crafterStats: CrafterStats,
     private hqIngredients: { id: number; amount: number }[] = [],
-    private stepStates: { [index: number]: StepState } = {}
+    private stepStates: { [index: number]: StepState } = {},
+    startingQuality = 0
   ) {
     this.durability = recipe.durability;
     this.availableCP = this._crafterStats.cp;
@@ -51,6 +52,9 @@ export class Simulation {
       if (ingredientDetails !== undefined && ingredientDetails.quality) {
         this.quality += ingredientDetails.quality * ingredient.amount;
       }
+    }
+    if (this.hqIngredients.length === 0) {
+      this.quality = startingQuality;
     }
     this.quality = Math.floor(this.quality);
     this.startingQuality = this.quality;
