@@ -27,7 +27,7 @@ export class Reflect extends QualityAction {
 
   // TODO: we need the new action cost
   getBaseCPCost(simulationState: Simulation): number {
-    return 0;
+    return 50;
   }
 
   getBaseDurabilityCost(simulationState: Simulation): number {
