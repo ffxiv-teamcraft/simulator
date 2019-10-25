@@ -29,6 +29,7 @@ import { PreparatoryTouch } from './actions/quality/preparatory-touch';
 import { IntensiveSynthesis } from './actions/progression/intensive-synthesis';
 import { DelicateSynthesis } from './actions/other/delicate-synthesis';
 import { Reuse } from './actions/buff/reuse';
+import { FinalAppraisal } from './actions/buff/final-appraisal';
 
 export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
@@ -77,7 +78,8 @@ export class CraftingActionsRegistry {
     { short: 'preparatoryTouch', full: 'PreparatoryTouch' },
     { short: 'delicateSynthesis', full: 'DelicateSynthesis' },
     { short: 'reuse', full: 'Reuse' },
-    { short: 'trainedEye', full: 'TrainedEye' }
+    { short: 'trainedEye', full: 'TrainedEye' },
+    { short: 'finalappraisal', full: 'FinalAppraisal' }
   ];
 
   public static readonly ALL_ACTIONS: { name: string; action: CraftingAction }[] = [
@@ -116,10 +118,12 @@ export class CraftingActionsRegistry {
     { name: 'GreatStrides', action: new GreatStrides() },
     { name: 'Innovation', action: new Innovation() },
     { name: 'NameOfTheElements', action: new NameOfTheElements() },
+    { name: 'FinalAppraisal', action: new FinalAppraisal() },
 
     // Other
     { name: 'Observe', action: new Observe() },
     { name: 'DelicateSynthesis', action: new DelicateSynthesis() },
+
     { name: 'Reuse', action: new Reuse() }
   ];
 
