@@ -10,7 +10,7 @@ export class FinalAppraisal extends BuffAction {
 
   // TODO: get action cost
   getBaseCPCost(simulationState: Simulation): number {
-    return 0;
+    return 32;
   }
 
   getDuration(simulation: Simulation): number {
