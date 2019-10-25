@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-rc.0](https://github.com/ffxiv-teamcraft/simulator/compare/v1.3.3...v2.0.0-rc.0) (2019-10-25)
+
+
+### Features
+
+* **5.1:** applied changes to existing skills ([70cabcc](https://github.com/ffxiv-teamcraft/simulator/commit/70cabcc))
+* **5.1:** removed all deleted actions ([549891d](https://github.com/ffxiv-teamcraft/simulator/commit/549891d))
+
+
+
 ### [1.3.3](https://github.com/ffxiv-teamcraft/simulator/compare/v1.3.2...v1.3.3) (2019-10-06)
 
 
