@@ -5,8 +5,12 @@ import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class Manipulation extends BuffAction {
+  getWaitDuration(): number {
+    return 2;
+  }
+
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.GSM, level: 15 };
+    return { job: CraftingJob.ANY, level: 65 };
   }
 
   public getType(): ActionType {
@@ -14,23 +18,19 @@ export class Manipulation extends BuffAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 88;
+    return 96;
   }
 
   getDuration(simulation: Simulation): number {
-    return 3;
-  }
-
-  getWaitDuration(): number {
-    return 2;
+    return 8;
   }
 
   getIds(): number[] {
-    return [278];
+    return [4574, 4575, 4576, 4577, 4578, 4579, 4580, 4581];
   }
 
   public getOverrides(): Buff[] {
-    return super.getOverrides().concat(Buff.MANIPULATION_II);
+    return super.getOverrides().concat(Buff.MANIPULATION);
   }
 
   getBuff(): Buff {
@@ -43,7 +43,7 @@ export class Manipulation extends BuffAction {
 
   protected getTick(): ((simulation: Simulation) => void) | undefined {
     return (simulation: Simulation) => {
-      simulation.repair(10);
+      simulation.repair(5);
     };
   }
 }

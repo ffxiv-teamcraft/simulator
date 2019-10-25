@@ -6,7 +6,6 @@ import { Buff } from '../model/buff.enum';
 import { SimulationResult } from './simulation-result';
 import { SimulationReliabilityReport } from './simulation-reliability-report';
 import { Tables } from '../model/tables';
-import { Reclaim } from '../model/actions/buff/reclaim';
 import { SimulationFailCause } from '../model/simulation-fail-cause.enum';
 import { Craft } from '../model/craft';
 import { StepState } from '../model/step-state';
@@ -178,7 +177,6 @@ export class Simulation {
    */
   public run(linear = false, maxTurns = Infinity, safeMode = false): SimulationResult {
     this.lastPossibleReclaimStep = -1;
-    const reclaimAction = new Reclaim();
     this.actions
       .filter(a => a !== undefined)
       .forEach((action: CraftingAction, index: number) => {
@@ -198,19 +196,6 @@ export class Simulation {
               break;
           }
         }
-        // If we're starting and the crafter is specialist
-        if (index === 0 && this.crafterStats.specialist && this.crafterStats.level >= 70) {
-          // Push stroke of genius buff
-          this.buffs.push({
-            buff: Buff.STROKE_OF_GENIUS,
-            stacks: 0,
-            duration: Infinity,
-            appliedStep: -1
-          });
-          // Apply stroke of genius manually in the stats
-          this.availableCP += 15;
-          this.maxCP += 15;
-        }
         let result: ActionResult;
         let failCause: SimulationFailCause | undefined = undefined;
         const canUseAction = action.canBeUsed(this, linear);
@@ -229,12 +214,6 @@ export class Simulation {
           canUseAction
         ) {
           result = this.runAction(action, linear, safeMode, index);
-          if (
-            reclaimAction.getBaseCPCost(this) <= this.availableCP &&
-            reclaimAction.canBeUsed(this, linear)
-          ) {
-            this.lastPossibleReclaimStep = index;
-          }
         } else {
           // If we can't, add the step to the result but skip it.
           result = {

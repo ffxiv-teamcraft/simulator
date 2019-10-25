@@ -5,7 +5,7 @@ import { CraftingJob } from '../../crafting-job.enum';
 
 export class TricksOfTheTrade extends CraftingAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.ALC, level: 15 };
+    return { job: CraftingJob.ANY, level: 13 };
   }
 
   public getType(): ActionType {

@@ -85,17 +85,7 @@ export abstract class CraftingAction {
   abstract _canBeUsed(simulationState: Simulation, linear?: boolean): boolean;
 
   public getCPCost(simulationState: Simulation, linear = false): number {
-    const baseCPCost = this.getBaseCPCost(simulationState);
-    if (simulationState.hasBuff(Buff.INITIAL_PREPARATIONS)) {
-      // According to this reddit topic:
-      // https://www.reddit.com/r/ffxiv/comments/7s4ilp/advanced_crafting_theory_and_math_recipe_level/
-      // Initial preparation has 20% chances to proc and applies a 30% reduction to CP cost, let's reflect that here.
-      const roll = linear ? 101 : Math.random() * 100;
-      if (roll <= 20) {
-        return Math.floor(baseCPCost * 0.7);
-      }
-    }
-    return baseCPCost;
+    return this.getBaseCPCost(simulationState);
   }
 
   abstract getBaseCPCost(simulationState: Simulation): number;
@@ -117,6 +107,7 @@ export abstract class CraftingAction {
   }
 
   protected getLevelDifference(simulation: Simulation): LevelDifference {
+    // TODO Handle the new Ingenuity, bye bye level diff modifier !
     let recipeLevel = simulation.recipe.rlvl;
     const stats: CrafterStats = simulation.crafterStats;
     const crafterLevel = Tables.LEVEL_TABLE[stats.level] || stats.level;
@@ -142,34 +133,6 @@ export abstract class CraftingAction {
             levelDifference += 5;
           }
           levelDifference = Math.max(levelDifference, -1 * (recipeStars[recipeLevel] || 5));
-        }
-      }
-    }
-    // If ingenuity 2
-    if (simulation.hasBuff(Buff.INGENUITY_II)) {
-      if (levelDifference < 0 && recipeLevel >= 390) {
-        let cap = -20;
-        if (Math.abs(originalLevelDifference) <= 100) {
-          cap = -4;
-        } else if (Math.abs(originalLevelDifference) < 110) {
-          cap = -9;
-        }
-        levelDifference = Math.max(levelDifference + Math.floor(recipeLevel / 7), cap);
-      } else {
-        // Shadowbringers
-        if (recipeLevel >= 390) {
-          levelDifference += Math.floor(recipeLevel / 21);
-        } else {
-          if (recipeLevel === 290) {
-            levelDifference += 11;
-          } else if (recipeLevel === 300) {
-            levelDifference += 10;
-          } else if (recipeLevel >= 120) {
-            levelDifference += 12;
-          } else {
-            levelDifference += 6;
-          }
-          levelDifference = Math.max(levelDifference, -1 * (recipeStars[recipeLevel] - 1 || 5));
         }
       }
     }

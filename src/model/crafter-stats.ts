@@ -21,11 +21,6 @@ export class CrafterStats {
       const innerQuietStacks = simulationState.getBuff(Buff.INNER_QUIET).stacks;
       control += 0.2 * (innerQuietStacks - 1) * this._control;
     }
-    // Then innovation, based on base control, not buffed one
-    if (simulationState.hasBuff(Buff.INNOVATION)) {
-      control += 0.5 * this._control;
-    }
-    // Total bonus is capped at 3k, we need to keep track of it.
-    return Math.min(control, this._control + 3000);
+    return control;
   }
 }

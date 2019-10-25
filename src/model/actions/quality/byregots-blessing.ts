@@ -38,7 +38,7 @@ export class ByregotsBlessing extends QualityAction {
   }
 
   getBaseSuccessRate(simulationState: Simulation): number {
-    return 90;
+    return 100;
   }
 
   getIds(): number[] {

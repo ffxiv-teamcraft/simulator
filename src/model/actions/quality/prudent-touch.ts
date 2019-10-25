@@ -4,17 +4,16 @@ import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class PrudentTouch extends QualityAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 66 };
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
-    return !simulationState.hasBuff(Buff.WASTE_NOT_II) && !simulationState.hasBuff(Buff.WASTE_NOT);
+    return !simulationState.hasBuff(Buff.WASTE_NOT);
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 21;
+    return 25;
   }
 
   getBaseDurabilityCost(simulationState: Simulation): number {
@@ -22,7 +21,7 @@ export class PrudentTouch extends QualityAction {
   }
 
   getBaseSuccessRate(simulationState: Simulation): number {
-    return 70;
+    return 100;
   }
 
   getIds(): number[] {

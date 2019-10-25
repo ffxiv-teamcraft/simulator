@@ -3,7 +3,6 @@ import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class BasicSynthesis extends ProgressAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 1 };
   }
@@ -17,7 +16,7 @@ export class BasicSynthesis extends ProgressAction {
   }
 
   getBaseSuccessRate(simulationState: Simulation): number {
-    return 90;
+    return 100;
   }
 
   getBaseCPCost(simulationState: Simulation): number {
@@ -29,7 +28,10 @@ export class BasicSynthesis extends ProgressAction {
   }
 
   getPotency(simulation: Simulation): number {
+    if (simulation.crafterStats.level >= 31) {
+      // Basic Synthesis Mastery
+      return 120;
+    }
     return 100;
   }
-
 }

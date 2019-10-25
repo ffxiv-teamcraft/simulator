@@ -1,6 +1,6 @@
 import { CraftingAction } from './actions/crafting-action';
 import { BasicSynthesis } from './actions/progression/basic-synthesis';
-import { CarefulSynthesisIII } from './actions/progression/careful-synthesis-iii';
+import { CarefulSynthesis } from './actions/progression/careful-synthesis';
 import { RapidSynthesis } from './actions/progression/rapid-synthesis';
 import { FocusedSynthesis } from './actions/progression/focused-synthesis';
 import { MuscleMemory } from './actions/progression/muscle-memory';
@@ -15,7 +15,7 @@ import { PatientTouch } from './actions/quality/patient-touch';
 import { PrudentTouch } from './actions/quality/prudent-touch';
 import { TricksOfTheTrade } from './actions/other/tricks-of-the-trade';
 import { MastersMend } from './actions/other/masters-mend';
-import { ManipulationII } from './actions/buff/manipulation-ii';
+import { Manipulation } from './actions/buff/manipulation';
 import { InnerQuiet } from './actions/buff/inner-quiet';
 import { Ingenuity } from './actions/buff/ingenuity';
 import { GreatStrides } from './actions/buff/great-strides';
@@ -26,7 +26,6 @@ import { BrandOfTheElements } from './actions/progression/brand-of-the-elements'
 import { NameOfTheElements } from './actions/buff/name-of-the-elements';
 import { TrainedEye } from './actions/quality/trained-eye';
 import { PreparatoryTouch } from './actions/quality/preparatory-touch';
-import { RapidSynthesisIII } from './actions/progression/rapid-synthesis-iii';
 import { IntensiveSynthesis } from './actions/progression/intensive-synthesis';
 import { DelicateSynthesis } from './actions/other/delicate-synthesis';
 import { Reuse } from './actions/buff/reuse';
@@ -64,13 +63,16 @@ export class CraftingActionsRegistry {
     { short: 'nameOfWater', full: 'NameOfTheElements' },
     { short: 'nameOfWind', full: 'NameOfTheElements' },
     { short: 'nameOfTheElements', full: 'NameOfTheElements' },
-    { short: 'carefulSynthesis3', full: 'CarefulSynthesisIII' },
+    { short: 'carefulSynthesis3', full: 'CarefulSynthesis' },
+    { short: 'carefulSynthesis', full: 'CarefulSynthesis' },
     { short: 'patientTouch', full: 'PatientTouch' },
     { short: 'manipulation2', full: 'ManipulationII' },
+    { short: 'manipulation', full: 'Manipulation' },
     { short: 'prudentTouch', full: 'PrudentTouch' },
     { short: 'focusedSynthesis', full: 'FocusedSynthesis' },
     { short: 'focusedTouch', full: 'FocusedTouch' },
-    { short: 'rapidSynthesis3', full: 'RapidSynthesisIII' },
+    { short: 'rapidSynthesis', full: 'RapidSynthesis' },
+    { short: 'rapidSynthesis3', full: 'RapidSynthesis' },
     { short: 'intensiveSynthesis', full: 'IntensiveSynthesis' },
     { short: 'preparatoryTouch', full: 'PreparatoryTouch' },
     { short: 'delicateSynthesis', full: 'DelicateSynthesis' },
@@ -81,7 +83,7 @@ export class CraftingActionsRegistry {
   public static readonly ALL_ACTIONS: { name: string; action: CraftingAction }[] = [
     // Progress actions
     { name: 'BasicSynthesis', action: new BasicSynthesis() },
-    { name: 'CarefulSynthesisIII', action: new CarefulSynthesisIII() },
+    { name: 'CarefulSynthesis', action: new CarefulSynthesis() },
     { name: 'RapidSynthesis', action: new RapidSynthesis() },
     { name: 'FocusedSynthesis', action: new FocusedSynthesis() },
     { name: 'MuscleMemory', action: new MuscleMemory() },
@@ -105,7 +107,7 @@ export class CraftingActionsRegistry {
 
     // Repair
     { name: 'MastersMend', action: new MastersMend() },
-    { name: 'ManipulationII', action: new ManipulationII() },
+    { name: 'Manipulation', action: new Manipulation() },
 
     // Buffs
     { name: 'InnerQuiet', action: new InnerQuiet() },

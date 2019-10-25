@@ -4,7 +4,6 @@ import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class MastersMend extends CraftingAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 7 };
   }
@@ -22,7 +21,7 @@ export class MastersMend extends CraftingAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 92;
+    return 88;
   }
 
   getDurabilityCost(simulationState: Simulation): number {

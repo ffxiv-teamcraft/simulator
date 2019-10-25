@@ -3,9 +3,8 @@ import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class HastyTouch extends QualityAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.CUL, level: 15 };
+    return { job: CraftingJob.ANY, level: 9 };
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
@@ -31,5 +30,4 @@ export class HastyTouch extends QualityAction {
   getPotency(simulation: Simulation): number {
     return 100;
   }
-
 }

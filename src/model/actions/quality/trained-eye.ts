@@ -12,7 +12,7 @@ export class TrainedEye extends CraftingAction {
   }
 
   execute(simulation: Simulation): void {
-    simulation.quality += Math.floor(simulation.recipe.quality / 2);
+    simulation.quality = simulation.recipe.quality;
   }
 
   getBaseCPCost(simulationState: Simulation): number {

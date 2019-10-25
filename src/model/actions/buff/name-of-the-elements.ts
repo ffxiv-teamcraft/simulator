@@ -9,11 +9,11 @@ export class NameOfTheElements extends BuffAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 15;
+    return 30;
   }
 
   getDuration(simulation: Simulation): number {
-    return 5;
+    return 3;
   }
 
   getInitialStacks(): number {

@@ -3,9 +3,8 @@ import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class CarefulSynthesis extends ProgressAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.WVR, level: 15 };
+    return { job: CraftingJob.ANY, level: 62 };
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
@@ -13,7 +12,7 @@ export class CarefulSynthesis extends ProgressAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 0;
+    return 7;
   }
 
   getBaseDurabilityCost(simulationState: Simulation): number {
@@ -25,11 +24,10 @@ export class CarefulSynthesis extends ProgressAction {
   }
 
   getIds(): number[] {
-    return [100063];
+    return [100203, 100204, 100205, 100206, 100207, 100208, 100209, 100210];
   }
 
   getPotency(simulation: Simulation): number {
-    return 90;
+    return 150;
   }
-
 }

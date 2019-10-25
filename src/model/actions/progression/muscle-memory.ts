@@ -2,17 +2,29 @@ import { Simulation } from '../../../simulation/simulation';
 import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
 import { CraftingAction } from '../crafting-action';
+import { ProgressAction } from '../progress-action';
+import { Buff } from '../../buff.enum';
 
 /**
  * MuMe is just piece by piece with a different condition, cost and success rate.
  */
-export class MuscleMemory extends CraftingAction {
+export class MuscleMemory extends ProgressAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.CUL, level: 54 };
+    return { job: CraftingJob.ANY, level: 54 };
   }
 
   public getType(): ActionType {
     return ActionType.PROGRESSION;
+  }
+
+  execute(simulation: Simulation): void {
+    super.execute(simulation);
+    simulation.buffs.push({
+      duration: 5,
+      stacks: 0,
+      buff: Buff.MUSCLE_MEMORY,
+      appliedStep: simulation.steps.length
+    });
   }
 
   _canBeUsed(simulation: Simulation): boolean {
@@ -27,16 +39,23 @@ export class MuscleMemory extends CraftingAction {
     return [100136];
   }
 
-  execute(simulation: Simulation): void {
-    const remainingProgress = simulation.recipe.progress - simulation.progression;
-    simulation.progression += Math.min(Math.floor(remainingProgress * 0.33), 1000);
-  }
-
   getDurabilityCost(simulationState: Simulation): number {
     return 10;
   }
 
   getSuccessRate(simulationState: Simulation): number {
     return 100;
+  }
+
+  getBaseDurabilityCost(simulationState: Simulation): number {
+    return 10;
+  }
+
+  getBaseSuccessRate(simulationState: Simulation): number {
+    return 100;
+  }
+
+  getPotency(simulation: Simulation): number {
+    return 300;
   }
 }

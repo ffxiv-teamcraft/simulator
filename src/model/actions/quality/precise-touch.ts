@@ -4,7 +4,6 @@ import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class PreciseTouch extends QualityAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 53 };
   }
@@ -35,7 +34,7 @@ export class PreciseTouch extends QualityAction {
   }
 
   getBaseSuccessRate(simulationState: Simulation): number {
-    return 70;
+    return 100;
   }
 
   getIds(): number[] {
@@ -43,7 +42,6 @@ export class PreciseTouch extends QualityAction {
   }
 
   getPotency(simulation: Simulation): number {
-    return 100;
+    return 150;
   }
-
 }

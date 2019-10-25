@@ -5,7 +5,7 @@ import { CraftingJob } from '../../crafting-job.enum';
 
 export class WasteNot extends BuffAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.LTW, level: 15 };
+    return { job: CraftingJob.ANY, level: 15 };
   }
 
   getBaseCPCost(simulationState: Simulation): number {
@@ -18,10 +18,6 @@ export class WasteNot extends BuffAction {
 
   getIds(): number[] {
     return [279];
-  }
-
-  public getOverrides(): Buff[] {
-    return super.getOverrides().concat(Buff.WASTE_NOT_II);
   }
 
   getBuff(): Buff {

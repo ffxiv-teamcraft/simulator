@@ -18,7 +18,7 @@ export class IntensiveSynthesis extends ProgressAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 12;
+    return 6;
   }
 
   getBaseDurabilityCost(simulationState: Simulation): number {
@@ -26,7 +26,7 @@ export class IntensiveSynthesis extends ProgressAction {
   }
 
   getBaseSuccessRate(simulationState: Simulation): number {
-    return 80;
+    return 100;
   }
 
   getIds(): number[] {

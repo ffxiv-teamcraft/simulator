@@ -3,9 +3,8 @@ import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class RapidSynthesis extends ProgressAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.ARM, level: 15 };
+    return { job: CraftingJob.ANY, level: 9 };
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
@@ -29,7 +28,10 @@ export class RapidSynthesis extends ProgressAction {
   }
 
   getPotency(simulation: Simulation): number {
+    if (simulation.crafterStats.level >= 63) {
+      // Rapid Synthesis Mastery
+      return 500;
+    }
     return 250;
   }
-
 }

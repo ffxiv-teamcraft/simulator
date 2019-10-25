@@ -5,7 +5,7 @@ import { CraftingJob } from '../../crafting-job.enum';
 
 export class Ingenuity extends BuffAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.BSM, level: 15 };
+    return { job: CraftingJob.ANY, level: 15 };
   }
 
   getBaseCPCost(simulationState: Simulation): number {
@@ -18,10 +18,6 @@ export class Ingenuity extends BuffAction {
 
   getIds(): number[] {
     return [277];
-  }
-
-  public getOverrides(): Buff[] {
-    return super.getOverrides().concat(Buff.INGENUITY_II);
   }
 
   getBuff(): Buff {

@@ -4,9 +4,8 @@ import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class Innovation extends BuffAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.GSM, level: 50 };
+    return { job: CraftingJob.GSM, level: 26 };
   }
 
   getBaseCPCost(simulationState: Simulation): number {
@@ -18,7 +17,7 @@ export class Innovation extends BuffAction {
   }
 
   getDuration(simulation: Simulation): number {
-    return 3;
+    return 4;
   }
 
   getIds(): number[] {
@@ -32,5 +31,4 @@ export class Innovation extends BuffAction {
   getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
   }
-
 }

@@ -20,7 +20,7 @@ export class PreparatoryTouch extends QualityAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 36;
+    return 40;
   }
 
   getBaseDurabilityCost(simulationState: Simulation): number {
@@ -28,7 +28,7 @@ export class PreparatoryTouch extends QualityAction {
   }
 
   getBaseSuccessRate(simulationState: Simulation): number {
-    return 70;
+    return 100;
   }
 
   getIds(): number[] {

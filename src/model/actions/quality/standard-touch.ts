@@ -3,7 +3,6 @@ import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class StandardTouch extends QualityAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 18 };
   }
@@ -21,7 +20,7 @@ export class StandardTouch extends QualityAction {
   }
 
   getBaseSuccessRate(simulationState: Simulation): number {
-    return 80;
+    return 100;
   }
 
   getIds(): number[] {
@@ -31,5 +30,4 @@ export class StandardTouch extends QualityAction {
   getPotency(simulation: Simulation): number {
     return 125;
   }
-
 }
