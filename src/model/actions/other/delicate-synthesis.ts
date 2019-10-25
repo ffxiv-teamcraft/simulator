@@ -24,7 +24,12 @@ export class DelicateSynthesis extends GeneralAction {
       (this.getBaseProgression(simulation) * progressPotency) / 100
     );
     // Quality
-    let qualityIncrease = (this.getBaseQuality(simulation) * this.getPotency(simulation)) / 100;
+    let qualityPotency = this.getPotency(simulation);
+    if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
+      qualityPotency += 100;
+      simulation.removeBuff(Buff.GREAT_STRIDES);
+    }
+    let qualityIncrease = (this.getBaseQuality(simulation) * qualityPotency) / 100;
     switch (simulation.state) {
       case 'EXCELLENT':
         qualityIncrease *= 4;
@@ -37,10 +42,6 @@ export class DelicateSynthesis extends GeneralAction {
         break;
       default:
         break;
-    }
-    if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
-      qualityIncrease *= 2;
-      simulation.removeBuff(Buff.GREAT_STRIDES);
     }
     simulation.quality += Math.floor(qualityIncrease);
     if (simulation.hasBuff(Buff.INNER_QUIET) && simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
