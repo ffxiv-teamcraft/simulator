@@ -9,7 +9,6 @@ import { Tables } from '../model/tables';
 import { SimulationFailCause } from '../model/simulation-fail-cause.enum';
 import { Craft } from '../model/craft';
 import { StepState } from '../model/step-state';
-import { CarefulObservation } from '../model/actions/other/careful-observation';
 
 export class Simulation {
   public progression = 0;
@@ -208,10 +207,6 @@ export class Simulation {
           failCause = SimulationFailCause.NOT_ENOUGH_CP;
         }
         // If we can use the action
-        if (action.is(CarefulObservation)) {
-          action.execute(this, linear);
-          return;
-        }
         if (
           this.success === undefined &&
           hasEnoughCP &&

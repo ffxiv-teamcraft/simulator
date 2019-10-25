@@ -31,7 +31,6 @@ import { DelicateSynthesis } from './actions/other/delicate-synthesis';
 import { Reuse } from './actions/buff/reuse';
 import { FinalAppraisal } from './actions/buff/final-appraisal';
 import { Reflect } from './actions/quality/reflect';
-import { CarefulObservation } from './actions/other/careful-observation';
 
 export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
