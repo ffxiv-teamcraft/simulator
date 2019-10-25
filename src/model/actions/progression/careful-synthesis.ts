@@ -23,8 +23,9 @@ export class CarefulSynthesis extends ProgressAction {
     return 100;
   }
 
+  // TODO get new IDs for this action
   getIds(): number[] {
-    return [100203, 100204, 100205, 100206, 100207, 100208, 100209, 100210];
+    return [100063];
   }
 
   getPotency(simulation: Simulation): number {

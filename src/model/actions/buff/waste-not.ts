@@ -13,7 +13,7 @@ export class WasteNot extends BuffAction {
   }
 
   getDuration(simulation: Simulation): number {
-    return 4;
+    return 8;
   }
 
   getIds(): number[] {
