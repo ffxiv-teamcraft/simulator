@@ -31,6 +31,7 @@ import { DelicateSynthesis } from './actions/other/delicate-synthesis';
 import { Reuse } from './actions/buff/reuse';
 import { FinalAppraisal } from './actions/buff/final-appraisal';
 import { Reflect } from './actions/quality/reflect';
+import { CarefulObservation } from './actions/other/careful-observation';
 
 export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
@@ -80,7 +81,8 @@ export class CraftingActionsRegistry {
     { short: 'delicateSynthesis', full: 'DelicateSynthesis' },
     { short: 'reuse', full: 'Reuse' },
     { short: 'trainedEye', full: 'TrainedEye' },
-    { short: 'finalappraisal', full: 'FinalAppraisal' },
+    { short: 'finalAppraisal', full: 'FinalAppraisal' },
+    { short: 'carefulObservation', full: 'CarefulObservation' },
     { short: 'reflect', full: 'Reflect' }
   ];
 
@@ -126,8 +128,8 @@ export class CraftingActionsRegistry {
     // Other
     { name: 'Observe', action: new Observe() },
     { name: 'DelicateSynthesis', action: new DelicateSynthesis() },
-
-    { name: 'Reuse', action: new Reuse() }
+    { name: 'Reuse', action: new Reuse() },
+    { name: 'CarefulObservation', action: new CarefulObservation() }
   ];
 
   public static getActionsByType(type: ActionType): CraftingAction[] {
