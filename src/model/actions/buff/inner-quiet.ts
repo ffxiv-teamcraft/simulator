@@ -33,7 +33,7 @@ export class InnerQuiet extends BuffAction {
     return 1;
   }
 
-  protected getTick(): ((simulation: Simulation) => void) | undefined {
+  getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
   }
 }

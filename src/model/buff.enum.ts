@@ -17,5 +17,7 @@ export enum Buff {
 
   REUSE,
 
-  MUSCLE_MEMORY
+  MUSCLE_MEMORY,
+
+  FINAL_APPRAISAL
 }

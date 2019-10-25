@@ -30,6 +30,7 @@ import { IntensiveSynthesis } from './actions/progression/intensive-synthesis';
 import { DelicateSynthesis } from './actions/other/delicate-synthesis';
 import { Reuse } from './actions/buff/reuse';
 import { FinalAppraisal } from './actions/buff/final-appraisal';
+import { Reflect } from './actions/quality/reflect';
 
 export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
@@ -79,7 +80,8 @@ export class CraftingActionsRegistry {
     { short: 'delicateSynthesis', full: 'DelicateSynthesis' },
     { short: 'reuse', full: 'Reuse' },
     { short: 'trainedEye', full: 'TrainedEye' },
-    { short: 'finalappraisal', full: 'FinalAppraisal' }
+    { short: 'finalappraisal', full: 'FinalAppraisal' },
+    { short: 'reflect', full: 'Reflect' }
   ];
 
   public static readonly ALL_ACTIONS: { name: string; action: CraftingAction }[] = [
@@ -103,6 +105,7 @@ export class CraftingActionsRegistry {
     { name: 'PrudentTouch', action: new PrudentTouch() },
     { name: 'TrainedEye', action: new TrainedEye() },
     { name: 'PreparatoryTouch', action: new PreparatoryTouch() },
+    { name: 'Reflect', action: new Reflect() },
 
     // CP recovery
     { name: 'TricksOfTheTrade', action: new TricksOfTheTrade() },
