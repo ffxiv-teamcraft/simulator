@@ -9,7 +9,11 @@ export abstract class ProgressAction extends GeneralAction {
   }
 
   execute(simulation: Simulation): void {
-    const potency = this.getPotency(simulation);
+    let potency = this.getPotency(simulation);
+    if (simulation.hasBuff(Buff.MUSCLE_MEMORY)) {
+      potency *= 2;
+      simulation.removeBuff(Buff.MUSCLE_MEMORY);
+    }
     let addition = (this.getBaseProgression(simulation) * potency) / 100;
     if (simulation.hasBuff(Buff.INNOVATION)) {
       addition *= 1.2;

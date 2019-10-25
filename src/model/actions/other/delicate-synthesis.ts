@@ -14,10 +14,15 @@ export class DelicateSynthesis extends GeneralAction {
   }
 
   execute(simulation: Simulation): void {
-    const baseProgressIncrease = this.getBaseProgression(simulation);
     // Progress
     let progressPotency = this.getPotency(simulation);
-    simulation.progression += Math.floor((baseProgressIncrease * progressPotency) / 100);
+    if (simulation.hasBuff(Buff.MUSCLE_MEMORY)) {
+      progressPotency *= 2;
+      simulation.removeBuff(Buff.MUSCLE_MEMORY);
+    }
+    simulation.progression += Math.floor(
+      (this.getBaseProgression(simulation) * progressPotency) / 100
+    );
     // Quality
     let qualityIncrease = (this.getBaseQuality(simulation) * this.getPotency(simulation)) / 100;
     switch (simulation.state) {
