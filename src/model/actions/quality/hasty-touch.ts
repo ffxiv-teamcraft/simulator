@@ -20,7 +20,7 @@ export class HastyTouch extends QualityAction {
   }
 
   getBaseSuccessRate(simulationState: Simulation): number {
-    return 50;
+    return 60;
   }
 
   getIds(): number[] {
