@@ -82,7 +82,6 @@ export class CraftingActionsRegistry {
     { short: 'reuse', full: 'Reuse' },
     { short: 'trainedEye', full: 'TrainedEye' },
     { short: 'finalAppraisal', full: 'FinalAppraisal' },
-    { short: 'carefulObservation', full: 'CarefulObservation' },
     { short: 'reflect', full: 'Reflect' }
   ];
 
@@ -128,8 +127,7 @@ export class CraftingActionsRegistry {
     // Other
     { name: 'Observe', action: new Observe() },
     { name: 'DelicateSynthesis', action: new DelicateSynthesis() },
-    { name: 'Reuse', action: new Reuse() },
-    { name: 'CarefulObservation', action: new CarefulObservation() }
+    { name: 'Reuse', action: new Reuse() }
   ];
 
   public static getActionsByType(type: ActionType): CraftingAction[] {
