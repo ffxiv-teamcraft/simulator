@@ -20,9 +20,11 @@ export class DelicateSynthesis extends GeneralAction {
       progressPotency *= 2;
       simulation.removeBuff(Buff.MUSCLE_MEMORY);
     }
-    simulation.progression += Math.floor(
-      (this.getBaseProgression(simulation) * progressPotency) / 100
-    );
+    let addition = (this.getBaseProgression(simulation) * progressPotency) / 100;
+    if (simulation.hasBuff(Buff.INNOVATION)) {
+      addition *= 1.2;
+    }
+    simulation.progression += Math.floor(addition);
     // Quality
     let qualityPotency = this.getPotency(simulation);
     if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
@@ -42,6 +44,9 @@ export class DelicateSynthesis extends GeneralAction {
         break;
       default:
         break;
+    }
+    if (simulation.hasBuff(Buff.INNOVATION)) {
+      qualityIncrease *= 1.2;
     }
     simulation.quality += Math.floor(qualityIncrease);
     if (simulation.hasBuff(Buff.INNER_QUIET) && simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
