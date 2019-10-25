@@ -40,7 +40,7 @@ export class Reflect extends QualityAction {
 
   // TODO: we need the new action IDs
   getIds(): number[] {
-    return [];
+    return [100275, 100276, 100277, 100278, 100279, 100280, 100281, 100282];
   }
 
   getPotency(simulation: Simulation): number {

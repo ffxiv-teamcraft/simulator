@@ -9,6 +9,7 @@ import { Tables } from '../model/tables';
 import { SimulationFailCause } from '../model/simulation-fail-cause.enum';
 import { Craft } from '../model/craft';
 import { StepState } from '../model/step-state';
+import { CarefulObservation } from '../model/actions/other/careful-observation';
 
 export class Simulation {
   public progression = 0;
@@ -207,6 +208,10 @@ export class Simulation {
           failCause = SimulationFailCause.NOT_ENOUGH_CP;
         }
         // If we can use the action
+        if (action.is(CarefulObservation)) {
+          action.execute(this, linear);
+          return;
+        }
         if (
           this.success === undefined &&
           hasEnoughCP &&
@@ -385,7 +390,7 @@ export class Simulation {
    * Changes the state of the craft,
    * source: https://github.com/Ermad/ffxiv-craft-opt-web/blob/master/app/js/ffxivcraftmodel.js#L255
    */
-  private tickState(): void {
+  public tickState(): void {
     // If current state is EXCELLENT, then next one is poor
     if (this.state === 'EXCELLENT') {
       this.state = 'POOR';

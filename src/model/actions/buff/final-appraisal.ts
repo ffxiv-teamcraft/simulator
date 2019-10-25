@@ -8,6 +8,7 @@ export class FinalAppraisal extends BuffAction {
     return { job: CraftingJob.ANY, level: 42 };
   }
 
+  // TODO: get action cost
   getBaseCPCost(simulationState: Simulation): number {
     return 0;
   }
@@ -16,8 +17,9 @@ export class FinalAppraisal extends BuffAction {
     return 5;
   }
 
+  // TODO get new action IDs
   getIds(): number[] {
-    return [];
+    return [286];
   }
 
   getBuff(): Buff {
