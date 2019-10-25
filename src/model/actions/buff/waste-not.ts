@@ -9,7 +9,7 @@ export class WasteNot extends BuffAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 56;
+    return 98;
   }
 
   getDuration(simulation: Simulation): number {
