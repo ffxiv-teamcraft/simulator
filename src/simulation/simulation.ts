@@ -435,7 +435,7 @@ export class Simulation {
       this.state = 'EXCELLENT';
     } else {
       const goodRandom = Math.random();
-      if (goodRandom <= goodChances) {
+      if (goodRandom <= goodChances && this.state !== 'GOOD') {
         this.state = 'GOOD';
       } else {
         this.state = 'NORMAL';
