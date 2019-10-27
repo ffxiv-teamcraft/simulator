@@ -5,7 +5,7 @@ import { CraftingJob } from '../../crafting-job.enum';
 
 export class Innovation extends BuffAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.GSM, level: 26 };
+    return { job: CraftingJob.ANY, level: 26 };
   }
 
   getBaseCPCost(simulationState: Simulation): number {
