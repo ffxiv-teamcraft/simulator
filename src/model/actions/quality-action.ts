@@ -12,7 +12,7 @@ export abstract class QualityAction extends GeneralAction {
     let potency = this.getPotency(simulation);
     let bonus = 1;
     if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
-      bonus += 2;
+      bonus += 1;
       simulation.removeBuff(Buff.GREAT_STRIDES);
     }
     if (simulation.hasBuff(Buff.INNOVATION)) {
