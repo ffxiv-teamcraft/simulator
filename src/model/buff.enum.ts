@@ -2,6 +2,7 @@ export enum Buff {
   INNER_QUIET,
 
   WASTE_NOT,
+  WASTE_NOT_II,
 
   MANIPULATION,
 

@@ -21,7 +21,7 @@ export class WasteNotII extends BuffAction {
   }
 
   getBuff(): Buff {
-    return Buff.WASTE_NOT;
+    return Buff.WASTE_NOT_II;
   }
 
   getInitialStacks(): number {
