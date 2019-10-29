@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.0-rc.7...v2.0.0) (2019-10-29)
+
+
+### Bug Fixes
+
+* fixed an issue allowing two goods in a row in tickState() ([ff26f91](https://github.com/ffxiv-teamcraft/simulator/commit/ff26f91))
+
+
+
 ## [2.0.0-rc.7](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.0-rc.6...v2.0.0-rc.7) (2019-10-25)
 
 
