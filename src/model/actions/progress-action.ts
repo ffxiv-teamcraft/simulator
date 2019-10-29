@@ -10,14 +10,15 @@ export abstract class ProgressAction extends GeneralAction {
 
   execute(simulation: Simulation): void {
     let potency = this.getPotency(simulation);
+    let bonus = 1;
     if (simulation.hasBuff(Buff.MUSCLE_MEMORY)) {
-      potency *= 2;
+      bonus += 2;
       simulation.removeBuff(Buff.MUSCLE_MEMORY);
     }
-    let addition = (this.getBaseProgression(simulation) * potency) / 100;
     if (simulation.hasBuff(Buff.INNOVATION)) {
-      addition *= 1.2;
+      bonus += 0.2;
     }
+    const addition = (this.getBaseProgression(simulation) * potency * bonus) / 100;
     simulation.progression += Math.floor(addition);
     if (simulation.hasBuff(Buff.FINAL_APPRAISAL)) {
       simulation.progression = Math.min(simulation.progression, simulation.recipe.progress - 1);
