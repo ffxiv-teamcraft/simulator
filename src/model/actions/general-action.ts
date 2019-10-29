@@ -8,7 +8,7 @@ import { Buff } from '../buff.enum';
 export abstract class GeneralAction extends CraftingAction {
   getDurabilityCost(simulationState: Simulation): number {
     const baseCost = this.getBaseDurabilityCost(simulationState);
-    if (simulationState.hasBuff(Buff.WASTE_NOT)) {
+    if (simulationState.hasBuff(Buff.WASTE_NOT) || simulationState.hasBuff(Buff.WASTE_NOT_II)) {
       return baseCost / 2;
     }
     return baseCost;
