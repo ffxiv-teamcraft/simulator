@@ -36,7 +36,7 @@ export class TricksOfTheTrade extends CraftingAction {
   }
 
   getIds(): number[] {
-    return [100098];
+    return [100371, 100372, 100373, 100374, 100375, 100376, 100377, 100378];
   }
 
   getSuccessRate(simulationState: Simulation): number {

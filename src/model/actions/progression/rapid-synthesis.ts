@@ -24,7 +24,7 @@ export class RapidSynthesis extends ProgressAction {
   }
 
   getIds(): number[] {
-    return [100033];
+    return [100363, 100364, 100365, 100366, 100367, 100368, 100369, 100370];
   }
 
   getPotency(simulation: Simulation): number {

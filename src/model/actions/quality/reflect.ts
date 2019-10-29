@@ -25,9 +25,8 @@ export class Reflect extends QualityAction {
     });
   }
 
-  // TODO: we need the new action cost
   getBaseCPCost(simulationState: Simulation): number {
-    return 50;
+    return 24;
   }
 
   getBaseDurabilityCost(simulationState: Simulation): number {
@@ -38,9 +37,8 @@ export class Reflect extends QualityAction {
     return 100;
   }
 
-  // TODO: we need the new action IDs
   getIds(): number[] {
-    return [100275, 100276, 100277, 100278, 100279, 100280, 100281, 100282];
+    return [100387, 100388, 100389, 100390, 100391, 100392, 100393, 100394];
   }
 
   getPotency(simulation: Simulation): number {

@@ -9,7 +9,7 @@ export class Ingenuity extends BuffAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 24;
+    return 22;
   }
 
   getDuration(simulation: Simulation): number {
@@ -17,7 +17,7 @@ export class Ingenuity extends BuffAction {
   }
 
   getIds(): number[] {
-    return [277];
+    return [4623, 4624, 4625, 4626, 4627, 4628, 4629, 4630];
   }
 
   getBuff(): Buff {

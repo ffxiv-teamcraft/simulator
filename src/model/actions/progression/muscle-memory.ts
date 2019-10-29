@@ -36,7 +36,7 @@ export class MuscleMemory extends ProgressAction {
   }
 
   getIds(): number[] {
-    return [100136];
+    return [100379, 100380, 100381, 100382, 100383, 100384, 100385, 100386];
   }
 
   getDurabilityCost(simulationState: Simulation): number {

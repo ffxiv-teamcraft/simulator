@@ -21,7 +21,7 @@ export class Innovation extends BuffAction {
   }
 
   getIds(): number[] {
-    return [284];
+    return [19004, 19005, 19006, 19007, 19008, 19009, 19010, 19011];
   }
 
   getInitialStacks(): number {

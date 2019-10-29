@@ -3,21 +3,21 @@ import { Buff } from '../../buff.enum';
 import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
 
-export class WasteNot extends BuffAction {
+export class WasteNotII extends BuffAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.ANY, level: 15 };
+    return { job: CraftingJob.ANY, level: 47 };
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 56;
+    return 98;
   }
 
   getDuration(simulation: Simulation): number {
-    return 4;
+    return 8;
   }
 
   getIds(): number[] {
-    return [4631, 4632, 4633, 4634, 4635, 4636, 4637, 4638];
+    return [4639, 4640, 4641, 4642, 4643, 4644, 19002, 19003];
   }
 
   getBuff(): Buff {
@@ -29,7 +29,7 @@ export class WasteNot extends BuffAction {
   }
 
   public getOverrides(): Buff[] {
-    return super.getOverrides().concat(Buff.WASTE_NOT_II);
+    return super.getOverrides().concat(Buff.WASTE_NOT);
   }
 
   protected getTick(): ((simulation: Simulation) => void) | undefined {

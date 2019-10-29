@@ -25,9 +25,8 @@ export class Manipulation extends BuffAction {
     return 8;
   }
 
-  // TODO get new IDs for this action
   getIds(): number[] {
-    return [278];
+    return [4574, 4575, 4576, 4577, 4578, 4579, 4580, 4581];
   }
 
   public getOverrides(): Buff[] {

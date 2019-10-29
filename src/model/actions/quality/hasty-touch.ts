@@ -24,7 +24,7 @@ export class HastyTouch extends QualityAction {
   }
 
   getIds(): number[] {
-    return [100108];
+    return [100355, 100356, 100357, 100358, 100359, 100360, 100361, 100362];
   }
 
   getPotency(simulation: Simulation): number {
