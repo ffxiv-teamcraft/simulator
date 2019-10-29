@@ -10,11 +10,15 @@ export abstract class QualityAction extends GeneralAction {
 
   execute(simulation: Simulation, safe = false, skipStackAddition = false): void {
     let potency = this.getPotency(simulation);
+    let bonus = 1;
     if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
-      potency += 100;
+      bonus += 2;
       simulation.removeBuff(Buff.GREAT_STRIDES);
     }
-    let qualityIncrease = Math.floor((this.getBaseQuality(simulation) * potency) / 100);
+    if (simulation.hasBuff(Buff.INNOVATION)) {
+      bonus += 0.2;
+    }
+    let qualityIncrease = Math.floor((this.getBaseQuality(simulation) * potency) / 100) * bonus;
     switch (simulation.state) {
       case 'EXCELLENT':
         qualityIncrease *= 4;
@@ -27,9 +31,6 @@ export abstract class QualityAction extends GeneralAction {
         break;
       default:
         break;
-    }
-    if (simulation.hasBuff(Buff.INNOVATION)) {
-      qualityIncrease *= 1.2;
     }
     simulation.quality += Math.floor(qualityIncrease);
     if (

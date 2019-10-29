@@ -15,23 +15,29 @@ export class DelicateSynthesis extends GeneralAction {
 
   execute(simulation: Simulation): void {
     // Progress
-    let progressPotency = this.getPotency(simulation);
+    const progressPotency = this.getPotency(simulation);
+    let progressBonus = 1;
     if (simulation.hasBuff(Buff.MUSCLE_MEMORY)) {
-      progressPotency *= 2;
+      progressBonus += 2;
       simulation.removeBuff(Buff.MUSCLE_MEMORY);
     }
-    let addition = (this.getBaseProgression(simulation) * progressPotency) / 100;
     if (simulation.hasBuff(Buff.INNOVATION)) {
-      addition *= 1.2;
+      progressBonus += 0.2;
     }
-    simulation.progression += Math.floor(addition);
+    simulation.progression +=
+      (this.getBaseProgression(simulation) * progressPotency * progressBonus) / 100;
     // Quality
-    let qualityPotency = this.getPotency(simulation);
+    const qualityPotency = this.getPotency(simulation);
+    let qualityBonus = 1;
     if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
-      qualityPotency += 100;
+      qualityBonus += 2;
       simulation.removeBuff(Buff.GREAT_STRIDES);
     }
-    let qualityIncrease = (this.getBaseQuality(simulation) * qualityPotency) / 100;
+    if (simulation.hasBuff(Buff.INNOVATION)) {
+      qualityBonus += 0.2;
+    }
+    let qualityIncrease =
+      Math.floor((this.getBaseQuality(simulation) * qualityPotency) / 100) * qualityBonus;
     if (simulation.hasBuff(Buff.INNOVATION)) {
       qualityIncrease *= 1.2;
     }
