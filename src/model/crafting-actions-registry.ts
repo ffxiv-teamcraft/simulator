@@ -22,6 +22,7 @@ import { GreatStrides } from './actions/buff/great-strides';
 import { Innovation } from './actions/buff/innovation';
 import { Observe } from './actions/other/observe';
 import { WasteNot } from './actions/buff/waste-not';
+import { WasteNotII } from './actions/buff/waste-not-ii';
 import { BrandOfTheElements } from './actions/progression/brand-of-the-elements';
 import { NameOfTheElements } from './actions/buff/name-of-the-elements';
 import { TrainedEye } from './actions/quality/trained-eye';
@@ -45,6 +46,7 @@ export class CraftingActionsRegistry {
     { short: 'tricksOfTheTrade', full: 'TricksOfTheTrade' },
     { short: 'innerQuiet', full: 'InnerQuiet' },
     { short: 'wasteNot', full: 'WasteNot' },
+    { short: 'wasteNot2', full: 'WasteNotII' },
     { short: 'innovation', full: 'Innovation' },
     { short: 'greatStrides', full: 'GreatStrides' },
     { short: 'ingenuity', full: 'Ingenuity' },
@@ -117,6 +119,7 @@ export class CraftingActionsRegistry {
     // Buffs
     { name: 'InnerQuiet', action: new InnerQuiet() },
     { name: 'WasteNot', action: new WasteNot() },
+    { name: 'WasteNotII', action: new WasteNotII() },
     { name: 'Ingenuity', action: new Ingenuity() },
     { name: 'GreatStrides', action: new GreatStrides() },
     { name: 'Innovation', action: new Innovation() },
