@@ -11,6 +11,10 @@ export abstract class BuffAction extends CraftingAction {
 
   abstract getDuration(simulation: Simulation): number;
 
+  canBeClipped(): boolean {
+    return false;
+  }
+
   execute(simulation: Simulation): void {
     for (const buffToOverride of this.getOverrides()) {
       simulation.removeBuff(buffToOverride);
@@ -19,7 +23,10 @@ export abstract class BuffAction extends CraftingAction {
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
-    return true;
+    if (this.canBeClipped()) {
+      return true;
+    }
+    return !simulationState.hasBuff(this.getBuff());
   }
 
   getDurabilityCost(simulationState: Simulation): number {

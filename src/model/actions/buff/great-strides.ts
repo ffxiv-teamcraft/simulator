@@ -4,6 +4,10 @@ import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class GreatStrides extends BuffAction {
+  canBeClipped(): boolean {
+    return true;
+  }
+
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 21 };
   }
