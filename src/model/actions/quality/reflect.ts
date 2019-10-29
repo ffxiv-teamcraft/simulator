@@ -18,7 +18,7 @@ export class Reflect extends QualityAction {
     const iq = new InnerQuiet();
     simulation.buffs.push({
       appliedStep: simulation.steps.length,
-      stacks: iq.getInitialStacks() + 3,
+      stacks: 3,
       buff: iq.getBuff(),
       tick: iq.getTick(),
       duration: iq.getDuration(simulation)
