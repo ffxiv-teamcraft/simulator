@@ -36,8 +36,9 @@ export class DelicateSynthesis extends GeneralAction {
     if (simulation.hasBuff(Buff.INNOVATION)) {
       qualityBonus += 0.2;
     }
-    let qualityIncrease =
-      Math.floor((this.getBaseQuality(simulation) * qualityPotency) / 100) * qualityBonus;
+    let qualityIncrease = Math.floor(
+      (this.getBaseQuality(simulation) * qualityPotency * qualityBonus) / 100
+    );
     if (simulation.hasBuff(Buff.INNOVATION)) {
       qualityIncrease *= 1.2;
     }
