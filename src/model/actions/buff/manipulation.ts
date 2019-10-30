@@ -5,6 +5,10 @@ import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class Manipulation extends BuffAction {
+  canBeClipped(): boolean {
+    return true;
+  }
+
   getWaitDuration(): number {
     return 2;
   }
