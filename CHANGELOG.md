@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.5](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.4...v2.0.5) (2019-10-30)
+
+
+### Bug Fixes
+
+* **patient-touch:** fixed patient touch IQ stacks addition ([c96e81c](https://github.com/ffxiv-teamcraft/simulator/commit/c96e81c))
+* fix for MuMe and GS bonus on delicate synth ([9810aa7](https://github.com/ffxiv-teamcraft/simulator/commit/9810aa7))
+
+
+
 ### [2.0.4](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.3...v2.0.4) (2019-10-29)
 
 
