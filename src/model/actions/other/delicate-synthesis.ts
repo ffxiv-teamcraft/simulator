@@ -18,7 +18,7 @@ export class DelicateSynthesis extends GeneralAction {
     const progressPotency = this.getPotency(simulation);
     let progressBonus = 1;
     if (simulation.hasBuff(Buff.MUSCLE_MEMORY)) {
-      progressBonus += 2;
+      progressBonus += 1;
       simulation.removeBuff(Buff.MUSCLE_MEMORY);
     }
     if (simulation.hasBuff(Buff.INNOVATION)) {
@@ -30,7 +30,7 @@ export class DelicateSynthesis extends GeneralAction {
     const qualityPotency = this.getPotency(simulation);
     let qualityBonus = 1;
     if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
-      qualityBonus += 2;
+      qualityBonus += 1;
       simulation.removeBuff(Buff.GREAT_STRIDES);
     }
     if (simulation.hasBuff(Buff.INNOVATION)) {
