@@ -12,7 +12,7 @@ export class PatientTouch extends QualityAction {
     super.execute(simulation);
     if (simulation.hasBuff(Buff.INNER_QUIET) && simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
       const iq = simulation.getBuff(Buff.INNER_QUIET);
-      iq.stacks = Math.min(iq.stacks * 2, 11);
+      iq.stacks = Math.min((iq.stacks - 1) * 2, 11);
     }
   }
 
