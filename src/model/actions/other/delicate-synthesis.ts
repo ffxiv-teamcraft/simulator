@@ -24,8 +24,8 @@ export class DelicateSynthesis extends GeneralAction {
     if (simulation.hasBuff(Buff.INNOVATION)) {
       progressBonus += 0.2;
     }
-    simulation.progression +=
-      (this.getBaseProgression(simulation) * progressPotency * progressBonus) / 100;
+    simulation.progression += Math.floor(
+      (this.getBaseProgression(simulation) * progressPotency * progressBonus) / 100);
     if (simulation.hasBuff(Buff.FINAL_APPRAISAL)) {
       simulation.progression = Math.min(simulation.progression, simulation.recipe.progress - 1);
     }
