@@ -30,7 +30,7 @@ export class DelicateSynthesis extends GeneralAction {
     const qualityPotency = this.getPotency(simulation);
     let qualityBonus = 1;
     if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
-      qualityBonus += 2;
+      qualityBonus += 1;
       simulation.removeBuff(Buff.GREAT_STRIDES);
     }
     if (simulation.hasBuff(Buff.INNOVATION)) {
