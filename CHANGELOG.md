@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.7](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.6...v2.0.7) (2019-10-30)
+
+
+### Bug Fixes
+
+* **buff:** added clip check for buffs ([36c796b](https://github.com/ffxiv-teamcraft/simulator/commit/36c796b))
+* **delicate-synthesis:** fixed an issue with flooring on prog not done ([593bd7b](https://github.com/ffxiv-teamcraft/simulator/commit/593bd7b))
+* **final-appraisal:** don't tick buffs if final appraisal was used ([c6be295](https://github.com/ffxiv-teamcraft/simulator/commit/c6be295))
+* **final-appraisal:** fixed an issue with final appraisal and delicate synthesis ([d858abe](https://github.com/ffxiv-teamcraft/simulator/commit/d858abe))
+
+
+
 ### [2.0.6](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.5...v2.0.6) (2019-10-30)
 
 
