@@ -23,7 +23,7 @@ export class BrandOfTheElements extends ProgressAction {
   getPotency(simulation: Simulation): number {
     let potency = 100;
     if (simulation.hasBuff(Buff.NAME_OF_THE_ELEMENTS)) {
-      potency += 200 * (1 - simulation.progression / simulation.recipe.progress);
+      potency += 100 * (1 - simulation.progression / simulation.recipe.progress);
     }
     return potency;
   }
