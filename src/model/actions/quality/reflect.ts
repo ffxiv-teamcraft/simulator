@@ -1,8 +1,8 @@
 import { QualityAction } from '../quality-action';
 import { Simulation } from '../../../simulation/simulation';
-import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 import { InnerQuiet } from '../buff/inner-quiet';
+import { FinalAppraisal } from '../buff/final-appraisal';
 
 export class Reflect extends QualityAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
@@ -10,7 +10,7 @@ export class Reflect extends QualityAction {
   }
 
   _canBeUsed(simulation: Simulation): boolean {
-    return simulation.steps.length === 0;
+    return simulation.steps.filter(step => !step.action.is(FinalAppraisal)).length === 0;
   }
 
   execute(simulation: Simulation): void {
