@@ -5,6 +5,7 @@ import { CraftingAction } from '../crafting-action';
 import { ProgressAction } from '../progress-action';
 import { Buff } from '../../buff.enum';
 import { FinalAppraisal } from '../buff/final-appraisal';
+import { RemoveFinalAppraisal } from '../other/remove-final-appraisal';
 
 /**
  * MuMe is just piece by piece with a different condition, cost and success rate.
@@ -29,7 +30,11 @@ export class MuscleMemory extends ProgressAction {
   }
 
   _canBeUsed(simulation: Simulation): boolean {
-    return simulation.steps.filter(step => !step.action.is(FinalAppraisal)).length === 0;
+    return (
+      simulation.steps.filter(
+        step => !step.action.is(FinalAppraisal) && !step.action.is(RemoveFinalAppraisal)
+      ).length === 0
+    );
   }
 
   getBaseCPCost(simulation: Simulation): number {

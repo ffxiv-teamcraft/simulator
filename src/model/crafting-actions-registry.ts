@@ -32,6 +32,7 @@ import { DelicateSynthesis } from './actions/other/delicate-synthesis';
 import { Reuse } from './actions/buff/reuse';
 import { FinalAppraisal } from './actions/buff/final-appraisal';
 import { Reflect } from './actions/quality/reflect';
+import { RemoveFinalAppraisal } from './actions/other/remove-final-appraisal';
 
 export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
@@ -129,7 +130,8 @@ export class CraftingActionsRegistry {
     // Other
     { name: 'Observe', action: new Observe() },
     { name: 'DelicateSynthesis', action: new DelicateSynthesis() },
-    { name: 'Reuse', action: new Reuse() }
+    { name: 'Reuse', action: new Reuse() },
+    { name: 'RemoveFinalAppraisal', action: new RemoveFinalAppraisal() }
   ];
 
   public static getActionsByType(type: ActionType): CraftingAction[] {

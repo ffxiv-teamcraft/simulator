@@ -10,6 +10,7 @@ import { SimulationFailCause } from '../model/simulation-fail-cause.enum';
 import { Craft } from '../model/craft';
 import { StepState } from '../model/step-state';
 import { FinalAppraisal } from '../model/actions/buff/final-appraisal';
+import { RemoveFinalAppraisal } from '../model/actions/other/remove-final-appraisal';
 
 export class Simulation {
   public progression = 0;
@@ -234,7 +235,11 @@ export class Simulation {
           const progressionBefore = this.progression;
           const durabilityBefore = this.durability;
           const cpBefore = this.availableCP;
-          if (this.success === undefined && !action.is(FinalAppraisal)) {
+          if (
+            this.success === undefined &&
+            !action.is(FinalAppraisal) &&
+            !action.is(RemoveFinalAppraisal)
+          ) {
             // Tick buffs after checking synth result, so if we reach 0 durability, synth fails.
             this.tickBuffs(linear);
           }
@@ -250,7 +255,7 @@ export class Simulation {
           };
         }
         // Tick state to change it for next turn if not in linear mode
-        if (!linear && !action.is(FinalAppraisal)) {
+        if (!linear && !action.is(FinalAppraisal) && !action.is(RemoveFinalAppraisal)) {
           this.tickState();
         }
 
