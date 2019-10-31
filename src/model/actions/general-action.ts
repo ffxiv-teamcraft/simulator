@@ -18,6 +18,10 @@ export abstract class GeneralAction extends CraftingAction {
     return this.getBaseSuccessRate(simulationState);
   }
 
+  getBaseBonus(simulation: Simulation): number {
+    return 1;
+  }
+
   abstract getPotency(simulation: Simulation): number;
 
   abstract getBaseDurabilityCost(simulationState: Simulation): number;

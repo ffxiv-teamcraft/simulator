@@ -21,11 +21,16 @@ export class BrandOfTheElements extends ProgressAction {
   }
 
   getPotency(simulation: Simulation): number {
-    let potency = 100;
+    return 100;
+  }
+
+  getBaseBonus(simulation: Simulation): number {
     if (simulation.hasBuff(Buff.NAME_OF_THE_ELEMENTS)) {
-      potency += 100 * (1 - simulation.progression / simulation.recipe.progress);
+      return (
+        1 + (2 * Math.ceil((1 - simulation.progression / simulation.recipe.progress) * 100)) / 100
+      );
     }
-    return potency;
+    return 1;
   }
 
   getIds(): number[] {

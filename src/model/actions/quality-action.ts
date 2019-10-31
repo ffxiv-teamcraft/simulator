@@ -18,7 +18,7 @@ export abstract class QualityAction extends GeneralAction {
     if (simulation.hasBuff(Buff.INNOVATION)) {
       bonus += 0.2;
     }
-    let qualityIncrease = Math.floor((this.getBaseQuality(simulation) * potency * bonus) / 100);
+    let qualityIncrease = (this.getBaseQuality(simulation) * potency * bonus) / 100;
     switch (simulation.state) {
       case 'EXCELLENT':
         qualityIncrease *= 4;

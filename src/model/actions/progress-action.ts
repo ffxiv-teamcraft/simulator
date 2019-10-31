@@ -10,7 +10,7 @@ export abstract class ProgressAction extends GeneralAction {
 
   execute(simulation: Simulation): void {
     let potency = this.getPotency(simulation);
-    let bonus = 1;
+    let bonus = this.getBaseBonus(simulation);
     if (simulation.hasBuff(Buff.MUSCLE_MEMORY)) {
       bonus += 1;
       simulation.removeBuff(Buff.MUSCLE_MEMORY);
