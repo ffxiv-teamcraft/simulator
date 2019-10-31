@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.8...v2.1.0) (2019-10-31)
+
+
+### Bug Fixes
+
+* **brand:** fixed an issue with brand of the elements not being computed properly ([1588083](https://github.com/ffxiv-teamcraft/simulator/commit/1588083))
+* **final-appraisal:** using final appraisal on first step doesn't count as step anymore ([dfa4139](https://github.com/ffxiv-teamcraft/simulator/commit/dfa4139))
+
+
+### Features
+
+* added fake action to remove final appraisal ([d7c97f2](https://github.com/ffxiv-teamcraft/simulator/commit/d7c97f2))
+
+
+
 ### [2.0.8](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.7...v2.0.8) (2019-10-31)
 
 
