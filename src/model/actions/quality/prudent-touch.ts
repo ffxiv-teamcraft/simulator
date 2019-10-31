@@ -9,7 +9,7 @@ export class PrudentTouch extends QualityAction {
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
-    return !simulationState.hasBuff(Buff.WASTE_NOT);
+    return !(simulationState.hasBuff(Buff.WASTE_NOT) || simulationState.hasBuff(Buff.WASTE_NOT_II));
   }
 
   getBaseCPCost(simulationState: Simulation): number {

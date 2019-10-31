@@ -2,6 +2,62 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.8](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.7...v2.0.8) (2019-10-31)
+
+
+### Bug Fixes
+
+* **brand:** fixed potency bonus on brand of elements ([1d900c0](https://github.com/ffxiv-teamcraft/simulator/commit/1d900c0))
+
+
+
+### [2.0.7](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.6...v2.0.7) (2019-10-30)
+
+
+### Bug Fixes
+
+* **buff:** added clip check for buffs ([36c796b](https://github.com/ffxiv-teamcraft/simulator/commit/36c796b))
+* **delicate-synthesis:** fixed an issue with flooring on prog not done ([593bd7b](https://github.com/ffxiv-teamcraft/simulator/commit/593bd7b))
+* **final-appraisal:** don't tick buffs if final appraisal was used ([c6be295](https://github.com/ffxiv-teamcraft/simulator/commit/c6be295))
+* **final-appraisal:** fixed an issue with final appraisal and delicate synthesis ([d858abe](https://github.com/ffxiv-teamcraft/simulator/commit/d858abe))
+
+
+
+### [2.0.6](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.5...v2.0.6) (2019-10-30)
+
+
+### Bug Fixes
+
+* **MuMe:** fix for MuMe bonus value ([7722a6a](https://github.com/ffxiv-teamcraft/simulator/commit/7722a6a))
+
+
+
+### [2.0.5](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.4...v2.0.5) (2019-10-30)
+
+
+### Bug Fixes
+
+* **patient-touch:** fixed patient touch IQ stacks addition ([c96e81c](https://github.com/ffxiv-teamcraft/simulator/commit/c96e81c))
+* fix for MuMe and GS bonus on delicate synth ([9810aa7](https://github.com/ffxiv-teamcraft/simulator/commit/9810aa7))
+
+
+
+### [2.0.4](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.3...v2.0.4) (2019-10-29)
+
+
+
+### [2.0.3](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.2...v2.0.3) (2019-10-29)
+
+
+
+### [2.0.2](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.1...v2.0.2) (2019-10-29)
+
+
+
+### [2.0.1](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.0...v2.0.1) (2019-10-29)
+
+
+
 ### [2.0.6](https://github.com/ffxiv-teamcraft/simulator/compare/v2.0.5...v2.0.6) (2019-10-30)
 
 
