@@ -12,3 +12,5 @@ compiled
 docs
 .idea
 /coverage
+*.csv
+./*.js
