@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.2](https://github.com/ffxiv-teamcraft/simulator/compare/v2.1.1...v2.1.2) (2019-11-02)
+
+
+### Bug Fixes
+
+* **ingenuity:** fixed ingenuity based on user data ([dd94dfc](https://github.com/ffxiv-teamcraft/simulator/commit/dd94dfc))
+
+
+
 ### [2.1.1](https://github.com/ffxiv-teamcraft/simulator/compare/v2.1.0...v2.1.1) (2019-11-01)
 
 
