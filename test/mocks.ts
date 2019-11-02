@@ -1,5 +1,6 @@
 import { CrafterStats } from '../src/model/crafter-stats';
 import { Craft } from '../src/model/craft';
+import { suggested } from './suggested-stats';
 
 export const gradeIIInfusionOfStrRecipe: Craft = {
   id: '32644',
@@ -168,7 +169,7 @@ export function generateRecipe(
   suggestedCraftsmanship?: number,
   suggestedControl?: number
 ): Craft {
-  const suggested: { [index: number]: number } = {
+  const suggestedCraft: { [index: number]: number } = {
     279: 1056,
     282: 1063,
     285: 1069,
@@ -199,8 +200,8 @@ export function generateRecipe(
     quality: 20287,
     progress: 3943,
     lvl: 75,
-    suggestedCraftsmanship: suggestedCraftsmanship || suggested[rlvl] || 0,
-    suggestedControl: suggestedControl || 1425,
+    suggestedCraftsmanship: suggestedCraftsmanship || suggested[rlvl.toString()].craftsmanship || 0,
+    suggestedControl: suggestedControl || suggested[rlvl.toString()].control || 1425,
     hq: 1,
     quickSynth: 1,
     ingredients: [

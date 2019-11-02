@@ -5,6 +5,16 @@ export interface LevelDifference {
 }
 
 export const CraftLevelDifference: LevelDifference[] = [
+  { Difference: -30, ProgressFactor: 75, QualityFactor: 50 },
+  { Difference: -29, ProgressFactor: 75, QualityFactor: 50 },
+  { Difference: -28, ProgressFactor: 75, QualityFactor: 50 },
+  { Difference: -27, ProgressFactor: 75, QualityFactor: 50 },
+  { Difference: -26, ProgressFactor: 75, QualityFactor: 50 },
+  { Difference: -25, ProgressFactor: 75, QualityFactor: 50 },
+  { Difference: -24, ProgressFactor: 75, QualityFactor: 50 },
+  { Difference: -23, ProgressFactor: 75, QualityFactor: 50 },
+  { Difference: -22, ProgressFactor: 75, QualityFactor: 50 },
+  { Difference: -21, ProgressFactor: 75, QualityFactor: 50 },
   { Difference: -20, ProgressFactor: 75, QualityFactor: 50 },
   { Difference: -19, ProgressFactor: 75, QualityFactor: 50 },
   { Difference: -18, ProgressFactor: 75, QualityFactor: 50 },

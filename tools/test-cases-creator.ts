@@ -1,7 +1,6 @@
 import { createReadStream, writeFileSync } from 'fs';
 import * as csv from 'csv-parser';
 import { join } from 'path';
-import { Tables } from '../src/model/tables';
 
 const cases: any[] = [];
 
@@ -16,14 +15,14 @@ createReadStream(join(__dirname, './ingenuity.csv'))
 function processCases(): void {
   const output = cases.map(entry => {
     return {
-      clvl: Tables.LEVEL_TABLE[+entry['Crafter level']] || +entry['Crafter level'],
-      rlvl: entry.rlvl,
-      craftsmanship: entry.Craftsmanship,
-      control: entry.Control,
-      progress100: entry['Progress for 100%'],
-      quality100: entry['Quality for 100%'],
-      progress100Ingen: entry['Progress for 100% with Ingen'],
-      quality100Ingen: entry['Quality for 100% with Ingen (on normal state)']
+      clvl: +entry['Crafter level'],
+      rlvl: +entry.rlvl,
+      craftsmanship: +entry.Craftsmanship,
+      control: +entry.Control,
+      progress100: +entry['Progress for 100%'],
+      quality100: +entry['Quality for 100%'],
+      progress100Ingen: +entry['Progress for 100% with Ingen'],
+      quality100Ingen: +entry['Quality for 100% with Ingen (on normal state)']
     };
   }).filter(entry => {
     console.log(entry);

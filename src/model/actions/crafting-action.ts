@@ -120,22 +120,22 @@ export abstract class CraftingAction {
       } else {
         // Shadowbringers
         if (recipeLevel >= 390) {
-          levelDifference += Math.floor(recipeLevel / 21.5);
+          levelDifference += Math.floor(recipeLevel / 18);
         } else {
           if (recipeLevel === 290) {
             levelDifference += 10;
           } else if (recipeLevel === 300) {
             levelDifference += 9;
-          } else if (recipeLevel >= 120) {
-            levelDifference += 11;
+          } else if (recipeLevel >= 110) {
+            levelDifference += 40;
           } else {
-            levelDifference += 5;
+            levelDifference += 8;
           }
-          levelDifference = Math.max(levelDifference, -1 * (recipeStars[recipeLevel] || 5));
+          levelDifference = Math.max(levelDifference, -1 * (recipeStars[recipeLevel] || 4));
         }
       }
     }
-    levelDifference = Math.min(49, Math.max(-20, levelDifference));
+    levelDifference = Math.min(49, Math.max(-30, levelDifference));
     return CraftLevelDifference.find(
       entry => entry.Difference === levelDifference
     ) as LevelDifference;
