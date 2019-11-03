@@ -103,20 +103,6 @@ export class Tables {
     100
   ];
 
-  public static readonly NYMEIAS_WHEEL_TABLE: { [index: number]: number } = {
-    1: 30,
-    2: 30,
-    3: 30,
-    4: 20,
-    5: 20,
-    6: 20,
-    7: 10,
-    8: 10,
-    9: 10,
-    10: 10,
-    11: 10
-  };
-
   public static readonly LEVEL_TABLE: { [index: number]: number } = {
     51: 120, // 120
     52: 125, // 125
