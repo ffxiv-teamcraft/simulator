@@ -55,14 +55,16 @@ describe('Ingenuity', () => {
       try {
         simulation.run(true);
 
-        expect(new TestAction().getBaseProgression(simulation)).toBe(entry.progress100);
-        expect(new TestAction().getBaseQuality(simulation)).toBe(entry.quality100);
+        expect(Math.floor(new TestAction().getBaseProgression(simulation))).toBe(entry.progress100);
+        expect(Math.floor(new TestAction().getBaseQuality(simulation))).toBe(entry.quality100);
 
         simulation.actions.push(new Ingenuity());
         simulation.run(true);
 
-        expect(new TestAction().getBaseProgression(simulation)).toBe(entry.progress100Ingen);
-        expect(new TestAction().getBaseQuality(simulation)).toBe(entry.quality100Ingen);
+        expect(Math.floor(new TestAction().getBaseProgression(simulation))).toBe(
+          entry.progress100Ingen
+        );
+        expect(Math.floor(new TestAction().getBaseQuality(simulation))).toBe(entry.quality100Ingen);
       } catch (e) {
         console.log(entry);
         console.log(new TestAction().getLevelDifference(simulation));
