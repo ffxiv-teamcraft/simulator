@@ -22,6 +22,7 @@ export abstract class ProgressAction extends GeneralAction {
     simulation.progression += Math.floor(addition);
     if (simulation.hasBuff(Buff.FINAL_APPRAISAL)) {
       simulation.progression = Math.min(simulation.progression, simulation.recipe.progress - 1);
+      simulation.removeBuff(Buff.FINAL_APPRAISAL);
     }
   }
 }

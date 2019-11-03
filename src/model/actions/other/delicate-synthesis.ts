@@ -29,6 +29,7 @@ export class DelicateSynthesis extends GeneralAction {
     );
     if (simulation.hasBuff(Buff.FINAL_APPRAISAL)) {
       simulation.progression = Math.min(simulation.progression, simulation.recipe.progress - 1);
+      simulation.removeBuff(Buff.FINAL_APPRAISAL);
     }
     // Quality
     const qualityPotency = this.getPotency(simulation);
