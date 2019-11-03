@@ -59,19 +59,19 @@ describe('Craft simulator tests', () => {
         new CarefulSynthesis(),
         new InnerQuiet(),
         new WasteNotII(),
-        new PreparatoryTouch(),
-        new PreparatoryTouch(),
+        new PreparatoryTouch(), // 1396
+        new PreparatoryTouch(), // 1024
         new MastersMend(),
         new MastersMend(),
-        new ByregotsBlessing(),
+        new ByregotsBlessing(), // 1245
         new CarefulSynthesis()
       ],
       generateStats(80, 2087, 1873, 463)
     );
 
-    console.log(simulation.run(true));
+    simulation.run(true);
 
     expect(simulation.success).toBeTruthy();
-    expect(simulation.quality).toBe(3655);
+    expect(simulation.quality).toBe(3665);
   });
 });
