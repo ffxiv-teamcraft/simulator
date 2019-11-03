@@ -166,60 +166,24 @@ export const acchanStats: CrafterStats = new CrafterStats(14, 1500, 1536, 539, t
 
 export function generateRecipe(
   rlvl: number,
+  progress?: number,
+  quality?: number,
   suggestedCraftsmanship?: number,
   suggestedControl?: number
 ): Craft {
-  const suggestedCraft: { [index: number]: number } = {
-    279: 1056,
-    282: 1063,
-    285: 1069,
-    288: 1075,
-    290: 1079,
-    300: 1100,
-    320: 1320,
-    350: 1500,
-    380: 1650,
-    390: 1320,
-    395: 1388,
-    400: 1457,
-    403: 1498,
-    406: 1539,
-    409: 1580,
-    412: 0,
-    415: 0,
-    418: 1702,
-    420: 1866,
-    430: 1866,
-    450: 2140
-  };
   return {
     id: '3864',
     job: 14,
     rlvl: rlvl,
     durability: 80,
-    quality: 20287,
-    progress: 3943,
-    lvl: 75,
+    quality: quality || 20287,
+    progress: progress || 3943,
+    lvl: 80,
     suggestedCraftsmanship: suggestedCraftsmanship || suggested[rlvl.toString()].craftsmanship || 0,
     suggestedControl: suggestedControl || suggested[rlvl.toString()].control || 1425,
     hq: 1,
     quickSynth: 1,
-    ingredients: [
-      {
-        id: 27773,
-        amount: 2,
-        quality: 3104.4375
-      },
-      {
-        id: 27774,
-        amount: 2,
-        quality: 3104.4375
-      },
-      {
-        id: 13,
-        amount: 7
-      }
-    ]
+    ingredients: []
   };
 }
 
