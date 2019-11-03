@@ -18,7 +18,7 @@ export abstract class ProgressAction extends GeneralAction {
     if (simulation.hasBuff(Buff.INNOVATION)) {
       bonus += 0.2;
     }
-    const addition = (this.getBaseProgression(simulation) * potency * bonus) / 100;
+    const addition = (Math.floor(this.getBaseProgression(simulation)) * potency * bonus) / 100;
     simulation.progression += Math.floor(addition);
     if (simulation.hasBuff(Buff.FINAL_APPRAISAL)) {
       simulation.progression = Math.min(simulation.progression, simulation.recipe.progress - 1);
