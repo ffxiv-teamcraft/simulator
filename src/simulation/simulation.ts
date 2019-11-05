@@ -300,7 +300,7 @@ export class Simulation {
     const cpBefore = this.availableCP;
     let failCause: SimulationFailCause | undefined = undefined;
     let success = false;
-    if (safeMode && action.getSuccessRate(this) < 100) {
+    if (safeMode && (action.getSuccessRate(this) < 100 || action.requiresGood())) {
       failCause = SimulationFailCause.UNSAFE_ACTION;
       action.onFail(this);
       this.safe = false;

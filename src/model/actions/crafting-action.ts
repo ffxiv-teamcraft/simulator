@@ -31,6 +31,10 @@ export abstract class CraftingAction {
     return this.getType() === ActionType.BUFF ? 2 : 3;
   }
 
+  public requiresGood(): boolean {
+    return false;
+  }
+
   abstract getLevelRequirement(): { job: CraftingJob; level: number };
 
   abstract getType(): ActionType;

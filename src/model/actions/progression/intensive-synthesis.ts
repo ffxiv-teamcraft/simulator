@@ -7,6 +7,10 @@ export class IntensiveSynthesis extends ProgressAction {
     return { job: CraftingJob.ANY, level: 78 };
   }
 
+  public requiresGood(): boolean {
+    return true;
+  }
+
   _canBeUsed(simulationState: Simulation, linear?: boolean): boolean {
     if (linear) {
       return true;

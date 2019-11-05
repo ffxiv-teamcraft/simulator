@@ -15,6 +15,10 @@ export class PreciseTouch extends QualityAction {
     }
   }
 
+  public requiresGood(): boolean {
+    return true;
+  }
+
   _canBeUsed(simulationState: Simulation, linear = false): boolean {
     if (linear) {
       return true;
