@@ -30,7 +30,9 @@ export class Reuse extends BuffAction {
 
   _canBeUsed(simulationState: Simulation): boolean {
     return (
-      super._canBeUsed(simulationState) && simulationState.quality >= simulationState.recipe.quality
+      super._canBeUsed(simulationState) &&
+      simulationState.quality >= simulationState.recipe.quality &&
+      !simulationState.safe
     );
   }
 
