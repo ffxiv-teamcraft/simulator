@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/ffxiv-teamcraft/simulator/compare/v2.2.0...v2.3.0) (2019-12-10)
+
+
+### Bug Fixes
+
+* **reuse:** consider reuse as not safe in safemode ([daba220](https://github.com/ffxiv-teamcraft/simulator/commit/daba220)), closes [#15](https://github.com/ffxiv-teamcraft/simulator/issues/15)
+
+
+### Features
+
+* Allow clipping of some buff actions as per 5.15 changes ([996ca18](https://github.com/ffxiv-teamcraft/simulator/commit/996ca18))
+
+
+
 ## [2.2.0](https://github.com/ffxiv-teamcraft/simulator/compare/v2.1.3...v2.2.0) (2019-11-05)
 
 
