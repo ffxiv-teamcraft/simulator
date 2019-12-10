@@ -4,6 +4,10 @@ import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class InnerQuiet extends BuffAction {
+  canBeClipped(): boolean {
+    return false;
+  }
+
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 11 };
   }

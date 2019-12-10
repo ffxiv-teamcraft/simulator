@@ -12,7 +12,7 @@ export abstract class BuffAction extends CraftingAction {
   abstract getDuration(simulation: Simulation): number;
 
   canBeClipped(): boolean {
-    return false;
+    return true;
   }
 
   execute(simulation: Simulation): void {
