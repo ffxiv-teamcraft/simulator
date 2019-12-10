@@ -28,6 +28,10 @@ export class Innovation extends BuffAction {
     return 0;
   }
 
+  canBeClipped(): boolean {
+    return true;
+  }
+
   getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
   }
