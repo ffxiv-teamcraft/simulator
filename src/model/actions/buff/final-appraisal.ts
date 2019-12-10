@@ -28,6 +28,10 @@ export class FinalAppraisal extends BuffAction {
     return 0;
   }
 
+  canBeClipped(): boolean {
+    return true;
+  }
+
   protected getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
   }

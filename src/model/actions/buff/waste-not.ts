@@ -28,6 +28,10 @@ export class WasteNot extends BuffAction {
     return 0;
   }
 
+  canBeClipped(): boolean {
+    return true;
+  }
+
   public getOverrides(): Buff[] {
     return super.getOverrides().concat(Buff.WASTE_NOT_II);
   }
