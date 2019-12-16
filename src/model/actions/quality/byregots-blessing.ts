@@ -10,7 +10,10 @@ export class ByregotsBlessing extends QualityAction {
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
-    return simulationState.hasBuff(Buff.INNER_QUIET);
+    return (
+      simulationState.hasBuff(Buff.INNER_QUIET) &&
+      simulationState.getBuff(Buff.INNER_QUIET).stacks > 1
+    );
   }
 
   getFailCause(
