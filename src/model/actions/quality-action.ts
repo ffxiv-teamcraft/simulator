@@ -32,7 +32,7 @@ export abstract class QualityAction extends GeneralAction {
       simulation.removeBuff(Buff.GREAT_STRIDES);
     }
     if (simulation.hasBuff(Buff.INNOVATION)) {
-      bonus += 0.2;
+      bonus += 0.5;
     }
 
     simulation.quality += Math.floor((Math.floor(qualityIncrease) * potency * bonus) / 100);

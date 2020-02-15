@@ -24,6 +24,7 @@ export * from './model/actions/buff/final-appraisal';
 export * from './model/actions/buff/great-strides';
 export * from './model/actions/buff/inner-quiet';
 export * from './model/actions/buff/innovation';
+export * from './model/actions/buff/veneration';
 export * from './model/actions/buff/manipulation';
 export * from './model/actions/buff/name-of-the-elements';
 export * from './model/actions/buff/waste-not-ii';

@@ -19,6 +19,7 @@ import { Manipulation } from './actions/buff/manipulation';
 import { InnerQuiet } from './actions/buff/inner-quiet';
 import { GreatStrides } from './actions/buff/great-strides';
 import { Innovation } from './actions/buff/innovation';
+import { Veneration } from './actions/buff/veneration';
 import { Observe } from './actions/other/observe';
 import { WasteNot } from './actions/buff/waste-not';
 import { WasteNotII } from './actions/buff/waste-not-ii';
@@ -47,6 +48,7 @@ export class CraftingActionsRegistry {
     { short: 'wasteNot', full: 'WasteNot' },
     { short: 'wasteNot2', full: 'WasteNotII' },
     { short: 'innovation', full: 'Innovation' },
+    { short: 'veneration', full: 'Veneration' },
     { short: 'greatStrides', full: 'GreatStrides' },
     { short: 'byregotsBrow', full: 'ByregotsBrow' },
     { short: 'preciseTouch', full: 'PreciseTouch' },
@@ -119,6 +121,7 @@ export class CraftingActionsRegistry {
     { name: 'WasteNotII', action: new WasteNotII() },
     { name: 'GreatStrides', action: new GreatStrides() },
     { name: 'Innovation', action: new Innovation() },
+    { name: 'Veneration', action: new Veneration() },
     { name: 'NameOfTheElements', action: new NameOfTheElements() },
     { name: 'FinalAppraisal', action: new FinalAppraisal() },
 
