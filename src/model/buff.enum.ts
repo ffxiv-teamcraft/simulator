@@ -16,8 +16,6 @@ export enum Buff {
 
   NAME_OF_THE_ELEMENTS,
 
-  REUSE,
-
   MUSCLE_MEMORY,
 
   FINAL_APPRAISAL
