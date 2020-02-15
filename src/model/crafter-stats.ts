@@ -16,12 +16,12 @@ export class CrafterStats {
 
   public getControl(simulationState: Simulation): number {
     let control = this._control;
-    // First of all, apply IQ control bonus
+    // Apply IQ control bonus
     if (simulationState.hasBuff(Buff.INNER_QUIET)) {
       const innerQuietStacks = simulationState.getBuff(Buff.INNER_QUIET).stacks;
       control += 0.2 * (innerQuietStacks - 1) * this._control;
     }
-    // Total bonus is capped at 3k, we need to keep track of it.
-    return Math.min(control, this._control + 3000);
+    // Total bonus is no longer capped.
+    return control;
   }
 }
