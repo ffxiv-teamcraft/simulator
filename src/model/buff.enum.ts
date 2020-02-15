@@ -10,8 +10,6 @@ export enum Buff {
 
   INNOVATION,
 
-  INGENUITY,
-
   MAKERS_MARK,
 
   NAME_OF_THE_ELEMENTS,

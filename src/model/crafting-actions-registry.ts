@@ -17,7 +17,6 @@ import { TricksOfTheTrade } from './actions/other/tricks-of-the-trade';
 import { MastersMend } from './actions/other/masters-mend';
 import { Manipulation } from './actions/buff/manipulation';
 import { InnerQuiet } from './actions/buff/inner-quiet';
-import { Ingenuity } from './actions/buff/ingenuity';
 import { GreatStrides } from './actions/buff/great-strides';
 import { Innovation } from './actions/buff/innovation';
 import { Observe } from './actions/other/observe';
@@ -49,7 +48,6 @@ export class CraftingActionsRegistry {
     { short: 'wasteNot2', full: 'WasteNotII' },
     { short: 'innovation', full: 'Innovation' },
     { short: 'greatStrides', full: 'GreatStrides' },
-    { short: 'ingenuity', full: 'Ingenuity' },
     { short: 'byregotsBrow', full: 'ByregotsBrow' },
     { short: 'preciseTouch', full: 'PreciseTouch' },
     { short: 'muscleMemory', full: 'MuscleMemory' },
@@ -119,7 +117,6 @@ export class CraftingActionsRegistry {
     { name: 'InnerQuiet', action: new InnerQuiet() },
     { name: 'WasteNot', action: new WasteNot() },
     { name: 'WasteNotII', action: new WasteNotII() },
-    { name: 'Ingenuity', action: new Ingenuity() },
     { name: 'GreatStrides', action: new GreatStrides() },
     { name: 'Innovation', action: new Innovation() },
     { name: 'NameOfTheElements', action: new NameOfTheElements() },

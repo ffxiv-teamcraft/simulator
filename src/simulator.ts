@@ -22,7 +22,6 @@ export * from './model/actions/progress-action';
 export * from './model/actions/quality-action';
 export * from './model/actions/buff/final-appraisal';
 export * from './model/actions/buff/great-strides';
-export * from './model/actions/buff/ingenuity';
 export * from './model/actions/buff/inner-quiet';
 export * from './model/actions/buff/innovation';
 export * from './model/actions/buff/manipulation';
