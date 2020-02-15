@@ -2,6 +2,7 @@ import { CraftingAction } from './actions/crafting-action';
 import { BasicSynthesis } from './actions/progression/basic-synthesis';
 import { CarefulSynthesis } from './actions/progression/careful-synthesis';
 import { RapidSynthesis } from './actions/progression/rapid-synthesis';
+import { Groundwork } from './actions/progression/groundwork';
 import { FocusedSynthesis } from './actions/progression/focused-synthesis';
 import { MuscleMemory } from './actions/progression/muscle-memory';
 import { BasicTouch } from './actions/quality/basic-touch';
@@ -38,6 +39,7 @@ export class CraftingActionsRegistry {
     { short: 'observe', full: 'Observe' },
     { short: 'basicSynth', full: 'BasicSynthesis' },
     { short: 'rapidSynthesis', full: 'RapidSynthesis' },
+    { short: 'groundwork', full: 'Groundwork' },
     { short: 'basicTouch', full: 'BasicTouch' },
     { short: 'standardTouch', full: 'StandardTouch' },
     { short: 'hastyTouch', full: 'HastyTouch' },
@@ -90,6 +92,7 @@ export class CraftingActionsRegistry {
     { name: 'BasicSynthesis', action: new BasicSynthesis() },
     { name: 'CarefulSynthesis', action: new CarefulSynthesis() },
     { name: 'RapidSynthesis', action: new RapidSynthesis() },
+    { name: 'Groundwork', action: new Groundwork() },
     { name: 'FocusedSynthesis', action: new FocusedSynthesis() },
     { name: 'MuscleMemory', action: new MuscleMemory() },
     { name: 'BrandOfTheElements', action: new BrandOfTheElements() },

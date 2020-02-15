@@ -41,6 +41,7 @@ export * from './model/actions/progression/focused-synthesis';
 export * from './model/actions/progression/intensive-synthesis';
 export * from './model/actions/progression/muscle-memory';
 export * from './model/actions/progression/rapid-synthesis';
+export * from './model/actions/progression/groundwork';
 export * from './model/actions/quality/basic-touch';
 export * from './model/actions/quality/byregots-blessing';
 export * from './model/actions/quality/byregots-miracle';
