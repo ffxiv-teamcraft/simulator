@@ -115,7 +115,7 @@ export abstract class CraftingAction {
     const stats: CrafterStats = simulation.crafterStats;
     const crafterLevel = Tables.LEVEL_TABLE[stats.level] || stats.level;
     let levelDifference = crafterLevel - recipeLevel;
-    levelDifference = Math.min(49, Math.max(0, levelDifference));
+    levelDifference = Math.min(49, Math.max(-30, levelDifference));
     return CraftLevelDifference.find(
       entry => entry.Difference === levelDifference
     ) as LevelDifference;
