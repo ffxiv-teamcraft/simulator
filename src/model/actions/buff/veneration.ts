@@ -3,25 +3,25 @@ import { Simulation } from '../../../simulation/simulation';
 import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 
-export class Ingenuity extends BuffAction {
+export class Veneration extends BuffAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 15 };
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 22;
-  }
-
-  getDuration(simulation: Simulation): number {
-    return 5;
-  }
-
-  getIds(): number[] {
-    return [4623, 4624, 4625, 4626, 4627, 4628, 4629, 4630];
+    return 18;
   }
 
   getBuff(): Buff {
-    return Buff.INGENUITY;
+    return Buff.VENERATION;
+  }
+
+  getDuration(simulation: Simulation): number {
+    return 4;
+  }
+
+  getIds(): number[] {
+    return [19297, 19298, 19299, 19300, 19301, 19302, 19303, 19304];
   }
 
   getInitialStacks(): number {
@@ -32,7 +32,7 @@ export class Ingenuity extends BuffAction {
     return true;
   }
 
-  protected getTick(): ((simulation: Simulation) => void) | undefined {
+  getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
   }
 }

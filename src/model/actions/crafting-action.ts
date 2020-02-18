@@ -115,30 +115,6 @@ export abstract class CraftingAction {
     const stats: CrafterStats = simulation.crafterStats;
     const crafterLevel = Tables.LEVEL_TABLE[stats.level] || stats.level;
     let levelDifference = crafterLevel - recipeLevel;
-    const originalLevelDifference = crafterLevel - recipeLevel;
-    // If ingenuity
-    if (simulation.hasBuff(Buff.INGENUITY)) {
-      if (levelDifference < 0 && recipeLevel >= 390) {
-        const cap = Math.abs(originalLevelDifference) <= 100 ? -5 : -20;
-        levelDifference = Math.max(levelDifference + Math.floor(recipeLevel / 8), cap);
-      } else {
-        // Shadowbringers
-        if (recipeLevel >= 390) {
-          levelDifference += Math.floor(recipeLevel / 18);
-        } else {
-          if (recipeLevel === 290) {
-            levelDifference += 10;
-          } else if (recipeLevel === 300) {
-            levelDifference += 9;
-          } else if (recipeLevel >= 110) {
-            levelDifference += 40;
-          } else {
-            levelDifference += 8;
-          }
-          levelDifference = Math.max(levelDifference, -1 * (recipeStars[recipeLevel] || 4));
-        }
-      }
-    }
     levelDifference = Math.min(49, Math.max(-30, levelDifference));
     return CraftLevelDifference.find(
       entry => entry.Difference === levelDifference

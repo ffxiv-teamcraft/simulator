@@ -2,6 +2,7 @@ import { CraftingAction } from './actions/crafting-action';
 import { BasicSynthesis } from './actions/progression/basic-synthesis';
 import { CarefulSynthesis } from './actions/progression/careful-synthesis';
 import { RapidSynthesis } from './actions/progression/rapid-synthesis';
+import { Groundwork } from './actions/progression/groundwork';
 import { FocusedSynthesis } from './actions/progression/focused-synthesis';
 import { MuscleMemory } from './actions/progression/muscle-memory';
 import { BasicTouch } from './actions/quality/basic-touch';
@@ -17,9 +18,9 @@ import { TricksOfTheTrade } from './actions/other/tricks-of-the-trade';
 import { MastersMend } from './actions/other/masters-mend';
 import { Manipulation } from './actions/buff/manipulation';
 import { InnerQuiet } from './actions/buff/inner-quiet';
-import { Ingenuity } from './actions/buff/ingenuity';
 import { GreatStrides } from './actions/buff/great-strides';
 import { Innovation } from './actions/buff/innovation';
+import { Veneration } from './actions/buff/veneration';
 import { Observe } from './actions/other/observe';
 import { WasteNot } from './actions/buff/waste-not';
 import { WasteNotII } from './actions/buff/waste-not-ii';
@@ -29,7 +30,6 @@ import { TrainedEye } from './actions/quality/trained-eye';
 import { PreparatoryTouch } from './actions/quality/preparatory-touch';
 import { IntensiveSynthesis } from './actions/progression/intensive-synthesis';
 import { DelicateSynthesis } from './actions/other/delicate-synthesis';
-import { Reuse } from './actions/buff/reuse';
 import { FinalAppraisal } from './actions/buff/final-appraisal';
 import { Reflect } from './actions/quality/reflect';
 import { RemoveFinalAppraisal } from './actions/other/remove-final-appraisal';
@@ -39,49 +39,49 @@ export class CraftingActionsRegistry {
     { short: 'observe', full: 'Observe' },
     { short: 'basicSynth', full: 'BasicSynthesis' },
     { short: 'rapidSynthesis', full: 'RapidSynthesis' },
+    { short: 'rapidSynthesis3', full: 'RapidSynthesis' },
+    { short: 'groundwork', full: 'Groundwork' },
     { short: 'basicTouch', full: 'BasicTouch' },
     { short: 'standardTouch', full: 'StandardTouch' },
     { short: 'hastyTouch', full: 'HastyTouch' },
     { short: 'byregotsBlessing', full: 'ByregotsBlessing' },
+    { short: 'byregotsBrow', full: 'ByregotsBlessing' },
+    { short: 'byregotsMiracle', full: 'ByregotsBlessing' },
     { short: 'mastersMend', full: 'MastersMend' },
     { short: 'tricksOfTheTrade', full: 'TricksOfTheTrade' },
     { short: 'innerQuiet', full: 'InnerQuiet' },
     { short: 'wasteNot', full: 'WasteNot' },
     { short: 'wasteNot2', full: 'WasteNotII' },
     { short: 'innovation', full: 'Innovation' },
+    { short: 'veneration', full: 'Veneration' },
     { short: 'greatStrides', full: 'GreatStrides' },
-    { short: 'ingenuity', full: 'Ingenuity' },
-    { short: 'byregotsBrow', full: 'ByregotsBrow' },
     { short: 'preciseTouch', full: 'PreciseTouch' },
     { short: 'muscleMemory', full: 'MuscleMemory' },
+    { short: 'brandOfTheElements', full: 'BrandOfTheElements' },
     { short: 'brandOfEarth', full: 'BrandOfTheElements' },
     { short: 'brandOfFire', full: 'BrandOfTheElements' },
     { short: 'brandOfIce', full: 'BrandOfTheElements' },
     { short: 'brandOfLightning', full: 'BrandOfTheElements' },
     { short: 'brandOfWater', full: 'BrandOfTheElements' },
     { short: 'brandOfWind', full: 'BrandOfTheElements' },
-    { short: 'brandOfTheElements', full: 'BrandOfTheElements' },
+    { short: 'nameOfTheElements', full: 'NameOfTheElements' },
     { short: 'nameOfEarth', full: 'NameOfTheElements' },
     { short: 'nameOfFire', full: 'NameOfTheElements' },
     { short: 'nameOfIce', full: 'NameOfTheElements' },
     { short: 'nameOfLightning', full: 'NameOfTheElements' },
     { short: 'nameOfWater', full: 'NameOfTheElements' },
     { short: 'nameOfWind', full: 'NameOfTheElements' },
-    { short: 'nameOfTheElements', full: 'NameOfTheElements' },
-    { short: 'carefulSynthesis3', full: 'CarefulSynthesis' },
     { short: 'carefulSynthesis', full: 'CarefulSynthesis' },
+    { short: 'carefulSynthesis3', full: 'CarefulSynthesis' },
     { short: 'patientTouch', full: 'PatientTouch' },
-    { short: 'manipulation2', full: 'ManipulationII' },
     { short: 'manipulation', full: 'Manipulation' },
+    { short: 'manipulation2', full: 'Manipulation' },
     { short: 'prudentTouch', full: 'PrudentTouch' },
     { short: 'focusedSynthesis', full: 'FocusedSynthesis' },
     { short: 'focusedTouch', full: 'FocusedTouch' },
-    { short: 'rapidSynthesis', full: 'RapidSynthesis' },
-    { short: 'rapidSynthesis3', full: 'RapidSynthesis' },
     { short: 'intensiveSynthesis', full: 'IntensiveSynthesis' },
     { short: 'preparatoryTouch', full: 'PreparatoryTouch' },
     { short: 'delicateSynthesis', full: 'DelicateSynthesis' },
-    { short: 'reuse', full: 'Reuse' },
     { short: 'trainedEye', full: 'TrainedEye' },
     { short: 'finalAppraisal', full: 'FinalAppraisal' },
     { short: 'reflect', full: 'Reflect' }
@@ -92,6 +92,7 @@ export class CraftingActionsRegistry {
     { name: 'BasicSynthesis', action: new BasicSynthesis() },
     { name: 'CarefulSynthesis', action: new CarefulSynthesis() },
     { name: 'RapidSynthesis', action: new RapidSynthesis() },
+    { name: 'Groundwork', action: new Groundwork() },
     { name: 'FocusedSynthesis', action: new FocusedSynthesis() },
     { name: 'MuscleMemory', action: new MuscleMemory() },
     { name: 'BrandOfTheElements', action: new BrandOfTheElements() },
@@ -121,16 +122,15 @@ export class CraftingActionsRegistry {
     { name: 'InnerQuiet', action: new InnerQuiet() },
     { name: 'WasteNot', action: new WasteNot() },
     { name: 'WasteNotII', action: new WasteNotII() },
-    { name: 'Ingenuity', action: new Ingenuity() },
     { name: 'GreatStrides', action: new GreatStrides() },
     { name: 'Innovation', action: new Innovation() },
+    { name: 'Veneration', action: new Veneration() },
     { name: 'NameOfTheElements', action: new NameOfTheElements() },
     { name: 'FinalAppraisal', action: new FinalAppraisal() },
 
     // Other
     { name: 'Observe', action: new Observe() },
     { name: 'DelicateSynthesis', action: new DelicateSynthesis() },
-    { name: 'Reuse', action: new Reuse() },
     { name: 'RemoveFinalAppraisal', action: new RemoveFinalAppraisal() }
   ];
 

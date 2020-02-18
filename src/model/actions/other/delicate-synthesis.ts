@@ -21,8 +21,8 @@ export class DelicateSynthesis extends GeneralAction {
       progressBonus += 1;
       simulation.removeBuff(Buff.MUSCLE_MEMORY);
     }
-    if (simulation.hasBuff(Buff.INNOVATION)) {
-      progressBonus += 0.2;
+    if (simulation.hasBuff(Buff.VENERATION)) {
+      progressBonus += 0.5;
     }
     simulation.progression += Math.floor(
       (Math.floor(this.getBaseProgression(simulation)) * progressPotency * progressBonus) / 100
@@ -42,7 +42,7 @@ export class DelicateSynthesis extends GeneralAction {
       simulation.removeBuff(Buff.GREAT_STRIDES);
     }
     if (simulation.hasBuff(Buff.INNOVATION)) {
-      qualityBonus += 0.2;
+      qualityBonus += 0.5;
     }
     let qualityIncrease = this.getBaseQuality(simulation);
     switch (simulation.state) {
