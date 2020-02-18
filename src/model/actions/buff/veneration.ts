@@ -21,7 +21,7 @@ export class Veneration extends BuffAction {
   }
 
   getIds(): number[] {
-    return [100137, 100138, 100139, 100140, 100141, 100142, 100143, 100144];
+    return [19297, 19298, 19299, 19300, 19301, 19302, 19303, 19304];
   }
 
   getInitialStacks(): number {

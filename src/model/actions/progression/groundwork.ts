@@ -12,7 +12,7 @@ export class Groundwork extends ProgressAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 24;
+    return 18;
   }
 
   getBaseDurabilityCost(simulationState: Simulation): number {
@@ -24,7 +24,7 @@ export class Groundwork extends ProgressAction {
   }
 
   getIds(): number[] {
-    return [100083];
+    return [100403, 100404, 100405, 100406, 100407, 100408, 100409, 100410];
   }
 
   getPotency(simulation: Simulation): number {
