@@ -1,14 +1,17 @@
 import { Simulation } from '../src/simulation/simulation';
-import { generateRecipe, generateStats } from './mocks';
+import { SimulationFailCause } from '../src/model/simulation-fail-cause.enum';
+import { generateRecipe, generateStarRecipe, generateStats } from './mocks';
 import { MuscleMemory } from '../src/model/actions/progression/muscle-memory';
 import { NameOfTheElements } from '../src/model/actions/buff/name-of-the-elements';
 import { BrandOfTheElements } from '../src/model/actions/progression/brand-of-the-elements';
 import { CarefulSynthesis } from '../src/model/actions/progression/careful-synthesis';
-import { IntensiveSynthesis } from '../src/model/actions/progression/intensive-synthesis';
+import { Groundwork } from '../src/model/actions/progression/groundwork';
 import { FinalAppraisal } from '../src/model/actions/buff/final-appraisal';
 import { InnerQuiet } from '../src/model/actions/buff/inner-quiet';
+import { WasteNot } from '../src/model/actions/buff/waste-not';
 import { WasteNotII } from '../src/model/actions/buff/waste-not-ii';
 import { Manipulation } from '../src/model/actions/buff/manipulation';
+import { Veneration } from '../src/model/actions/buff/veneration';
 import { BasicTouch } from '../src/model/actions/quality/basic-touch';
 import { PreparatoryTouch } from '../src/model/actions/quality/preparatory-touch';
 import { MastersMend } from '../src/model/actions/other/masters-mend';
@@ -82,7 +85,7 @@ describe('Craft simulator tests', () => {
         new InnerQuiet(),
         new Manipulation(),
         new NameOfTheElements(),
-        new IntensiveSynthesis(),
+        new BrandOfTheElements(),
         new BasicTouch()
       ],
       generateStats(80, 1822, 1696, 421)
@@ -93,5 +96,25 @@ describe('Craft simulator tests', () => {
     expect(simulation.progression).toBe(1149);
     expect(simulation.quality).toBe(626); // starting HQ with 1 each of oyster+lemonette for 5481
     expect(simulation.success).toBeFalsy();
+  });
+
+  it('Should fail a craft when user is below minimum stat requirements', () => {
+    const simulation = new Simulation(
+      generateStarRecipe(480, 4943, 32328, 2480, 2195),
+      [
+        new MuscleMemory(),
+        new WasteNot(),
+        new Veneration(),
+        new Groundwork(),
+        new CarefulSynthesis()
+      ],
+      generateStats(80, 2450, 2500, 541)
+    );
+    const result = simulation.run(true);
+
+    expect(simulation.success).toBeFalsy();
+    expect(result.failCause).toBe(
+      SimulationFailCause[SimulationFailCause.MISSING_STATS_REQUIREMENT]
+    );
   });
 });
