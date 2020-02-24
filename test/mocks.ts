@@ -187,6 +187,31 @@ export function generateRecipe(
   };
 }
 
+export function generateStarRecipe(
+  rlvl: number,
+  progress: number,
+  quality: number,
+  requiredCraftsmanship: number,
+  requiredControl: number
+): Craft {
+  return {
+    id: '33904',
+    job: 14,
+    rlvl: rlvl,
+    durability: 70,
+    quality: quality,
+    progress: progress,
+    lvl: 80,
+    suggestedCraftsmanship: requiredCraftsmanship,
+    suggestedControl: requiredControl,
+    craftsmanshipReq: requiredCraftsmanship,
+    controlReq: requiredControl,
+    hq: 1,
+    quickSynth: 0,
+    ingredients: []
+  };
+}
+
 export function generateStats(
   level: number,
   craftsmanship: number,
