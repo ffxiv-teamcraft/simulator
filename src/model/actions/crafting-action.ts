@@ -45,6 +45,8 @@ export abstract class CraftingAction {
 
   canBeUsed(simulationState: Simulation, linear?: boolean, safeMode?: boolean): boolean {
     const levelRequirement = this.getLevelRequirement();
+    const craftsmanshipRequirement = simulationState.recipe.craftsmanshipReq;
+    const controlRequirement = simulationState.recipe.controlReq;
     if (safeMode && this.getSuccessRate(simulationState) < 100) {
       return false;
     }
@@ -54,6 +56,28 @@ export abstract class CraftingAction {
     ) {
       return (
         simulationState.crafterStats.levels[levelRequirement.job] >= levelRequirement.level &&
+        this._canBeUsed(simulationState, linear)
+      );
+    }
+    if (craftsmanshipRequirement && controlRequirement) {
+      return (
+        simulationState.crafterStats.craftsmanship >= craftsmanshipRequirement &&
+        simulationState.crafterStats._control >= controlRequirement &&
+        simulationState.crafterStats.level >= levelRequirement.level &&
+        this._canBeUsed(simulationState, linear)
+      );
+    }
+    if (craftsmanshipRequirement) {
+      return (
+        simulationState.crafterStats.craftsmanship >= craftsmanshipRequirement &&
+        simulationState.crafterStats.level >= levelRequirement.level &&
+        this._canBeUsed(simulationState, linear)
+      );
+    }
+    if (controlRequirement) {
+      return (
+        simulationState.crafterStats._control >= controlRequirement &&
+        simulationState.crafterStats.level >= levelRequirement.level &&
         this._canBeUsed(simulationState, linear)
       );
     }
@@ -69,6 +93,8 @@ export abstract class CraftingAction {
     safeMode?: boolean
   ): SimulationFailCause | undefined {
     const levelRequirement = this.getLevelRequirement();
+    const craftsmanshipRequirement = simulationState.recipe.craftsmanshipReq;
+    const controlRequirement = simulationState.recipe.controlReq;
     if (safeMode && this.getSuccessRate(simulationState) < 100) {
       return SimulationFailCause.UNSAFE_ACTION;
     }
@@ -82,6 +108,15 @@ export abstract class CraftingAction {
     }
     if (simulationState.crafterStats.level < levelRequirement.level) {
       return SimulationFailCause.MISSING_LEVEL_REQUIREMENT;
+    }
+    if (
+      craftsmanshipRequirement &&
+      simulationState.crafterStats.craftsmanship < craftsmanshipRequirement
+    ) {
+      return SimulationFailCause.MISSING_STATS_REQUIREMENT;
+    }
+    if (controlRequirement && simulationState.crafterStats._control < controlRequirement) {
+      return SimulationFailCause.MISSING_STATS_REQUIREMENT;
     }
     return undefined;
   }
