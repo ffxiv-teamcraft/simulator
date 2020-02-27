@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.4](https://github.com/ffxiv-teamcraft/simulator/compare/v2.3.3...v2.3.4) (2020-02-27)
+
+
+### Bug Fixes
+
+* MuMe and Reflect can't be moved anymore ([923f65f](https://github.com/ffxiv-teamcraft/simulator/commit/923f65f))
+
+
+
 ### [2.3.3](https://github.com/ffxiv-teamcraft/simulator/compare/v2.3.2...v2.3.3) (2020-02-24)
 
 
