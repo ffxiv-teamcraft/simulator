@@ -37,8 +37,8 @@ export class MuscleMemory extends ProgressAction {
     );
   }
 
-  canBeMoved(): boolean {
-    return false;
+  canBeMoved(currentIndex: number): boolean {
+    return currentIndex > 0;
   }
 
   getBaseCPCost(simulation: Simulation): number {

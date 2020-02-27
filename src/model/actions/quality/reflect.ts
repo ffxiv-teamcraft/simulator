@@ -18,8 +18,8 @@ export class Reflect extends QualityAction {
     );
   }
 
-  canBeMoved(): boolean {
-    return false;
+  canBeMoved(currentIndex: number): boolean {
+    return currentIndex > 0;
   }
 
   execute(simulation: Simulation): void {

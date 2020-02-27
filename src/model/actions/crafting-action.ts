@@ -16,7 +16,7 @@ export abstract class CraftingAction {
    * this is meant to prevent moving automatic actions (looking at you Whistle end progression tick).
    * @returns {boolean}
    */
-  public canBeMoved(): boolean {
+  public canBeMoved(currentIndex: number): boolean {
     return true;
   }
 
