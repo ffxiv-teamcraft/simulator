@@ -37,6 +37,10 @@ export class MuscleMemory extends ProgressAction {
     );
   }
 
+  canBeMoved(): boolean {
+    return false;
+  }
+
   getBaseCPCost(simulation: Simulation): number {
     return 6;
   }

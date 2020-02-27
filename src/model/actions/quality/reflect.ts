@@ -18,6 +18,10 @@ export class Reflect extends QualityAction {
     );
   }
 
+  canBeMoved(): boolean {
+    return false;
+  }
+
   execute(simulation: Simulation): void {
     super.execute(simulation);
     const iq = new InnerQuiet();

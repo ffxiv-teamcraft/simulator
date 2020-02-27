@@ -1,5 +1,4 @@
 import { Simulation } from '../../simulation/simulation';
-import { Buff } from '../buff.enum';
 import { ActionType } from './action-type';
 import { Tables } from '../tables';
 import { CrafterStats } from '../crafter-stats';
@@ -7,7 +6,6 @@ import { CraftingJob } from '../crafting-job.enum';
 import { SimulationFailCause } from '../simulation-fail-cause.enum';
 import { Class } from '@kaiu/serializer';
 import { CraftLevelDifference, LevelDifference } from '../formulas/craft-level-difference';
-import { recipeStars } from '../formulas/recipe-stars';
 
 /**
  * This is the parent class of all actions in the simulator.
