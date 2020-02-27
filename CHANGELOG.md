@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.5](https://github.com/ffxiv-teamcraft/simulator/compare/v2.3.4...v2.3.5) (2020-02-27)
+
+
+### Bug Fixes
+
+* allow movement for MuMe and Reflect if it's not in valid index ([2a6c7d2](https://github.com/ffxiv-teamcraft/simulator/commit/2a6c7d2))
+
+
+
 ### [2.3.4](https://github.com/ffxiv-teamcraft/simulator/compare/v2.3.3...v2.3.4) (2020-02-27)
 
 
