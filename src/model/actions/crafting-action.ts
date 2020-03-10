@@ -43,7 +43,7 @@ export abstract class CraftingAction {
   abstract _getSuccessRate(simulationState: Simulation): number;
 
   getSuccessRate(simulationState: Simulation): number {
-    const baseRate = this.getSuccessRate(simulationState);
+    const baseRate = this._getSuccessRate(simulationState);
     if (simulationState.state === StepState.CENTERED) {
       return baseRate + 25;
     }
