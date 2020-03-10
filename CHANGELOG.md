@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0-beta.0](https://github.com/ffxiv-teamcraft/simulator/compare/v2.3.5...v2.4.0-beta.0) (2020-03-10)
+
+
+### Features
+
+* implemented new states from 5.21 update for expert recipes ([aab98bb](https://github.com/ffxiv-teamcraft/simulator/commit/aab98bb))
+
+
+
 ### [2.3.5](https://github.com/ffxiv-teamcraft/simulator/compare/v2.3.4...v2.3.5) (2020-02-27)
 
 
