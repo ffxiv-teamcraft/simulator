@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0-beta.4](https://github.com/ffxiv-teamcraft/simulator/compare/v2.4.0-beta.3...v2.4.0-beta.4) (2020-03-10)
+
+
+### Bug Fixes
+
+* **sturdy:** durability cost is ceil not floor (floor negative = -1 * ceil positive) ([f2fc65e](https://github.com/ffxiv-teamcraft/simulator/commit/f2fc65e))
+
+
+
 ## [2.4.0-beta.3](https://github.com/ffxiv-teamcraft/simulator/compare/v2.4.0-beta.2...v2.4.0-beta.3) (2020-03-10)
 
 
