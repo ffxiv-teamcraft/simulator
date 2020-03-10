@@ -15,7 +15,7 @@ export abstract class GeneralAction extends CraftingAction {
     if (simulationState.state === StepState.STURDY) {
       divider *= 2;
     }
-    return Math.floor(this.getBaseDurabilityCost(simulationState) / divider);
+    return Math.ceil(this.getBaseDurabilityCost(simulationState) / divider);
   }
 
   _getSuccessRate(simulationState: Simulation): number {

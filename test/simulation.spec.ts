@@ -145,7 +145,7 @@ describe('Craft simulator tests', () => {
       }
     );
     const result = simulation.run(true);
-    expect(result.simulation.durability).toBe(70 - 2);
+    expect(result.simulation.durability).toBe(70 - 3);
 
     const simulation2 = new Simulation(
       generateStarRecipe(480, 4943, 32328, 2480, 2195, true),
@@ -157,6 +157,6 @@ describe('Craft simulator tests', () => {
       }
     );
     const result2 = simulation2.run(true);
-    expect(result2.simulation.durability).toBe(70 - 2);
+    expect(result2.simulation.durability).toBe(70 - 3);
   });
 });
