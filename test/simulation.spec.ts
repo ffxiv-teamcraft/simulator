@@ -16,6 +16,7 @@ import { BasicTouch } from '../src/model/actions/quality/basic-touch';
 import { PreparatoryTouch } from '../src/model/actions/quality/preparatory-touch';
 import { MastersMend } from '../src/model/actions/other/masters-mend';
 import { ByregotsBlessing } from '../src/model/actions/quality/byregots-blessing';
+import { StepState } from '../src/model/step-state';
 
 describe('Craft simulator tests', () => {
   it('Should apply Name of the Elements bonus properly', () => {
@@ -116,5 +117,19 @@ describe('Craft simulator tests', () => {
     expect(result.failCause).toBe(
       SimulationFailCause[SimulationFailCause.MISSING_STATS_REQUIREMENT]
     );
+  });
+
+  it('Should reduce CP cost with PLIANT step state', () => {
+    const simulation = new Simulation(
+      generateStarRecipe(480, 4943, 32328, 2480, 2195, true),
+      [new MuscleMemory(), new WasteNot()],
+      generateStats(80, 2800, 2500, 541),
+      [],
+      {
+        1: StepState.PLIANT
+      }
+    );
+    const result = simulation.run(true);
+    expect(result.simulation.availableCP).toBe(541 - 6 - Math.floor(56 / 2));
   });
 });

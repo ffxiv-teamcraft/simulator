@@ -192,7 +192,8 @@ export function generateStarRecipe(
   progress: number,
   quality: number,
   requiredCraftsmanship: number,
-  requiredControl: number
+  requiredControl: number,
+  expert = false
 ): Craft {
   return {
     id: '33904',
@@ -208,7 +209,8 @@ export function generateStarRecipe(
     controlReq: requiredControl,
     hq: 1,
     quickSynth: 0,
-    ingredients: []
+    ingredients: [],
+    expert: expert
   };
 }
 
