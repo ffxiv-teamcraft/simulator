@@ -2,6 +2,7 @@ import { QualityAction } from '../quality-action';
 import { Simulation } from '../../../simulation/simulation';
 import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
+import { StepState } from '../../step-state';
 
 export class PrudentTouch extends QualityAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
@@ -9,7 +10,11 @@ export class PrudentTouch extends QualityAction {
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
-    return !(simulationState.hasBuff(Buff.WASTE_NOT) || simulationState.hasBuff(Buff.WASTE_NOT_II));
+    return !(
+      simulationState.hasBuff(Buff.WASTE_NOT) ||
+      simulationState.hasBuff(Buff.WASTE_NOT_II) ||
+      simulationState.state === StepState.STURDY
+    );
   }
 
   getBaseCPCost(simulationState: Simulation): number {

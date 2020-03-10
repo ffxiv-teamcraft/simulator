@@ -19,7 +19,7 @@ export class Simulation {
   // Durability of the craft
   public durability: number;
 
-  public state: 'NORMAL' | 'EXCELLENT' | 'GOOD' | 'POOR' = 'NORMAL';
+  public state: StepState = StepState.NORMAL;
 
   public availableCP: number;
   public maxCP: number;
@@ -166,7 +166,7 @@ export class Simulation {
     this.steps = [];
     this.maxCP = this.crafterStats.cp;
     this.availableCP = this.maxCP;
-    this.state = 'NORMAL';
+    this.state = StepState.NORMAL;
     this.safe = false;
   }
 
@@ -183,20 +183,7 @@ export class Simulation {
       .filter(a => a !== undefined)
       .forEach((action: CraftingAction, index: number) => {
         if (this.stepStates[index] !== StepState.FAILED) {
-          switch (this.stepStates[index]) {
-            case StepState.EXCELLENT:
-              this.state = 'EXCELLENT';
-              break;
-            case StepState.GOOD:
-              this.state = 'GOOD';
-              break;
-            case StepState.POOR:
-              this.state = 'POOR';
-              break;
-            default:
-              this.state = 'NORMAL';
-              break;
-          }
+          this.state = this.stepStates[index] || StepState.NORMAL;
         }
         let result: ActionResult;
         let failCause: SimulationFailCause | undefined = undefined;
@@ -393,8 +380,8 @@ export class Simulation {
    */
   public tickState(): void {
     // If current state is EXCELLENT, then next one is poor
-    if (this.state === 'EXCELLENT') {
-      this.state = 'POOR';
+    if (this.state === StepState.EXCELLENT) {
+      this.state = StepState.POOR;
       return;
     }
 
@@ -436,15 +423,29 @@ export class Simulation {
       excellentChances = 0.02;
     }
 
-    const exRandom = Math.random();
-    if (exRandom <= excellentChances) {
-      this.state = 'EXCELLENT';
+    const statesAndRates = [{ state: StepState.GOOD, rate: goodChances }];
+
+    if (this.recipe.expert) {
+      // TODO proper rates for expert recipes
+      statesAndRates.push(
+        ...[
+          { state: StepState.CENTERED, rate: 0.1 },
+          { state: StepState.STURDY, rate: 0.1 },
+          { state: StepState.PLIANT, rate: 0.1 }
+        ]
+      );
     } else {
-      const goodRandom = Math.random();
-      if (goodRandom <= goodChances && this.state !== 'GOOD') {
-        this.state = 'GOOD';
-      } else {
-        this.state = 'NORMAL';
+      statesAndRates.push({ state: StepState.EXCELLENT, rate: excellentChances });
+    }
+
+    // If none of the states actually proc, fallback to normal.
+    statesAndRates.push({ state: StepState.NORMAL, rate: 1 });
+
+    for (let possibleState of statesAndRates) {
+      const roll = Math.random();
+      if (roll <= possibleState.rate) {
+        this.state = possibleState.state;
+        break;
       }
     }
   }

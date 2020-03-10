@@ -1,6 +1,7 @@
 import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
 import { ProgressAction } from '../progress-action';
+import { StepState } from '../../step-state';
 
 export class IntensiveSynthesis extends ProgressAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
@@ -18,7 +19,9 @@ export class IntensiveSynthesis extends ProgressAction {
     if (simulationState.safe) {
       return false;
     }
-    return simulationState.state === 'GOOD' || simulationState.state === 'EXCELLENT';
+    return (
+      simulationState.state === StepState.GOOD || simulationState.state === StepState.EXCELLENT
+    );
   }
 
   getBaseCPCost(simulationState: Simulation): number {

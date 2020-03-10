@@ -6,6 +6,7 @@ import { CraftingJob } from '../crafting-job.enum';
 import { SimulationFailCause } from '../simulation-fail-cause.enum';
 import { Class } from '@kaiu/serializer';
 import { CraftLevelDifference, LevelDifference } from '../formulas/craft-level-difference';
+import { StepState } from '../step-state';
 
 /**
  * This is the parent class of all actions in the simulator.
@@ -39,7 +40,15 @@ export abstract class CraftingAction {
 
   abstract getIds(): number[];
 
-  abstract getSuccessRate(simulationState: Simulation): number;
+  abstract _getSuccessRate(simulationState: Simulation): number;
+
+  getSuccessRate(simulationState: Simulation): number {
+    const baseRate = this.getSuccessRate(simulationState);
+    if (simulationState.state === StepState.CENTERED) {
+      return baseRate + 25;
+    }
+    return baseRate;
+  }
 
   canBeUsed(simulationState: Simulation, linear?: boolean, safeMode?: boolean): boolean {
     const levelRequirement = this.getLevelRequirement();
@@ -122,7 +131,11 @@ export abstract class CraftingAction {
   abstract _canBeUsed(simulationState: Simulation, linear?: boolean): boolean;
 
   public getCPCost(simulationState: Simulation, linear = false): number {
-    return this.getBaseCPCost(simulationState);
+    const baseCost = this.getBaseCPCost(simulationState);
+    if (!linear && simulationState.state === StepState.PLIANT) {
+      return Math.floor(baseCost / 2);
+    }
+    return baseCost;
   }
 
   abstract getBaseCPCost(simulationState: Simulation): number;

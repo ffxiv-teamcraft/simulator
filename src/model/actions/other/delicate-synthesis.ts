@@ -3,6 +3,7 @@ import { Simulation } from '../../../simulation/simulation';
 import { ActionType } from '../action-type';
 import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
+import { StepState } from '../../step-state';
 
 export class DelicateSynthesis extends GeneralAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
@@ -46,13 +47,13 @@ export class DelicateSynthesis extends GeneralAction {
     }
     let qualityIncrease = this.getBaseQuality(simulation);
     switch (simulation.state) {
-      case 'EXCELLENT':
+      case StepState.EXCELLENT:
         qualityIncrease *= 4;
         break;
-      case 'POOR':
+      case StepState.POOR:
         qualityIncrease *= 0.5;
         break;
-      case 'GOOD':
+      case StepState.GOOD:
         qualityIncrease *= 1.5;
         break;
       default:

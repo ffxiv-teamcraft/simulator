@@ -1,5 +1,6 @@
 import { CraftingAction } from './actions/crafting-action';
 import { SimulationFailCause } from './simulation-fail-cause.enum';
+import { StepState } from './step-state';
 
 export interface ActionResult {
   // Action used
@@ -19,7 +20,7 @@ export interface ActionResult {
   // If the action is skipped because the craft is finished
   skipped: boolean;
   // State of the step
-  state: 'NORMAL' | 'EXCELLENT' | 'GOOD' | 'POOR';
+  state: StepState;
 
   afterBuffTick?: {
     // Amount of progression added to the craft

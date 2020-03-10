@@ -2,6 +2,7 @@ import { CraftingAction } from '../crafting-action';
 import { Simulation } from '../../../simulation/simulation';
 import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
+import { StepState } from '../../step-state';
 
 export class TricksOfTheTrade extends CraftingAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
@@ -19,7 +20,9 @@ export class TricksOfTheTrade extends CraftingAction {
     if (simulationState.safe) {
       return false;
     }
-    return simulationState.state === 'GOOD' || simulationState.state === 'EXCELLENT';
+    return (
+      simulationState.state === StepState.GOOD || simulationState.state === StepState.EXCELLENT
+    );
   }
 
   execute(simulation: Simulation, safe: boolean): void {
@@ -39,7 +42,7 @@ export class TricksOfTheTrade extends CraftingAction {
     return [100371, 100372, 100373, 100374, 100375, 100376, 100377, 100378];
   }
 
-  getSuccessRate(simulationState: Simulation): number {
+  _getSuccessRate(simulationState: Simulation): number {
     return 100;
   }
 

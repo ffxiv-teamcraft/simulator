@@ -2,6 +2,7 @@ import { QualityAction } from '../quality-action';
 import { Simulation } from '../../../simulation/simulation';
 import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
+import { StepState } from '../../step-state';
 
 export class PreciseTouch extends QualityAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
@@ -26,7 +27,9 @@ export class PreciseTouch extends QualityAction {
     if (simulationState.safe) {
       return false;
     }
-    return simulationState.state === 'GOOD' || simulationState.state === 'EXCELLENT';
+    return (
+      simulationState.state === StepState.GOOD || simulationState.state === StepState.EXCELLENT
+    );
   }
 
   getBaseCPCost(simulationState: Simulation): number {

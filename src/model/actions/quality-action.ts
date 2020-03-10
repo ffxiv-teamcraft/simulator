@@ -2,6 +2,7 @@ import { Simulation } from '../../simulation/simulation';
 import { GeneralAction } from './general-action';
 import { Buff } from '../buff.enum';
 import { ActionType } from './action-type';
+import { StepState } from '../step-state';
 
 export abstract class QualityAction extends GeneralAction {
   public getType(): ActionType {
@@ -14,13 +15,13 @@ export abstract class QualityAction extends GeneralAction {
     let qualityIncrease = this.getBaseQuality(simulation);
 
     switch (simulation.state) {
-      case 'EXCELLENT':
+      case StepState.EXCELLENT:
         qualityIncrease *= 4;
         break;
-      case 'POOR':
+      case StepState.POOR:
         qualityIncrease *= 0.5;
         break;
-      case 'GOOD':
+      case StepState.GOOD:
         qualityIncrease *= 1.5;
         break;
       default:

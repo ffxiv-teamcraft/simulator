@@ -53,7 +53,7 @@ export class MuscleMemory extends ProgressAction {
     return 10;
   }
 
-  getSuccessRate(simulationState: Simulation): number {
+  _getSuccessRate(simulationState: Simulation): number {
     return 100;
   }
 

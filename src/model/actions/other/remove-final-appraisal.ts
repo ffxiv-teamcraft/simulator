@@ -33,7 +33,7 @@ export class RemoveFinalAppraisal extends CraftingAction {
     return [-1];
   }
 
-  getSuccessRate(simulationState: Simulation): number {
+  _getSuccessRate(simulationState: Simulation): number {
     return 100;
   }
 }

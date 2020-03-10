@@ -4,7 +4,6 @@ import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class Observe extends CraftingAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 13 };
   }
@@ -33,8 +32,7 @@ export class Observe extends CraftingAction {
     return [100010, 100023, 100040, 100053, 100070, 100082, 100099, 100113];
   }
 
-  getSuccessRate(simulationState: Simulation): number {
+  _getSuccessRate(simulationState: Simulation): number {
     return 100;
   }
-
 }

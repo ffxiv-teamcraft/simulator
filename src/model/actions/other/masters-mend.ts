@@ -32,7 +32,7 @@ export class MastersMend extends CraftingAction {
     return [100003, 100017, 100032, 100047, 100062, 100077, 100092, 100107];
   }
 
-  getSuccessRate(simulationState: Simulation): number {
+  _getSuccessRate(simulationState: Simulation): number {
     return 100;
   }
 }

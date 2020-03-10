@@ -31,7 +31,7 @@ export class TrainedEye extends CraftingAction {
     return { job: CraftingJob.ANY, level: 80 };
   }
 
-  getSuccessRate(simulationState: Simulation): number {
+  _getSuccessRate(simulationState: Simulation): number {
     return 100;
   }
 
