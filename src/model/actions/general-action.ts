@@ -8,16 +8,14 @@ import { StepState } from '../step-state';
  */
 export abstract class GeneralAction extends CraftingAction {
   getDurabilityCost(simulationState: Simulation): number {
-    const baseCost = this.getBaseDurabilityCost(simulationState);
-    let cost = baseCost;
-    // TODO this is cumulative for now, will require more work once servers are up.
+    let divider = 1;
     if (simulationState.hasBuff(Buff.WASTE_NOT) || simulationState.hasBuff(Buff.WASTE_NOT_II)) {
-      cost -= baseCost / 2;
+      divider *= 2;
     }
     if (simulationState.state === StepState.STURDY) {
-      cost -= baseCost / 2;
+      divider *= 2;
     }
-    return cost;
+    return Math.floor(this.getBaseDurabilityCost(simulationState) / divider);
   }
 
   _getSuccessRate(simulationState: Simulation): number {

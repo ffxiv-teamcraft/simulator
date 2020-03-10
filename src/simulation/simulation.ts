@@ -429,9 +429,9 @@ export class Simulation {
       // TODO proper rates for expert recipes
       statesAndRates.push(
         ...[
-          { state: StepState.CENTERED, rate: 0.1 },
-          { state: StepState.STURDY, rate: 0.1 },
-          { state: StepState.PLIANT, rate: 0.1 }
+          { state: StepState.CENTERED, rate: 0.25 },
+          { state: StepState.STURDY, rate: 0.25 },
+          { state: StepState.PLIANT, rate: 0.25 }
         ]
       );
     } else {
