@@ -10,6 +10,9 @@ export class PatientTouch extends QualityAction {
 
   execute(simulation: Simulation): void {
     super.execute(simulation);
+
+    // We have to decrement stacks by 1 because the super exec increments
+    // from successful Patient before getting to this part.
     if (simulation.hasBuff(Buff.INNER_QUIET) && simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
       const iq = simulation.getBuff(Buff.INNER_QUIET);
       iq.stacks = Math.min((iq.stacks - 1) * 2, 11);
@@ -18,7 +21,7 @@ export class PatientTouch extends QualityAction {
 
   onFail(simulation: Simulation): void {
     if (simulation.getBuff(Buff.INNER_QUIET)) {
-      simulation.getBuff(Buff.INNER_QUIET).stacks = Math.floor(
+      simulation.getBuff(Buff.INNER_QUIET).stacks = Math.ceil(
         simulation.getBuff(Buff.INNER_QUIET).stacks / 2
       );
     }
