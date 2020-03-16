@@ -28,7 +28,7 @@ export class Groundwork extends ProgressAction {
   }
 
   getPotency(simulation: Simulation): number {
-    if (simulation.durability >= 20) {
+    if (simulation.durability >= this.getDurabilityCost(simulation)) {
       return 300;
     }
     return 150;
