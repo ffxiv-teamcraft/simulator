@@ -5,7 +5,7 @@ import { CraftingJob } from '../../crafting-job.enum';
 
 export class NameOfTheElements extends BuffAction {
   _canBeUsed(simulation: Simulation): boolean {
-    return simulation.actions.filter(action => action.is(NameOfTheElements)).length <= 1;
+    return !simulation.buffs.some(buff => buff.buff === Buff.NAMELESS);
   }
 
   getBaseCPCost(simulationState: Simulation): number {
@@ -22,6 +22,18 @@ export class NameOfTheElements extends BuffAction {
 
   protected getTick(): ((simulation: Simulation, linear?: boolean) => void) | undefined {
     return undefined;
+  }
+
+  getOnExpire(): ((simulation: Simulation, linear?: boolean) => void) | undefined {
+    return simulation => {
+      simulation.buffs.push({
+        buff: Buff.NAMELESS,
+        duration: Infinity,
+        appliedStep: simulation.steps.length,
+        tick: undefined,
+        stacks: 0
+      });
+    };
   }
 
   getBuff(): Buff {

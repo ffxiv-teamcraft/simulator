@@ -371,6 +371,11 @@ export class Simulation {
         effectiveBuff.duration--;
       }
     }
+    this.buffs
+      .filter(buff => buff.duration <= 0 && buff.onExpire !== undefined)
+      .forEach((expired: any) => {
+        expired.onExpire(this, linear);
+      });
     this.buffs = this.buffs.filter(buff => buff.duration > 0);
   }
 

@@ -7,7 +7,7 @@ export interface EffectiveBuff {
   buff: Buff;
 
   tick?: (simulationState: Simulation, linear?: boolean) => void;
+  onExpire?: (simulationState: Simulation, linear?: boolean) => void;
 
   appliedStep: number;
 }
-

@@ -18,6 +18,8 @@ import { MastersMend } from '../src/model/actions/other/masters-mend';
 import { ByregotsBlessing } from '../src/model/actions/quality/byregots-blessing';
 import { StepState } from '../src/model/step-state';
 import { PrudentTouch } from '../src/model/actions/quality/prudent-touch';
+import { Observe } from '../src/model/actions/other/observe';
+import { Buff } from '../src/model/buff.enum';
 
 describe('Craft simulator tests', () => {
   it('Should apply Name of the Elements bonus properly', () => {
@@ -168,7 +170,7 @@ describe('Craft simulator tests', () => {
         new PrudentTouch(), // +512 (512)
         new PrudentTouch(), // +634 (1146)
         new PrudentTouch(), // +762 (1908)
-        new PrudentTouch()  // +898 (2806)
+        new PrudentTouch() // +898 (2806)
       ],
       generateStats(80, 2486, 2318, 613)
     );
@@ -176,5 +178,45 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.quality).toBe(2806);
+  });
+
+  it('Should add nameless after name of the element expired', () => {
+    const simulation = new Simulation(
+      generateRecipe(480, 6178, 36208, 2480, 2195),
+      [
+        new NameOfTheElements(),
+        new Observe(),
+        new Observe(),
+        new Observe(),
+        new Observe(),
+        new Observe()
+      ],
+      generateStats(80, 2486, 2318, 613)
+    );
+
+    simulation.run(true);
+
+    expect(simulation.buffs.some(buff => buff.buff === Buff.NAMELESS)).toBeTruthy();
+  });
+
+  it('Should block name of the elements when nameless is applied', () => {
+    const simulation = new Simulation(
+      generateRecipe(480, 6178, 36208, 2480, 2195),
+      [
+        new NameOfTheElements(),
+        new Observe(),
+        new Observe(),
+        new Observe(),
+        new Observe(),
+        new Observe(),
+        new NameOfTheElements()
+      ],
+      generateStats(80, 2486, 2318, 613)
+    );
+
+    simulation.run(true);
+
+    expect(simulation.buffs.some(buff => buff.buff === Buff.NAME_OF_THE_ELEMENTS)).toBeFalsy();
+    expect(new NameOfTheElements().canBeUsed(simulation)).toBeFalsy();
   });
 });

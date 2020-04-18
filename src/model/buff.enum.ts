@@ -18,5 +18,7 @@ export enum Buff {
 
   MUSCLE_MEMORY,
 
-  FINAL_APPRAISAL
+  FINAL_APPRAISAL,
+
+  NAMELESS
 }
