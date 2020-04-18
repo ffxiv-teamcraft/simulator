@@ -159,4 +159,22 @@ describe('Craft simulator tests', () => {
     const result2 = simulation2.run(true);
     expect(result2.simulation.durability).toBe(70 - 3);
   });
+
+  it('Should floor control bonuses properly', () => {
+    const simulation = new Simulation(
+      generateRecipe(480, 6178, 36208, 2480, 2195),
+      [
+        new InnerQuiet(),
+        new PrudentTouch(), // +512 (512)
+        new PrudentTouch(), // +634 (1146)
+        new PrudentTouch(), // +762 (1908)
+        new PrudentTouch()  // +898 (2806)
+      ],
+      generateStats(80, 2486, 2318, 613)
+    );
+
+    simulation.run(true);
+
+    expect(simulation.quality).toBe(2806);
+  });
 });
