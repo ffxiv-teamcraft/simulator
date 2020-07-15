@@ -22,7 +22,7 @@ export class ByregotsBlessing extends QualityAction {
     safeMode?: boolean
   ): SimulationFailCause | undefined {
     const superCause = super.getFailCause(simulationState, linear, safeMode);
-    if (!superCause && !simulationState.hasBuff(Buff.INNER_QUIET)) {
+    if (!simulationState.success && !superCause && !simulationState.hasBuff(Buff.INNER_QUIET)) {
       return SimulationFailCause.NO_INNER_QUIET;
     }
     return superCause;

@@ -99,6 +99,9 @@ export abstract class CraftingAction {
     linear?: boolean,
     safeMode?: boolean
   ): SimulationFailCause | undefined {
+    if (simulationState.success) {
+      return undefined;
+    }
     const levelRequirement = this.getLevelRequirement();
     const craftsmanshipRequirement = simulationState.recipe.craftsmanshipReq;
     const controlRequirement = simulationState.recipe.controlReq;
