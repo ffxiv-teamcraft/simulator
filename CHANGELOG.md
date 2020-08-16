@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.4](https://github.com/ffxiv-teamcraft/simulator/compare/v2.5.3...v2.5.4) (2020-08-16)
+
+
+### Bug Fixes
+
+* **buffs:** better fix for failing buffs and other actions ([c18d318](https://github.com/ffxiv-teamcraft/simulator/commit/c18d318))
+
+
+
 ### [2.5.3](https://github.com/ffxiv-teamcraft/simulator/compare/v2.5.2...v2.5.3) (2020-08-16)
 
 
