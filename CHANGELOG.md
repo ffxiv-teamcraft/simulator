@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.3](https://github.com/ffxiv-teamcraft/simulator/compare/v2.5.2...v2.5.3) (2020-08-16)
+
+
+### Bug Fixes
+
+* **buffs:** fixed an issue with buffs being ticked when ToT or buff action is skipped ([9380b41](https://github.com/ffxiv-teamcraft/simulator/commit/9380b41))
+
+
+
 ### [2.5.2](https://github.com/ffxiv-teamcraft/simulator/compare/v2.5.1...v2.5.2) (2020-07-15)
 
 
