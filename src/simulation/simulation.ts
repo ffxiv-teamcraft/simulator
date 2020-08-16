@@ -11,6 +11,8 @@ import { Craft } from '../model/craft';
 import { StepState } from '../model/step-state';
 import { FinalAppraisal } from '../model/actions/buff/final-appraisal';
 import { RemoveFinalAppraisal } from '../model/actions/other/remove-final-appraisal';
+import { BuffAction } from '../model/actions/buff-action';
+import { TricksOfTheTrade } from '../model/actions/other/tricks-of-the-trade';
 
 export class Simulation {
   public progression = 0;
@@ -222,10 +224,13 @@ export class Simulation {
           const progressionBefore = this.progression;
           const durabilityBefore = this.durability;
           const cpBefore = this.availableCP;
+          const isBuffOrToTFail =
+            (action.is(BuffAction) || action.is(TricksOfTheTrade)) && !result.success;
           if (
             this.success === undefined &&
             !action.is(FinalAppraisal) &&
-            !action.is(RemoveFinalAppraisal)
+            !action.is(RemoveFinalAppraisal) &&
+            !isBuffOrToTFail
           ) {
             // Tick buffs after checking synth result, so if we reach 0 durability, synth fails.
             this.tickBuffs(linear);
