@@ -37,6 +37,10 @@ export abstract class BuffAction extends CraftingAction {
     return 100;
   }
 
+  skipOnFail(): boolean {
+    return true;
+  }
+
   /**
    * Override this method if the buff overrides other buffs (steady hands for instance).
    * Don't forget to add super.getOverrides() to the array you'll return

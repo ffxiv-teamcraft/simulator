@@ -18,6 +18,10 @@ export class Reflect extends QualityAction {
     );
   }
 
+  skipOnFail(): boolean {
+    return true;
+  }
+
   canBeMoved(currentIndex: number): boolean {
     return currentIndex > 0;
   }

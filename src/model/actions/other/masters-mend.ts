@@ -35,4 +35,8 @@ export class MastersMend extends CraftingAction {
   _getSuccessRate(simulationState: Simulation): number {
     return 100;
   }
+
+  skipOnFail(): boolean {
+    return true;
+  }
 }

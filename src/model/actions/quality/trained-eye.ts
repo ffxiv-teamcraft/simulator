@@ -11,6 +11,10 @@ export class TrainedEye extends CraftingAction {
     );
   }
 
+  skipOnFail(): boolean {
+    return true;
+  }
+
   execute(simulation: Simulation): void {
     simulation.quality = simulation.recipe.quality;
   }

@@ -49,4 +49,8 @@ export class TricksOfTheTrade extends CraftingAction {
   getDurabilityCost(simulationState: Simulation): number {
     return 0;
   }
+
+  skipOnFail(): boolean {
+    return true;
+  }
 }
