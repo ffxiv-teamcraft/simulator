@@ -38,6 +38,7 @@ export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
     { short: 'observe', full: 'Observe' },
     { short: 'basicSynth', full: 'BasicSynthesis' },
+    { short: 'basicSynth2', full: 'BasicSynthesis' },
     { short: 'rapidSynthesis', full: 'RapidSynthesis' },
     { short: 'rapidSynthesis3', full: 'RapidSynthesis' },
     { short: 'groundwork', full: 'Groundwork' },
