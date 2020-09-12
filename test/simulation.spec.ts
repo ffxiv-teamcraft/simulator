@@ -228,7 +228,8 @@ describe('Craft simulator tests', () => {
       [new GreatStrides(), new TricksOfTheTrade()],
       generateStats(80, 2486, 2318, 613),
       [],
-      [StepState.NORMAL, StepState.FAILED]
+      [StepState.NORMAL],
+      [1]
     );
 
     simulation.run(true);

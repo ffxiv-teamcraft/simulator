@@ -11,8 +11,6 @@ import { Craft } from '../model/craft';
 import { StepState } from '../model/step-state';
 import { FinalAppraisal } from '../model/actions/buff/final-appraisal';
 import { RemoveFinalAppraisal } from '../model/actions/other/remove-final-appraisal';
-import { BuffAction } from '../model/actions/buff-action';
-import { TricksOfTheTrade } from '../model/actions/other/tricks-of-the-trade';
 
 export class Simulation {
   public progression = 0;
@@ -43,6 +41,7 @@ export class Simulation {
     private _crafterStats: CrafterStats,
     private hqIngredients: { id: number; amount: number }[] = [],
     private stepStates: { [index: number]: StepState } = {},
+    private fails: number[] = [],
     startingQuality = 0
   ) {
     this.durability = recipe.durability;
@@ -184,9 +183,7 @@ export class Simulation {
     this.actions
       .filter(a => a !== undefined)
       .forEach((action: CraftingAction, index: number) => {
-        if (this.stepStates[index] !== StepState.FAILED) {
-          this.state = this.stepStates[index] || StepState.NORMAL;
-        }
+        this.state = this.stepStates[index] || StepState.NORMAL;
         let result: ActionResult;
         let failCause: SimulationFailCause | undefined = undefined;
         const canUseAction = action.canBeUsed(this, linear);
@@ -281,7 +278,7 @@ export class Simulation {
   ): ActionResult {
     // The roll for the current action's success rate, 0 if ideal mode, as 0 will even match a 1% chances.
     let probabilityRoll = linear ? 0 : Math.random() * 100;
-    if (this.stepStates[index] === StepState.FAILED) {
+    if (this.fails.includes(index)) {
       // Impossible to succeed
       probabilityRoll = 999;
     }
@@ -349,7 +346,15 @@ export class Simulation {
   }
 
   clone(): Simulation {
-    return new Simulation(this.recipe, this.actions, this.crafterStats, this.hqIngredients);
+    return new Simulation(
+      this.recipe,
+      this.actions,
+      this.crafterStats,
+      this.hqIngredients,
+      this.stepStates,
+      this.fails,
+      this.startingQuality
+    );
   }
 
   private getHQPercent(): number {

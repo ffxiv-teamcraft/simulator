@@ -1,6 +1,6 @@
 export enum StepState {
   // Fails the step
-  FAILED,
+  NONE,
   NORMAL,
   GOOD,
   EXCELLENT, // Not available on expert recipes
