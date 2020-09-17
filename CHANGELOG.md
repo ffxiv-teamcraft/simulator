@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/ffxiv-teamcraft/simulator/compare/v2.6.0...v2.7.0) (2020-09-17)
+
+
+### Features
+
+* add careful observation ([5bc824a](https://github.com/ffxiv-teamcraft/simulator/commit/5bc824a))
+
+
+
 ## [2.6.0](https://github.com/ffxiv-teamcraft/simulator/compare/v2.5.6...v2.6.0) (2020-09-12)
 
 
