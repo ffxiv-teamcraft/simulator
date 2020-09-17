@@ -36,4 +36,8 @@ export class RemoveFinalAppraisal extends CraftingAction {
   _getSuccessRate(simulationState: Simulation): number {
     return 100;
   }
+
+  skipsBuffTicks(): boolean {
+    return true;
+  }
 }

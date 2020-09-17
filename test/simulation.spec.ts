@@ -22,6 +22,8 @@ import { Observe } from '../src/model/actions/other/observe';
 import { Buff } from '../src/model/buff.enum';
 import { GreatStrides } from '../src/model/actions/buff/great-strides';
 import { TricksOfTheTrade } from '../src/model/actions/other/tricks-of-the-trade';
+import { CarefulObservation } from '../src/model/actions/other/careful-observation';
+import { RemoveFinalAppraisal } from '../src/model/actions/other/remove-final-appraisal';
 
 describe('Craft simulator tests', () => {
   it('Should apply Name of the Elements bonus properly', () => {
@@ -230,6 +232,26 @@ describe('Craft simulator tests', () => {
       [],
       [StepState.NORMAL],
       [1]
+    );
+
+    simulation.run(true);
+
+    expect(simulation.getBuff(Buff.GREAT_STRIDES).duration).toBe(3);
+  });
+
+  it('Should not tick buffs when using final appraisal or careful observation', () => {
+    const simulation = new Simulation(
+      generateRecipe(480, 6178, 36208, 2480, 2195),
+      [
+        new GreatStrides(),
+        new FinalAppraisal(),
+        new CarefulObservation(),
+        new RemoveFinalAppraisal()
+      ],
+      generateStats(80, 2486, 2318, 613),
+      [],
+      [],
+      []
     );
 
     simulation.run(true);

@@ -159,6 +159,10 @@ export abstract class CraftingAction {
     // Base onFail does nothing, override to implement it, as it wont be used in most cases.
   }
 
+  public skipsBuffTicks(): boolean {
+    return false;
+  }
+
   /**
    * Checks if this action is an instance of a given other action.
    * @param actionClass

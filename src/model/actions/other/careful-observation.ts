@@ -40,4 +40,8 @@ export class CarefulObservation extends CraftingAction {
   skipOnFail(): boolean {
     return true;
   }
+
+  skipsBuffTicks(): boolean {
+    return true;
+  }
 }

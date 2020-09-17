@@ -222,12 +222,7 @@ export class Simulation {
           const durabilityBefore = this.durability;
           const cpBefore = this.availableCP;
           const skipTicksOnFail = !result.success && action.skipOnFail();
-          if (
-            this.success === undefined &&
-            !action.is(FinalAppraisal) &&
-            !action.is(RemoveFinalAppraisal) &&
-            !skipTicksOnFail
-          ) {
+          if (this.success === undefined && !action.skipsBuffTicks() && !skipTicksOnFail) {
             // Tick buffs after checking synth result, so if we reach 0 durability, synth fails.
             this.tickBuffs(linear);
           }

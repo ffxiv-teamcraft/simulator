@@ -32,6 +32,10 @@ export class FinalAppraisal extends BuffAction {
     return true;
   }
 
+  skipsBuffTicks(): boolean {
+    return true;
+  }
+
   protected getTick(): ((simulation: Simulation) => void) | undefined {
     return undefined;
   }
