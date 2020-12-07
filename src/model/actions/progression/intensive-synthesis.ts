@@ -41,6 +41,6 @@ export class IntensiveSynthesis extends ProgressAction {
   }
 
   getPotency(simulation: Simulation): number {
-    return 300;
+    return 400;
   }
 }
