@@ -1,6 +1,7 @@
 import { QualityAction } from '../quality-action';
 import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
+import { BasicTouch } from './basic-touch';
 
 export class StandardTouch extends QualityAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
@@ -12,7 +13,8 @@ export class StandardTouch extends QualityAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 32;
+    const lastAction = simulationState.actions[simulationState.actions.length - 1];
+    return lastAction?.is(BasicTouch) ? 18 : 32;
   }
 
   getBaseDurabilityCost(simulationState: Simulation): number {
