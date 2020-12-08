@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.8.1](https://github.com/ffxiv-teamcraft/simulator/compare/v2.8.0...v2.8.1) (2020-12-08)
+
+
+### Bug Fixes
+
+* **StandardTouch:** better cost check ([14eff24](https://github.com/ffxiv-teamcraft/simulator/commit/14eff24))
+
+
+
 ## [2.8.0](https://github.com/ffxiv-teamcraft/simulator/compare/v2.7.1...v2.8.0) (2020-12-07)
 
 
