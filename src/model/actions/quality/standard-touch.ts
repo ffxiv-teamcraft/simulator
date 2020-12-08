@@ -13,8 +13,10 @@ export class StandardTouch extends QualityAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    const lastAction = simulationState.actions[simulationState.actions.length - 1];
-    return lastAction?.is(BasicTouch) ? 18 : 32;
+    return simulationState.lastStep !== undefined &&
+      simulationState.lastStep.action.getIds()[0] === new BasicTouch().getIds()[0]
+      ? 18
+      : 32;
   }
 
   getBaseDurabilityCost(simulationState: Simulation): number {

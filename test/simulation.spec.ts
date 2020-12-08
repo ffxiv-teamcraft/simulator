@@ -24,6 +24,7 @@ import { GreatStrides } from '../src/model/actions/buff/great-strides';
 import { TricksOfTheTrade } from '../src/model/actions/other/tricks-of-the-trade';
 import { CarefulObservation } from '../src/model/actions/other/careful-observation';
 import { RemoveFinalAppraisal } from '../src/model/actions/other/remove-final-appraisal';
+import { StandardTouch } from '../src/model/actions/quality/standard-touch';
 
 describe('Craft simulator tests', () => {
   it('Should apply Name of the Elements bonus properly', () => {
@@ -257,5 +258,19 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.getBuff(Buff.GREAT_STRIDES).duration).toBe(3);
+  });
+
+  it('Should apply 5.4 bonus for combo on standard touch', () => {
+    const simulation = new Simulation(
+      generateRecipe(480, 6178, 36208, 2480, 2195),
+      [new BasicTouch(), new StandardTouch()],
+      generateStats(80, 2486, 2318, 613),
+      [],
+      [],
+      []
+    );
+
+    simulation.run(true);
+    expect(simulation.lastStep.cpDifference).toBe(-18);
   });
 });
