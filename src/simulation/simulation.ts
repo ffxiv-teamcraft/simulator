@@ -72,7 +72,7 @@ export class Simulation {
 
   public getReliabilityReport(): SimulationReliabilityReport {
     this.reset();
-    const results: SimulationResult[] = [];
+    let results: SimulationResult[] = [];
     // Let's run the simulation 200 times.
     for (let i = 0; i < 200; i++) {
       results.push(this.run(false));
@@ -80,10 +80,10 @@ export class Simulation {
     }
     const successPercent = (results.filter(res => res.success).length / results.length) * 100;
     const hqPercent = results.reduce((p, c) => p + c.hqPercent, 0) / results.length;
-    let hqMedian = 0;
-    results.map(res => res.hqPercent).sort((a, b) => a - b);
+    let hqMedian: number;
+    results = results.sort((a, b) => a.hqPercent - b.hqPercent);
     if (results.length % 2) {
-      hqMedian = results[results.length / 2].hqPercent;
+      hqMedian = results[Math.floor(results.length / 2)].hqPercent;
     } else {
       hqMedian =
         (results[Math.floor(results.length / 2)].hqPercent +
@@ -94,7 +94,9 @@ export class Simulation {
       rawData: results,
       successPercent: Math.round(successPercent),
       averageHQPercent: Math.round(hqPercent),
-      medianHQPercent: hqMedian
+      medianHQPercent: hqMedian,
+      minHQPercent: results[0].hqPercent,
+      maxHQPercent: results[results.length - 1].hqPercent
     };
   }
 
