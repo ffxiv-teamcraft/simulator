@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.1](https://github.com/ffxiv-teamcraft/simulator/compare/v2.9.0...v2.9.1) (2020-12-22)
+
+
+### Bug Fixes
+
+* **tricks-of-the-trade:** don't regen CP on normal state anymore ([04e9cb0](https://github.com/ffxiv-teamcraft/simulator/commit/04e9cb0))
+
+
+
 ## [2.9.0](https://github.com/ffxiv-teamcraft/simulator/compare/v2.8.1...v2.9.0) (2020-12-11)
 
 
