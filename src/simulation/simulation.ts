@@ -218,7 +218,7 @@ export class Simulation {
             failCause: failCause
           };
         }
-        if (this.steps.length <= maxTurns) {
+        if (this.steps.length < maxTurns) {
           const qualityBefore = this.quality;
           const progressionBefore = this.progression;
           const durabilityBefore = this.durability;

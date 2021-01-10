@@ -273,4 +273,29 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
     expect(simulation.lastStep.cpDifference).toBe(-18);
   });
+
+  it('Should count buffs properly in step by step mode', () => {
+    const simulation = new Simulation(
+      generateRecipe(480, 6178, 36208, 2480, 2195),
+      [
+        new MuscleMemory(),
+        new Manipulation(),
+        new InnerQuiet(),
+        new Veneration(),
+        new Groundwork(),
+        new PrudentTouch(),
+        new PrudentTouch(),
+        new PrudentTouch(),
+        new PrudentTouch(),
+        new PrudentTouch()
+      ],
+      generateStats(80, 2745, 2885, 626),
+      [],
+      [],
+      []
+    );
+
+    simulation.run(true, 4);
+    expect(simulation.getBuff(Buff.MANIPULATION).duration).toBe(6);
+  });
 });
