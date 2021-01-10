@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.2](https://github.com/ffxiv-teamcraft/simulator/compare/v2.9.1...v2.9.2) (2021-01-10)
+
+
+### Bug Fixes
+
+* **maxTurns:** fixed a bug with buffs being ticked twice on final turn ([c1cc4e0](https://github.com/ffxiv-teamcraft/simulator/commit/c1cc4e0))
+
+
+
 ### [2.9.1](https://github.com/ffxiv-teamcraft/simulator/compare/v2.9.0...v2.9.1) (2020-12-22)
 
 
