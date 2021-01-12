@@ -60,6 +60,49 @@ export class Simulation {
     }
     this.quality = Math.floor(this.quality);
     this.startingQuality = this.quality;
+
+    // TODO understand the bitmask properly for step conditions
+    // this.possibleConditions = this.recipe.conditionsFlag
+    //   .toString(2)
+    //   .split('')
+    //   .map((value, index) => {
+    //     if (value === '1') {
+    //       return index + 1 as StepState;
+    //     } else {
+    //       return null;
+    //     }
+    //   })
+    //   .filter(condition => condition !== null) as StepState[];
+
+    switch (this.recipe.conditionsFlag) {
+      case 15:
+        this.possibleConditions = [
+          StepState.NORMAL,
+          StepState.GOOD,
+          StepState.EXCELLENT,
+          StepState.POOR
+        ];
+        break;
+      case 115:
+        this.possibleConditions = [
+          StepState.NORMAL,
+          StepState.GOOD,
+          StepState.CENTERED,
+          StepState.STURDY,
+          StepState.PLIANT
+        ];
+        break;
+      case 483:
+        this.possibleConditions = [
+          StepState.NORMAL,
+          StepState.GOOD,
+          StepState.STURDY,
+          StepState.PLIANT,
+          StepState.MALLEABLE,
+          StepState.PRIMED
+        ];
+        break;
+    }
   }
 
   public get lastStep(): ActionResult {
@@ -69,6 +112,8 @@ export class Simulation {
   public get crafterStats(): CrafterStats {
     return this._crafterStats;
   }
+
+  public readonly possibleConditions: StepState[] = [];
 
   public getReliabilityReport(): SimulationReliabilityReport {
     this.reset();
@@ -434,23 +479,32 @@ export class Simulation {
       excellentChances = 0.02;
     }
 
-    const statesAndRates = [{ state: StepState.GOOD, rate: goodChances }];
-
-    if (this.recipe.expert) {
-      // TODO proper rates for expert recipes
-      statesAndRates.push(
-        ...[
-          { state: StepState.CENTERED, rate: 0.25 },
-          { state: StepState.STURDY, rate: 0.25 },
-          { state: StepState.PLIANT, rate: 0.25 }
-        ]
-      );
-    } else {
-      statesAndRates.push({ state: StepState.EXCELLENT, rate: excellentChances });
-    }
-
-    // If none of the states actually proc, fallback to normal.
-    statesAndRates.push({ state: StepState.NORMAL, rate: 1 });
+    const statesAndRates = this.possibleConditions
+      .map(condition => {
+        // Default rate
+        let rate = 0.25;
+        switch (condition) {
+          case StepState.NORMAL:
+            rate = 1;
+            break;
+          case StepState.GOOD:
+            rate = goodChances;
+            break;
+          case StepState.EXCELLENT:
+            rate = excellentChances;
+            break;
+          case StepState.POOR:
+            rate = 0;
+            break;
+        }
+        return {
+          state: condition,
+          rate: rate
+        };
+      })
+      .sort((a, b) => {
+        return a.rate - b.rate;
+      });
 
     for (let possibleState of statesAndRates) {
       const roll = Math.random();
