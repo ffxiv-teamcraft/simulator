@@ -19,4 +19,5 @@ export interface Craft {
   ingredients: Ingredient[];
   yield?: number;
   expert?: boolean;
+  conditionsFlag: number;
 }
