@@ -1,8 +1,9 @@
-import { CraftingAction } from './crafting-action';
 import { Simulation } from '../../simulation/simulation';
-import { EffectiveBuff } from '../effective-buff';
-import { Buff } from '../buff.enum';
 import { ActionType } from './action-type';
+import { Buff } from '../buff.enum';
+import { CraftingAction } from './crafting-action';
+import { EffectiveBuff } from '../effective-buff';
+import { StepState } from '../step-state';
 
 export abstract class BuffAction extends CraftingAction {
   public getType(): ActionType {
@@ -63,7 +64,9 @@ export abstract class BuffAction extends CraftingAction {
 
   private getAppliedBuff(simulation: Simulation): EffectiveBuff {
     return {
-      duration: this.getDuration(simulation),
+      duration: simulation.state === StepState.PRIMED
+        ? this.getDuration(simulation) + 2
+        : this.getDuration(simulation),
       tick: this.getTick(),
       onExpire: this.getOnExpire(),
       stacks: this.getInitialStacks(),

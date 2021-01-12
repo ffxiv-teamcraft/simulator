@@ -10,5 +10,6 @@ export enum StepState {
   STURDY,    // Reduces loss of durability by 50%, stacks with WN & WN2
   PLIANT,    // Reduces CP cost by 50%
   // Only for super expert recipes
-  MALLEABLE  // Good, but for Progress. Doesn't proc Intensive/Precise.
+  MALLEABLE, // Good, but for Progress. Doesn't proc Intensive/Precise.
+  PRIMED     // Next status is +2 duration
 }
