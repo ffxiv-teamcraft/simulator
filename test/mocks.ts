@@ -48,7 +48,8 @@ export const gradeIIInfusionOfStrRecipe: Craft = {
       id: 18,
       amount: 2
     }
-  ]
+  ],
+  conditionsFlag: 15
 };
 
 export const infusionOfMindRecipe: Craft = {
@@ -93,7 +94,8 @@ export const infusionOfMindRecipe: Craft = {
       id: 18,
       amount: 1
     }
-  ]
+  ],
+  conditionsFlag: 15
 };
 
 export const enchantedTruegoldInkRecipe: Craft = {
@@ -128,7 +130,8 @@ export const enchantedTruegoldInkRecipe: Craft = {
       id: 13,
       amount: 6
     }
-  ]
+  ],
+  conditionsFlag: 15
 };
 
 export const alc70i350Stats: CrafterStats = new CrafterStats(14, 1467, 1468, 474, true, 70, [
@@ -169,7 +172,8 @@ export function generateRecipe(
   progress?: number,
   quality?: number,
   suggestedCraftsmanship?: number,
-  suggestedControl?: number
+  suggestedControl?: number,
+  conditionsFlag = 15
 ): Craft {
   return {
     id: '3864',
@@ -183,7 +187,8 @@ export function generateRecipe(
     suggestedControl: suggestedControl || suggested[rlvl.toString()].control || 1425,
     hq: 1,
     quickSynth: 1,
-    ingredients: []
+    ingredients: [],
+    conditionsFlag: conditionsFlag
   };
 }
 
@@ -193,7 +198,8 @@ export function generateStarRecipe(
   quality: number,
   requiredCraftsmanship: number,
   requiredControl: number,
-  expert = false
+  expert = false,
+  conditionsFlag = 15
 ): Craft {
   return {
     id: '33904',
@@ -210,7 +216,8 @@ export function generateStarRecipe(
     hq: 1,
     quickSynth: 0,
     ingredients: [],
-    expert: expert
+    expert: expert,
+    conditionsFlag: conditionsFlag
   };
 }
 

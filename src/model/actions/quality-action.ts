@@ -1,7 +1,7 @@
 import { Simulation } from '../../simulation/simulation';
 import { GeneralAction } from './general-action';
-import { Buff } from '../buff.enum';
 import { ActionType } from './action-type';
+import { Buff } from '../buff.enum';
 import { StepState } from '../step-state';
 
 export abstract class QualityAction extends GeneralAction {
@@ -10,7 +10,7 @@ export abstract class QualityAction extends GeneralAction {
   }
 
   execute(simulation: Simulation, safe = false, skipStackAddition = false): void {
-    let bonus = 1;
+    let bonus = this.getBaseBonus(simulation);;
     let potency = this.getPotency(simulation);
     let qualityIncrease = this.getBaseQuality(simulation);
 

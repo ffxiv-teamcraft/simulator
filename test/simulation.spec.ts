@@ -298,4 +298,61 @@ describe('Craft simulator tests', () => {
     simulation.run(true, 4);
     expect(simulation.getBuff(Buff.MANIPULATION).duration).toBe(6);
   });
+
+  it('Should have proper conditions for normal recipes', () => {
+    const simulation = new Simulation(
+      generateRecipe(480, 6178, 36208, 2480, 2195, 15),
+      [],
+      generateStats(80, 2745, 2885, 626),
+      [],
+      [],
+      []
+    );
+
+    expect(simulation.possibleConditions).toStrictEqual([
+      StepState.NORMAL,
+      StepState.GOOD,
+      StepState.EXCELLENT,
+      StepState.POOR
+    ]);
+  });
+
+  it('Should have proper conditions for expert 1 recipes', () => {
+    const simulation = new Simulation(
+      generateRecipe(480, 6178, 36208, 2480, 2195, 115),
+      [],
+      generateStats(80, 2745, 2885, 626),
+      [],
+      [],
+      []
+    );
+
+    expect(simulation.possibleConditions).toStrictEqual([
+      StepState.NORMAL,
+      StepState.GOOD,
+      StepState.CENTERED,
+      StepState.STURDY,
+      StepState.PLIANT
+    ]);
+  });
+
+  it('Should have proper conditions for expert 2 recipes', () => {
+    const simulation = new Simulation(
+      generateRecipe(480, 6178, 36208, 2480, 2195, 483),
+      [],
+      generateStats(80, 2745, 2885, 626),
+      [],
+      [],
+      []
+    );
+
+    expect(simulation.possibleConditions).toStrictEqual([
+      StepState.NORMAL,
+      StepState.GOOD,
+      StepState.STURDY,
+      StepState.PLIANT,
+      StepState.MALLEABLE,
+      StepState.PRIMED
+    ]);
+  });
 });
