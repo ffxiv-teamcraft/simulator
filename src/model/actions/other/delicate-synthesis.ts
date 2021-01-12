@@ -25,8 +25,16 @@ export class DelicateSynthesis extends GeneralAction {
     if (simulation.hasBuff(Buff.VENERATION)) {
       progressBonus += 0.5;
     }
+    let progressionIncrease = this.getBaseProgression(simulation);
+    switch (simulation.state) {
+      case StepState.MALLEABLE:
+        progressionIncrease *= 1.5;
+        break;
+      default:
+        break;
+    }
     simulation.progression += Math.floor(
-      (Math.floor(this.getBaseProgression(simulation)) * progressPotency * progressBonus) / 100
+      (Math.floor(progressionIncrease) * progressPotency * progressBonus) / 100
     );
     if (
       simulation.hasBuff(Buff.FINAL_APPRAISAL) &&
