@@ -26,6 +26,10 @@ export abstract class GeneralAction extends CraftingAction {
     return 1;
   }
 
+  getBaseCondition(simulation: Simulation): number {
+    return 1;
+  }
+
   abstract getPotency(simulation: Simulation): number;
 
   abstract getBaseDurabilityCost(simulationState: Simulation): number;
