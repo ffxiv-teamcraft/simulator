@@ -6,6 +6,7 @@ import { NameOfTheElements } from '../src/model/actions/buff/name-of-the-element
 import { BrandOfTheElements } from '../src/model/actions/progression/brand-of-the-elements';
 import { CarefulSynthesis } from '../src/model/actions/progression/careful-synthesis';
 import { Groundwork } from '../src/model/actions/progression/groundwork';
+import { RapidSynthesis } from '../src/model/actions/progression/rapid-synthesis';
 import { FinalAppraisal } from '../src/model/actions/buff/final-appraisal';
 import { InnerQuiet } from '../src/model/actions/buff/inner-quiet';
 import { WasteNot } from '../src/model/actions/buff/waste-not';
@@ -165,6 +166,21 @@ describe('Craft simulator tests', () => {
     );
     const result2 = simulation2.run(true);
     expect(result2.simulation.durability).toBe(70 - 3);
+  });
+
+  it('Should use floor correctly with MALLEABLE step state', () => {
+    const simulation = new Simulation(
+      generateStarRecipe(513, 12046, 81447, 2620, 2540, true),
+      [new Veneration(), new RapidSynthesis()],
+      generateStats(80, 2763, 2800, 554),
+      [],
+      {
+        1: StepState.MALLEABLE
+      }
+    );
+
+    const result = simulation.run(true);
+    expect(result.simulation.progression).toBe(5298);
   });
 
   it('Should floor control bonuses properly', () => {

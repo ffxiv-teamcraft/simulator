@@ -10,27 +10,32 @@ export abstract class ProgressAction extends GeneralAction {
   }
 
   execute(simulation: Simulation): void {
-    let bonus = this.getBaseBonus(simulation);
-    let potency = this.getPotency(simulation);
-    let progressionIncrease = this.getBaseProgression(simulation);
+    let buffMod = this.getBaseBonus(simulation);
+    let conditionMod = this.getBaseCondition(simulation);
+    const potency = this.getPotency(simulation);
+    const progressionIncrease = this.getBaseProgression(simulation);
 
     switch (simulation.state) {
       case StepState.MALLEABLE:
-        progressionIncrease *= 1.5;
+        conditionMod *= 1.5;
         break;
       default:
         break;
     }
 
     if (simulation.hasBuff(Buff.MUSCLE_MEMORY)) {
-      bonus += 1;
+      buffMod += 1;
       simulation.removeBuff(Buff.MUSCLE_MEMORY);
     }
     if (simulation.hasBuff(Buff.VENERATION)) {
-      bonus += 0.5;
+      buffMod += 0.5;
     }
 
-    simulation.progression += Math.floor((Math.floor(progressionIncrease) * potency * bonus) / 100);
+    const efficiency = potency * buffMod / 100
+
+    simulation.progression += Math.floor(
+      Math.floor(progressionIncrease) * conditionMod * efficiency
+    );
 
     if (
       simulation.hasBuff(Buff.FINAL_APPRAISAL) &&
