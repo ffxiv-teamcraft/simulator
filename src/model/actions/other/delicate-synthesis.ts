@@ -16,26 +16,31 @@ export class DelicateSynthesis extends GeneralAction {
 
   execute(simulation: Simulation): void {
     // Progress
+    const progressionIncrease = this.getBaseProgression(simulation);
     const progressPotency = this.getPotency(simulation);
-    let progressBonus = 1;
-    if (simulation.hasBuff(Buff.MUSCLE_MEMORY)) {
-      progressBonus += 1;
-      simulation.removeBuff(Buff.MUSCLE_MEMORY);
-    }
-    if (simulation.hasBuff(Buff.VENERATION)) {
-      progressBonus += 0.5;
-    }
-    let progressionIncrease = this.getBaseProgression(simulation);
+    let progressBuffMod = this.getBaseBonus(simulation);
+    let progressConditionMod = this.getBaseCondition(simulation);
+
     switch (simulation.state) {
       case StepState.MALLEABLE:
-        progressionIncrease *= 1.5;
+        progressConditionMod *= 1.5;
         break;
       default:
         break;
     }
+
+    if (simulation.hasBuff(Buff.MUSCLE_MEMORY)) {
+      progressBuffMod += 1;
+      simulation.removeBuff(Buff.MUSCLE_MEMORY);
+    }
+    if (simulation.hasBuff(Buff.VENERATION)) {
+      progressBuffMod += 0.5;
+    }
+
     simulation.progression += Math.floor(
-      (Math.floor(progressionIncrease) * progressPotency * progressBonus) / 100
+      (Math.floor(progressionIncrease) * progressConditionMod * progressPotency * progressBuffMod) / 100
     );
+
     if (
       simulation.hasBuff(Buff.FINAL_APPRAISAL) &&
       simulation.progression >= simulation.recipe.progress
@@ -43,32 +48,37 @@ export class DelicateSynthesis extends GeneralAction {
       simulation.progression = Math.min(simulation.progression, simulation.recipe.progress - 1);
       simulation.removeBuff(Buff.FINAL_APPRAISAL);
     }
+
     // Quality
+    const qualityIncrease = this.getBaseQuality(simulation);
     const qualityPotency = this.getPotency(simulation);
-    let qualityBonus = 1;
-    if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
-      qualityBonus += 1;
-      simulation.removeBuff(Buff.GREAT_STRIDES);
-    }
-    if (simulation.hasBuff(Buff.INNOVATION)) {
-      qualityBonus += 0.5;
-    }
-    let qualityIncrease = this.getBaseQuality(simulation);
+    let qualityBuffMod = this.getBaseBonus(simulation);
+    let qualityConditionMod = this.getBaseCondition(simulation);
+
     switch (simulation.state) {
       case StepState.EXCELLENT:
-        qualityIncrease *= 4;
+        qualityConditionMod *= 4;
         break;
       case StepState.POOR:
-        qualityIncrease *= 0.5;
+        qualityConditionMod *= 0.5;
         break;
       case StepState.GOOD:
-        qualityIncrease *= 1.5;
+        qualityConditionMod *= 1.5;
         break;
       default:
         break;
     }
+
+    if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
+      qualityBuffMod += 1;
+      simulation.removeBuff(Buff.GREAT_STRIDES);
+    }
+    if (simulation.hasBuff(Buff.INNOVATION)) {
+      qualityBuffMod += 0.5;
+    }
+
     simulation.quality += Math.floor(
-      (Math.floor(qualityIncrease) * qualityPotency * qualityBonus) / 100
+      (Math.floor(qualityIncrease * qualityConditionMod) * qualityPotency * qualityBuffMod) / 100
     );
     if (simulation.hasBuff(Buff.INNER_QUIET) && simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
       simulation.getBuff(Buff.INNER_QUIET).stacks++;

@@ -10,33 +10,34 @@ export abstract class QualityAction extends GeneralAction {
   }
 
   execute(simulation: Simulation, safe = false, skipStackAddition = false): void {
-    let bonus = this.getBaseBonus(simulation);;
+    let buffMod = this.getBaseBonus(simulation);
+    let conditionMod = this.getBaseCondition(simulation);
     let potency = this.getPotency(simulation);
-    let qualityIncrease = this.getBaseQuality(simulation);
+    const qualityIncrease = this.getBaseQuality(simulation);
 
     switch (simulation.state) {
       case StepState.EXCELLENT:
-        qualityIncrease *= 4;
+        conditionMod *= 4;
         break;
       case StepState.POOR:
-        qualityIncrease *= 0.5;
+        conditionMod *= 0.5;
         break;
       case StepState.GOOD:
-        qualityIncrease *= 1.5;
+        conditionMod *= 1.5;
         break;
       default:
         break;
     }
 
     if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
-      bonus += 1;
+      buffMod += 1;
       simulation.removeBuff(Buff.GREAT_STRIDES);
     }
     if (simulation.hasBuff(Buff.INNOVATION)) {
-      bonus += 0.5;
+      buffMod += 0.5;
     }
 
-    simulation.quality += Math.floor((Math.floor(qualityIncrease) * potency * bonus) / 100);
+    simulation.quality += Math.floor((Math.floor(qualityIncrease * conditionMod) * potency * buffMod) / 100);
 
     if (
       simulation.hasBuff(Buff.INNER_QUIET) &&
