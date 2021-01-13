@@ -37,8 +37,10 @@ export class DelicateSynthesis extends GeneralAction {
       progressBuffMod += 0.5;
     }
 
+    const progressEfficiency = progressPotency * progressBuffMod / 100
+
     simulation.progression += Math.floor(
-      (Math.floor(progressionIncrease) * progressConditionMod * progressPotency * progressBuffMod) / 100
+      Math.floor(progressionIncrease) * progressConditionMod * progressEfficiency
     );
 
     if (
@@ -77,9 +79,12 @@ export class DelicateSynthesis extends GeneralAction {
       qualityBuffMod += 0.5;
     }
 
+    const qualityEfficiency = qualityPotency * qualityBuffMod / 100
+
     simulation.quality += Math.floor(
-      (Math.floor(qualityIncrease * qualityConditionMod) * qualityPotency * qualityBuffMod) / 100
+      Math.floor(qualityIncrease * qualityConditionMod) * qualityEfficiency
     );
+
     if (simulation.hasBuff(Buff.INNER_QUIET) && simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
       simulation.getBuff(Buff.INNER_QUIET).stacks++;
     }

@@ -12,7 +12,7 @@ export abstract class ProgressAction extends GeneralAction {
   execute(simulation: Simulation): void {
     let buffMod = this.getBaseBonus(simulation);
     let conditionMod = this.getBaseCondition(simulation);
-    let potency = this.getPotency(simulation);
+    const potency = this.getPotency(simulation);
     const progressionIncrease = this.getBaseProgression(simulation);
 
     switch (simulation.state) {
@@ -31,7 +31,11 @@ export abstract class ProgressAction extends GeneralAction {
       buffMod += 0.5;
     }
 
-    simulation.progression += Math.floor((Math.floor(progressionIncrease) * conditionMod * potency * buffMod) / 100);
+    const efficiency = potency * buffMod / 100
+
+    simulation.progression += Math.floor(
+      Math.floor(progressionIncrease) * conditionMod * efficiency
+    );
 
     if (
       simulation.hasBuff(Buff.FINAL_APPRAISAL) &&

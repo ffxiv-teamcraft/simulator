@@ -12,7 +12,7 @@ export abstract class QualityAction extends GeneralAction {
   execute(simulation: Simulation, safe = false, skipStackAddition = false): void {
     let buffMod = this.getBaseBonus(simulation);
     let conditionMod = this.getBaseCondition(simulation);
-    let potency = this.getPotency(simulation);
+    const potency = this.getPotency(simulation);
     const qualityIncrease = this.getBaseQuality(simulation);
 
     switch (simulation.state) {
@@ -37,7 +37,11 @@ export abstract class QualityAction extends GeneralAction {
       buffMod += 0.5;
     }
 
-    simulation.quality += Math.floor((Math.floor(qualityIncrease * conditionMod) * potency * buffMod) / 100);
+    const efficiency = potency * buffMod / 100
+
+    simulation.quality += Math.floor(
+      Math.floor(qualityIncrease * conditionMod) * efficiency
+    );
 
     if (
       simulation.hasBuff(Buff.INNER_QUIET) &&
