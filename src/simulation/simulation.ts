@@ -415,13 +415,11 @@ export class Simulation {
     const goodChance = this.crafterStats.level >= 63 ? 0.25 : 0.2;
 
     const statesAndRates = this.possibleConditions
+      .filter(condition => condition !== StepState.NORMAL)
       .map(condition => {
         // Default rate - most conditions are 12% so here we are.
         let rate = 0.12;
         switch (condition) {
-          case StepState.NORMAL:
-            rate = 1;
-            break;
           case StepState.GOOD:
             rate = this.recipe.expert ? 0.12 : goodChance;
             break;
@@ -448,20 +446,38 @@ export class Simulation {
             break;
         }
         return {
-          state: condition,
-          rate: rate
+          item: condition,
+          weight: rate
         };
-      })
-      .sort((a, b) => {
-        return a.rate - b.rate;
       });
 
-    for (let possibleState of statesAndRates) {
-      const roll = Math.random();
-      if (roll <= possibleState.rate) {
-        this.state = possibleState.state;
-        break;
-      }
-    }
+    let nonNormalRate = statesAndRates
+      .map(val => val.weight)
+      .reduce((accumulator, weight) => accumulator + weight);
+
+    statesAndRates.push({
+      item: StepState.NORMAL,
+      weight: 1 - nonNormalRate
+    });
+
+    this.state = getWeightedRandom(statesAndRates);
   }
 }
+
+const getWeightedRandom = <T>(weightedItems: { item: T; weight: number }[]): T => {
+  let totalWeights = weightedItems
+    .map(val => val.weight)
+    .reduce((accumulator, weight) => accumulator + weight);
+
+  const threshold = Math.random() * totalWeights;
+
+  let check = 0;
+  for (let { item, weight } of weightedItems) {
+    check += weight;
+    if (check > threshold) {
+      return item;
+    }
+  }
+
+  return weightedItems[weightedItems.length - 1].item;
+};

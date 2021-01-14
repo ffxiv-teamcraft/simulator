@@ -371,4 +371,40 @@ describe('Craft simulator tests', () => {
       StepState.PRIMED
     ]);
   });
+
+  it('Should apply conditions with the proper rates for expert 2 recipes', () => {
+    const simulation = new Simulation(
+      generateRecipe(480, 6178, 36208, 2480, 2195, 483),
+      [],
+      generateStats(80, 2745, 2885, 626),
+      [],
+      [],
+      []
+    );
+
+    simulation.recipe.expert = true;
+
+    const rates: { [state in StepState]?: number } = {
+      [StepState.NORMAL]: 0,
+      [StepState.GOOD]: 0,
+      [StepState.STURDY]: 0,
+      [StepState.PLIANT]: 0,
+      [StepState.MALLEABLE]: 0,
+      [StepState.PRIMED]: 0
+    };
+
+    const numSamples = 100000;
+
+    for (let i = 0; i < numSamples; i++) {
+      simulation.tickState();
+      rates[simulation.state]! += 1;
+    }
+
+    expect(rates[StepState.NORMAL]! / numSamples).toBeCloseTo(0.37, 1);
+    expect(rates[StepState.GOOD]! / numSamples).toBeCloseTo(0.12, 1);
+    expect(rates[StepState.STURDY]! / numSamples).toBeCloseTo(0.15, 1);
+    expect(rates[StepState.PLIANT]! / numSamples).toBeCloseTo(0.12, 1);
+    expect(rates[StepState.MALLEABLE]! / numSamples).toBeCloseTo(0.12, 1);
+    expect(rates[StepState.PRIMED]! / numSamples).toBeCloseTo(0.12, 1);
+  });
 });
