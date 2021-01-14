@@ -441,60 +441,40 @@ export class Simulation {
       return;
     }
 
-    // Good
-    const recipeLevel = this.recipe.rlvl;
-    const qualityAssurance = this.crafterStats.level >= 63;
-    let goodChances = 0;
-    if (recipeLevel >= 300) {
-      // 70*+
-      goodChances = qualityAssurance ? 0.11 : 0.1;
-    } else if (recipeLevel >= 276) {
-      // 65+
-      goodChances = qualityAssurance ? 0.17 : 0.15;
-    } else if (recipeLevel >= 255) {
-      // 61+
-      goodChances = qualityAssurance ? 0.22 : 0.2;
-    } else if (recipeLevel >= 150) {
-      // 60+
-      goodChances = qualityAssurance ? 0.11 : 0.1;
-    } else if (recipeLevel >= 136) {
-      // 55+
-      goodChances = qualityAssurance ? 0.17 : 0.15;
-    } else {
-      goodChances = qualityAssurance ? 0.27 : 0.25;
-    }
-
-    // Excellent
-    let excellentChances = 0;
-    if (recipeLevel >= 300) {
-      // 70*+
-      excellentChances = 0.01;
-    } else if (recipeLevel >= 255) {
-      // 61+
-      excellentChances = 0.02;
-    } else if (recipeLevel >= 150) {
-      // 60+
-      excellentChances = 0.01;
-    } else {
-      excellentChances = 0.02;
-    }
+    // LV 63 Trait for improved Good chances (Quality Assurance)
+    const goodChance = this.crafterStats.level >= 63 ? 0.25 : 0.2;
 
     const statesAndRates = this.possibleConditions
       .map(condition => {
-        // Default rate
+        // Default rate - do we need this as anything other than 0?
         let rate = 0.25;
         switch (condition) {
           case StepState.NORMAL:
             rate = 1;
             break;
           case StepState.GOOD:
-            rate = goodChances;
+              rate = this.recipe.expert ? 0.12 : goodChance;
             break;
           case StepState.EXCELLENT:
-            rate = excellentChances;
+            rate = this.recipe.expert ? 0 : 0.4;
             break;
           case StepState.POOR:
             rate = 0;
+            break;
+          case StepState.CENTERED:
+            rate = 0.15;
+            break;
+          case StepState.PLIANT:
+            rate = 0.12;
+            break;
+          case StepState.STURDY:
+            rate = 0.15;
+            break;
+          case StepState.MALLEABLE:
+            rate = 0.12;
+            break;
+          case StepState.PRIMED:
+            rate = 0.12;
             break;
         }
         return {
