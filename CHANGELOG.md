@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.10.2](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.1...v2.10.2) (2021-01-14)
+
+
+### Bug Fixes
+
+* update condition proc rates ([b2210f9](https://github.com/ffxiv-teamcraft/simulator/commit/b2210f9))
+
+
+
 ### [2.10.1](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.0...v2.10.1) (2021-01-13)
 
 
