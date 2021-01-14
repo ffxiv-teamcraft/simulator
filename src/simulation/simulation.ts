@@ -416,8 +416,8 @@ export class Simulation {
 
     const statesAndRates = this.possibleConditions
       .map(condition => {
-        // Default rate - do we need this as anything other than 0?
-        let rate = 0.25;
+        // Default rate - most conditions are 12% so here we are.
+        let rate = 0.12;
         switch (condition) {
           case StepState.NORMAL:
             rate = 1;
