@@ -61,48 +61,18 @@ export class Simulation {
     this.quality = Math.floor(this.quality);
     this.startingQuality = this.quality;
 
-    // TODO understand the bitmask properly for step conditions
-    // this.possibleConditions = this.recipe.conditionsFlag
-    //   .toString(2)
-    //   .split('')
-    //   .map((value, index) => {
-    //     if (value === '1') {
-    //       return index + 1 as StepState;
-    //     } else {
-    //       return null;
-    //     }
-    //   })
-    //   .filter(condition => condition !== null) as StepState[];
-
-    switch (this.recipe.conditionsFlag) {
-      case 15:
-        this.possibleConditions = [
-          StepState.NORMAL,
-          StepState.GOOD,
-          StepState.EXCELLENT,
-          StepState.POOR
-        ];
-        break;
-      case 115:
-        this.possibleConditions = [
-          StepState.NORMAL,
-          StepState.GOOD,
-          StepState.CENTERED,
-          StepState.STURDY,
-          StepState.PLIANT
-        ];
-        break;
-      case 483:
-        this.possibleConditions = [
-          StepState.NORMAL,
-          StepState.GOOD,
-          StepState.STURDY,
-          StepState.PLIANT,
-          StepState.MALLEABLE,
-          StepState.PRIMED
-        ];
-        break;
-    }
+    this.possibleConditions = this.recipe.conditionsFlag
+      .toString(2)
+      .split('')
+      .reverse()
+      .map((value, index) => {
+        if (value === '1') {
+          return (index + 1) as StepState;
+        } else {
+          return null;
+        }
+      })
+      .filter(condition => condition !== null) as StepState[];
   }
 
   public get lastStep(): ActionResult {
@@ -453,7 +423,7 @@ export class Simulation {
             rate = 1;
             break;
           case StepState.GOOD:
-              rate = this.recipe.expert ? 0.12 : goodChance;
+            rate = this.recipe.expert ? 0.12 : goodChance;
             break;
           case StepState.EXCELLENT:
             rate = this.recipe.expert ? 0 : 0.4;
