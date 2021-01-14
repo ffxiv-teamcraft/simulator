@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.10.3](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.2...v2.10.3) (2021-01-14)
+
+
+### Bug Fixes
+
+* **simulator:** correctly simulate random crafting conditions ([efe867b](https://github.com/ffxiv-teamcraft/simulator/commit/efe867b))
+
+
+
 ### [2.10.2](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.1...v2.10.2) (2021-01-14)
 
 
