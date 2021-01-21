@@ -142,6 +142,20 @@ describe('Craft simulator tests', () => {
     expect(result.simulation.availableCP).toBe(541 - 6 - Math.floor(56 / 2));
   });
 
+  it('Should reduce CP cost with PLIANT step state', () => {
+    const simulation = new Simulation(
+      generateStarRecipe(480, 4943, 32328, 2480, 2195, true),
+      [new PrudentTouch()],
+      generateStats(80, 2800, 2500, 541),
+      [],
+      {
+        0: StepState.PLIANT
+      }
+    );
+    const result = simulation.run(true);
+    expect(result.simulation.availableCP).toBe(541 - 13);
+  });
+
   it('Should reduce Durability cost with STURDY step state', () => {
     const simulation = new Simulation(
       generateStarRecipe(480, 4943, 32328, 2480, 2195, true),
