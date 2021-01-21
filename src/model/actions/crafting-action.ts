@@ -144,7 +144,7 @@ export abstract class CraftingAction {
   public getCPCost(simulationState: Simulation, linear = false): number {
     const baseCost = this.getBaseCPCost(simulationState);
     if (simulationState.state === StepState.PLIANT) {
-      return Math.floor(baseCost / 2);
+      return Math.ceil(baseCost / 2);
     }
     return baseCost;
   }
