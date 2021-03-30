@@ -11,6 +11,7 @@ import { Craft } from '../model/craft';
 import { StepState } from '../model/step-state';
 import { FinalAppraisal } from '../model/actions/buff/final-appraisal';
 import { RemoveFinalAppraisal } from '../model/actions/other/remove-final-appraisal';
+import { Observe } from '../simulator';
 
 export class Simulation {
   public progression = 0;
@@ -77,6 +78,22 @@ export class Simulation {
 
   public get lastStep(): ActionResult {
     return this.steps[this.steps.length - 1];
+  }
+
+  public get hasObserveComboAvailable(): boolean {
+    const observeId = new Observe().getIds()[0];
+    for (let index = this.steps.length - 1; index >= 0; index--) {
+      const step = this.steps[index];
+      // If we end up finding observe, the combo is available
+      if (step.action.getIds()[0] === observeId) {
+        return true;
+      }
+      // If there's an action that isn't skipped (fail or not), combo is broken
+      if (!step.skipped) {
+        return false;
+      }
+    }
+    return false;
   }
 
   public get crafterStats(): CrafterStats {

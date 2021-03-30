@@ -1,10 +1,8 @@
 import { QualityAction } from '../quality-action';
 import { Simulation } from '../../../simulation/simulation';
-import { Observe } from '../other/observe';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class FocusedTouch extends QualityAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 68 };
   }
@@ -22,8 +20,7 @@ export class FocusedTouch extends QualityAction {
   }
 
   getBaseSuccessRate(simulationState: Simulation): number {
-    return simulationState.lastStep !== undefined
-    && simulationState.lastStep.action.getIds()[0] === new Observe().getIds()[0] ? 100 : 50;
+    return simulationState.hasObserveComboAvailable ? 100 : 50;
   }
 
   getIds(): number[] {

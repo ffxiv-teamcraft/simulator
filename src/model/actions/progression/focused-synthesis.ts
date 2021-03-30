@@ -1,10 +1,8 @@
 import { ProgressAction } from '../progress-action';
 import { Simulation } from '../../../simulation/simulation';
-import { Observe } from '../other/observe';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class FocusedSynthesis extends ProgressAction {
-
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 67 };
   }
@@ -22,8 +20,7 @@ export class FocusedSynthesis extends ProgressAction {
   }
 
   getBaseSuccessRate(simulationState: Simulation): number {
-    return simulationState.lastStep !== undefined &&
-    simulationState.lastStep.action.getIds()[0] === new Observe().getIds()[0] ? 100 : 50;
+    return simulationState.hasObserveComboAvailable ? 100 : 50;
   }
 
   getIds(): number[] {
@@ -33,5 +30,4 @@ export class FocusedSynthesis extends ProgressAction {
   getPotency(simulation: Simulation): number {
     return 200;
   }
-
 }

@@ -26,6 +26,7 @@ import { TricksOfTheTrade } from '../src/model/actions/other/tricks-of-the-trade
 import { CarefulObservation } from '../src/model/actions/other/careful-observation';
 import { RemoveFinalAppraisal } from '../src/model/actions/other/remove-final-appraisal';
 import { StandardTouch } from '../src/model/actions/quality/standard-touch';
+import { FocusedSynthesis } from '../src/model/actions/progression/focused-synthesis';
 
 describe('Craft simulator tests', () => {
   it('Should apply Name of the Elements bonus properly', () => {
@@ -420,5 +421,19 @@ describe('Craft simulator tests', () => {
     expect(rates[StepState.PLIANT]! / numSamples).toBeCloseTo(0.12, 1);
     expect(rates[StepState.MALLEABLE]! / numSamples).toBeCloseTo(0.12, 1);
     expect(rates[StepState.PRIMED]! / numSamples).toBeCloseTo(0.12, 1);
+  });
+
+  it('Should handle skipped actions due to missing CP/Level', () => {
+    const simulation = new Simulation(
+      generateRecipe(480, 900, 36208, 2480, 2195),
+      [new Observe(), new CarefulSynthesis(), new ByregotsBlessing(), new FocusedSynthesis()],
+      generateStats(80, 2745, 2885, 12),
+      [],
+      [],
+      []
+    );
+
+    const result = simulation.getReliabilityReport();
+    expect(result.successPercent).toBe(100);
   });
 });
