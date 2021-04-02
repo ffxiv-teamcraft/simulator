@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.10.6](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.5...v2.10.6) (2021-04-02)
+
+
+### Bug Fixes
+
+* **Observe:** fixed combo being broken for standard touch ([5a412b8](https://github.com/ffxiv-teamcraft/simulator/commit/5a412b8))
+
+
+
 ### [2.10.5](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.4...v2.10.5) (2021-03-30)
 
 
