@@ -80,12 +80,11 @@ export class Simulation {
     return this.steps[this.steps.length - 1];
   }
 
-  public get hasObserveComboAvailable(): boolean {
-    const observeId = new Observe().getIds()[0];
+  public hasComboAvailable(actionId: number): boolean {
     for (let index = this.steps.length - 1; index >= 0; index--) {
       const step = this.steps[index];
-      // If we end up finding observe, the combo is available
-      if (step.action.getIds()[0] === observeId) {
+      // If we end up finding the action, the combo is available
+      if (step.action.getIds()[0] === actionId) {
         return true;
       }
       // If there's an action that isn't skipped (fail or not), combo is broken

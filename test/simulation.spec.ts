@@ -434,6 +434,18 @@ describe('Craft simulator tests', () => {
     );
 
     const result = simulation.getReliabilityReport();
+
     expect(result.successPercent).toBe(100);
+    const simulation2 = new Simulation(
+      generateRecipe(480, 900, 1400, 2480, 2195),
+      [new BasicTouch(), new ByregotsBlessing(), new StandardTouch()],
+      generateStats(80, 2745, 2885, 36),
+      [],
+      [],
+      []
+    );
+
+    const result2 = simulation2.getReliabilityReport();
+    expect(result2.averageHQPercent).toBe(100);
   });
 });
