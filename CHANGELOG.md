@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.10.7](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.6...v2.10.7) (2021-04-07)
+
+
+### Bug Fixes
+
+* **standard-touch:** fixed wrong combo for CP cost reduction ([2f986d8](https://github.com/ffxiv-teamcraft/simulator/commit/2f986d8))
+
+
+
 ### [2.10.6](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.5...v2.10.6) (2021-04-02)
 
 
