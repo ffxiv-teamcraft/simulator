@@ -11,7 +11,6 @@ import { Craft } from '../model/craft';
 import { StepState } from '../model/step-state';
 import { FinalAppraisal } from '../model/actions/buff/final-appraisal';
 import { RemoveFinalAppraisal } from '../model/actions/other/remove-final-appraisal';
-import { Observe } from '../simulator';
 
 export class Simulation {
   public progression = 0;
@@ -84,7 +83,7 @@ export class Simulation {
     for (let index = this.steps.length - 1; index >= 0; index--) {
       const step = this.steps[index];
       // If we end up finding the action, the combo is available
-      if (step.action.getIds()[0] === actionId) {
+      if (step.action.getIds()[0] === actionId && step.success) {
         return true;
       }
       // If there's an action that isn't skipped (fail or not), combo is broken
