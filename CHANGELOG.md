@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.10.8](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.7...v2.10.8) (2021-04-28)
+
+
+### Bug Fixes
+
+* **combos:** only consider action combo if the action didn't fail ([ee97c32](https://github.com/ffxiv-teamcraft/simulator/commit/ee97c32))
+
+
+
 ### [2.10.7](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.6...v2.10.7) (2021-04-07)
 
 
