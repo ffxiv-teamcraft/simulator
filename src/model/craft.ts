@@ -16,7 +16,7 @@ export interface Craft {
   controlReq?: number;
   craftsmanshipReq?: number;
   unlockId?: number;
-  ingredients?: Ingredient[];
+  ingredients: Ingredient[];
   yield?: number;
   expert?: boolean;
   conditionsFlag: number;
