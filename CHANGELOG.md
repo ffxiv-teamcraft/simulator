@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.10.9](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.8...v2.10.9) (2021-10-24)
+
+
+### Bug Fixes
+
+* **model:** make hq and quickSynth optional on Craft ([12005a7](https://github.com/ffxiv-teamcraft/simulator/commit/12005a7))
+
+
+
 ### [2.10.8](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.7...v2.10.8) (2021-04-28)
 
 
