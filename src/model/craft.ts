@@ -11,12 +11,12 @@ export interface Craft {
   suggestedCraftsmanship: number;
   suggestedControl: number;
   stars?: number;
-  hq: 1 | 0;
-  quickSynth: 1 | 0;
+  hq?: 1 | 0;
+  quickSynth?: 1 | 0;
   controlReq?: number;
   craftsmanshipReq?: number;
   unlockId?: number;
-  ingredients: Ingredient[];
+  ingredients?: Ingredient[];
   yield?: number;
   expert?: boolean;
   conditionsFlag: number;

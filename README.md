@@ -1,7 +1,7 @@
 # Teamcraft simulator
 [![CircleCI](https://circleci.com/gh/ffxiv-teamcraft/simulator.svg?style=svg)](https://circleci.com/gh/ffxiv-teamcraft/simulator)
 [![codecov](https://codecov.io/gh/ffxiv-teamcraft/simulator/branch/master/graph/badge.svg)](https://codecov.io/gh/ffxiv-teamcraft/simulator)
-[![npm version](https://badge.fury.io/js/%40ffxivteamcraft%2Fsimulator.svg)](https://www.npmjs.com/package/@kaiu/serializer)
+[![npm version](https://badge.fury.io/js/@ffxiv-teamcraft/simulator.svg)](https://www.npmjs.com/package/@ffxiv-teamcraft/simulator)
 [![GitHub issues](https://img.shields.io/github/issues/ffxiv-teamcraft/simulator.svg)](https://github.com/ffxiv-teamcraft/simulator/issues)
 [![GitHub stars](https://img.shields.io/github/stars/ffxiv-teamcraft/simulator.svg)](https://github.com/ffxiv-teamcraft/simulator/stargazers)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/ffxiv-teamcraft/simulator/master/LICENSE)
