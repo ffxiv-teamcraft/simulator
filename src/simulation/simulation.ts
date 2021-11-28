@@ -439,7 +439,7 @@ export class Simulation {
             rate = this.recipe.expert ? 0.12 : goodChance;
             break;
           case StepState.EXCELLENT:
-            rate = this.recipe.expert ? 0 : 0.4;
+            rate = this.recipe.expert ? 0 : 0.04;
             break;
           case StepState.POOR:
             rate = 0;
