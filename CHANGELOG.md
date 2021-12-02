@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-rc.3](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.0-rc.2...v3.0.0-rc.3) (2021-12-02)
+
+
+### Bug Fixes
+
+* **core:** switch IQ buff bonus from multiplicative to additive ([94669e5](https://github.com/ffxiv-teamcraft/simulator/commit/94669e5))
+
+
+
 ## [3.0.0-rc.2](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.0-rc.1...v3.0.0-rc.2) (2021-12-02)
 
 
