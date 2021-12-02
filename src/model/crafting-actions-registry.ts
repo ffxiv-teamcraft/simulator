@@ -33,6 +33,7 @@ import { CarefulObservation } from './actions/other/careful-observation';
 import { AdvancedTouch } from './actions/quality/advanced-touch';
 import { PrudentSynthesis } from './actions/progression/prudent-synthesis';
 import { HeartAndSoul } from './actions/buff/heart-and-soul';
+import { TrainedFinesse } from './actions/quality/trained-finesse';
 
 export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
@@ -110,6 +111,7 @@ export class CraftingActionsRegistry {
     { name: 'TrainedEye', action: new TrainedEye() },
     { name: 'PreparatoryTouch', action: new PreparatoryTouch() },
     { name: 'Reflect', action: new Reflect() },
+    { name: 'TrainedFinesse', action: new TrainedFinesse() },
 
     // CP recovery
     { name: 'TricksOfTheTrade', action: new TricksOfTheTrade() },
