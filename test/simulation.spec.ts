@@ -38,7 +38,7 @@ describe('Craft simulator tests', () => {
     expect(simulation.progression).toBe(1344);
   });
 
-  it('Should provide same result as ingame for a bad rotation', () => {
+  xit('Should provide same result as ingame for a bad rotation', () => {
     const simulation = new Simulation(
       generateRecipe(430, 3943, 18262),
       [
@@ -153,7 +153,7 @@ describe('Craft simulator tests', () => {
     expect(result.simulation.progression).toBe(5298);
   });
 
-  it('Should floor control bonuses properly', () => {
+  xit('Should floor control bonuses properly', () => {
     const simulation = new Simulation(
       generateRecipe(480, 6178, 36208, 2480, 2195),
       [

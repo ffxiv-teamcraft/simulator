@@ -197,12 +197,10 @@ export abstract class CraftingAction {
   public getBaseQuality(simulation: Simulation): number {
     // Quality = (Control + 10000) / (SuggestedControl + 10000) * ((Control * 35) / 100 + 35) * CraftLevelDifference.Quality / 100
     const stats = simulation.crafterStats;
-    const IQBonus = 1 + (simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0) / 10;
     return (
       (((stats.getControl(simulation) + 10000) / (simulation.recipe.suggestedControl + 10000)) *
         ((stats.getControl(simulation) * 35) / 100 + 35) *
-        this.getLevelDifference(simulation).QualityFactor *
-        IQBonus) /
+        this.getLevelDifference(simulation).QualityFactor) /
       100
     );
   }

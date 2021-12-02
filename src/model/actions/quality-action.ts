@@ -36,6 +36,7 @@ export abstract class QualityAction extends GeneralAction {
     if (simulation.hasBuff(Buff.INNOVATION)) {
       buffMod += 0.5;
     }
+    buffMod += simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0;
 
     const efficiency = (potency * buffMod) / 100;
 
