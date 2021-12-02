@@ -1,6 +1,6 @@
 {
   "name": "@ffxiv-teamcraft/simulator",
-  "version": "2.10.12",
+  "version": "3.0.0-rc.0",
   "description": "A FINAL FANTASY XIV crafting simulator",
   "keywords": [
     "ffxiv",

@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-rc.0](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.12...v3.0.0-rc.0) (2021-12-02)
+
+
+### Bug Fixes
+
+* **core:** excellent state probability ([521c2ab](https://github.com/ffxiv-teamcraft/simulator/commit/521c2ab))
+
+
+### Features
+
+* **simulation:** 6.0 changes ([f8c2d1a](https://github.com/ffxiv-teamcraft/simulator/commit/f8c2d1a))
+
+
+### BREAKING CHANGES
+
+* **simulation:** this makes any rotation created before 6.0 inaccurate with their corresponding game version.
+
+
+
 ### [2.10.12](https://github.com/ffxiv-teamcraft/simulator/compare/v2.10.10...v2.10.12) (2021-10-24)
 
 
