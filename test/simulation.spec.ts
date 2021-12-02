@@ -61,7 +61,7 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.success).toBeTruthy();
-    expect(simulation.quality).toBe(8941);
+    expect(simulation.quality).toBe(4636);
   });
 
   it('Should fail a craft when user is below minimum stat requirements', () => {
@@ -167,7 +167,7 @@ describe('Craft simulator tests', () => {
 
     simulation.run(true);
 
-    expect(simulation.quality).toBe(3742);
+    expect(simulation.quality).toBe(2357);
   });
 
   it('Should not tick buffs if a buff is set to fail', () => {
