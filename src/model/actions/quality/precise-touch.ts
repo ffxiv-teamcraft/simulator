@@ -1,8 +1,8 @@
 import { QualityAction } from '../quality-action';
 import { Simulation } from '../../../simulation/simulation';
-import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 import { StepState } from '../../step-state';
+import { Buff } from '../../buff.enum';
 
 export class PreciseTouch extends QualityAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
@@ -11,9 +11,7 @@ export class PreciseTouch extends QualityAction {
 
   execute(simulation: Simulation): void {
     super.execute(simulation);
-    if (simulation.hasBuff(Buff.INNER_QUIET) && simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
-      simulation.getBuff(Buff.INNER_QUIET).stacks++;
-    }
+    simulation.addInnerQuietStacks(1);
   }
 
   public requiresGood(): boolean {
@@ -24,11 +22,13 @@ export class PreciseTouch extends QualityAction {
     if (linear) {
       return true;
     }
-    if (simulationState.safe) {
+    if (simulationState.safe && !simulationState.hasBuff(Buff.HEART_AND_SOUL)) {
       return false;
     }
     return (
-      simulationState.state === StepState.GOOD || simulationState.state === StepState.EXCELLENT
+      simulationState.hasBuff(Buff.HEART_AND_SOUL) ||
+      simulationState.state === StepState.GOOD ||
+      simulationState.state === StepState.EXCELLENT
     );
   }
 

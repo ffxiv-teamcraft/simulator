@@ -101,7 +101,7 @@
     "jest-config": "^23.6.0",
     "lint-staged": "^8.0.0",
     "lodash.camelcase": "^4.3.0",
-    "prettier": "^1.14.3",
+    "prettier": "^2.5.0",
     "prompt": "^1.0.0",
     "replace-in-file": "^3.4.2",
     "rimraf": "^2.6.2",
@@ -120,7 +120,7 @@
     "tslint-config-prettier": "^1.15.0",
     "tslint-config-standard": "^8.0.1",
     "typedoc": "^0.19.2",
-    "typescript": "^4.1.2",
+    "typescript": "^4.5.2",
     "csv-parser": "^2.3.1"
   },
   "dependencies": {

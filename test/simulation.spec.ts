@@ -2,13 +2,10 @@ import { Simulation } from '../src/simulation/simulation';
 import { SimulationFailCause } from '../src/model/simulation-fail-cause.enum';
 import { generateRecipe, generateStarRecipe, generateStats } from './mocks';
 import { MuscleMemory } from '../src/model/actions/progression/muscle-memory';
-import { NameOfTheElements } from '../src/model/actions/buff/name-of-the-elements';
-import { BrandOfTheElements } from '../src/model/actions/progression/brand-of-the-elements';
 import { CarefulSynthesis } from '../src/model/actions/progression/careful-synthesis';
 import { Groundwork } from '../src/model/actions/progression/groundwork';
 import { RapidSynthesis } from '../src/model/actions/progression/rapid-synthesis';
 import { FinalAppraisal } from '../src/model/actions/buff/final-appraisal';
-import { InnerQuiet } from '../src/model/actions/buff/inner-quiet';
 import { WasteNot } from '../src/model/actions/buff/waste-not';
 import { WasteNotII } from '../src/model/actions/buff/waste-not-ii';
 import { Manipulation } from '../src/model/actions/buff/manipulation';
@@ -29,29 +26,6 @@ import { StandardTouch } from '../src/model/actions/quality/standard-touch';
 import { FocusedSynthesis } from '../src/model/actions/progression/focused-synthesis';
 
 describe('Craft simulator tests', () => {
-  it('Should apply Name of the Elements bonus properly', () => {
-    const simulation = new Simulation(
-      generateRecipe(430),
-      [new MuscleMemory(), new NameOfTheElements(), new BrandOfTheElements()],
-      generateStats(80, 2087, 1873, 463)
-    );
-    simulation.run(true);
-    expect(simulation.progression).toBe(2831);
-
-    const simulation2 = new Simulation(
-      generateRecipe(430),
-      [
-        new MuscleMemory(),
-        new CarefulSynthesis(),
-        new NameOfTheElements(),
-        new BrandOfTheElements()
-      ],
-      generateStats(80, 2087, 1873, 463)
-    );
-    simulation2.run(true);
-    expect(simulation2.progression).toBe(3422);
-  });
-
   it('Should use MuMe properly', () => {
     const simulation = new Simulation(
       generateRecipe(430),
@@ -71,14 +45,13 @@ describe('Craft simulator tests', () => {
         new CarefulSynthesis(), // 672
         new FinalAppraisal(),
         new CarefulSynthesis(), // 582
-        new InnerQuiet(),
         new WasteNotII(),
         new PreparatoryTouch(), // 1396
         new PreparatoryTouch(), // 2048
         new MastersMend(),
         new MastersMend(),
         new ByregotsBlessing(), // 2491
-        new CarefulSynthesis()
+        new CarefulSynthesis(),
       ],
       generateStats(80, 2087, 1873, 463)
     );
@@ -89,26 +62,6 @@ describe('Craft simulator tests', () => {
     expect(simulation.quality).toBe(5935);
   });
 
-  it('Should match 5.2 preliminary patch notes', () => {
-    const simulation = new Simulation(
-      generateRecipe(430, 3943, 18262),
-      [
-        new InnerQuiet(),
-        new Manipulation(),
-        new NameOfTheElements(),
-        new BrandOfTheElements(),
-        new BasicTouch()
-      ],
-      generateStats(80, 1822, 1696, 421)
-    );
-    simulation.run(true);
-
-    expect(simulation.durability).toBe(70);
-    expect(simulation.progression).toBe(1149);
-    expect(simulation.quality).toBe(626); // starting HQ with 1 each of oyster+lemonette for 5481
-    expect(simulation.success).toBeFalsy();
-  });
-
   it('Should fail a craft when user is below minimum stat requirements', () => {
     const simulation = new Simulation(
       generateStarRecipe(480, 4943, 32328, 2480, 2195),
@@ -117,7 +70,7 @@ describe('Craft simulator tests', () => {
         new WasteNot(),
         new Veneration(),
         new Groundwork(),
-        new CarefulSynthesis()
+        new CarefulSynthesis(),
       ],
       generateStats(80, 2450, 2500, 541)
     );
@@ -136,7 +89,7 @@ describe('Craft simulator tests', () => {
       generateStats(80, 2800, 2500, 541),
       [],
       {
-        1: StepState.PLIANT
+        1: StepState.PLIANT,
       }
     );
     const result = simulation.run(true);
@@ -150,7 +103,7 @@ describe('Craft simulator tests', () => {
       generateStats(80, 2800, 2500, 541),
       [],
       {
-        0: StepState.PLIANT
+        0: StepState.PLIANT,
       }
     );
     const result = simulation.run(true);
@@ -164,7 +117,7 @@ describe('Craft simulator tests', () => {
       generateStats(80, 2800, 2500, 541),
       [],
       {
-        0: StepState.STURDY
+        0: StepState.STURDY,
       }
     );
     const result = simulation.run(true);
@@ -176,7 +129,7 @@ describe('Craft simulator tests', () => {
       generateStats(80, 2800, 2500, 541),
       [],
       {
-        1: StepState.STURDY
+        1: StepState.STURDY,
       }
     );
     const result2 = simulation2.run(true);
@@ -190,7 +143,7 @@ describe('Craft simulator tests', () => {
       generateStats(80, 2763, 2800, 554),
       [],
       {
-        1: StepState.MALLEABLE
+        1: StepState.MALLEABLE,
       }
     );
 
@@ -202,11 +155,10 @@ describe('Craft simulator tests', () => {
     const simulation = new Simulation(
       generateRecipe(480, 6178, 36208, 2480, 2195),
       [
-        new InnerQuiet(),
         new PrudentTouch(), // +512 (512)
         new PrudentTouch(), // +634 (1146)
         new PrudentTouch(), // +762 (1908)
-        new PrudentTouch() // +898 (2806)
+        new PrudentTouch(), // +898 (2806)
       ],
       generateStats(80, 2486, 2318, 613)
     );
@@ -214,46 +166,6 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.quality).toBe(2806);
-  });
-
-  it('Should add nameless after name of the element expired', () => {
-    const simulation = new Simulation(
-      generateRecipe(480, 6178, 36208, 2480, 2195),
-      [
-        new NameOfTheElements(),
-        new Observe(),
-        new Observe(),
-        new Observe(),
-        new Observe(),
-        new Observe()
-      ],
-      generateStats(80, 2486, 2318, 613)
-    );
-
-    simulation.run(true);
-
-    expect(simulation.buffs.some(buff => buff.buff === Buff.NAMELESS)).toBeTruthy();
-  });
-
-  it('Should block name of the elements when nameless is applied', () => {
-    const simulation = new Simulation(
-      generateRecipe(480, 6178, 36208, 2480, 2195),
-      [
-        new NameOfTheElements(),
-        new Observe(),
-        new Observe(),
-        new Observe(),
-        new Observe(),
-        new Observe(),
-        new NameOfTheElements()
-      ],
-      generateStats(80, 2486, 2318, 613)
-    );
-
-    simulation.run(true);
-
-    expect(simulation.buffs.some(buff => buff.buff === Buff.NAME_OF_THE_ELEMENTS)).toBeFalsy();
-    expect(new NameOfTheElements().canBeUsed(simulation)).toBeFalsy();
   });
 
   it('Should not tick buffs if a buff is set to fail', () => {
@@ -278,7 +190,7 @@ describe('Craft simulator tests', () => {
         new GreatStrides(),
         new FinalAppraisal(),
         new CarefulObservation(),
-        new RemoveFinalAppraisal()
+        new RemoveFinalAppraisal(),
       ],
       generateStats(80, 2486, 2318, 613),
       [],
@@ -311,14 +223,14 @@ describe('Craft simulator tests', () => {
       [
         new MuscleMemory(),
         new Manipulation(),
-        new InnerQuiet(),
+        new Observe(),
         new Veneration(),
         new Groundwork(),
         new PrudentTouch(),
         new PrudentTouch(),
         new PrudentTouch(),
         new PrudentTouch(),
-        new PrudentTouch()
+        new PrudentTouch(),
       ],
       generateStats(80, 2745, 2885, 626),
       [],
@@ -344,7 +256,7 @@ describe('Craft simulator tests', () => {
       StepState.NORMAL,
       StepState.GOOD,
       StepState.EXCELLENT,
-      StepState.POOR
+      StepState.POOR,
     ]);
   });
 
@@ -363,7 +275,7 @@ describe('Craft simulator tests', () => {
       StepState.GOOD,
       StepState.CENTERED,
       StepState.STURDY,
-      StepState.PLIANT
+      StepState.PLIANT,
     ]);
   });
 
@@ -383,7 +295,7 @@ describe('Craft simulator tests', () => {
       StepState.STURDY,
       StepState.PLIANT,
       StepState.MALLEABLE,
-      StepState.PRIMED
+      StepState.PRIMED,
     ]);
   });
 
@@ -405,7 +317,7 @@ describe('Craft simulator tests', () => {
       [StepState.STURDY]: 0,
       [StepState.PLIANT]: 0,
       [StepState.MALLEABLE]: 0,
-      [StepState.PRIMED]: 0
+      [StepState.PRIMED]: 0,
     };
 
     const numSamples = 100000;

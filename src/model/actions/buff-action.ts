@@ -55,7 +55,9 @@ export abstract class BuffAction extends CraftingAction {
 
   abstract getInitialStacks(): number;
 
-  protected abstract getTick(): ((simulation: Simulation, linear?: boolean) => void) | undefined;
+  protected abstract getTick():
+    | ((simulation: Simulation, linear?: boolean, action?: CraftingAction) => void)
+    | undefined;
 
   protected getOnExpire(): ((simulation: Simulation, linear?: boolean) => void) | undefined {
     // Adding a return here to avoid typescript compilation error due to empty block.
@@ -64,14 +66,15 @@ export abstract class BuffAction extends CraftingAction {
 
   private getAppliedBuff(simulation: Simulation): EffectiveBuff {
     return {
-      duration: simulation.state === StepState.PRIMED
-        ? this.getDuration(simulation) + 2
-        : this.getDuration(simulation),
+      duration:
+        simulation.state === StepState.PRIMED
+          ? this.getDuration(simulation) + 2
+          : this.getDuration(simulation),
       tick: this.getTick(),
       onExpire: this.getOnExpire(),
       stacks: this.getInitialStacks(),
       buff: this.getBuff(),
-      appliedStep: simulation.steps.length
+      appliedStep: simulation.steps.length,
     };
   }
 }

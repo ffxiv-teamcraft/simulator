@@ -28,9 +28,10 @@ export class Groundwork extends ProgressAction {
   }
 
   getPotency(simulation: Simulation): number {
+    const basePotency = simulation.crafterStats.level >= 86 ? 360 : 300;
     if (simulation.durability >= this.getDurabilityCost(simulation)) {
-      return 300;
+      return basePotency;
     }
-    return 150;
+    return basePotency / 2;
   }
 }

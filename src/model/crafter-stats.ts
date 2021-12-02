@@ -1,5 +1,4 @@
 import { Simulation } from '../simulation/simulation';
-import { Buff } from './buff.enum';
 
 export type CrafterLevels = [number, number, number, number, number, number, number, number];
 
@@ -15,13 +14,6 @@ export class CrafterStats {
   ) {}
 
   public getControl(simulationState: Simulation): number {
-    let control = this._control;
-    // Apply IQ control bonus
-    if (simulationState.hasBuff(Buff.INNER_QUIET)) {
-      const innerQuietStacks = simulationState.getBuff(Buff.INNER_QUIET).stacks;
-      control += Math.floor(0.2 * (innerQuietStacks - 1) * this._control);
-    }
-    // Total bonus is no longer capped.
-    return control;
+    return this._control;
   }
 }

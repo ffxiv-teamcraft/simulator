@@ -7,6 +7,7 @@ import { SimulationFailCause } from '../simulation-fail-cause.enum';
 import { Class } from '@kaiu/serializer';
 import { CraftLevelDifference, LevelDifference } from '../formulas/craft-level-difference';
 import { StepState } from '../step-state';
+import { Buff } from '../buff.enum';
 
 /**
  * This is the parent class of all actions in the simulator.
@@ -167,7 +168,7 @@ export abstract class CraftingAction {
    * Checks if this action is an instance of a given other action.
    * @param actionClass
    */
-  is(actionClass: Class<CraftingAction>): boolean {
+  is<T extends CraftingAction>(actionClass: Class<T>): actionClass is Class<T> {
     return this instanceof actionClass;
   }
 
@@ -178,7 +179,7 @@ export abstract class CraftingAction {
     let levelDifference = crafterLevel - recipeLevel;
     levelDifference = Math.min(49, Math.max(-30, levelDifference));
     return CraftLevelDifference.find(
-      entry => entry.Difference === levelDifference
+      (entry) => entry.Difference === levelDifference
     ) as LevelDifference;
   }
 
@@ -196,10 +197,12 @@ export abstract class CraftingAction {
   public getBaseQuality(simulation: Simulation): number {
     // Quality = (Control + 10000) / (SuggestedControl + 10000) * ((Control * 35) / 100 + 35) * CraftLevelDifference.Quality / 100
     const stats = simulation.crafterStats;
+    const IQBonus = 1 + (simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0) / 10;
     return (
       (((stats.getControl(simulation) + 10000) / (simulation.recipe.suggestedControl + 10000)) *
         ((stats.getControl(simulation) * 35) / 100 + 35) *
-        this.getLevelDifference(simulation).QualityFactor) /
+        this.getLevelDifference(simulation).QualityFactor *
+        IQBonus) /
       100
     );
   }

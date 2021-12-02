@@ -49,7 +49,7 @@ export class Simulation {
     this.maxCP = this.availableCP;
     for (const ingredient of this.hqIngredients) {
       // Get the ingredient in the recipe
-      const ingredientDetails = this.recipe.ingredients.find(i => i.id === ingredient.id);
+      const ingredientDetails = this.recipe.ingredients.find((i) => i.id === ingredient.id);
       // Check that the ingredient in included in the recipe
       if (ingredientDetails !== undefined && ingredientDetails.quality) {
         this.quality += ingredientDetails.quality * ingredient.amount;
@@ -72,7 +72,7 @@ export class Simulation {
           return null;
         }
       })
-      .filter(condition => condition !== null) as StepState[];
+      .filter((condition) => condition !== null) as StepState[];
   }
 
   public get lastStep(): ActionResult {
@@ -108,7 +108,7 @@ export class Simulation {
       results.push(this.run(false));
       this.reset();
     }
-    const successPercent = (results.filter(res => res.success).length / results.length) * 100;
+    const successPercent = (results.filter((res) => res.success).length / results.length) * 100;
     const hqPercent = results.reduce((p, c) => p + c.hqPercent, 0) / results.length;
     let hqMedian: number;
     results = results.sort((a, b) => a.hqPercent - b.hqPercent);
@@ -126,8 +126,22 @@ export class Simulation {
       averageHQPercent: Math.round(hqPercent),
       medianHQPercent: hqMedian,
       minHQPercent: results[0].hqPercent,
-      maxHQPercent: results[results.length - 1].hqPercent
+      maxHQPercent: results[results.length - 1].hqPercent,
     };
+  }
+
+  public addInnerQuietStacks(stacks: number): void {
+    if (!this.hasBuff(Buff.INNER_QUIET)) {
+      this.buffs.push({
+        appliedStep: this.steps.length,
+        stacks: Math.max(stacks, 10),
+        buff: Buff.INNER_QUIET,
+        duration: Infinity,
+      });
+    } else {
+      const iq = this.getBuff(Buff.INNER_QUIET);
+      iq.stacks = Math.max(iq.stacks + stacks, 10);
+    }
   }
 
   public getMinStats(): { control: number; craftsmanship: number; cp: number; found: boolean } {
@@ -138,7 +152,7 @@ export class Simulation {
       control: this.crafterStats._control,
       craftsmanship: this.crafterStats.craftsmanship,
       cp: this.crafterStats.cp,
-      found: true
+      found: true,
     };
 
     this.crafterStats.craftsmanship = 1;
@@ -213,7 +227,7 @@ export class Simulation {
   public run(linear = false, maxTurns = Infinity, safeMode = false): SimulationResult {
     this.lastPossibleReclaimStep = -1;
     this.actions
-      .filter(a => a !== undefined)
+      .filter((a) => a !== undefined)
       .forEach((action: CraftingAction, index: number) => {
         this.state = this.stepStates[index] || StepState.NORMAL;
         let result: ActionResult;
@@ -245,7 +259,7 @@ export class Simulation {
             skipped: true,
             solidityDifference: 0,
             state: this.state,
-            failCause: failCause
+            failCause: failCause,
           };
         }
         if (this.steps.length < maxTurns) {
@@ -256,7 +270,7 @@ export class Simulation {
           const skipTicksOnFail = !result.success && action.skipOnFail();
           if (this.success === undefined && !action.skipsBuffTicks() && !skipTicksOnFail) {
             // Tick buffs after checking synth result, so if we reach 0 durability, synth fails.
-            this.tickBuffs(linear);
+            this.tickBuffs(linear, action);
           }
           result.afterBuffTick = {
             // Amount of progression added to the craft
@@ -266,7 +280,7 @@ export class Simulation {
             // CP added to the craft (negative if removed)
             cpDifference: this.availableCP - cpBefore,
             // Solidity added to the craft (negative if removed)
-            solidityDifference: this.durability - durabilityBefore
+            solidityDifference: this.durability - durabilityBefore,
           };
         }
         // Tick state to change it for next turn if not in linear mode
@@ -277,12 +291,12 @@ export class Simulation {
         this.steps.push(result);
       });
 
-    const failedAction = this.steps.find(step => step.failCause !== undefined);
+    const failedAction = this.steps.find((step) => step.failCause !== undefined);
     const res: SimulationResult = {
       steps: this.steps,
       hqPercent: this.getHQPercent(),
       success: this.progression >= this.recipe.progress,
-      simulation: this
+      simulation: this,
     };
     if (failedAction !== undefined && failedAction.failCause) {
       res.failCause = SimulationFailCause[failedAction.failCause];
@@ -315,7 +329,11 @@ export class Simulation {
     const cpBefore = this.availableCP;
     let failCause: SimulationFailCause | undefined = undefined;
     let success = false;
-    if (safeMode && (action.getSuccessRate(this) < 100 || action.requiresGood())) {
+    if (
+      safeMode &&
+      (action.getSuccessRate(this) < 100 ||
+        (action.requiresGood() && !this.hasBuff(Buff.HEART_AND_SOUL)))
+    ) {
       failCause = SimulationFailCause.UNSAFE_ACTION;
       action.onFail(this);
       this.safe = false;
@@ -349,20 +367,20 @@ export class Simulation {
       skipped: false,
       solidityDifference: this.durability - durabilityBefore,
       state: this.state,
-      failCause: failCause
+      failCause: failCause,
     };
   }
 
   public hasBuff(buff: Buff): boolean {
-    return this.buffs.find(row => row.buff === buff) !== undefined;
+    return this.buffs.find((row) => row.buff === buff) !== undefined;
   }
 
   public getBuff(buff: Buff): EffectiveBuff {
-    return this.buffs.find(row => row.buff === buff) as EffectiveBuff;
+    return this.buffs.find((row) => row.buff === buff) as EffectiveBuff;
   }
 
   public removeBuff(buff: Buff): void {
-    this.buffs = this.buffs.filter(row => row.buff !== buff);
+    this.buffs = this.buffs.filter((row) => row.buff !== buff);
   }
 
   public repair(amount: number): void {
@@ -395,24 +413,24 @@ export class Simulation {
     }
   }
 
-  private tickBuffs(linear = false): void {
+  private tickBuffs(linear = false, action?: CraftingAction): void {
     for (const effectiveBuff of this.buffs) {
       // We are checking the appliedStep because ticks only happen at the beginning of the second turn after the application,
       // For instance, Great strides launched at turn 1 will start to loose duration at the beginning of turn 3
       if (effectiveBuff.appliedStep < this.steps.length) {
         // If the buff has something to do, let it do it
         if (effectiveBuff.tick !== undefined) {
-          effectiveBuff.tick(this, linear);
+          effectiveBuff.tick(this, linear, action);
         }
         effectiveBuff.duration--;
       }
     }
     this.buffs
-      .filter(buff => buff.duration <= 0 && buff.onExpire !== undefined)
+      .filter((buff) => buff.duration <= 0 && buff.onExpire !== undefined)
       .forEach((expired: any) => {
         expired.onExpire(this, linear);
       });
-    this.buffs = this.buffs.filter(buff => buff.duration > 0);
+    this.buffs = this.buffs.filter((buff) => buff.duration > 0);
   }
 
   /**
@@ -430,8 +448,8 @@ export class Simulation {
     const goodChance = this.crafterStats.level >= 63 ? 0.25 : 0.2;
 
     const statesAndRates = this.possibleConditions
-      .filter(condition => condition !== StepState.NORMAL)
-      .map(condition => {
+      .filter((condition) => condition !== StepState.NORMAL)
+      .map((condition) => {
         // Default rate - most conditions are 12% so here we are.
         let rate = 0.12;
         switch (condition) {
@@ -462,17 +480,17 @@ export class Simulation {
         }
         return {
           item: condition,
-          weight: rate
+          weight: rate,
         };
       });
 
     let nonNormalRate = statesAndRates
-      .map(val => val.weight)
+      .map((val) => val.weight)
       .reduce((accumulator, weight) => accumulator + weight);
 
     statesAndRates.push({
       item: StepState.NORMAL,
-      weight: 1 - nonNormalRate
+      weight: 1 - nonNormalRate,
     });
 
     this.state = getWeightedRandom(statesAndRates);
@@ -481,7 +499,7 @@ export class Simulation {
 
 const getWeightedRandom = <T>(weightedItems: { item: T; weight: number }[]): T => {
   let totalWeights = weightedItems
-    .map(val => val.weight)
+    .map((val) => val.weight)
     .reduce((accumulator, weight) => accumulator + weight);
 
   const threshold = Math.random() * totalWeights;

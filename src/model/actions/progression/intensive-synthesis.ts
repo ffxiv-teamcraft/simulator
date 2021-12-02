@@ -2,6 +2,7 @@ import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
 import { ProgressAction } from '../progress-action';
 import { StepState } from '../../step-state';
+import { Buff } from '../../buff.enum';
 
 export class IntensiveSynthesis extends ProgressAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
@@ -16,11 +17,13 @@ export class IntensiveSynthesis extends ProgressAction {
     if (linear) {
       return true;
     }
-    if (simulationState.safe) {
+    if (simulationState.safe && !simulationState.hasBuff(Buff.HEART_AND_SOUL)) {
       return false;
     }
     return (
-      simulationState.state === StepState.GOOD || simulationState.state === StepState.EXCELLENT
+      simulationState.hasBuff(Buff.HEART_AND_SOUL) ||
+      simulationState.state === StepState.GOOD ||
+      simulationState.state === StepState.EXCELLENT
     );
   }
 

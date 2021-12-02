@@ -50,6 +50,6 @@ export class ByregotsBlessing extends QualityAction {
   }
 
   getPotency(simulation: Simulation): number {
-    return 100 + (simulation.getBuff(Buff.INNER_QUIET).stacks - 1) * 20;
+    return Math.min(100 + (simulation.getBuff(Buff.INNER_QUIET).stacks - 1) * 20, 300);
   }
 }

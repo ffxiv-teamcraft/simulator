@@ -3,6 +3,7 @@ import { Simulation } from '../../../simulation/simulation';
 import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
 import { StepState } from '../../step-state';
+import { Buff } from '../../buff.enum';
 
 export class TricksOfTheTrade extends CraftingAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
@@ -26,7 +27,11 @@ export class TricksOfTheTrade extends CraftingAction {
   }
 
   execute(simulation: Simulation, safe: boolean): void {
-    if (simulation.state === StepState.GOOD || simulation.state === StepState.EXCELLENT) {
+    if (
+      simulation.hasBuff(Buff.HEART_AND_SOUL) ||
+      simulation.state === StepState.GOOD ||
+      simulation.state === StepState.EXCELLENT
+    ) {
       simulation.availableCP += 20;
       if (simulation.availableCP > simulation.maxCP) {
         simulation.availableCP = simulation.maxCP;

@@ -12,20 +12,16 @@ import { HastyTouch } from './actions/quality/hasty-touch';
 import { ByregotsBlessing } from './actions/quality/byregots-blessing';
 import { PreciseTouch } from './actions/quality/precise-touch';
 import { FocusedTouch } from './actions/quality/focused-touch';
-import { PatientTouch } from './actions/quality/patient-touch';
 import { PrudentTouch } from './actions/quality/prudent-touch';
 import { TricksOfTheTrade } from './actions/other/tricks-of-the-trade';
 import { MastersMend } from './actions/other/masters-mend';
 import { Manipulation } from './actions/buff/manipulation';
-import { InnerQuiet } from './actions/buff/inner-quiet';
 import { GreatStrides } from './actions/buff/great-strides';
 import { Innovation } from './actions/buff/innovation';
 import { Veneration } from './actions/buff/veneration';
 import { Observe } from './actions/other/observe';
 import { WasteNot } from './actions/buff/waste-not';
 import { WasteNotII } from './actions/buff/waste-not-ii';
-import { BrandOfTheElements } from './actions/progression/brand-of-the-elements';
-import { NameOfTheElements } from './actions/buff/name-of-the-elements';
 import { TrainedEye } from './actions/quality/trained-eye';
 import { PreparatoryTouch } from './actions/quality/preparatory-touch';
 import { IntensiveSynthesis } from './actions/progression/intensive-synthesis';
@@ -34,6 +30,8 @@ import { FinalAppraisal } from './actions/buff/final-appraisal';
 import { Reflect } from './actions/quality/reflect';
 import { RemoveFinalAppraisal } from './actions/other/remove-final-appraisal';
 import { CarefulObservation } from './actions/other/careful-observation';
+import { AdvancedTouch } from './actions/quality/advanced-touch';
+import { PrudentSynthesis } from './actions/progression/prudent-synthesis';
 
 export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
@@ -51,7 +49,6 @@ export class CraftingActionsRegistry {
     { short: 'byregotsMiracle', full: 'ByregotsBlessing' },
     { short: 'mastersMend', full: 'MastersMend' },
     { short: 'tricksOfTheTrade', full: 'TricksOfTheTrade' },
-    { short: 'innerQuiet', full: 'InnerQuiet' },
     { short: 'wasteNot', full: 'WasteNot' },
     { short: 'wasteNot2', full: 'WasteNotII' },
     { short: 'innovation', full: 'Innovation' },
@@ -86,28 +83,28 @@ export class CraftingActionsRegistry {
     { short: 'delicateSynthesis', full: 'DelicateSynthesis' },
     { short: 'trainedEye', full: 'TrainedEye' },
     { short: 'finalAppraisal', full: 'FinalAppraisal' },
-    { short: 'reflect', full: 'Reflect' }
+    { short: 'reflect', full: 'Reflect' },
   ];
 
   public static readonly ALL_ACTIONS: { name: string; action: CraftingAction }[] = [
     // Progress actions
     { name: 'BasicSynthesis', action: new BasicSynthesis() },
     { name: 'CarefulSynthesis', action: new CarefulSynthesis() },
+    { name: 'PrudentSynthesis', action: new PrudentSynthesis() },
     { name: 'RapidSynthesis', action: new RapidSynthesis() },
     { name: 'Groundwork', action: new Groundwork() },
     { name: 'FocusedSynthesis', action: new FocusedSynthesis() },
     { name: 'MuscleMemory', action: new MuscleMemory() },
-    { name: 'BrandOfTheElements', action: new BrandOfTheElements() },
     { name: 'IntensiveSynthesis', action: new IntensiveSynthesis() },
 
     // Quality actions
     { name: 'BasicTouch', action: new BasicTouch() },
     { name: 'StandardTouch', action: new StandardTouch() },
+    { name: 'AdvancedTouch', action: new AdvancedTouch() },
     { name: 'HastyTouch', action: new HastyTouch() },
     { name: 'ByregotsBlessing', action: new ByregotsBlessing() },
     { name: 'PreciseTouch', action: new PreciseTouch() },
     { name: 'FocusedTouch', action: new FocusedTouch() },
-    { name: 'PatientTouch', action: new PatientTouch() },
     { name: 'PrudentTouch', action: new PrudentTouch() },
     { name: 'TrainedEye', action: new TrainedEye() },
     { name: 'PreparatoryTouch', action: new PreparatoryTouch() },
@@ -121,90 +118,90 @@ export class CraftingActionsRegistry {
     { name: 'Manipulation', action: new Manipulation() },
 
     // Buffs
-    { name: 'InnerQuiet', action: new InnerQuiet() },
     { name: 'WasteNot', action: new WasteNot() },
     { name: 'WasteNotII', action: new WasteNotII() },
     { name: 'GreatStrides', action: new GreatStrides() },
     { name: 'Innovation', action: new Innovation() },
     { name: 'Veneration', action: new Veneration() },
-    { name: 'NameOfTheElements', action: new NameOfTheElements() },
     { name: 'FinalAppraisal', action: new FinalAppraisal() },
 
     // Other
     { name: 'Observe', action: new Observe() },
     { name: 'CarefulObservation', action: new CarefulObservation() },
     { name: 'DelicateSynthesis', action: new DelicateSynthesis() },
-    { name: 'RemoveFinalAppraisal', action: new RemoveFinalAppraisal() }
+    { name: 'RemoveFinalAppraisal', action: new RemoveFinalAppraisal() },
   ];
 
   public static getActionsByType(type: ActionType): CraftingAction[] {
-    return CraftingActionsRegistry.ALL_ACTIONS.filter(row => row.action.getType() === type).map(
-      row => row.action
+    return CraftingActionsRegistry.ALL_ACTIONS.filter((row) => row.action.getType() === type).map(
+      (row) => row.action
     );
   }
 
   public static importFromCraftOpt(importArray: string[]): CraftingAction[] {
     return importArray
-      .map(row => {
+      .map((row) => {
         const found = CraftingActionsRegistry.ACTION_IMPORT_NAMES.find(
-          action => action.short === row
+          (action) => action.short === row
         );
         if (found === undefined) {
           return undefined;
         }
-        return CraftingActionsRegistry.ALL_ACTIONS.find(el => {
+        return CraftingActionsRegistry.ALL_ACTIONS.find((el) => {
           return el.name === found.full;
         });
       })
-      .filter(action => action !== undefined)
+      .filter((action) => action !== undefined)
       .map((row: any) => row.action);
   }
 
   public static exportToCraftOpt(actionNames: string[]): string {
     return JSON.stringify(
       actionNames
-        .map(actionName => {
-          return CraftingActionsRegistry.ACTION_IMPORT_NAMES.find(el => {
+        .map((actionName) => {
+          return CraftingActionsRegistry.ACTION_IMPORT_NAMES.find((el) => {
             return el.full === actionName;
           });
         })
-        .filter(action => action !== undefined)
+        .filter((action) => action !== undefined)
         .map((row: any) => row.short)
     );
   }
 
   public static createFromIds(ids: number[]): CraftingAction[] {
     return ids
-      .map(id => {
+      .map((id) => {
         const found = CraftingActionsRegistry.ALL_ACTIONS.find(
-          row => row.action.getIds().indexOf(id) > -1
+          (row) => row.action.getIds().indexOf(id) > -1
         );
         if (found !== undefined) {
           return found.action;
         }
         return undefined;
       })
-      .filter(action => action !== undefined) as CraftingAction[];
+      .filter((action) => action !== undefined) as CraftingAction[];
   }
 
   public static serializeRotation(rotation: CraftingAction[]): string[] {
     return rotation
-      .map(action => {
+      .map((action) => {
         const actionRow = CraftingActionsRegistry.ALL_ACTIONS.find(
-          row => row.action.getIds()[0] === action.getIds()[0]
+          (row) => row.action.getIds()[0] === action.getIds()[0]
         );
         if (actionRow !== undefined) {
           return actionRow.name;
         }
         return undefined;
       })
-      .filter(action => action !== undefined) as string[];
+      .filter((action) => action !== undefined) as string[];
   }
 
   public static deserializeRotation(rotation: string[]): CraftingAction[] {
     return rotation
-      .map(actionName => CraftingActionsRegistry.ALL_ACTIONS.find(row => row.name === actionName))
-      .filter(action => action !== undefined)
+      .map((actionName) =>
+        CraftingActionsRegistry.ALL_ACTIONS.find((row) => row.name === actionName)
+      )
+      .filter((action) => action !== undefined)
       .map((row: any) => row.action);
   }
 }

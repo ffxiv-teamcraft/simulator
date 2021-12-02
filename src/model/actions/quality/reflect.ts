@@ -1,7 +1,6 @@
 import { QualityAction } from '../quality-action';
 import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
-import { InnerQuiet } from '../buff/inner-quiet';
 import { FinalAppraisal } from '../buff/final-appraisal';
 import { RemoveFinalAppraisal } from '../other/remove-final-appraisal';
 
@@ -13,7 +12,7 @@ export class Reflect extends QualityAction {
   _canBeUsed(simulation: Simulation): boolean {
     return (
       simulation.steps.filter(
-        step => !step.action.is(FinalAppraisal) && !step.action.is(RemoveFinalAppraisal)
+        (step) => !step.action.is(FinalAppraisal) && !step.action.is(RemoveFinalAppraisal)
       ).length === 0
     );
   }
@@ -28,18 +27,11 @@ export class Reflect extends QualityAction {
 
   execute(simulation: Simulation): void {
     super.execute(simulation);
-    const iq = new InnerQuiet();
-    simulation.buffs.push({
-      appliedStep: simulation.steps.length,
-      stacks: 3,
-      buff: iq.getBuff(),
-      tick: iq.getTick(),
-      duration: iq.getDuration(simulation)
-    });
+    simulation.addInnerQuietStacks(3);
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 24;
+    return 6;
   }
 
   getBaseDurabilityCost(simulationState: Simulation): number {
