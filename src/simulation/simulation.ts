@@ -134,13 +134,13 @@ export class Simulation {
     if (!this.hasBuff(Buff.INNER_QUIET)) {
       this.buffs.push({
         appliedStep: this.steps.length,
-        stacks: Math.max(stacks, 10),
+        stacks: Math.min(stacks, 10),
         buff: Buff.INNER_QUIET,
         duration: Infinity,
       });
     } else {
       const iq = this.getBuff(Buff.INNER_QUIET);
-      iq.stacks = Math.max(iq.stacks + stacks, 10);
+      iq.stacks = Math.min(iq.stacks + stacks, 10);
     }
   }
 
