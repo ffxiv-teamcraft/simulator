@@ -24,6 +24,8 @@ import { CarefulObservation } from '../src/model/actions/other/careful-observati
 import { RemoveFinalAppraisal } from '../src/model/actions/other/remove-final-appraisal';
 import { StandardTouch } from '../src/model/actions/quality/standard-touch';
 import { FocusedSynthesis } from '../src/model/actions/progression/focused-synthesis';
+import { HeartAndSoul } from '../src/model/actions/buff/heart-and-soul';
+import { PreciseTouch } from '../src/model/actions/quality/precise-touch';
 
 describe('Craft simulator tests', () => {
   it('Should use MuMe properly', () => {
@@ -59,7 +61,7 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.success).toBeTruthy();
-    expect(simulation.quality).toBe(5935);
+    expect(simulation.quality).toBe(8941);
   });
 
   it('Should fail a craft when user is below minimum stat requirements', () => {
@@ -165,7 +167,7 @@ describe('Craft simulator tests', () => {
 
     simulation.run(true);
 
-    expect(simulation.quality).toBe(2806);
+    expect(simulation.quality).toBe(3742);
   });
 
   it('Should not tick buffs if a buff is set to fail', () => {
@@ -359,5 +361,19 @@ describe('Craft simulator tests', () => {
 
     const result2 = simulation2.getReliabilityReport();
     expect(result2.averageHQPercent).toBe(100);
+  });
+
+  it('Should handle Heart and Soul properly', () => {
+    const simulation = new Simulation(
+      generateRecipe(480, 900, 36208, 2480, 2195),
+      [new Observe(), new HeartAndSoul(), new PreciseTouch()],
+      generateStats(90, 2745, 2885, 500),
+      [],
+      [StepState.NORMAL, StepState.NORMAL, StepState.NORMAL],
+      []
+    );
+
+    simulation.run();
+    expect(simulation.quality).toBeGreaterThan(0);
   });
 });

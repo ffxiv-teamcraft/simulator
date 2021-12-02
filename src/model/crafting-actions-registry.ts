@@ -32,6 +32,7 @@ import { RemoveFinalAppraisal } from './actions/other/remove-final-appraisal';
 import { CarefulObservation } from './actions/other/careful-observation';
 import { AdvancedTouch } from './actions/quality/advanced-touch';
 import { PrudentSynthesis } from './actions/progression/prudent-synthesis';
+import { HeartAndSoul } from './actions/buff/heart-and-soul';
 
 export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
@@ -127,6 +128,7 @@ export class CraftingActionsRegistry {
 
     // Other
     { name: 'Observe', action: new Observe() },
+    { name: 'HeartAndSoul', action: new HeartAndSoul() },
     { name: 'CarefulObservation', action: new CarefulObservation() },
     { name: 'DelicateSynthesis', action: new DelicateSynthesis() },
     { name: 'RemoveFinalAppraisal', action: new RemoveFinalAppraisal() },
