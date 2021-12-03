@@ -54,7 +54,6 @@ export * from './model/actions/quality/reflect';
 export * from './model/actions/quality/standard-touch';
 export * from './model/actions/quality/trained-eye';
 export * from './model/actions/quality/trained-finesse';
-export * from './model/formulas/craft-level-difference';
 export * from './model/formulas/recipe-stars';
 export * from './simulation/simulation-reliability-report';
 export * from './simulation/simulation-result';
