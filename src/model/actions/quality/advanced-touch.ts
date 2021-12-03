@@ -21,13 +21,11 @@ export class AdvancedTouch extends QualityAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    // TODO fix once servers are up
-    return simulationState.hasComboAvailable(new StandardTouch().getIds()[0]) ? 18 : 24;
+    return simulationState.hasComboAvailable(new StandardTouch().getIds()[0]) ? 18 : 46;
   }
 
   getIds(): number[] {
-    // TODO fix once servers are up
-    return [100002, 100016, 100031, 100076, 100046, 100061, 100091, 100106];
+    return [100411, 100412, 100413, 100414, 100415, 100416, 100417, 100418];
   }
 
   getPotency(simulation: Simulation): number {

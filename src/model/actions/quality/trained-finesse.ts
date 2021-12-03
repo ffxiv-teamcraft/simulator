@@ -12,13 +12,11 @@ export class TrainedFinesse extends QualityAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    // TODO fix once servers are up
-    return 24;
+    return 32;
   }
 
   getIds(): number[] {
-    // TODO fix once servers are up
-    return [100283, 100284, 100285, 100286, 100287, 100288, 100289, 100290];
+    return [100435, 100436, 100437, 100438, 100439, 100440, 100441, 100442];
   }
 
   getLevelRequirement(): { job: CraftingJob; level: number } {

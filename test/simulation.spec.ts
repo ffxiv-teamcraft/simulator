@@ -7,11 +7,9 @@ import { Groundwork } from '../src/model/actions/progression/groundwork';
 import { RapidSynthesis } from '../src/model/actions/progression/rapid-synthesis';
 import { FinalAppraisal } from '../src/model/actions/buff/final-appraisal';
 import { WasteNot } from '../src/model/actions/buff/waste-not';
-import { WasteNotII } from '../src/model/actions/buff/waste-not-ii';
 import { Manipulation } from '../src/model/actions/buff/manipulation';
 import { Veneration } from '../src/model/actions/buff/veneration';
 import { BasicTouch } from '../src/model/actions/quality/basic-touch';
-import { PreparatoryTouch } from '../src/model/actions/quality/preparatory-touch';
 import { MastersMend } from '../src/model/actions/other/masters-mend';
 import { ByregotsBlessing } from '../src/model/actions/quality/byregots-blessing';
 import { StepState } from '../src/model/step-state';
@@ -19,6 +17,7 @@ import { PrudentTouch } from '../src/model/actions/quality/prudent-touch';
 import { Observe } from '../src/model/actions/other/observe';
 import { Buff } from '../src/model/buff.enum';
 import { GreatStrides } from '../src/model/actions/buff/great-strides';
+import { Reflect } from '../src/model/actions/quality/reflect';
 import { TricksOfTheTrade } from '../src/model/actions/other/tricks-of-the-trade';
 import { CarefulObservation } from '../src/model/actions/other/careful-observation';
 import { RemoveFinalAppraisal } from '../src/model/actions/other/remove-final-appraisal';
@@ -28,60 +27,90 @@ import { HeartAndSoul } from '../src/model/actions/buff/heart-and-soul';
 import { PreciseTouch } from '../src/model/actions/quality/precise-touch';
 
 describe('Craft simulator tests', () => {
-  it('Should use MuMe properly', () => {
+  it('Should handle Reflect properly', () => {
     const simulation = new Simulation(
-      generateRecipe(430),
-      [new MuscleMemory()],
-      generateStats(80, 2087, 1873, 463)
+      generateRecipe(16, 31, 866, 50, 30),
+      [
+        new Reflect(), // 817
+        new BasicTouch(), // 980
+        new CarefulSynthesis(), // 685
+      ],
+      generateStats(80, 2278, 2348, 532)
     );
+
     simulation.run(true);
-    expect(simulation.progression).toBe(1344);
+
+    expect(simulation.getBuff(Buff.INNER_QUIET).stacks).toBe(3);
   });
 
-  xit('Should provide same result as ingame for a bad rotation', () => {
+  it('Should provide same result as ingame for a low level rotation', () => {
     const simulation = new Simulation(
-      generateRecipe(430, 3943, 18262),
+      generateRecipe(16, 31, 866, 50, 30),
       [
-        new MuscleMemory(), // 1344
-        new CarefulSynthesis(), // 1344
-        new CarefulSynthesis(), // 672
-        new FinalAppraisal(),
-        new CarefulSynthesis(), // 582
-        new WasteNotII(),
-        new PreparatoryTouch(), // 1396
-        new PreparatoryTouch(), // 2048
-        new MastersMend(),
-        new MastersMend(),
-        new ByregotsBlessing(), // 2491
-        new CarefulSynthesis(),
+        new Reflect(), // 817
+        new BasicTouch(), // 980
+        new ByregotsBlessing(), // 1372,
+        new CarefulSynthesis(), // 685
       ],
-      generateStats(80, 2087, 1873, 463)
+      generateStats(80, 2278, 2348, 532)
     );
 
     simulation.run(true);
 
     expect(simulation.success).toBeTruthy();
-    expect(simulation.quality).toBe(4636);
+    expect(simulation.steps[3].addedProgression).toBe(685);
+    expect(simulation.steps[0].addedQuality).toBe(817);
+    expect(simulation.steps[1].addedQuality).toBe(980);
+    expect(simulation.steps[2].addedQuality).toBe(1699);
   });
 
-  it('Should fail a craft when user is below minimum stat requirements', () => {
+  it('Should provide same result as ingame for a 60 2stars rotation', () => {
     const simulation = new Simulation(
-      generateStarRecipe(480, 4943, 32328, 2480, 2195),
+      generateRecipe(180, 740, 2900, 70, 50),
       [
-        new MuscleMemory(),
-        new WasteNot(),
-        new Veneration(),
-        new Groundwork(),
-        new CarefulSynthesis(),
+        new Reflect(), // 504
+        new BasicTouch(), // 604
+        new ByregotsBlessing(), // 1048,
+        new CarefulSynthesis(), // 490
+        new CarefulSynthesis(), // 490
       ],
-      generateStats(80, 2450, 2500, 541)
+      generateStats(80, 2278, 2348, 532)
     );
-    const result = simulation.run(true);
 
-    expect(simulation.success).toBeFalsy();
-    expect(result.failCause).toBe(
-      SimulationFailCause[SimulationFailCause.MISSING_STATS_REQUIREMENT]
+    simulation.run(true);
+
+    expect(simulation.success).toBeTruthy();
+    expect(simulation.steps[3].addedProgression).toBe(490);
+    expect(simulation.steps[0].addedQuality).toBe(504);
+    expect(simulation.steps[1].addedQuality).toBe(604);
+    expect(simulation.steps[2].addedQuality).toBe(1048);
+  });
+
+  it('Should compute high stacks Byregots blessing properly', () => {
+    const simulation = new Simulation(
+      generateRecipe(16, 31, 866, 50, 30),
+      [
+        new Reflect(), // 817
+        new BasicTouch(), // 980
+        new BasicTouch(),
+        new MastersMend(),
+        new BasicTouch(),
+        new BasicTouch(),
+        new BasicTouch(),
+        new MastersMend(),
+        new BasicTouch(),
+        new BasicTouch(),
+        new BasicTouch(),
+        new ByregotsBlessing(), // 4902,
+        new CarefulSynthesis(), // 685
+      ],
+      generateStats(80, 2278, 2348, 10000)
     );
+
+    simulation.run(true);
+
+    expect(simulation.success).toBeTruthy();
+    expect(simulation.steps[11].addedQuality).toBe(4902);
   });
 
   it('Should reduce CP cost with PLIANT step state', () => {
@@ -140,7 +169,7 @@ describe('Craft simulator tests', () => {
 
   it('Should use floor correctly with MALLEABLE step state', () => {
     const simulation = new Simulation(
-      generateStarRecipe(513, 12046, 81447, 2620, 2540, true),
+      generateStarRecipe(513, 12046, 81447, 140, 130, true),
       [new Veneration(), new RapidSynthesis()],
       generateStats(80, 2763, 2800, 554),
       [],
@@ -150,12 +179,12 @@ describe('Craft simulator tests', () => {
     );
 
     const result = simulation.run(true);
-    expect(result.simulation.progression).toBe(5298);
+    expect(result.simulation.progression).toBe(2238);
   });
 
   xit('Should floor control bonuses properly', () => {
     const simulation = new Simulation(
-      generateRecipe(480, 6178, 36208, 2480, 2195),
+      generateRecipe(480, 6178, 36208, 110, 90),
       [
         new PrudentTouch(), // +512 (512)
         new PrudentTouch(), // +634 (1146)
@@ -172,7 +201,7 @@ describe('Craft simulator tests', () => {
 
   it('Should not tick buffs if a buff is set to fail', () => {
     const simulation = new Simulation(
-      generateRecipe(480, 6178, 36208, 2480, 2195),
+      generateRecipe(480, 6178, 36208, 110, 90),
       [new GreatStrides(), new TricksOfTheTrade()],
       generateStats(80, 2486, 2318, 613),
       [],
@@ -187,7 +216,7 @@ describe('Craft simulator tests', () => {
 
   it('Should not tick buffs when using final appraisal or careful observation', () => {
     const simulation = new Simulation(
-      generateRecipe(480, 6178, 36208, 2480, 2195),
+      generateRecipe(480, 6178, 36208, 110, 90),
       [
         new GreatStrides(),
         new FinalAppraisal(),
@@ -207,7 +236,7 @@ describe('Craft simulator tests', () => {
 
   it('Should apply 5.4 bonus for combo on standard touch', () => {
     const simulation = new Simulation(
-      generateRecipe(480, 6178, 36208, 2480, 2195),
+      generateRecipe(480, 6178, 36208, 110, 90),
       [new BasicTouch(), new StandardTouch()],
       generateStats(80, 2486, 2318, 613),
       [],
@@ -221,7 +250,7 @@ describe('Craft simulator tests', () => {
 
   it('Should count buffs properly in step by step mode', () => {
     const simulation = new Simulation(
-      generateRecipe(480, 6178, 36208, 2480, 2195),
+      generateRecipe(480, 6178, 36208, 110, 90),
       [
         new MuscleMemory(),
         new Manipulation(),
@@ -246,7 +275,7 @@ describe('Craft simulator tests', () => {
 
   it('Should have proper conditions for normal recipes', () => {
     const simulation = new Simulation(
-      generateRecipe(480, 6178, 36208, 2480, 2195, 15),
+      generateRecipe(480, 6178, 36208, 110, 90, 15),
       [],
       generateStats(80, 2745, 2885, 626),
       [],
@@ -264,7 +293,7 @@ describe('Craft simulator tests', () => {
 
   it('Should have proper conditions for expert 1 recipes', () => {
     const simulation = new Simulation(
-      generateRecipe(480, 6178, 36208, 2480, 2195, 115),
+      generateRecipe(480, 6178, 36208, 110, 90, 115),
       [],
       generateStats(80, 2745, 2885, 626),
       [],
@@ -283,7 +312,7 @@ describe('Craft simulator tests', () => {
 
   it('Should have proper conditions for expert 2 recipes', () => {
     const simulation = new Simulation(
-      generateRecipe(480, 6178, 36208, 2480, 2195, 483),
+      generateRecipe(480, 6178, 36208, 110, 90, 483),
       [],
       generateStats(80, 2745, 2885, 626),
       [],
@@ -303,7 +332,7 @@ describe('Craft simulator tests', () => {
 
   it('Should apply conditions with the proper rates for expert 2 recipes', () => {
     const simulation = new Simulation(
-      generateRecipe(480, 6178, 36208, 2480, 2195, 483),
+      generateRecipe(480, 6178, 36208, 110, 90, 483),
       [],
       generateStats(80, 2745, 2885, 626),
       [],
@@ -337,35 +366,9 @@ describe('Craft simulator tests', () => {
     expect(rates[StepState.PRIMED]! / numSamples).toBeCloseTo(0.12, 1);
   });
 
-  it('Should handle skipped actions due to missing CP/Level', () => {
-    const simulation = new Simulation(
-      generateRecipe(480, 900, 36208, 2480, 2195),
-      [new Observe(), new CarefulSynthesis(), new ByregotsBlessing(), new FocusedSynthesis()],
-      generateStats(80, 2745, 2885, 12),
-      [],
-      [],
-      []
-    );
-
-    const result = simulation.getReliabilityReport();
-
-    expect(result.successPercent).toBe(100);
-    const simulation2 = new Simulation(
-      generateRecipe(480, 900, 1400, 2480, 2195),
-      [new BasicTouch(), new ByregotsBlessing(), new StandardTouch()],
-      generateStats(80, 2745, 2885, 36),
-      [],
-      [],
-      []
-    );
-
-    const result2 = simulation2.getReliabilityReport();
-    expect(result2.averageHQPercent).toBe(100);
-  });
-
   it('Should handle Heart and Soul properly', () => {
     const simulation = new Simulation(
-      generateRecipe(480, 900, 36208, 2480, 2195),
+      generateRecipe(480, 900, 36208, 110, 90),
       [new Observe(), new HeartAndSoul(), new PreciseTouch()],
       generateStats(90, 2745, 2885, 500),
       [],

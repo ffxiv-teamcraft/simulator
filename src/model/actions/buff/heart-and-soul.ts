@@ -34,8 +34,7 @@ export class HeartAndSoul extends BuffAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    // TODO fix once servers are up
-    return 1;
+    return 0;
   }
 
   getDuration(simulation: Simulation): number {
@@ -43,8 +42,7 @@ export class HeartAndSoul extends BuffAction {
   }
 
   getIds(): number[] {
-    // TODO fix once servers are up
-    return [4574, 4575, 4576, 4577, 4578, 4579, 4580, 4581];
+    return [100419, 100420, 100421, 100422, 100423, 100424, 100425, 100426];
   }
 
   getBuff(): Buff {

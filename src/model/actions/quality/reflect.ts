@@ -27,7 +27,7 @@ export class Reflect extends QualityAction {
 
   execute(simulation: Simulation): void {
     super.execute(simulation);
-    simulation.addInnerQuietStacks(3);
+    simulation.addInnerQuietStacks(1);
   }
 
   getBaseCPCost(simulationState: Simulation): number {

@@ -1,13 +1,9 @@
 import { Simulation } from '../../simulation/simulation';
 import { ActionType } from './action-type';
-import { Tables } from '../tables';
-import { CrafterStats } from '../crafter-stats';
 import { CraftingJob } from '../crafting-job.enum';
 import { SimulationFailCause } from '../simulation-fail-cause.enum';
 import { Class } from '@kaiu/serializer';
-import { CraftLevelDifference, LevelDifference } from '../formulas/craft-level-difference';
 import { StepState } from '../step-state';
-import { Buff } from '../buff.enum';
 
 /**
  * This is the parent class of all actions in the simulator.
@@ -172,36 +168,13 @@ export abstract class CraftingAction {
     return this instanceof actionClass;
   }
 
-  protected getLevelDifference(simulation: Simulation): LevelDifference {
-    let recipeLevel = simulation.recipe.rlvl;
-    const stats: CrafterStats = simulation.crafterStats;
-    const crafterLevel = Tables.LEVEL_TABLE[stats.level] || stats.level;
-    let levelDifference = crafterLevel - recipeLevel;
-    levelDifference = Math.min(49, Math.max(-30, levelDifference));
-    return CraftLevelDifference.find(
-      (entry) => entry.Difference === levelDifference
-    ) as LevelDifference;
-  }
-
   public getBaseProgression(simulation: Simulation): number {
-    // Progress = (Craftsmanship + 10000) / (SuggestedCraftsmanship + 10000) * ((Craftsmanship * 21) / 100 + 2) * CraftLevelDifference.Progress / 100
     const stats = simulation.crafterStats;
-    return (
-      (((stats.craftsmanship + 10000) / (simulation.recipe.suggestedCraftsmanship + 10000)) *
-        ((stats.craftsmanship * 21) / 100 + 2) *
-        this.getLevelDifference(simulation).ProgressFactor) /
-      100
-    );
+    return (stats.craftsmanship * 10) / simulation.recipe.progressDivider + 2;
   }
 
   public getBaseQuality(simulation: Simulation): number {
-    // Quality = (Control + 10000) / (SuggestedControl + 10000) * ((Control * 35) / 100 + 35) * CraftLevelDifference.Quality / 100
     const stats = simulation.crafterStats;
-    return (
-      (((stats.getControl(simulation) + 10000) / (simulation.recipe.suggestedControl + 10000)) *
-        ((stats.getControl(simulation) * 35) / 100 + 35) *
-        this.getLevelDifference(simulation).QualityFactor) /
-      100
-    );
+    return (stats.getControl(simulation) * 10) / simulation.recipe.qualityDivider + 35;
   }
 }

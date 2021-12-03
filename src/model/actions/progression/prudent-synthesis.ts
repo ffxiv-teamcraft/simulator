@@ -13,8 +13,7 @@ export class PrudentSynthesis extends ProgressAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    // TODO fix once servers are up
-    return 24;
+    return 18;
   }
 
   getBaseDurabilityCost(simulationState: Simulation): number {
@@ -26,8 +25,7 @@ export class PrudentSynthesis extends ProgressAction {
   }
 
   getIds(): number[] {
-    // TODO fix once servers are up
-    return [100203, 100204, 100205, 100206, 100207, 100208, 100209, 100210];
+    return [100427, 100428, 100429, 100430, 100431, 100432, 100433, 100434];
   }
 
   getPotency(simulation: Simulation): number {

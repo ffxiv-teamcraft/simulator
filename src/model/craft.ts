@@ -8,8 +8,8 @@ export interface Craft {
   quality: number;
   progress: number;
   lvl: number;
-  suggestedCraftsmanship: number;
-  suggestedControl: number;
+  suggestedCraftsmanship?: number;
+  suggestedControl?: number;
   stars?: number;
   hq?: 1 | 0;
   quickSynth?: 1 | 0;
@@ -20,4 +20,6 @@ export interface Craft {
   yield?: number;
   expert?: boolean;
   conditionsFlag: number;
+  progressDivider: number;
+  qualityDivider: number;
 }
