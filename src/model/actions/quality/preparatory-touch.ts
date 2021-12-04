@@ -1,6 +1,5 @@
 import { QualityAction } from '../quality-action';
 import { Simulation } from '../../../simulation/simulation';
-import { Buff } from '../../buff.enum';
 import { CraftingJob } from '../../crafting-job.enum';
 
 export class PreparatoryTouch extends QualityAction {
@@ -10,9 +9,7 @@ export class PreparatoryTouch extends QualityAction {
 
   execute(simulation: Simulation): void {
     super.execute(simulation);
-    if (simulation.hasBuff(Buff.INNER_QUIET) && simulation.getBuff(Buff.INNER_QUIET).stacks < 11) {
-      simulation.getBuff(Buff.INNER_QUIET).stacks++;
-    }
+    simulation.addInnerQuietStacks(1);
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
