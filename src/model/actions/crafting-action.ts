@@ -4,6 +4,7 @@ import { CraftingJob } from '../crafting-job.enum';
 import { SimulationFailCause } from '../simulation-fail-cause.enum';
 import { Class } from '@kaiu/serializer';
 import { StepState } from '../step-state';
+import { Tables } from '../tables';
 
 /**
  * This is the parent class of all actions in the simulator.
@@ -170,11 +171,19 @@ export abstract class CraftingAction {
 
   public getBaseProgression(simulation: Simulation): number {
     const stats = simulation.crafterStats;
-    return (stats.craftsmanship * 10) / simulation.recipe.progressDivider + 2;
+    const baseValue = (stats.craftsmanship * 10) / simulation.recipe.progressDivider + 2;
+    if (Tables.LEVEL_TABLE[stats.level] < simulation.recipe.rlvl) {
+      return (baseValue * (simulation.recipe.progressModifier || 100)) / 100;
+    }
+    return baseValue;
   }
 
   public getBaseQuality(simulation: Simulation): number {
     const stats = simulation.crafterStats;
-    return (stats.getControl(simulation) * 10) / simulation.recipe.qualityDivider + 35;
+    const baseValue = (stats.getControl(simulation) * 10) / simulation.recipe.qualityDivider + 35;
+    if (Tables.LEVEL_TABLE[stats.level] < simulation.recipe.rlvl) {
+      return (baseValue * (simulation.recipe.qualityModifier || 100)) / 100;
+    }
+    return baseValue;
   }
 }

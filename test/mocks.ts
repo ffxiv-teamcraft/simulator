@@ -1,6 +1,6 @@
 import { CrafterStats } from '../src/model/crafter-stats';
 import { Craft } from '../src/model/craft';
-import { suggested } from './suggested-stats';
+
 export function generateRecipe(
   rlvl: number,
   progress: number,
@@ -32,24 +32,28 @@ export function generateStarRecipe(
   quality: number,
   progressDivider: number,
   qualityDivider: number,
+  progressModifier: number,
+  qualityModifier: number,
   expert = false,
   conditionsFlag = 15
 ): Craft {
   return {
     id: '33904',
     job: 14,
-    rlvl: rlvl,
+    rlvl,
     durability: 70,
-    quality: quality,
-    progress: progress,
+    quality,
+    progress,
     lvl: 80,
     hq: 1,
     quickSynth: 0,
     ingredients: [],
-    expert: expert,
-    conditionsFlag: conditionsFlag,
+    expert,
+    conditionsFlag,
     progressDivider,
     qualityDivider,
+    progressModifier,
+    qualityModifier,
   };
 }
 

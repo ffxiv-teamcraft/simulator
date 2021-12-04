@@ -22,4 +22,6 @@ export interface Craft {
   conditionsFlag: number;
   progressDivider: number;
   qualityDivider: number;
+  progressModifier?: number;
+  qualityModifier?: number;
 }

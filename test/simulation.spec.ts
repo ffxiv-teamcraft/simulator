@@ -1,5 +1,4 @@
 import { Simulation } from '../src/simulation/simulation';
-import { SimulationFailCause } from '../src/model/simulation-fail-cause.enum';
 import { generateRecipe, generateStarRecipe, generateStats } from './mocks';
 import { MuscleMemory } from '../src/model/actions/progression/muscle-memory';
 import { CarefulSynthesis } from '../src/model/actions/progression/careful-synthesis';
@@ -22,9 +21,9 @@ import { TricksOfTheTrade } from '../src/model/actions/other/tricks-of-the-trade
 import { CarefulObservation } from '../src/model/actions/other/careful-observation';
 import { RemoveFinalAppraisal } from '../src/model/actions/other/remove-final-appraisal';
 import { StandardTouch } from '../src/model/actions/quality/standard-touch';
-import { FocusedSynthesis } from '../src/model/actions/progression/focused-synthesis';
 import { HeartAndSoul } from '../src/model/actions/buff/heart-and-soul';
 import { PreciseTouch } from '../src/model/actions/quality/precise-touch';
+import { BasicSynthesis } from '../src/model/actions/progression/basic-synthesis';
 
 describe('Craft simulator tests', () => {
   it('Should handle Reflect properly', () => {
@@ -64,26 +63,20 @@ describe('Craft simulator tests', () => {
     expect(simulation.steps[2].addedQuality).toBe(1699);
   });
 
-  it('Should provide same result as ingame for a 60 2stars rotation', () => {
+  it('Should provide same result as ingame for a 80 2stars rotation as lvl 80 crafter', () => {
     const simulation = new Simulation(
-      generateRecipe(180, 740, 2900, 70, 50),
+      generateStarRecipe(450, 2050, 9000, 110, 90, 80, 70),
       [
-        new Reflect(), // 504
-        new BasicTouch(), // 604
-        new ByregotsBlessing(), // 1048,
-        new CarefulSynthesis(), // 490
-        new CarefulSynthesis(), // 490
+        new BasicSynthesis(), // 203
+        new BasicTouch(), // 217
       ],
-      generateStats(80, 2278, 2348, 532)
+      generateStats(80, 2626, 2477, 522)
     );
 
     simulation.run(true);
 
-    expect(simulation.success).toBeTruthy();
-    expect(simulation.steps[3].addedProgression).toBe(490);
-    expect(simulation.steps[0].addedQuality).toBe(504);
-    expect(simulation.steps[1].addedQuality).toBe(604);
-    expect(simulation.steps[2].addedQuality).toBe(1048);
+    expect(simulation.progression).toBe(230);
+    expect(simulation.quality).toBe(217);
   });
 
   it('Should compute high stacks Byregots blessing properly', () => {
@@ -115,7 +108,7 @@ describe('Craft simulator tests', () => {
 
   it('Should reduce CP cost with PLIANT step state', () => {
     const simulation = new Simulation(
-      generateStarRecipe(480, 4943, 32328, 2480, 2195, true),
+      generateStarRecipe(480, 4943, 32328, 2480, 2195, 80, 70, true),
       [new MuscleMemory(), new WasteNot()],
       generateStats(80, 2800, 2500, 541),
       [],
@@ -129,7 +122,7 @@ describe('Craft simulator tests', () => {
 
   it('Should reduce CP cost with PLIANT step state', () => {
     const simulation = new Simulation(
-      generateStarRecipe(480, 4943, 32328, 2480, 2195, true),
+      generateStarRecipe(480, 4943, 32328, 2480, 2195, 80, 70, true),
       [new PrudentTouch()],
       generateStats(80, 2800, 2500, 541),
       [],
@@ -143,7 +136,7 @@ describe('Craft simulator tests', () => {
 
   it('Should reduce Durability cost with STURDY step state', () => {
     const simulation = new Simulation(
-      generateStarRecipe(480, 4943, 32328, 2480, 2195, true),
+      generateStarRecipe(480, 4943, 32328, 2480, 2195, 80, 70, true),
       [new PrudentTouch()],
       generateStats(80, 2800, 2500, 541),
       [],
@@ -155,7 +148,7 @@ describe('Craft simulator tests', () => {
     expect(result.simulation.durability).toBe(70 - 3);
 
     const simulation2 = new Simulation(
-      generateStarRecipe(480, 4943, 32328, 2480, 2195, true),
+      generateStarRecipe(480, 4943, 32328, 2480, 2195, 80, 70, true),
       [new WasteNot(), new CarefulSynthesis()],
       generateStats(80, 2800, 2500, 541),
       [],
@@ -169,7 +162,7 @@ describe('Craft simulator tests', () => {
 
   it('Should use floor correctly with MALLEABLE step state', () => {
     const simulation = new Simulation(
-      generateStarRecipe(513, 12046, 81447, 140, 130, true),
+      generateStarRecipe(513, 12046, 81447, 140, 130, 80, 70, true),
       [new Veneration(), new RapidSynthesis()],
       generateStats(80, 2763, 2800, 554),
       [],
