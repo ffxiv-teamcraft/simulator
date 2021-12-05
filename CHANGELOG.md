@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.4](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.3...v3.0.4) (2021-12-05)
+
+
+### Bug Fixes
+
+* **innovation:** fixed innovation bug interaction ([3d5667f](https://github.com/ffxiv-teamcraft/simulator/commit/3d5667f))
+
+
+
 ### [3.0.3](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.2...v3.0.3) (2021-12-05)
 
 
