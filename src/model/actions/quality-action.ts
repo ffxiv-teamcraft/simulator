@@ -29,14 +29,18 @@ export abstract class QualityAction extends GeneralAction {
         break;
     }
 
+    buffMod += (simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0) / 10;
+
+    let buffMult = 1;
     if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
-      buffMod += 1;
+      buffMult += 1;
       simulation.removeBuff(Buff.GREAT_STRIDES);
     }
     if (simulation.hasBuff(Buff.INNOVATION)) {
-      buffMod += 0.5;
+      buffMult += 0.5;
     }
-    buffMod += (simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0) / 10;
+
+    buffMod *= buffMult;
 
     const efficiency = (potency * buffMod) / 100;
 

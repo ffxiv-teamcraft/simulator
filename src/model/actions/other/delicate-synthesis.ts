@@ -52,40 +52,45 @@ export class DelicateSynthesis extends GeneralAction {
     }
 
     // Quality
+    this.executeQuality(simulation);
+  }
+
+  private executeQuality(simulation: Simulation): void {
+    let buffMod = this.getBaseBonus(simulation);
+    let conditionMod = this.getBaseCondition(simulation);
+    const potency = this.getPotency(simulation);
     const qualityIncrease = this.getBaseQuality(simulation);
-    const qualityPotency = this.getPotency(simulation);
-    let qualityBuffMod = this.getBaseBonus(simulation);
-    let qualityConditionMod = this.getBaseCondition(simulation);
 
     switch (simulation.state) {
       case StepState.EXCELLENT:
-        qualityConditionMod *= 4;
+        conditionMod *= 4;
         break;
       case StepState.POOR:
-        qualityConditionMod *= 0.5;
+        conditionMod *= 0.5;
         break;
       case StepState.GOOD:
-        qualityConditionMod *= 1.5;
+        conditionMod *= 1.5;
         break;
       default:
         break;
     }
 
+    buffMod += (simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0) / 10;
+
+    let buffMult = 1;
     if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
-      qualityBuffMod += 1;
+      buffMult += 1;
       simulation.removeBuff(Buff.GREAT_STRIDES);
     }
     if (simulation.hasBuff(Buff.INNOVATION)) {
-      qualityBuffMod += 0.5;
+      buffMult += 0.5;
     }
 
-    qualityBuffMod += (simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0) / 10;
+    buffMod *= buffMult;
 
-    const qualityEfficiency = (qualityPotency * qualityBuffMod) / 100;
+    const efficiency = (potency * buffMod) / 100;
 
-    simulation.quality += Math.floor(
-      Math.floor(qualityIncrease * qualityConditionMod) * qualityEfficiency
-    );
+    simulation.quality += Math.floor(Math.floor(qualityIncrease * conditionMod) * efficiency);
 
     simulation.addInnerQuietStacks(1);
   }

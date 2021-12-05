@@ -66,8 +66,7 @@ describe('Craft simulator tests', () => {
     expect(simulation.steps[2].addedQuality).toBe(1699);
   });
 
-  // XIV bug it seems, Preparatory touch not always acting like it's supposed to?
-  xit("Should handle preparatory touch's weirdness properly", () => {
+  it('Should handle new Innovation interactions properly', () => {
     const simulation = new Simulation(
       generateRecipe(517, 2000, 5200, 121, 105),
       [
@@ -93,6 +92,24 @@ describe('Craft simulator tests', () => {
     expect(simulation.steps[6].addedQuality).toBe(1255);
     expect(simulation.steps[7].addedQuality).toBe(1435);
     expect(simulation.steps[9].addedQuality).toBe(1614);
+  });
+
+  it('Should handle new Innovation interactions with Great Strides properly', () => {
+    const simulation = new Simulation(
+      generateRecipe(16, 31, 866, 50, 30),
+      [
+        new Reflect(), // 817
+        new Innovation(),
+        new GreatStrides(),
+        new BasicTouch(), // 2451
+      ],
+      generateStats(80, 2278, 2348, 532)
+    );
+
+    simulation.run(true);
+
+    expect(simulation.steps[0].addedQuality).toBe(817);
+    expect(simulation.steps[3].addedQuality).toBe(2451);
   });
 
   it('Should provide same result as ingame for a 80 2stars rotation as lvl 80 crafter', () => {
