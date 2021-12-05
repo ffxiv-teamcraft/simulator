@@ -24,6 +24,9 @@ import { StandardTouch } from '../src/model/actions/quality/standard-touch';
 import { HeartAndSoul } from '../src/model/actions/buff/heart-and-soul';
 import { PreciseTouch } from '../src/model/actions/quality/precise-touch';
 import { BasicSynthesis } from '../src/model/actions/progression/basic-synthesis';
+import { PreparatoryTouch } from '../src/model/actions/quality/preparatory-touch';
+import { DelicateSynthesis } from '../src/model/actions/other/delicate-synthesis';
+import { Innovation } from '../src/model/actions/buff/innovation';
 
 describe('Craft simulator tests', () => {
   it('Should handle Reflect properly', () => {
@@ -61,6 +64,35 @@ describe('Craft simulator tests', () => {
     expect(simulation.steps[0].addedQuality).toBe(817);
     expect(simulation.steps[1].addedQuality).toBe(980);
     expect(simulation.steps[2].addedQuality).toBe(1699);
+  });
+
+  // XIV bug it seems, Preparatory touch not always acting like it's supposed to?
+  xit("Should handle preparatory touch's weirdness properly", () => {
+    const simulation = new Simulation(
+      generateRecipe(517, 2000, 5200, 121, 105),
+      [
+        new Reflect(), // 299
+        new DelicateSynthesis(), // 358
+        new DelicateSynthesis(), // 388
+        new WasteNot(),
+        new Groundwork(),
+        new Innovation(),
+        new PreparatoryTouch(), // 1255
+        new PreparatoryTouch(), // 1435
+        new MastersMend(),
+        new PreparatoryTouch(), // 1614
+      ],
+      generateStats(80, 2763, 2780, 545)
+    );
+
+    simulation.run(true);
+
+    expect(simulation.steps[0].addedQuality).toBe(299);
+    expect(simulation.steps[1].addedQuality).toBe(358);
+    expect(simulation.steps[2].addedQuality).toBe(388);
+    expect(simulation.steps[6].addedQuality).toBe(1255);
+    expect(simulation.steps[7].addedQuality).toBe(1435);
+    expect(simulation.steps[9].addedQuality).toBe(1614);
   });
 
   it('Should provide same result as ingame for a 80 2stars rotation as lvl 80 crafter', () => {
