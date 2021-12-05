@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.5](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.4...v3.0.5) (2021-12-05)
+
+
+### Bug Fixes
+
+* **core:** fixed flooring issue with condition mod ([2f45fe8](https://github.com/ffxiv-teamcraft/simulator/commit/2f45fe8))
+* **core:** fixed progression being doubled ([d5b1dfc](https://github.com/ffxiv-teamcraft/simulator/commit/d5b1dfc))
+
+
+
 ### [3.0.4](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.3...v3.0.4) (2021-12-05)
 
 
