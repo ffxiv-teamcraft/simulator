@@ -94,6 +94,26 @@ describe('Craft simulator tests', () => {
     expect(simulation.steps[9].addedQuality).toBe(1614);
   });
 
+  it('Should compute progress properly properly', () => {
+    const simulation = new Simulation(
+      generateRecipe(517, 1000, 5200, 121, 105),
+      [
+        new Reflect(), // 299
+        new DelicateSynthesis(), // 358
+      ],
+      generateStats(80, 2763, 2780, 545)
+    );
+
+    simulation.run(true);
+
+    expect(simulation.steps[0].addedQuality).toBe(299);
+    expect(simulation.steps[1].addedQuality).toBe(358);
+    expect(simulation.steps[2].addedQuality).toBe(388);
+    expect(simulation.steps[6].addedQuality).toBe(1255);
+    expect(simulation.steps[7].addedQuality).toBe(1435);
+    expect(simulation.steps[9].addedQuality).toBe(1614);
+  });
+
   it('Should handle new Innovation interactions with Great Strides properly', () => {
     const simulation = new Simulation(
       generateRecipe(16, 31, 866, 50, 30),
