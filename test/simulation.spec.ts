@@ -121,6 +121,24 @@ describe('Craft simulator tests', () => {
     expect(simulation.steps[8].addedQuality).toBe(2691);
   });
 
+  it('Should be accurate at level 90', () => {
+    const simulation = new Simulation(
+      generateStarRecipe(560, 1000, 5200, 130, 115, 90, 80),
+      [
+        new Reflect(), // 222
+        new BasicSynthesis(), // 222
+        new BasicTouch(), // 266
+      ],
+      generateStats(90, 2659, 2803, 548)
+    );
+
+    simulation.run(true);
+
+    expect(simulation.steps[0].addedQuality).toBe(222);
+    expect(simulation.steps[1].addedProgression).toBe(222);
+    expect(simulation.steps[2].addedQuality).toBe(266);
+  });
+
   it('Should handle new Innovation interactions with Great Strides properly', () => {
     const simulation = new Simulation(
       generateRecipe(16, 31, 866, 50, 30),
