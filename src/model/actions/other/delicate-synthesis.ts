@@ -79,6 +79,8 @@ export class DelicateSynthesis extends GeneralAction {
       qualityBuffMod += 0.5;
     }
 
+    qualityBuffMod += (simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0) / 10;
+
     const qualityEfficiency = (qualityPotency * qualityBuffMod) / 100;
 
     simulation.quality += Math.floor(
