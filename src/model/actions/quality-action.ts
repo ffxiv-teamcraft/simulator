@@ -44,7 +44,7 @@ export abstract class QualityAction extends GeneralAction {
 
     const efficiency = (potency * buffMod) / 100;
 
-    simulation.quality += Math.floor(Math.floor(qualityIncrease * conditionMod) * efficiency);
+    simulation.quality += Math.floor(Math.floor(qualityIncrease) * conditionMod * efficiency);
 
     if (!skipStackAddition) {
       simulation.addInnerQuietStacks(1);

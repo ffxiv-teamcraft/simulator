@@ -27,6 +27,7 @@ import { BasicSynthesis } from '../src/model/actions/progression/basic-synthesis
 import { PreparatoryTouch } from '../src/model/actions/quality/preparatory-touch';
 import { DelicateSynthesis } from '../src/model/actions/other/delicate-synthesis';
 import { Innovation } from '../src/model/actions/buff/innovation';
+import { WasteNotII } from '../src/model/actions/buff/waste-not-ii';
 
 describe('Craft simulator tests', () => {
   it('Should handle Reflect properly', () => {
@@ -94,24 +95,30 @@ describe('Craft simulator tests', () => {
     expect(simulation.steps[9].addedQuality).toBe(1614);
   });
 
-  it('Should compute progress properly properly', () => {
+  it('Should compute flooring accurately', () => {
     const simulation = new Simulation(
       generateRecipe(517, 1000, 5200, 121, 105),
       [
         new Reflect(), // 299
-        new DelicateSynthesis(), // 358
+        new WasteNotII(),
+        new PreparatoryTouch(),
+        new PreparatoryTouch(),
+        new PreparatoryTouch(),
+        new PreparatoryTouch(),
+        new PreparatoryTouch(),
+        new Innovation(),
+        new PreparatoryTouch(),
       ],
-      generateStats(80, 2763, 2780, 545)
+      generateStats(80, 2763, 2780, 545),
+      [],
+      {
+        8: StepState.GOOD,
+      }
     );
 
     simulation.run(true);
 
-    expect(simulation.steps[0].addedQuality).toBe(299);
-    expect(simulation.steps[1].addedQuality).toBe(358);
-    expect(simulation.steps[2].addedQuality).toBe(388);
-    expect(simulation.steps[6].addedQuality).toBe(1255);
-    expect(simulation.steps[7].addedQuality).toBe(1435);
-    expect(simulation.steps[9].addedQuality).toBe(1614);
+    expect(simulation.steps[8].addedQuality).toBe(2691);
   });
 
   it('Should handle new Innovation interactions with Great Strides properly', () => {
