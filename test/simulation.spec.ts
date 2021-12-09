@@ -28,6 +28,7 @@ import { PreparatoryTouch } from '../src/model/actions/quality/preparatory-touch
 import { DelicateSynthesis } from '../src/model/actions/other/delicate-synthesis';
 import { Innovation } from '../src/model/actions/buff/innovation';
 import { WasteNotII } from '../src/model/actions/buff/waste-not-ii';
+import { AdvancedTouch } from '../src/model/actions/quality/advanced-touch';
 
 describe('Craft simulator tests', () => {
   it('Should handle Reflect properly', () => {
@@ -119,6 +120,28 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.steps[8].addedQuality).toBe(2691);
+  });
+
+  it('Should not combo AdvancedTouch if StandardTouch was not combo itself', () => {
+    const simulation = new Simulation(
+      generateRecipe(517, 1000, 5200, 121, 105),
+      [new StandardTouch(), new AdvancedTouch()],
+      generateStats(90, 2763, 2780, 545)
+    );
+
+    simulation.run(true);
+
+    expect(simulation.steps[1].cpDifference).toBe(-46);
+
+    const simulation2 = new Simulation(
+      generateRecipe(517, 1000, 5200, 121, 105),
+      [new BasicTouch(), new StandardTouch(), new AdvancedTouch()],
+      generateStats(90, 2763, 2780, 545)
+    );
+
+    simulation2.run(true);
+
+    expect(simulation2.steps[2].cpDifference).toBe(-18);
   });
 
   it('Should be accurate at level 90', () => {

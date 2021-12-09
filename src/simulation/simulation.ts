@@ -327,6 +327,7 @@ export class Simulation {
     const progressionBefore = this.progression;
     const durabilityBefore = this.durability;
     const cpBefore = this.availableCP;
+    const combo = action.hasCombo(this);
     let failCause: SimulationFailCause | undefined = undefined;
     let success = false;
     if (
@@ -368,6 +369,7 @@ export class Simulation {
       solidityDifference: this.durability - durabilityBefore,
       state: this.state,
       failCause: failCause,
+      combo,
     };
   }
 

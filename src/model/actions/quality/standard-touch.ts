@@ -12,6 +12,10 @@ export class StandardTouch extends QualityAction {
     return true;
   }
 
+  hasCombo(simulation: Simulation): boolean {
+    return simulation.hasComboAvailable(new BasicTouch().getIds()[0]);
+  }
+
   getBaseCPCost(simulationState: Simulation): number {
     return simulationState.hasComboAvailable(new BasicTouch().getIds()[0]) ? 18 : 32;
   }

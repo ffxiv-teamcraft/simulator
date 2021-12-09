@@ -19,6 +19,8 @@ export interface ActionResult {
   solidityDifference: number;
   // If the action is skipped because the craft is finished
   skipped: boolean;
+  // Did the action trigger a combo?
+  combo?: boolean;
   // State of the step
   state: StepState;
 

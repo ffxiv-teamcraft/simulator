@@ -20,8 +20,27 @@ export class AdvancedTouch extends QualityAction {
     return 100;
   }
 
+  hasCombo(simulation: Simulation): boolean {
+    for (let index = simulation.steps.length - 1; index >= 0; index--) {
+      const step = simulation.steps[index];
+      // If we end up finding the action, the combo is available
+      if (
+        step.action.getIds()[0] === new StandardTouch().getIds()[0] &&
+        step.success &&
+        step.combo
+      ) {
+        return true;
+      }
+      // If there's an action that isn't skipped (fail or not), combo is broken
+      if (!step.skipped) {
+        return false;
+      }
+    }
+    return false;
+  }
+
   getBaseCPCost(simulationState: Simulation): number {
-    return simulationState.hasComboAvailable(new StandardTouch().getIds()[0]) ? 18 : 46;
+    return this.hasCombo(simulationState) ? 18 : 46;
   }
 
   getIds(): number[] {

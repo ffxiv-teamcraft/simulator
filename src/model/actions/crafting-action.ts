@@ -40,6 +40,10 @@ export abstract class CraftingAction {
     return false;
   }
 
+  hasCombo(simulation: Simulation): boolean {
+    return false;
+  }
+
   abstract getLevelRequirement(): { job: CraftingJob; level: number };
 
   abstract getType(): ActionType;
