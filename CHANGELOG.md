@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.8](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.7...v3.0.8) (2021-12-11)
+
+
+### Bug Fixes
+
+* **byregots-blessing:** now usable a t1 stack of IQ ([120cb1c](https://github.com/ffxiv-teamcraft/simulator/commit/120cb1c))
+
+
+
 ### [3.0.7](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.6...v3.0.7) (2021-12-09)
 
 
