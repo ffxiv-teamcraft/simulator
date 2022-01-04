@@ -45,6 +45,7 @@ export class CraftingActionsRegistry {
     { short: 'groundwork', full: 'Groundwork' },
     { short: 'basicTouch', full: 'BasicTouch' },
     { short: 'standardTouch', full: 'StandardTouch' },
+    { short: 'advancedTouch', full: 'AdvancedTouch' },
     { short: 'hastyTouch', full: 'HastyTouch' },
     { short: 'byregotsBlessing', full: 'ByregotsBlessing' },
     { short: 'byregotsBrow', full: 'ByregotsBlessing' },
@@ -86,6 +87,8 @@ export class CraftingActionsRegistry {
     { short: 'trainedEye', full: 'TrainedEye' },
     { short: 'finalAppraisal', full: 'FinalAppraisal' },
     { short: 'reflect', full: 'Reflect' },
+    { short: 'prudentSynthesis', full: 'PrudentSynthesis' },
+    { short: 'trainedFinesse', full: 'TrainedFinesse' },
   ];
 
   public static readonly ALL_ACTIONS: { name: string; action: CraftingAction }[] = [
