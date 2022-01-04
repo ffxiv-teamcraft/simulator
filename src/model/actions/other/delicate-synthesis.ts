@@ -88,7 +88,7 @@ export class DelicateSynthesis extends GeneralAction {
 
     buffMod *= buffMult;
 
-    const efficiency = (potency * buffMod) / 100;
+    const efficiency = Math.fround((potency * buffMod) / 100);
 
     simulation.quality += Math.floor(Math.floor(qualityIncrease) * conditionMod * efficiency);
 

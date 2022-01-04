@@ -27,7 +27,6 @@ import { BasicSynthesis } from '../src/model/actions/progression/basic-synthesis
 import { PreparatoryTouch } from '../src/model/actions/quality/preparatory-touch';
 import { DelicateSynthesis } from '../src/model/actions/other/delicate-synthesis';
 import { Innovation } from '../src/model/actions/buff/innovation';
-import { WasteNotII } from '../src/model/actions/buff/waste-not-ii';
 import { AdvancedTouch } from '../src/model/actions/quality/advanced-touch';
 
 describe('Craft simulator tests', () => {
@@ -98,28 +97,14 @@ describe('Craft simulator tests', () => {
 
   it('Should compute flooring accurately', () => {
     const simulation = new Simulation(
-      generateRecipe(517, 1000, 5200, 121, 105),
-      [
-        new Reflect(), // 299
-        new WasteNotII(),
-        new PreparatoryTouch(),
-        new PreparatoryTouch(),
-        new PreparatoryTouch(),
-        new PreparatoryTouch(),
-        new PreparatoryTouch(),
-        new Innovation(),
-        new PreparatoryTouch(),
-      ],
-      generateStats(80, 2763, 2780, 545),
-      [],
-      {
-        8: StepState.GOOD,
-      }
+      generateRecipe(517, 2000, 5200, 121, 105),
+      [new BasicTouch(), new BasicTouch(), new BasicTouch(), new BasicTouch()],
+      generateStats(80, 1645, 1532, 400)
     );
 
     simulation.run(true);
 
-    expect(simulation.steps[8].addedQuality).toBe(2691);
+    expect(simulation.quality).toBe(827);
   });
 
   it('Should not combo AdvancedTouch if StandardTouch was not combo itself', () => {

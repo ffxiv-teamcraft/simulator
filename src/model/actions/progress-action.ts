@@ -31,7 +31,7 @@ export abstract class ProgressAction extends GeneralAction {
       buffMod += 0.5;
     }
 
-    const efficiency = (potency * buffMod) / 100;
+    const efficiency = Math.fround((potency * buffMod) / 100);
 
     simulation.progression += Math.floor(
       Math.floor(progressionIncrease) * conditionMod * efficiency
