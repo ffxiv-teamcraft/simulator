@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.10](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.9...v3.0.10) (2022-01-04)
+
+
+### Bug Fixes
+
+* **core:** fixed float32 precision again... ([0bb70db](https://github.com/ffxiv-teamcraft/simulator/commit/0bb70db))
+* imports from lokyst for 6.0 actions ([72f4a60](https://github.com/ffxiv-teamcraft/simulator/commit/72f4a60))
+
+
+
 ### [3.0.9](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.8...v3.0.9) (2022-01-04)
 
 
