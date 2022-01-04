@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.9](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.8...v3.0.9) (2022-01-04)
+
+
+### Bug Fixes
+
+* **core:** fixed float64 precision issue with game using float32 ([0139701](https://github.com/ffxiv-teamcraft/simulator/commit/0139701))
+
+
+
 ### [3.0.8](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.7...v3.0.8) (2021-12-11)
 
 
