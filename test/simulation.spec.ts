@@ -105,6 +105,25 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.quality).toBe(827);
+
+    const simulation2 = new Simulation(
+      generateStarRecipe(580, 3900, 10920, 130, 115, 80, 70),
+      [
+        new MuscleMemory(),
+        new Veneration(),
+        new Groundwork(),
+        new Groundwork(),
+        new Observe(),
+        new Observe(),
+        new CarefulSynthesis(),
+      ],
+      generateStats(90, 3289, 3420, 400)
+    );
+
+    simulation2.run(true);
+
+    expect(simulation2.steps[0].addedProgression).toBe(609);
+    expect(simulation2.progression).toBe(3897);
   });
 
   it('Should not combo AdvancedTouch if StandardTouch was not combo itself', () => {
@@ -260,21 +279,6 @@ describe('Craft simulator tests', () => {
     );
     const result2 = simulation2.run(true);
     expect(result2.simulation.durability).toBe(70 - 3);
-  });
-
-  it('Should use floor correctly with MALLEABLE step state', () => {
-    const simulation = new Simulation(
-      generateStarRecipe(513, 12046, 81447, 140, 130, 80, 70, true),
-      [new Veneration(), new RapidSynthesis()],
-      generateStats(80, 2763, 2800, 554),
-      [],
-      {
-        1: StepState.MALLEABLE,
-      }
-    );
-
-    const result = simulation.run(true);
-    expect(result.simulation.progression).toBe(2238);
   });
 
   xit('Should floor control bonuses properly', () => {
