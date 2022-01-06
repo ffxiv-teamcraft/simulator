@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.11](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.10...v3.0.11) (2022-01-06)
+
+
+### Bug Fixes
+
+* **final-appraisal:** only allow remove final appraisal if buff is present ([5bffaee](https://github.com/ffxiv-teamcraft/simulator/commit/5bffaee))
+
+
+
 ### [3.0.10](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.9...v3.0.10) (2022-01-04)
 
 
