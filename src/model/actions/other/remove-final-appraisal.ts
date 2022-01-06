@@ -14,7 +14,7 @@ export class RemoveFinalAppraisal extends CraftingAction {
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
-    return true;
+    return simulationState.hasBuff(Buff.FINAL_APPRAISAL);
   }
 
   execute(simulation: Simulation): void {
