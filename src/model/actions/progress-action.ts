@@ -13,7 +13,7 @@ export abstract class ProgressAction extends GeneralAction {
     let buffMod = this.getBaseBonus(simulation);
     let conditionMod = this.getBaseCondition(simulation);
     const potency = this.getPotency(simulation);
-    const progressionIncrease = this.getBaseProgression(simulation);
+    const progressionIncrease = Math.floor(this.getBaseProgression(simulation));
 
     switch (simulation.state) {
       case StepState.MALLEABLE:
@@ -31,11 +31,9 @@ export abstract class ProgressAction extends GeneralAction {
       buffMod += 0.5;
     }
 
-    const efficiency = Math.fround((potency * buffMod) / 100);
+    const efficiency = potency * buffMod;
 
-    simulation.progression += Math.floor(
-      Math.floor(progressionIncrease) * conditionMod * efficiency
-    );
+    simulation.progression += Math.floor((progressionIncrease * conditionMod * efficiency) / 100);
 
     if (
       simulation.hasBuff(Buff.FINAL_APPRAISAL) &&

@@ -478,4 +478,18 @@ describe('Craft simulator tests', () => {
     simulation.run();
     expect(simulation.quality).toBeGreaterThan(0);
   });
+  
+  it('Progress flooring', () => {
+    const simulation = new Simulation(
+      generateRecipe(535, 3000, 6700, 125, 109),
+      [
+        new CarefulSynthesis(),
+      ],
+      generateStats(90, 2606, 2457, 507)
+    );
+
+    simulation.run(true);
+
+    expect(simulation.progression).toBe(378);
+  });
 });
