@@ -16,7 +16,7 @@ export class DelicateSynthesis extends GeneralAction {
 
   execute(simulation: Simulation): void {
     // Progress
-    const progressionIncrease = this.getBaseProgression(simulation);
+    const progressionIncrease = Math.floor(this.getBaseProgression(simulation));
     const progressPotency = this.getPotency(simulation);
     let progressBuffMod = this.getBaseBonus(simulation);
     let progressConditionMod = this.getBaseCondition(simulation);
@@ -37,11 +37,9 @@ export class DelicateSynthesis extends GeneralAction {
       progressBuffMod += 0.5;
     }
 
-    const progressEfficiency = (progressPotency * progressBuffMod) / 100;
+    const progressEfficiency = progressPotency * progressBuffMod;
 
-    simulation.progression += Math.floor(
-      Math.floor(progressionIncrease) * progressConditionMod * progressEfficiency
-    );
+    simulation.progression += Math.floor((progressionIncrease * progressConditionMod * progressEfficiency) / 100);
 
     if (
       simulation.hasBuff(Buff.FINAL_APPRAISAL) &&
