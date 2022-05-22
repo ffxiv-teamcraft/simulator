@@ -492,4 +492,21 @@ describe('Craft simulator tests', () => {
 
     expect(simulation.progression).toBe(378);
   });
+  
+  it('Quality Buff flooring', () => {
+    const simulation = new Simulation(
+      generateRecipe(285, 980, 3420, 88, 68),
+      [
+        new Innovation(),
+        new PrudentTouch(),
+        new PrudentTouch(),
+        new PrudentTouch(),
+      ],
+      generateStats(66, 813, 683, 283)
+    );
+	
+	simulation.run(true);
+	
+	expect(simulation.quality).toBe(667);
+  });
 });
