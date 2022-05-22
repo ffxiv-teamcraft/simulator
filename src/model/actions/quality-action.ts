@@ -13,7 +13,7 @@ export abstract class QualityAction extends GeneralAction {
     let buffMod = this.getBaseBonus(simulation);
     let conditionMod = this.getBaseCondition(simulation);
     const potency = this.getPotency(simulation);
-    const qualityIncrease = Math.floor(this.getBaseQuality(simulation));
+    const qualityIncrease = this.getBaseQuality(simulation);
 
     switch (simulation.state) {
       case StepState.EXCELLENT:

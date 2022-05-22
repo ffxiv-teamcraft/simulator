@@ -16,7 +16,7 @@ export class DelicateSynthesis extends GeneralAction {
 
   execute(simulation: Simulation): void {
     // Progress
-    const progressionIncrease = Math.floor(this.getBaseProgression(simulation));
+    const progressionIncrease = this.getBaseProgression(simulation);
     const progressPotency = this.getPotency(simulation);
     let progressBuffMod = this.getBaseBonus(simulation);
     let progressConditionMod = this.getBaseCondition(simulation);
