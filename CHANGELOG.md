@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.14...v3.1.0) (2022-08-19)
+
+
+### Features
+
+* **6.2:** support for new quality requirement system ([7da61be](https://github.com/ffxiv-teamcraft/simulator/commit/7da61be))
+
+
+
 ### [3.0.14](https://github.com/ffxiv-teamcraft/simulator/compare/v3.0.13...v3.0.14) (2022-08-19)
 
 
