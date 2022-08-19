@@ -478,13 +478,11 @@ describe('Craft simulator tests', () => {
     simulation.run();
     expect(simulation.quality).toBeGreaterThan(0);
   });
-  
+
   it('Progress flooring', () => {
     const simulation = new Simulation(
       generateRecipe(535, 3000, 6700, 125, 109),
-      [
-        new CarefulSynthesis(),
-      ],
+      [new CarefulSynthesis()],
       generateStats(90, 2606, 2457, 507)
     );
 
@@ -492,7 +490,7 @@ describe('Craft simulator tests', () => {
 
     expect(simulation.progression).toBe(378);
   });
-  
+
   it('Quality Buff flooring', () => {
     const simulation = new Simulation(
       generateRecipe(285, 980, 3420, 88, 68),
@@ -504,9 +502,21 @@ describe('Craft simulator tests', () => {
       ],
       generateStats(66, 813, 683, 283)
     );
-	
+
 	simulation.run(true);
-	
+
 	expect(simulation.quality).toBe(667);
+  });
+
+  it('Quality flooring', () => {
+    const simulation = new Simulation(
+      generateRecipe(145, 3000, 6700, 68, 48),
+      [new Innovation(), new BasicTouch(), new StandardTouch(), new BasicTouch()],
+      generateStats(58, 2606, 434, 507)
+    );
+
+    simulation.run(true);
+
+    expect(simulation.steps[3].addedQuality).toBe(225);
   });
 });

@@ -13,7 +13,7 @@ export abstract class QualityAction extends GeneralAction {
     let buffMod = this.getBaseBonus(simulation);
     let conditionMod = this.getBaseCondition(simulation);
     const potency = this.getPotency(simulation);
-    const qualityIncrease = this.getBaseQuality(simulation);
+    const qualityIncrease = Math.floor(this.getBaseQuality(simulation));
 
     switch (simulation.state) {
       case StepState.EXCELLENT:
@@ -29,7 +29,7 @@ export abstract class QualityAction extends GeneralAction {
         break;
     }
 
-    buffMod = Math.fround(buffMod + (simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0) / 10);
+    buffMod += (simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0) / 10;
 
     let buffMult = 1;
     if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
@@ -40,7 +40,7 @@ export abstract class QualityAction extends GeneralAction {
       buffMult += 0.5;
     }
 
-    buffMod = buffMod * buffMult;
+    buffMod = Math.fround(buffMod) * Math.fround(buffMult);
 
     const efficiency = potency * buffMod;
 
