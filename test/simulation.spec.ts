@@ -3,7 +3,6 @@ import { generateRecipe, generateStarRecipe, generateStats } from './mocks';
 import { MuscleMemory } from '../src/model/actions/progression/muscle-memory';
 import { CarefulSynthesis } from '../src/model/actions/progression/careful-synthesis';
 import { Groundwork } from '../src/model/actions/progression/groundwork';
-import { RapidSynthesis } from '../src/model/actions/progression/rapid-synthesis';
 import { FinalAppraisal } from '../src/model/actions/buff/final-appraisal';
 import { WasteNot } from '../src/model/actions/buff/waste-not';
 import { Manipulation } from '../src/model/actions/buff/manipulation';
@@ -28,6 +27,9 @@ import { PreparatoryTouch } from '../src/model/actions/quality/preparatory-touch
 import { DelicateSynthesis } from '../src/model/actions/other/delicate-synthesis';
 import { Innovation } from '../src/model/actions/buff/innovation';
 import { AdvancedTouch } from '../src/model/actions/quality/advanced-touch';
+import { WasteNotII } from '../src/model/actions/buff/waste-not-ii';
+import { FocusedTouch } from '../src/model/actions/quality/focused-touch';
+import { TrainedFinesse } from '../src/model/actions/quality/trained-finesse';
 
 describe('Craft simulator tests', () => {
   it('Should handle Reflect properly', () => {
@@ -496,5 +498,73 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.steps[3].addedQuality).toBe(225);
+  });
+
+  it('Should fail if required quality is not met', () => {
+    const simulation = new Simulation(
+      generateStarRecipe(590, 4300, 12800, 130, 115, 80, 70, false, 15, { requiredQuality: 12800 }),
+      [
+        new MuscleMemory(),
+        new Manipulation(),
+        new Veneration(),
+        new WasteNotII(),
+        new FinalAppraisal(),
+        new Groundwork(),
+        new Groundwork(),
+        new CarefulSynthesis(),
+        new Innovation(),
+        new PreparatoryTouch(),
+        new PreparatoryTouch(),
+        new PreparatoryTouch(),
+        new PreparatoryTouch(),
+        new Innovation(),
+        new PrudentTouch(),
+        new PrudentTouch(),
+        new Observe(),
+        new FocusedTouch(),
+        new Innovation(),
+        new TrainedFinesse(),
+        new TrainedFinesse(),
+        new GreatStrides(),
+        new ByregotsBlessing(),
+        new BasicSynthesis(),
+      ],
+      generateStats(90, 3392, 3338, 675)
+    );
+
+    expect(simulation.run(true).success).toBe(false);
+
+    const simulation2 = new Simulation(
+      generateStarRecipe(590, 4300, 12800, 130, 115, 80, 70, false, 15, { requiredQuality: 6400 }),
+      [
+        new MuscleMemory(),
+        new Manipulation(),
+        new Veneration(),
+        new WasteNotII(),
+        new FinalAppraisal(),
+        new Groundwork(),
+        new Groundwork(),
+        new CarefulSynthesis(),
+        new Innovation(),
+        new PreparatoryTouch(),
+        new PreparatoryTouch(),
+        new PreparatoryTouch(),
+        new PreparatoryTouch(),
+        new Innovation(),
+        new PrudentTouch(),
+        new PrudentTouch(),
+        new Observe(),
+        new FocusedTouch(),
+        new Innovation(),
+        new TrainedFinesse(),
+        new TrainedFinesse(),
+        new GreatStrides(),
+        new ByregotsBlessing(),
+        new BasicSynthesis(),
+      ],
+      generateStats(90, 3392, 3338, 675)
+    );
+
+    expect(simulation2.run(true).success).toBe(true);
   });
 });

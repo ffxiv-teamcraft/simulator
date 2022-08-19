@@ -7,7 +7,8 @@ export function generateRecipe(
   quality: number,
   progressDivider: number,
   qualityDivider: number,
-  conditionsFlag = 15
+  conditionsFlag = 15,
+  additionalParams?: Partial<Craft>
 ): Craft {
   return {
     id: '3864',
@@ -23,6 +24,7 @@ export function generateRecipe(
     conditionsFlag: conditionsFlag,
     progressDivider,
     qualityDivider,
+    ...(additionalParams || {}),
   };
 }
 
@@ -35,7 +37,8 @@ export function generateStarRecipe(
   progressModifier: number,
   qualityModifier: number,
   expert = false,
-  conditionsFlag = 15
+  conditionsFlag = 15,
+  additionalParams?: Partial<Craft>
 ): Craft {
   return {
     id: '33904',
@@ -54,6 +57,7 @@ export function generateStarRecipe(
     qualityDivider,
     progressModifier,
     qualityModifier,
+    ...(additionalParams || {}),
   };
 }
 

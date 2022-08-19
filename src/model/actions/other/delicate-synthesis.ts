@@ -39,7 +39,9 @@ export class DelicateSynthesis extends GeneralAction {
 
     const progressEfficiency = progressPotency * progressBuffMod;
 
-    simulation.progression += Math.floor((progressionIncrease * progressConditionMod * progressEfficiency) / 100);
+    simulation.progression += Math.floor(
+      (progressionIncrease * progressConditionMod * progressEfficiency) / 100
+    );
 
     if (
       simulation.hasBuff(Buff.FINAL_APPRAISAL) &&
@@ -84,7 +86,7 @@ export class DelicateSynthesis extends GeneralAction {
       buffMult += 0.5;
     }
 
-    buffMod *= buffMult;
+    buffMod = Math.fround(buffMod) * Math.fround(buffMult);
 
     const efficiency = Math.fround((potency * buffMod) / 100);
 
