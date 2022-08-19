@@ -281,23 +281,6 @@ describe('Craft simulator tests', () => {
     expect(result2.simulation.durability).toBe(70 - 3);
   });
 
-  xit('Should floor control bonuses properly', () => {
-    const simulation = new Simulation(
-      generateRecipe(480, 6178, 36208, 110, 90),
-      [
-        new PrudentTouch(), // +512 (512)
-        new PrudentTouch(), // +634 (1146)
-        new PrudentTouch(), // +762 (1908)
-        new PrudentTouch(), // +898 (2806)
-      ],
-      generateStats(80, 2486, 2318, 613)
-    );
-
-    simulation.run(true);
-
-    expect(simulation.quality).toBe(2357);
-  });
-
   it('Should not tick buffs if a buff is set to fail', () => {
     const simulation = new Simulation(
       generateRecipe(480, 6178, 36208, 110, 90),
@@ -494,18 +477,13 @@ describe('Craft simulator tests', () => {
   it('Quality Buff flooring', () => {
     const simulation = new Simulation(
       generateRecipe(285, 980, 3420, 88, 68),
-      [
-        new Innovation(),
-        new PrudentTouch(),
-        new PrudentTouch(),
-        new PrudentTouch(),
-      ],
+      [new Innovation(), new PrudentTouch(), new PrudentTouch(), new PrudentTouch()],
       generateStats(66, 813, 683, 283)
     );
 
-	simulation.run(true);
+    simulation.run(true);
 
-	expect(simulation.quality).toBe(667);
+    expect(simulation.quality).toBe(667);
   });
 
   it('Quality flooring', () => {
