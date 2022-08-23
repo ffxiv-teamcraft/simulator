@@ -298,8 +298,8 @@ export class Simulation {
       success: this.progression >= this.recipe.progress,
       simulation: this,
     };
-    if (this.recipe.requiredQuality) {
-      const qualityRequirementMet = this.quality >= this.recipe.requiredQuality;
+    if (this.recipe.requiredQualityPercent) {
+      const qualityRequirementMet = this.getHQPercent() >= this.recipe.requiredQualityPercent;
       res.success = res.success && qualityRequirementMet;
       res.failCause = SimulationFailCause[SimulationFailCause.QUALITY_TOO_LOW];
     }

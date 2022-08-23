@@ -500,9 +500,11 @@ describe('Craft simulator tests', () => {
     expect(simulation.steps[3].addedQuality).toBe(225);
   });
 
-  it('Should fail if required quality is not met', () => {
+  it('Should fail if required quality percent is not met', () => {
     const simulation = new Simulation(
-      generateStarRecipe(590, 4300, 12800, 130, 115, 80, 70, false, 15, { requiredQuality: 12800 }),
+      generateStarRecipe(590, 4300, 12800, 130, 115, 80, 70, false, 15, {
+        requiredQualityPercent: 95,
+      }),
       [
         new MuscleMemory(),
         new Manipulation(),
@@ -535,7 +537,9 @@ describe('Craft simulator tests', () => {
     expect(simulation.run(true).success).toBe(false);
 
     const simulation2 = new Simulation(
-      generateStarRecipe(590, 4300, 12800, 130, 115, 80, 70, false, 15, { requiredQuality: 6400 }),
+      generateStarRecipe(590, 4300, 12800, 130, 115, 80, 70, false, 15, {
+        requiredQualityPercent: 50,
+      }),
       [
         new MuscleMemory(),
         new Manipulation(),
