@@ -301,7 +301,9 @@ export class Simulation {
     if (this.recipe.requiredQuality) {
       const qualityRequirementMet = this.quality >= this.recipe.requiredQuality;
       res.success = res.success && qualityRequirementMet;
-      res.failCause = SimulationFailCause[SimulationFailCause.QUALITY_TOO_LOW];
+      if (!res.success) {
+        res.failCause = SimulationFailCause[SimulationFailCause.QUALITY_TOO_LOW];
+      }
     }
     if (failedAction !== undefined && failedAction.failCause) {
       res.failCause = SimulationFailCause[failedAction.failCause];
