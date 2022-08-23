@@ -24,5 +24,5 @@ export interface Craft {
   qualityDivider: number;
   progressModifier?: number;
   qualityModifier?: number;
-  requiredQualityPercent?: number;
+  requiredQuality?: number;
 }
