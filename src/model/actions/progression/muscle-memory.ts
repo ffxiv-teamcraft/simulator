@@ -1,11 +1,9 @@
 import { Simulation } from '../../../simulation/simulation';
 import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
-import { CraftingAction } from '../crafting-action';
 import { ProgressAction } from '../progress-action';
 import { Buff } from '../../buff.enum';
-import { FinalAppraisal } from '../buff/final-appraisal';
-import { RemoveFinalAppraisal } from '../other/remove-final-appraisal';
+import { StepState } from '../../step-state';
 
 /**
  * MuMe is just piece by piece with a different condition, cost and success rate.
@@ -22,19 +20,15 @@ export class MuscleMemory extends ProgressAction {
   execute(simulation: Simulation): void {
     super.execute(simulation);
     simulation.buffs.push({
-      duration: 5,
+      duration: simulation.state === StepState.PRIMED ? 7 : 5,
       stacks: 0,
       buff: Buff.MUSCLE_MEMORY,
-      appliedStep: simulation.steps.length
+      appliedStep: simulation.steps.length,
     });
   }
 
   _canBeUsed(simulation: Simulation): boolean {
-    return (
-      simulation.steps.filter(
-        step => !step.action.is(FinalAppraisal) && !step.action.is(RemoveFinalAppraisal)
-      ).length === 0
-    );
+    return simulation.steps.filter((step) => !step.action.skipsBuffTicks()).length === 0;
   }
 
   canBeMoved(currentIndex: number): boolean {
