@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.1.4](https://github.com/ffxiv-teamcraft/simulator/compare/v3.1.3...v3.1.4) (2022-08-30)
+
+
+### Bug Fixes
+
+* **quality:** fix rounding error, fround again ([adc3669](https://github.com/ffxiv-teamcraft/simulator/commit/adc3669))
+
+
+
 ### [3.1.3](https://github.com/ffxiv-teamcraft/simulator/compare/v3.1.2...v3.1.3) (2022-08-29)
 
 
