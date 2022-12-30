@@ -587,4 +587,30 @@ describe('Craft simulator tests', () => {
 
     expect(simulation2.run(true).success).toBe(true);
   });
+
+  it('Should handle ToT and Heart and Soul properly', () => {
+    const simulation = new Simulation(
+      generateStarRecipe(590, 4300, 12800, 130, 115, 80, 70, false, 15),
+      [new HeartAndSoul(), new PreparatoryTouch(), new TricksOfTheTrade()],
+      generateStats(90, 500, 500, 675),
+      [],
+      {
+        2: StepState.GOOD,
+      }
+    );
+
+    simulation.run(true);
+
+    expect(simulation.getBuff(Buff.HEART_AND_SOUL)).not.toBeUndefined();
+
+    const simulation2 = new Simulation(
+      generateStarRecipe(590, 4300, 12800, 130, 115, 80, 70, false, 15),
+      [new HeartAndSoul(), new PreparatoryTouch(), new TricksOfTheTrade()],
+      generateStats(90, 500, 500, 675)
+    );
+
+    simulation2.run(true);
+
+    expect(simulation2.getBuff(Buff.HEART_AND_SOUL)).toBeUndefined();
+  });
 });

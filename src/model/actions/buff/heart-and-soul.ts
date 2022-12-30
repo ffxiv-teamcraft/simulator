@@ -58,7 +58,7 @@ export class HeartAndSoul extends BuffAction {
     | undefined {
     return (simulation: Simulation, linear?: boolean, action?: CraftingAction) => {
       const usedOnNonGoodOrExcellent =
-        linear || (simulation.state !== StepState.GOOD && simulation.state !== StepState.EXCELLENT);
+        simulation.state !== StepState.GOOD && simulation.state !== StepState.EXCELLENT;
       // If linear, this buff will be removed if last action is one of the buffed ones.
       if (
         usedOnNonGoodOrExcellent &&
