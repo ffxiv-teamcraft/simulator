@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.1.5](https://github.com/ffxiv-teamcraft/simulator/compare/v3.1.4...v3.1.5) (2022-12-30)
+
+
+### Bug Fixes
+
+* **heart and soul:** fixed Tricks of the Trade removing H&S on linear mode no matter the condition ([3a3bf8e](https://github.com/ffxiv-teamcraft/simulator/commit/3a3bf8e))
+
+
+
 ### [3.1.4](https://github.com/ffxiv-teamcraft/simulator/compare/v3.1.3...v3.1.4) (2022-08-30)
 
 
