@@ -156,7 +156,7 @@ export class Simulation {
     let totalIterations = 0;
     let result = this.run(true);
     const originalHqPercent = result.hqPercent;
-    const originalQuality = result.simulation.quality;
+    const originalCollect = Math.floor(result.simulation.quality / 10);
     const originalStats = { ...this.crafterStats };
     const res = {
       control: this.crafterStats._control,
@@ -165,68 +165,109 @@ export class Simulation {
       found: true,
     };
 
-    this.crafterStats.craftsmanship = 1;
-    this.reset();
-    result = this.run(true);
-    // Three loops, one per stat
-    while (!result.success && totalIterations < 10000) {
-      this.crafterStats.craftsmanship++;
+    let rating = originalCollect;
+    if (collectible && tiers != null) {
+      // I hate this but it's better than the reverse, wtb switch cases allowing functions
+      if (originalCollect > tiers.high) {
+        rating = tiers.high;
+      } else if (originalCollect > tiers.mid) {
+        rating = tiers.mid;
+      } else if (originalCollect > tiers.low) {
+        rating = tiers.low;
+      }
+    }
+
+    const bisect = (stat: 'cms' | 'cp', start: number, end: number): number => {
+      if (start === end) {
+        return start;
+      }
+
+      totalIterations++;
+
+      // Our operating new stat value
+      const test = Math.floor((start + end) / 2);
+
+      switch (stat) {
+        case 'cms':
+          this.crafterStats.craftsmanship = test;
+          break;
+        case 'cp':
+          this.crafterStats.cp = test;
+          break;
+      }
+
       this.reset();
       result = this.run(true);
-      totalIterations++;
-    }
 
-    res.craftsmanship = this.crafterStats.craftsmanship;
+      if (result.success && result.hqPercent >= originalHqPercent) {
+        // Due to flooring, if the 2 numbers are adjacent, test will be the same as the lower
+        if (test === start) {
+          return test;
+        }
 
-    this.crafterStats._control = 1;
-    this.reset();
-    result = this.run(true);
-
-    if (collectible && originalHqPercent < 100 && tiers != null) {
-      const originalRating = Math.floor(originalQuality / 10);
-      let rating = 0;
-      // I hate this but it's better than the reverse, wtb switch cases allowing functions
-      if (originalRating > tiers.high) {
-        rating = tiers.high;
-      } else if (originalRating > tiers.mid) {
-        rating = tiers.mid;
-      } else if (originalRating > tiers.low) {
-        rating = tiers.low;
+        return bisect(stat, start, test);
       } else {
-        rating = originalRating;
+        // If it fails but our test was 1 below the "good" side, then the end was the answer
+        if (test === end - 1) {
+          switch (stat) {
+            case 'cms':
+              this.crafterStats.craftsmanship = end;
+              break;
+            case 'cp':
+              this.crafterStats.cp = end;
+              break;
+          }
+
+          return end;
+        }
+
+        return bisect(stat, test, end);
+      }
+    };
+
+    const bisectControl = (start: number, end: number): number => {
+      if (start === end) {
+        return start;
       }
 
-      while (Math.floor(result.simulation.quality / 10) < rating && totalIterations < 10000) {
-        this.crafterStats._control++;
-        this.reset();
-        result = this.run(true);
-        totalIterations++;
-      }
-    } else {
-      while (result.hqPercent < originalHqPercent && totalIterations < 10000) {
-        this.crafterStats._control++;
-        this.reset();
-        result = this.run(true);
-        totalIterations++;
-      }
-    }
+      totalIterations++;
 
-    res.control = this.crafterStats._control;
+      // Our operating new stat value
+      const test = Math.floor((start + end) / 2);
+
+      this.crafterStats._control = test;
+
+      this.reset();
+      result = this.run(true);
+
+      const comparator =
+        collectible && tiers != null && originalHqPercent < 100 ? rating : originalHqPercent;
+
+      const outcome =
+        collectible && tiers != null && originalHqPercent < 100
+          ? Math.floor(result.simulation.quality / 10)
+          : result.hqPercent;
+
+      if (outcome < comparator) {
+        if (test === end - 1) {
+          this.crafterStats._control = end;
+          return end;
+        }
+        return bisectControl(test, end);
+      } else {
+        if (test === start) {
+          return test;
+        }
+        return bisectControl(start, test);
+      }
+    };
+
+    res.craftsmanship = bisect('cms', 1, originalStats.craftsmanship);
+    res.control = bisectControl(1, originalStats._control);
 
     // We need to reset control to make sure result.hqPercent is accurate
     this.crafterStats._control = originalStats._control;
-    this.crafterStats.cp = 180;
-    this.reset();
-    result = this.run(true);
-
-    while (totalIterations < 10000 && (!result.success || result.hqPercent < originalHqPercent)) {
-      this.crafterStats.cp++;
-      this.reset();
-      result = this.run(true);
-      totalIterations++;
-    }
-
-    res.cp = this.crafterStats.cp;
+    res.cp = bisect('cp', 180, originalStats.cp);
 
     if (totalIterations >= 10000) {
       res.found = false;
