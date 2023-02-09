@@ -663,5 +663,6 @@ describe('Craft simulator tests', () => {
     expect(stats.found).toBe(true);
     expect(stats.craftsmanship).toBe(3875);
     expect(stats.control).toBe(2962);
+    expect(stats.cp).toBe(363);
   });
 });
