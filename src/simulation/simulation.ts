@@ -144,9 +144,19 @@ export class Simulation {
     }
   }
 
-  public getMinStats(): { control: number; craftsmanship: number; cp: number; found: boolean } {
+  public getMinStats(
+    collectible = false,
+    tiers?: { low: number; mid: number; high: number }
+  ): {
+    control: number;
+    craftsmanship: number;
+    cp: number;
+    found: boolean;
+  } {
     let totalIterations = 0;
-    const originalHqPercent = this.run(true).hqPercent;
+    let result = this.run(true);
+    const originalHqPercent = result.hqPercent;
+    const originalQuality = result.simulation.quality;
     const originalStats = { ...this.crafterStats };
     const res = {
       control: this.crafterStats._control,
@@ -157,7 +167,7 @@ export class Simulation {
 
     this.crafterStats.craftsmanship = 1;
     this.reset();
-    let result = this.run(true);
+    result = this.run(true);
     // Three loops, one per stat
     while (!result.success && totalIterations < 10000) {
       this.crafterStats.craftsmanship++;
@@ -172,15 +182,39 @@ export class Simulation {
     this.reset();
     result = this.run(true);
 
-    while (result.hqPercent < originalHqPercent && totalIterations < 10000) {
-      this.crafterStats._control++;
-      this.reset();
-      result = this.run(true);
-      totalIterations++;
+    if (collectible && originalHqPercent < 100 && tiers != null) {
+      const originalRating = Math.floor(originalQuality / 10);
+      let rating = 0;
+      // I hate this but it's better than the reverse, wtb switch cases allowing functions
+      if (originalRating > tiers.high) {
+        rating = tiers.high;
+      } else if (originalRating > tiers.mid) {
+        rating = tiers.mid;
+      } else if (originalRating > tiers.low) {
+        rating = tiers.low;
+      } else {
+        rating = originalRating;
+      }
+
+      while (Math.floor(result.simulation.quality / 10) < rating && totalIterations < 10000) {
+        this.crafterStats._control++;
+        this.reset();
+        result = this.run(true);
+        totalIterations++;
+      }
+    } else {
+      while (result.hqPercent < originalHqPercent && totalIterations < 10000) {
+        this.crafterStats._control++;
+        this.reset();
+        result = this.run(true);
+        totalIterations++;
+      }
     }
 
     res.control = this.crafterStats._control;
 
+    // We need to reset control to make sure result.hqPercent is accurate
+    this.crafterStats._control = originalStats._control;
     this.crafterStats.cp = 180;
     this.reset();
     result = this.run(true);
