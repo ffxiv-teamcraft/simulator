@@ -614,6 +614,32 @@ describe('Craft simulator tests', () => {
     expect(simulation2.getBuff(Buff.HEART_AND_SOUL)).toBeUndefined();
   });
 
+  it('Should calculate min stats', () => {
+    const simulation = new Simulation(
+      generateRecipe(525, 1300, 6200, 123, 107, 15, { durability: 40 }),
+      [
+        new Reflect(),
+        new Groundwork(),
+        new MastersMend(),
+        new Manipulation(),
+        new WasteNot(),
+        new PreparatoryTouch(),
+        new PreparatoryTouch(),
+        new PreparatoryTouch(),
+        new PreparatoryTouch(),
+        new ByregotsBlessing(),
+        new BasicSynthesis(),
+      ],
+      generateStats(90, 4021, 3600, 500)
+    );
+
+    const stats = simulation.getMinStats();
+    expect(stats.found).toBe(true);
+    expect(stats.craftsmanship).toBe(3309);
+    expect(stats.control).toBe(3125);
+    expect(stats.cp).toBe(448);
+  });
+
   it('Should correctly identify Collectibility tiers for min stats', () => {
     const simulation = new Simulation(
       generateRecipe(560, 3500, 7200, 130, 115, 15, { progressModifier: 90, qualityModifier: 80 }),
