@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.1.6](https://github.com/ffxiv-teamcraft/simulator/compare/v3.1.5...v3.1.6) (2023-02-09)
+
+
+### Bug Fixes
+
+* **min-stats:** respect collectibility tiers in min stats ([#71](https://github.com/ffxiv-teamcraft/simulator/issues/71)) ([210c155](https://github.com/ffxiv-teamcraft/simulator/commit/210c155))
+
+
+
 ### [3.1.5](https://github.com/ffxiv-teamcraft/simulator/compare/v3.1.4...v3.1.5) (2022-12-30)
 
 
