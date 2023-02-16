@@ -265,8 +265,16 @@ export class Simulation {
       }
     };
 
-    res.craftsmanship = bisect('cms', 1, originalStats.craftsmanship);
-    res.control = bisectControl(1, originalStats._control);
+    // Narrow the window when possible, or return the min if we're too low
+    const cmsBase = this.recipe.craftsmanshipReq ?? 1;
+    res.craftsmanship =
+      cmsBase < originalStats.craftsmanship
+        ? bisect('cms', cmsBase, originalStats.craftsmanship)
+        : cmsBase;
+
+    const ctlBase = this.recipe.controlReq ?? 1;
+    res.control =
+      ctlBase < originalStats._control ? bisectControl(ctlBase, originalStats._control) : ctlBase;
 
     // We need to reset control to make sure result.hqPercent is accurate
     this.crafterStats._control = originalStats._control;
