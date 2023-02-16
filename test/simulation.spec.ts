@@ -640,7 +640,7 @@ describe('Craft simulator tests', () => {
     expect(stats.cp).toBe(448);
   });
 
-  it('Should correctly identify Collectibility tiers for min stats', () => {
+  it('Should correctly identify tier thresholds for min stats', () => {
     const simulation = new Simulation(
       generateRecipe(560, 3500, 7200, 130, 115, 15, { progressModifier: 90, qualityModifier: 80 }),
       [
@@ -659,7 +659,7 @@ describe('Craft simulator tests', () => {
       generateStats(90, 4021, 3600, 601)
     );
 
-    const stats = simulation.getMinStats(true, { low: 396, mid: 540, high: 684 });
+    const stats = simulation.getMinStats([3960, 5400, 6840]);
     expect(stats.found).toBe(true);
     expect(stats.craftsmanship).toBe(3875);
     expect(stats.control).toBe(2962);
