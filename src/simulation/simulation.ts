@@ -144,10 +144,7 @@ export class Simulation {
     }
   }
 
-  public getMinStats(
-    collectible = false,
-    tiers?: { low: number; mid: number; high: number }
-  ): {
+  public getMinStats(thresholds: Array<number> = []): {
     control: number;
     craftsmanship: number;
     cp: number;
@@ -156,7 +153,7 @@ export class Simulation {
     let totalIterations = 0;
     let result = this.run(true);
     const originalHqPercent = result.hqPercent;
-    const originalCollect = Math.floor(result.simulation.quality / 10);
+    const originalQuality = result.simulation.quality;
     const originalStats = { ...this.crafterStats };
     const res = {
       control: this.crafterStats._control,
@@ -165,16 +162,13 @@ export class Simulation {
       found: true,
     };
 
-    let rating = originalCollect;
-    if (collectible && tiers != null) {
-      // I hate this but it's better than the reverse, wtb switch cases allowing functions
-      if (originalCollect > tiers.high) {
-        rating = tiers.high;
-      } else if (originalCollect > tiers.mid) {
-        rating = tiers.mid;
-      } else if (originalCollect > tiers.low) {
-        rating = tiers.low;
-      }
+    // Note that thresholds are actual quality, so Collectibility rating must scale before input
+    let rating = originalQuality;
+    if (thresholds.length > 0) {
+      rating = thresholds.reduce(
+        (current, next) => (next > originalQuality ? current : Math.max(current, next)),
+        0
+      );
     }
 
     const bisect = (stat: 'cms' | 'cp', start: number, end: number): number => {
@@ -240,12 +234,14 @@ export class Simulation {
       this.reset();
       result = this.run(true);
 
+      // If we have thresholds and didn't max the recipe, target rating, otherwise HQ chance
       const comparator =
-        collectible && tiers != null && originalHqPercent < 100 ? rating : originalHqPercent;
+        thresholds.length > 0 && originalHqPercent < 100 ? rating : originalHqPercent;
 
+      // If we have thresholds and didn't max the recipe, use quality, otherwise HQ chance
       const outcome =
-        collectible && tiers != null && originalHqPercent < 100
-          ? Math.floor(result.simulation.quality / 10)
+        thresholds.length > 0 && originalHqPercent < 100
+          ? result.simulation.quality
           : result.hqPercent;
 
       if (outcome < comparator) {
