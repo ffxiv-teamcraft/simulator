@@ -144,6 +144,11 @@ export class Simulation {
     }
   }
 
+  /**
+   *
+   * @param thresholds an array of quality thresholds, Collectibility ratings must be scaled before input
+   * @returns a boolean for successful calculation, and the minimum value for each stat
+   */
   public getMinStats(thresholds: Array<number> = []): {
     control: number;
     craftsmanship: number;
