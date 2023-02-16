@@ -198,6 +198,7 @@ export class Simulation {
       this.reset();
       result = this.run(true);
 
+      // CP needs to know we didn't gimp quality, so check both values
       if (result.success && result.hqPercent >= originalHqPercent) {
         // Due to flooring, if the 2 numbers are adjacent, test will be the same as the lower
         if (test === start) {
@@ -249,6 +250,7 @@ export class Simulation {
           ? result.simulation.quality
           : result.hqPercent;
 
+      // Switch between the 2 control targets
       if (outcome < comparator) {
         if (test === end - 1) {
           this.crafterStats._control = end;
