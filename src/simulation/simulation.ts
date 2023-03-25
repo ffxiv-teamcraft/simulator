@@ -144,10 +144,12 @@ export class Simulation {
     }
   }
 
-  public getMinStats(
-    collectible = false,
-    tiers?: { low: number; mid: number; high: number }
-  ): {
+  /**
+   *
+   * @param thresholds an array of quality thresholds, Collectibility ratings must be scaled before input
+   * @returns a boolean for successful calculation, and the minimum value for each stat
+   */
+  public getMinStats(thresholds: Array<number> = []): {
     control: number;
     craftsmanship: number;
     cp: number;
@@ -156,7 +158,7 @@ export class Simulation {
     let totalIterations = 0;
     let result = this.run(true);
     const originalHqPercent = result.hqPercent;
-    const originalCollect = Math.floor(result.simulation.quality / 10);
+    const originalQuality = result.simulation.quality;
     const originalStats = { ...this.crafterStats };
     const res = {
       control: this.crafterStats._control,
@@ -165,16 +167,13 @@ export class Simulation {
       found: true,
     };
 
-    let rating = originalCollect;
-    if (collectible && tiers != null) {
-      // I hate this but it's better than the reverse, wtb switch cases allowing functions
-      if (originalCollect > tiers.high) {
-        rating = tiers.high;
-      } else if (originalCollect > tiers.mid) {
-        rating = tiers.mid;
-      } else if (originalCollect > tiers.low) {
-        rating = tiers.low;
-      }
+    // Note that thresholds are actual quality, so Collectibility rating must scale before input
+    let rating = originalQuality;
+    if (thresholds.length > 0) {
+      rating = thresholds.reduce(
+        (current, next) => (next > originalQuality ? current : Math.max(current, next)),
+        0
+      );
     }
 
     const bisect = (stat: 'cms' | 'cp', start: number, end: number): number => {
@@ -199,6 +198,7 @@ export class Simulation {
       this.reset();
       result = this.run(true);
 
+      // CP needs to know we didn't gimp quality, so check both values
       if (result.success && result.hqPercent >= originalHqPercent) {
         // Due to flooring, if the 2 numbers are adjacent, test will be the same as the lower
         if (test === start) {
@@ -240,14 +240,17 @@ export class Simulation {
       this.reset();
       result = this.run(true);
 
+      // If we have thresholds and didn't max the recipe, target rating, otherwise HQ chance
       const comparator =
-        collectible && tiers != null && originalHqPercent < 100 ? rating : originalHqPercent;
+        thresholds.length > 0 && originalHqPercent < 100 ? rating : originalHqPercent;
 
+      // If we have thresholds and didn't max the recipe, use quality, otherwise HQ chance
       const outcome =
-        collectible && tiers != null && originalHqPercent < 100
-          ? Math.floor(result.simulation.quality / 10)
+        thresholds.length > 0 && originalHqPercent < 100
+          ? result.simulation.quality
           : result.hqPercent;
 
+      // Switch between the 2 control targets
       if (outcome < comparator) {
         if (test === end - 1) {
           this.crafterStats._control = end;
@@ -262,8 +265,16 @@ export class Simulation {
       }
     };
 
-    res.craftsmanship = bisect('cms', 1, originalStats.craftsmanship);
-    res.control = bisectControl(1, originalStats._control);
+    // Narrow the window when possible, or return the min if we're too low
+    const cmsBase = this.recipe.craftsmanshipReq ?? 1;
+    res.craftsmanship =
+      cmsBase < originalStats.craftsmanship
+        ? bisect('cms', cmsBase, originalStats.craftsmanship)
+        : cmsBase;
+
+    const ctlBase = this.recipe.controlReq ?? 1;
+    res.control =
+      ctlBase < originalStats._control ? bisectControl(ctlBase, originalStats._control) : ctlBase;
 
     // We need to reset control to make sure result.hqPercent is accurate
     this.crafterStats._control = originalStats._control;
