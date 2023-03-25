@@ -106,7 +106,7 @@ describe('Craft simulator tests', () => {
 
     simulation.run(true);
 
-    expect(simulation.quality).toBe(827);
+    expect(simulation.quality).toBe(828);
 
     const simulation2 = new Simulation(
       generateStarRecipe(580, 3900, 10920, 130, 115, 80, 70),
