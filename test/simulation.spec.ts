@@ -665,4 +665,19 @@ describe('Craft simulator tests', () => {
     expect(stats.control).toBe(2962);
     expect(stats.cp).toBe(363);
   });
+
+  it('Should use the enhanced Good modifier with Splendorous tools', () => {
+    const simulation = new Simulation(
+      generateRecipe(1, 9, 80, 50, 30),
+      [new Observe(), new BasicTouch()],
+      generateStats(90, 4041, 3987, 616, true),
+      [],
+      {
+        1: StepState.GOOD,
+      }
+    );
+
+    simulation.run(true);
+    expect(simulation.quality).toBe(2387);
+  });
 });

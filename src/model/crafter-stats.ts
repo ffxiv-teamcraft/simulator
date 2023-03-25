@@ -9,6 +9,7 @@ export class CrafterStats {
     public _control: number,
     public cp: number,
     public readonly specialist: boolean,
+    public readonly splendorous: boolean,
     public readonly level: number,
     public readonly levels: CrafterLevels
   ) {}
