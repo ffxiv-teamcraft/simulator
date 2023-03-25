@@ -65,9 +65,10 @@ export function generateStats(
   level: number,
   craftsmanship: number,
   control = 3000,
-  cp = 539
+  cp = 539,
+  splendorous = false
 ): CrafterStats {
-  return new CrafterStats(14, craftsmanship, control, cp, true, level, [
+  return new CrafterStats(14, craftsmanship, control, cp, true, splendorous, level, [
     level,
     level,
     level,
