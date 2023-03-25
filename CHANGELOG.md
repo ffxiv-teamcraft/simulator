@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/ffxiv-teamcraft/simulator/compare/v3.1.6...v3.2.0) (2023-03-25)
+
+
+### Bug Fixes
+
+* **simulator:** better threshold logic and min stats implementation  ([911007b](https://github.com/ffxiv-teamcraft/simulator/commit/911007b))
+
+
+### Features
+
+* **stats:** handle splendorous tools' buff on good conditions ([b7f2c6f](https://github.com/ffxiv-teamcraft/simulator/commit/b7f2c6f))
+
+
+
 ### [3.1.6](https://github.com/ffxiv-teamcraft/simulator/compare/v3.1.5...v3.1.6) (2023-02-09)
 
 
