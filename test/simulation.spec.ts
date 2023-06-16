@@ -375,6 +375,26 @@ describe('Craft simulator tests', () => {
     ]);
   });
 
+  it('Should have proper conditions switch system', () => {
+    const excellentTest = new Simulation(
+      generateRecipe(480, 6178, 36208, 110, 90, 995),
+      [new Observe(), new Observe()],
+      generateStats(80, 2745, 2885, 626)
+    );
+    excellentTest.state = StepState.EXCELLENT;
+    excellentTest.tickState();
+    expect(excellentTest.state).toEqual(StepState.POOR);
+
+    const goodOmen = new Simulation(
+      generateRecipe(480, 6178, 36208, 110, 90, 995),
+      [new Observe(), new Observe()],
+      generateStats(80, 2745, 2885, 626)
+    );
+    goodOmen.state = StepState.GOOD_OMEN;
+    goodOmen.tickState();
+    expect(goodOmen.state).toEqual(StepState.GOOD);
+  });
+
   it('Should have proper conditions for expert 1 recipes', () => {
     const simulation = new Simulation(
       generateRecipe(480, 6178, 36208, 110, 90, 115),

@@ -315,7 +315,9 @@ export class Simulation {
     this.actions
       .filter((a) => a !== undefined)
       .forEach((action: CraftingAction, index: number) => {
+        console.log('before', StepState[this.state]);
         this.state = this.stepStates[index] || StepState.NORMAL;
+        console.log(StepState[this.state]);
         let result: ActionResult;
         let failCause: SimulationFailCause | undefined = undefined;
         const canUseAction = action.canBeUsed(this, linear);
@@ -371,7 +373,9 @@ export class Simulation {
         }
         // Tick state to change it for next turn if not in linear mode
         if (!linear && !action.is(FinalAppraisal) && !action.is(RemoveFinalAppraisal)) {
+          const prev = StepState[this.state];
           this.tickState();
+          console.log(prev, '=>', StepState[this.state]);
         }
 
         this.steps.push(result);
@@ -538,6 +542,11 @@ export class Simulation {
       this.state = StepState.POOR;
       return;
     }
+    // If current state is GOOD_OMEN, then next one is GOOD
+    if (this.state === StepState.GOOD_OMEN) {
+      this.state = StepState.GOOD;
+      return;
+    }
 
     // LV 63 Trait for improved Good chances (Quality Assurance)
     const goodChance = this.crafterStats.level >= 63 ? 0.25 : 0.2;
@@ -571,6 +580,9 @@ export class Simulation {
             break;
           case StepState.PRIMED:
             rate = 0.12;
+            break;
+          case StepState.GOOD_OMEN:
+            rate = 0.1;
             break;
         }
         return {
