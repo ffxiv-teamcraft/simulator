@@ -315,9 +315,7 @@ export class Simulation {
     this.actions
       .filter((a) => a !== undefined)
       .forEach((action: CraftingAction, index: number) => {
-        console.log('before', StepState[this.state]);
         this.state = this.stepStates[index] || StepState.NORMAL;
-        console.log(StepState[this.state]);
         let result: ActionResult;
         let failCause: SimulationFailCause | undefined = undefined;
         const canUseAction = action.canBeUsed(this, linear);
