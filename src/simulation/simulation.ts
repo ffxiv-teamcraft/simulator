@@ -371,9 +371,7 @@ export class Simulation {
         }
         // Tick state to change it for next turn if not in linear mode
         if (!linear && !action.is(FinalAppraisal) && !action.is(RemoveFinalAppraisal)) {
-          const prev = StepState[this.state];
           this.tickState();
-          console.log(prev, '=>', StepState[this.state]);
         }
 
         this.steps.push(result);
