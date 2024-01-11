@@ -538,6 +538,16 @@ describe('Craft simulator tests', () => {
     simulation2.run(true);
 
     expect(simulation2.steps[8].addedQuality).toBe(663);
+
+    const simulation3 = new Simulation(
+      generateStarRecipe(625, 5280, 13050, 130, 115, 80, 70),
+      [new Reflect(), new Innovation(), new BasicTouch(), new StandardTouch()],
+      generateStats(90, 3702, 4073, 588)
+    );
+
+    simulation3.run(true);
+
+    expect(simulation3.steps[3].addedQuality).toBe(663);
   });
 
   it('Should fail if required quality is not met', () => {
