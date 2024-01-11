@@ -29,7 +29,7 @@ export abstract class QualityAction extends GeneralAction {
         break;
     }
 
-    buffMod += (simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0) / 10;
+    let iqMod = simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0;
 
     let buffMult = 1;
     if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
@@ -40,7 +40,7 @@ export abstract class QualityAction extends GeneralAction {
       buffMult += 0.5;
     }
 
-    buffMod = Math.fround(buffMod) * Math.fround(buffMult);
+    buffMod = Math.fround((buffMod * buffMult * (100 + iqMod * 10)) / 100);
 
     const efficiency = Math.fround(potency * buffMod);
 
