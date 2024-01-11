@@ -29,7 +29,7 @@ export abstract class QualityAction extends GeneralAction {
         break;
     }
 
-    let iqMod = simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0;
+    const iqMod = simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0;
 
     let buffMult = 1;
     if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
