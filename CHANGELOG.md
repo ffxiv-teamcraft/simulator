@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.3.3](https://github.com/ffxiv-teamcraft/simulator/compare/v3.3.2...v3.3.3) (2024-01-12)
+
+
+### Bug Fixes
+
+* **math:** IQ floating point precision error ([3f4b7f8](https://github.com/ffxiv-teamcraft/simulator/commit/3f4b7f8))
+
+
+
 ### [3.3.2](https://github.com/ffxiv-teamcraft/simulator/compare/v3.3.1...v3.3.2) (2023-08-13)
 
 
