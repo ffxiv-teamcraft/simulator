@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/simulator
   docker:
-    - image: circleci/node:16.13.1
+    - image: circleci/node:18.18.0
 
 
 version: 2
