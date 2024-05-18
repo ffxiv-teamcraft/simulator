@@ -710,4 +710,19 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
     expect(simulation.quality).toBe(2387);
   });
+
+  it('Should not increase Inner Quiet when job level is below 11', () => {
+    const simulation = new Simulation(
+      generateRecipe(1, 9, 80, 50, 30),
+      [new BasicTouch()],
+      generateStats(10, 10, 10, 20),
+      [],
+      {
+        1: StepState.NORMAL,
+      }
+    );
+
+    simulation.run(true);
+    expect(simulation.buffs).toHaveLength(0);
+  });
 });
