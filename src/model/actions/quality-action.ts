@@ -46,7 +46,7 @@ export abstract class QualityAction extends GeneralAction {
 
     simulation.quality += Math.floor((qualityIncrease * conditionMod * efficiency) / 100);
 
-    if (!skipStackAddition) {
+    if (!skipStackAddition && simulation.crafterStats.level >= 11) {
       simulation.addInnerQuietStacks(1);
     }
   }
