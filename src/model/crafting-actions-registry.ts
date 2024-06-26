@@ -112,6 +112,7 @@ export class CraftingActionsRegistry {
     { name: 'StandardTouch', action: new StandardTouch() },
     { name: 'AdvancedTouch', action: new AdvancedTouch() },
     { name: 'HastyTouch', action: new HastyTouch() },
+    { name: 'DaringTouch', action: new DaringTouch() },
     { name: 'ByregotsBlessing', action: new ByregotsBlessing() },
     { name: 'PreciseTouch', action: new PreciseTouch() },
     { name: 'FocusedTouch', action: new FocusedTouch() },
@@ -121,7 +122,6 @@ export class CraftingActionsRegistry {
     { name: 'Reflect', action: new Reflect() },
     { name: 'TrainedFinesse', action: new TrainedFinesse() },
     { name: 'RefinedTouch', action: new RefinedTouch() },
-    { name: 'DaringTouch', action: new DaringTouch() },
     { name: 'TrainedPerfection', action: new TrainedPerfection() },
 
     // CP recovery

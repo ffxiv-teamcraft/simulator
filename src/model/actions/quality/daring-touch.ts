@@ -8,6 +8,10 @@ export class DaringTouch extends QualityAction {
     return { job: CraftingJob.ANY, level: 96 };
   }
 
+  hasCombo(simulation: Simulation): boolean {
+    return simulation.hasBuff(Buff.EXPEDIENCE);
+  }
+
   _canBeUsed(simulationState: Simulation): boolean {
     return simulationState.hasBuff(Buff.EXPEDIENCE);
   }
