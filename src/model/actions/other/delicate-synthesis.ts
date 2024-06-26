@@ -17,7 +17,7 @@ export class DelicateSynthesis extends GeneralAction {
   execute(simulation: Simulation): void {
     // Progress
     const progressionIncrease = this.getBaseProgression(simulation);
-    const progressPotency = this.getPotency(simulation);
+    const progressPotency = this.getPotency(simulation, 'progress');
     let progressBuffMod = this.getBaseBonus(simulation);
     let progressConditionMod = this.getBaseCondition(simulation);
 
@@ -58,7 +58,7 @@ export class DelicateSynthesis extends GeneralAction {
   private executeQuality(simulation: Simulation): void {
     let buffMod = this.getBaseBonus(simulation);
     let conditionMod = this.getBaseCondition(simulation);
-    const potency = this.getPotency(simulation);
+    const potency = this.getPotency(simulation, 'quality');
     const qualityIncrease = this.getBaseQuality(simulation);
 
     switch (simulation.state) {
@@ -111,8 +111,10 @@ export class DelicateSynthesis extends GeneralAction {
     return [100323, 100324, 100325, 100326, 100327, 100328, 100329, 100330];
   }
 
-  // Potency is the same for both quality and progression so let's use this.
-  getPotency(simulation: Simulation): number {
+  getPotency(simulation: Simulation, target?: 'progress' | 'quality'): number {
+    if (target === 'progress') {
+      return simulation.crafterStats.level >= 94 ? 150 : 100;
+    }
     return 100;
   }
 
