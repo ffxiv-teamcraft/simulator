@@ -10,12 +10,14 @@ export class HastyTouch extends QualityAction {
     skipStackAddition: boolean = false
   ) {
     super.execute(simulation, safe, skipStackAddition);
-    simulation.buffs.push({
-      duration: 1,
-      buff: Buff.EXPEDIENCE,
-      stacks: 1,
-      appliedStep: simulation.steps.length,
-    });
+    if (simulation.crafterStats.level >= 96) {
+      simulation.buffs.push({
+        duration: 1,
+        buff: Buff.EXPEDIENCE,
+        stacks: 1,
+        appliedStep: simulation.steps.length,
+      });
+    }
   }
 
   getLevelRequirement(): { job: CraftingJob; level: number } {
