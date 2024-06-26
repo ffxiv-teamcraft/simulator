@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.5.0](https://github.com/ffxiv-teamcraft/simulator/compare/v3.3.3...v3.5.0) (2024-06-26)
+
+
+### Bug Fixes
+
+* **daring-touch:** place it next to hasty and show combo when available ([a28a4bf](https://github.com/ffxiv-teamcraft/simulator/commit/a28a4bf))
+* **inner-quiet:** inner quiet triggering below level 11 ([#80](https://github.com/ffxiv-teamcraft/simulator/issues/80)) ([49b95bd](https://github.com/ffxiv-teamcraft/simulator/commit/49b95bd))
+
+
+### Features
+
+* new Dawntrail actions ([ad5b356](https://github.com/ffxiv-teamcraft/simulator/commit/ad5b356))
+
+
+
 ## [3.4.0](https://github.com/ffxiv-teamcraft/simulator/compare/v3.3.3...v3.4.0) (2024-06-26)
 
 
