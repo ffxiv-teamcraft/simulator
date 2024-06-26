@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.2](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.1...v3.5.2) (2024-06-26)
+
+
+### Bug Fixes
+
+* **delicate-synthesis:** implement new trait ([574d012](https://github.com/ffxiv-teamcraft/simulator/commit/574d012))
+
+
+
 ### [3.5.1](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.0...v3.5.1) (2024-06-26)
 
 
