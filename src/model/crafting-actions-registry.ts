@@ -34,6 +34,11 @@ import { AdvancedTouch } from './actions/quality/advanced-touch';
 import { PrudentSynthesis } from './actions/progression/prudent-synthesis';
 import { HeartAndSoul } from './actions/buff/heart-and-soul';
 import { TrainedFinesse } from './actions/quality/trained-finesse';
+import { RefinedTouch } from './actions/quality/refined-touch';
+import { TrainedPerfection } from './actions/other/trained-perfection';
+import { DaringTouch } from './actions/quality/daring-touch';
+import { QuickInnovation } from './actions/buff/quick-innovation';
+import { ImmaculateMend } from './actions/other/immaculate-mend';
 
 export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
@@ -115,6 +120,9 @@ export class CraftingActionsRegistry {
     { name: 'PreparatoryTouch', action: new PreparatoryTouch() },
     { name: 'Reflect', action: new Reflect() },
     { name: 'TrainedFinesse', action: new TrainedFinesse() },
+    { name: 'RefinedTouch', action: new RefinedTouch() },
+    { name: 'DaringTouch', action: new DaringTouch() },
+    { name: 'TrainedPerfection', action: new TrainedPerfection() },
 
     // CP recovery
     { name: 'TricksOfTheTrade', action: new TricksOfTheTrade() },
@@ -122,6 +130,7 @@ export class CraftingActionsRegistry {
     // Repair
     { name: 'MastersMend', action: new MastersMend() },
     { name: 'Manipulation', action: new Manipulation() },
+    { name: 'ImmaculateMend', action: new ImmaculateMend() },
 
     // Buffs
     { name: 'WasteNot', action: new WasteNot() },
@@ -130,6 +139,7 @@ export class CraftingActionsRegistry {
     { name: 'Innovation', action: new Innovation() },
     { name: 'Veneration', action: new Veneration() },
     { name: 'FinalAppraisal', action: new FinalAppraisal() },
+    { name: 'QuickInnovation', action: new QuickInnovation() },
 
     // Other
     { name: 'Observe', action: new Observe() },
