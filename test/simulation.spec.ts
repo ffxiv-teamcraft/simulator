@@ -30,6 +30,9 @@ import { AdvancedTouch } from '../src/model/actions/quality/advanced-touch';
 import { WasteNotII } from '../src/model/actions/buff/waste-not-ii';
 import { FocusedTouch } from '../src/model/actions/quality/focused-touch';
 import { TrainedFinesse } from '../src/model/actions/quality/trained-finesse';
+import { TrainedPerfection } from '../src/model/actions/other/trained-perfection';
+import { HastyTouch } from '../src/model/actions/quality/hasty-touch';
+import { DaringTouch } from '../src/model/actions/quality/daring-touch';
 
 describe('Craft simulator tests', () => {
   it('Should handle Reflect properly', () => {
@@ -709,5 +712,33 @@ describe('Craft simulator tests', () => {
 
     simulation.run(true);
     expect(simulation.quality).toBe(2387);
+  });
+
+  it('Should reduce durability cost to 0 after using TrainedPerfection', () => {
+    const simulation = new Simulation(
+      generateRecipe(1, 9, 80, 50, 30),
+      [new TrainedPerfection(), new BasicTouch(), new BasicTouch()],
+      generateStats(100, 4041, 3987, 616, true),
+      []
+    );
+
+    const result = simulation.run(true);
+    expect(result.steps[1].solidityDifference).toBe(0);
+    expect(result.steps[2].solidityDifference).toBe(
+      -new BasicTouch().getDurabilityCost(simulation)
+    );
+  });
+
+  it('Should only be able to use Daring Touch after Hasty Touch success', () => {
+    const simulation = new Simulation(
+      generateRecipe(1, 9, 80, 50, 30),
+      [new HastyTouch(), new DaringTouch(), new DaringTouch()],
+      generateStats(100, 4041, 3987, 616, true),
+      []
+    );
+
+    const result = simulation.run(true);
+    expect(result.steps[1].success).toBe(true);
+    expect(result.steps[2].success).toBe(null);
   });
 });

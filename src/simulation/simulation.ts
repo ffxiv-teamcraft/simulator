@@ -11,6 +11,7 @@ import { Craft } from '../model/craft';
 import { StepState } from '../model/step-state';
 import { FinalAppraisal } from '../model/actions/buff/final-appraisal';
 import { RemoveFinalAppraisal } from '../model/actions/other/remove-final-appraisal';
+import { TrainedPerfection } from '../model/actions/other/trained-perfection';
 
 export class Simulation {
   public progression = 0;
@@ -441,7 +442,9 @@ export class Simulation {
     }
 
     // Even if the action failed, we have to remove the durability cost
-    this.durability -= action.getDurabilityCost(this);
+    if (!this.lastStep || !(this.lastStep.action.is(TrainedPerfection) && this.lastStep.success)) {
+      this.durability -= action.getDurabilityCost(this);
+    }
     // Even if the action failed, CP has to be consumed too
     this.availableCP -= action.getCPCost(this, linear);
     if (this.progression >= this.recipe.progress) {

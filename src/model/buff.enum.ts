@@ -19,4 +19,6 @@ export enum Buff {
   FINAL_APPRAISAL,
 
   HEART_AND_SOUL,
+
+  EXPEDIENCE,
 }
