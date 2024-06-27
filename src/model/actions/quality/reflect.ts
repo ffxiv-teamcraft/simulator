@@ -41,6 +41,6 @@ export class Reflect extends QualityAction {
   }
 
   getPotency(simulation: Simulation): number {
-    return 100;
+    return 300;
   }
 }

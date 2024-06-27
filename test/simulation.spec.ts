@@ -28,7 +28,6 @@ import { DelicateSynthesis } from '../src/model/actions/other/delicate-synthesis
 import { Innovation } from '../src/model/actions/buff/innovation';
 import { AdvancedTouch } from '../src/model/actions/quality/advanced-touch';
 import { WasteNotII } from '../src/model/actions/buff/waste-not-ii';
-import { FocusedTouch } from '../src/model/actions/quality/focused-touch';
 import { TrainedFinesse } from '../src/model/actions/quality/trained-finesse';
 import { TrainedPerfection } from '../src/model/actions/other/trained-perfection';
 import { HastyTouch } from '../src/model/actions/quality/hasty-touch';
@@ -67,7 +66,7 @@ describe('Craft simulator tests', () => {
 
     expect(simulation.success).toBeTruthy();
     expect(simulation.steps[3].addedProgression).toBe(685);
-    expect(simulation.steps[0].addedQuality).toBe(817);
+    expect(simulation.steps[0].addedQuality).toBe(2451);
     expect(simulation.steps[1].addedQuality).toBe(980);
     expect(simulation.steps[2].addedQuality).toBe(1699);
   });
@@ -92,7 +91,7 @@ describe('Craft simulator tests', () => {
 
     simulation.run(true);
 
-    expect(simulation.steps[0].addedQuality).toBe(299);
+    expect(simulation.steps[0].addedQuality).toBe(897);
     expect(simulation.steps[1].addedQuality).toBe(358);
     expect(simulation.steps[2].addedQuality).toBe(388);
     expect(simulation.steps[6].addedQuality).toBe(1255);
@@ -131,6 +130,16 @@ describe('Craft simulator tests', () => {
     expect(simulation2.progression).toBe(3897);
   });
 
+  it('Should combo AdvancedTouch with Observe', () => {
+    const simulation = new Simulation(
+      generateRecipe(517, 1000, 5200, 121, 105),
+      [new Observe(), new AdvancedTouch()],
+      generateStats(90, 2763, 2780, 545)
+    );
+
+    expect(simulation.run(true).steps[1].cpDifference).toBe(-18);
+  });
+
   it('Should not combo AdvancedTouch if StandardTouch was not combo itself', () => {
     const simulation = new Simulation(
       generateRecipe(517, 1000, 5200, 121, 105),
@@ -157,7 +166,7 @@ describe('Craft simulator tests', () => {
     const simulation = new Simulation(
       generateStarRecipe(560, 1000, 5200, 130, 115, 90, 80),
       [
-        new Reflect(), // 222
+        new Reflect(), // 666
         new BasicSynthesis(), // 222
         new BasicTouch(), // 266
       ],
@@ -166,7 +175,7 @@ describe('Craft simulator tests', () => {
 
     simulation.run(true);
 
-    expect(simulation.steps[0].addedQuality).toBe(222);
+    expect(simulation.steps[0].addedQuality).toBe(666);
     expect(simulation.steps[1].addedProgression).toBe(222);
     expect(simulation.steps[2].addedQuality).toBe(266);
   });
@@ -185,7 +194,7 @@ describe('Craft simulator tests', () => {
 
     simulation.run(true);
 
-    expect(simulation.steps[0].addedQuality).toBe(817);
+    expect(simulation.steps[0].addedQuality).toBe(2451);
     expect(simulation.steps[3].addedQuality).toBe(2451);
   });
 
@@ -574,7 +583,7 @@ describe('Craft simulator tests', () => {
         new PrudentTouch(),
         new PrudentTouch(),
         new Observe(),
-        new FocusedTouch(),
+        new AdvancedTouch(),
         new Innovation(),
         new TrainedFinesse(),
         new TrainedFinesse(),
@@ -607,7 +616,7 @@ describe('Craft simulator tests', () => {
         new PrudentTouch(),
         new PrudentTouch(),
         new Observe(),
-        new FocusedTouch(),
+        new AdvancedTouch(),
         new Innovation(),
         new TrainedFinesse(),
         new TrainedFinesse(),
@@ -669,7 +678,7 @@ describe('Craft simulator tests', () => {
     const stats = simulation.getMinStats();
     expect(stats.found).toBe(true);
     expect(stats.craftsmanship).toBe(3309);
-    expect(stats.control).toBe(3125);
+    expect(stats.control).toBe(2793);
     expect(stats.cp).toBe(448);
   });
 

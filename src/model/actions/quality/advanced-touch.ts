@@ -2,10 +2,11 @@ import { QualityAction } from '../quality-action';
 import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
 import { StandardTouch } from './standard-touch';
+import { Observe } from '../other/observe';
 
 export class AdvancedTouch extends QualityAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
-    return { job: CraftingJob.ANY, level: 84 };
+    return { job: CraftingJob.ANY, level: 68 };
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
@@ -25,9 +26,8 @@ export class AdvancedTouch extends QualityAction {
       const step = simulation.steps[index];
       // If we end up finding the action, the combo is available
       if (
-        step.action.getIds()[0] === new StandardTouch().getIds()[0] &&
-        step.success &&
-        step.combo
+        (step.action.is(StandardTouch) && step.success && step.combo) ||
+        step.action.is(Observe)
       ) {
         return true;
       }

@@ -3,7 +3,6 @@ import { BasicSynthesis } from './actions/progression/basic-synthesis';
 import { CarefulSynthesis } from './actions/progression/careful-synthesis';
 import { RapidSynthesis } from './actions/progression/rapid-synthesis';
 import { Groundwork } from './actions/progression/groundwork';
-import { FocusedSynthesis } from './actions/progression/focused-synthesis';
 import { MuscleMemory } from './actions/progression/muscle-memory';
 import { BasicTouch } from './actions/quality/basic-touch';
 import { StandardTouch } from './actions/quality/standard-touch';
@@ -11,7 +10,6 @@ import { ActionType } from './actions/action-type';
 import { HastyTouch } from './actions/quality/hasty-touch';
 import { ByregotsBlessing } from './actions/quality/byregots-blessing';
 import { PreciseTouch } from './actions/quality/precise-touch';
-import { FocusedTouch } from './actions/quality/focused-touch';
 import { PrudentTouch } from './actions/quality/prudent-touch';
 import { TricksOfTheTrade } from './actions/other/tricks-of-the-trade';
 import { MastersMend } from './actions/other/masters-mend';
@@ -103,7 +101,6 @@ export class CraftingActionsRegistry {
     { name: 'PrudentSynthesis', action: new PrudentSynthesis() },
     { name: 'RapidSynthesis', action: new RapidSynthesis() },
     { name: 'Groundwork', action: new Groundwork() },
-    { name: 'FocusedSynthesis', action: new FocusedSynthesis() },
     { name: 'MuscleMemory', action: new MuscleMemory() },
     { name: 'IntensiveSynthesis', action: new IntensiveSynthesis() },
 
@@ -115,7 +112,6 @@ export class CraftingActionsRegistry {
     { name: 'DaringTouch', action: new DaringTouch() },
     { name: 'ByregotsBlessing', action: new ByregotsBlessing() },
     { name: 'PreciseTouch', action: new PreciseTouch() },
-    { name: 'FocusedTouch', action: new FocusedTouch() },
     { name: 'PrudentTouch', action: new PrudentTouch() },
     { name: 'TrainedEye', action: new TrainedEye() },
     { name: 'PreparatoryTouch', action: new PreparatoryTouch() },
