@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.3](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.2...v3.5.3) (2024-06-27)
+
+
+### Bug Fixes
+
+* **core:** applied action updates from 7.0 ([8ec5f1c](https://github.com/ffxiv-teamcraft/simulator/commit/8ec5f1c))
+
+
+
 ### [3.5.2](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.1...v3.5.2) (2024-06-26)
 
 
