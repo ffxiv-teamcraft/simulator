@@ -36,7 +36,7 @@ export class RefinedTouch extends QualityAction {
     for (let index = simulation.steps.length - 1; index >= 0; index--) {
       const step = simulation.steps[index];
       // If we end up finding the action, the combo is available
-      if (step.action.getIds()[0] === new BasicTouch().getIds()[0] && step.success && step.combo) {
+      if (step.action.is(BasicTouch) && step.success) {
         return true;
       }
       // If there's an action that isn't skipped (fail or not), combo is broken

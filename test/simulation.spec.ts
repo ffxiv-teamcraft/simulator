@@ -32,6 +32,7 @@ import { TrainedFinesse } from '../src/model/actions/quality/trained-finesse';
 import { TrainedPerfection } from '../src/model/actions/other/trained-perfection';
 import { HastyTouch } from '../src/model/actions/quality/hasty-touch';
 import { DaringTouch } from '../src/model/actions/quality/daring-touch';
+import { RefinedTouch } from '../src/model/actions/quality/refined-touch';
 
 describe('Craft simulator tests', () => {
   it('Should handle Reflect properly', () => {
@@ -128,6 +129,16 @@ describe('Craft simulator tests', () => {
 
     expect(simulation2.steps[0].addedProgression).toBe(609);
     expect(simulation2.progression).toBe(3897);
+  });
+
+  it('Should combo RefinedTouch with BasicTouch', () => {
+    const simulation = new Simulation(
+      generateRecipe(517, 1000, 5200, 121, 105),
+      [new BasicTouch(), new RefinedTouch()],
+      generateStats(100, 2763, 2780, 545)
+    );
+
+    expect(simulation.run(true).simulation.getBuff(Buff.INNER_QUIET).stacks).toBe(3);
   });
 
   it('Should combo AdvancedTouch with Observe', () => {
