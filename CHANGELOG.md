@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.5](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.4...v3.5.5) (2024-06-28)
+
+
+### Bug Fixes
+
+* **quick-innovation:** CP cost should be 0 ([17fba4c](https://github.com/ffxiv-teamcraft/simulator/commit/17fba4c))
+* **refined-touch:** fix combo with Basic Touch ([6219b8b](https://github.com/ffxiv-teamcraft/simulator/commit/6219b8b))
+
+
+
 ### [3.5.4](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.3...v3.5.4) (2024-06-28)
 
 
