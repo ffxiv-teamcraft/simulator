@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.4](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.3...v3.5.4) (2024-06-28)
+
+
+### Bug Fixes
+
+* **core:** add missing LEVEL_TABLE entries for DT ([ce9f05a](https://github.com/ffxiv-teamcraft/simulator/commit/ce9f05a))
+
+
+
 ### [3.5.3](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.2...v3.5.3) (2024-06-27)
 
 
