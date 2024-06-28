@@ -10,7 +10,7 @@ export class QuickInnovation extends BuffAction {
   }
 
   getBaseCPCost(simulationState: Simulation): number {
-    return 18;
+    return 0;
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
