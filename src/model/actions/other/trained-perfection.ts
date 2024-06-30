@@ -14,10 +14,7 @@ export class TrainedPerfection extends CraftingAction {
   }
 
   _canBeUsed(simulationState: Simulation): boolean {
-    return (
-      simulationState.crafterStats.specialist &&
-      !simulationState.steps.some((step: ActionResult) => step.action.is(TrainedPerfection))
-    );
+    return !simulationState.steps.some((step: ActionResult) => step.action.is(TrainedPerfection));
   }
 
   execute(simulation: Simulation): void {
