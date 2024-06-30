@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.6](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.5...v3.5.6) (2024-06-30)
+
+
+### Bug Fixes
+
+* **trained-perfection:** now acts like a buff instead ([fd203fc](https://github.com/ffxiv-teamcraft/simulator/commit/fd203fc))
+* **trained-perfection:** shouldn't require specialist ([270ea0c](https://github.com/ffxiv-teamcraft/simulator/commit/270ea0c))
+
+
+
 ### [3.5.5](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.4...v3.5.5) (2024-06-28)
 
 
