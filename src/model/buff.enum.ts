@@ -21,4 +21,6 @@ export enum Buff {
   HEART_AND_SOUL,
 
   EXPEDIENCE,
+
+  TRAINED_PERFECTION,
 }

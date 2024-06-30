@@ -764,6 +764,18 @@ describe('Craft simulator tests', () => {
     );
   });
 
+  it('Should reduce durability cost to 0 after using TrainedPerfection even if buffs used inbetween', () => {
+    const simulation = new Simulation(
+      generateRecipe(1, 9, 80, 50, 30),
+      [new TrainedPerfection(), new Innovation(), new BasicTouch()],
+      generateStats(100, 4041, 3987, 616, true),
+      []
+    );
+
+    const result = simulation.run(true);
+    expect(result.steps[2].solidityDifference).toBe(0);
+  });
+
   it('Should only be able to use Daring Touch after Hasty Touch success', () => {
     const simulation = new Simulation(
       generateRecipe(1, 9, 80, 50, 30),

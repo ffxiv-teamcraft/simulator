@@ -3,8 +3,10 @@ import { Simulation } from '../../../simulation/simulation';
 import { ActionType } from '../action-type';
 import { CraftingJob } from '../../crafting-job.enum';
 import { ActionResult } from '../../action-result';
+import { BuffAction } from '../buff-action';
+import { Buff } from '../../buff.enum';
 
-export class TrainedPerfection extends CraftingAction {
+export class TrainedPerfection extends BuffAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
     return { job: CraftingJob.ANY, level: 100 };
   }
@@ -17,15 +19,7 @@ export class TrainedPerfection extends CraftingAction {
     return !simulationState.steps.some((step: ActionResult) => step.action.is(TrainedPerfection));
   }
 
-  execute(simulation: Simulation): void {
-    // Do nothing
-  }
-
   getBaseCPCost(simulationState: Simulation): number {
-    return 0;
-  }
-
-  getDurabilityCost(simulationState: Simulation): number {
     return 0;
   }
 
@@ -33,11 +27,21 @@ export class TrainedPerfection extends CraftingAction {
     return [100475, 100476, 100477, 100478, 100479, 100480, 100481, 100482];
   }
 
-  _getSuccessRate(simulationState: Simulation): number {
-    return 100;
+  getBuff(): Buff {
+    return Buff.TRAINED_PERFECTION;
   }
 
-  skipOnFail(): boolean {
-    return true;
+  getDuration(simulation: Simulation): number {
+    return Infinity;
+  }
+
+  getInitialStacks(): number {
+    return 0;
+  }
+
+  protected getTick():
+    | ((simulation: Simulation, linear?: boolean, action?: CraftingAction) => void)
+    | undefined {
+    return undefined;
   }
 }
