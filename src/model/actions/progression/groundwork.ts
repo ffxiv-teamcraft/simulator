@@ -1,6 +1,7 @@
 import { ProgressAction } from '../progress-action';
 import { Simulation } from '../../../simulation/simulation';
 import { CraftingJob } from '../../crafting-job.enum';
+import { Buff } from '../../buff.enum';
 
 export class Groundwork extends ProgressAction {
   getLevelRequirement(): { job: CraftingJob; level: number } {
@@ -29,7 +30,10 @@ export class Groundwork extends ProgressAction {
 
   getPotency(simulation: Simulation): number {
     const basePotency = simulation.crafterStats.level >= 86 ? 360 : 300;
-    if (simulation.durability >= this.getDurabilityCost(simulation)) {
+    if (
+      simulation.hasBuff(Buff.TRAINED_PERFECTION) ||
+      simulation.durability >= this.getDurabilityCost(simulation)
+    ) {
       return basePotency;
     }
     return basePotency / 2;
