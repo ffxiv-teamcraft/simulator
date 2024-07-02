@@ -788,4 +788,25 @@ describe('Craft simulator tests', () => {
     expect(result.steps[1].success).toBe(true);
     expect(result.steps[2].success).toBe(null);
   });
+
+  it('Should not reduce efficiency on Groundwork when Trained Perfection is used', () => {
+    const recipe = { ...generateRecipe(1, 9, 80, 50, 30), durability: 10 };
+    const simulation1 = new Simulation(
+      recipe,
+      [new Groundwork()],
+      generateStats(100, 4041, 3987, 616, true),
+      []
+    );
+
+    const simulation2 = new Simulation(
+      recipe,
+      [new TrainedPerfection(), new Groundwork()],
+      generateStats(100, 4041, 3987, 616, true),
+      []
+    );
+
+    expect(simulation1.run(true).steps[0].addedProgression).toBeLessThan(
+      simulation2.run(true).steps[1].addedProgression
+    );
+  });
 });

@@ -8,6 +8,9 @@ import { StepState } from '../step-state';
  */
 export abstract class GeneralAction extends CraftingAction {
   getDurabilityCost(simulationState: Simulation): number {
+    if (simulationState.hasBuff(Buff.TRAINED_PERFECTION)) {
+      return 0;
+    }
     let divider = 1;
     if (simulationState.hasBuff(Buff.WASTE_NOT) || simulationState.hasBuff(Buff.WASTE_NOT_II)) {
       divider *= 2;
