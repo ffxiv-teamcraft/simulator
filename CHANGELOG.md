@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.8](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.7...v3.5.8) (2024-07-02)
+
+
+### Bug Fixes
+
+* **trained-perfection:** properly remove buff after usage ([8b35975](https://github.com/ffxiv-teamcraft/simulator/commit/8b35975))
+
+
+
 ### [3.5.7](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.6...v3.5.7) (2024-07-02)
 
 
