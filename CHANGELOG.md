@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.9](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.8...v3.5.9) (2024-07-07)
+
+
+### Bug Fixes
+
+* **quick-innovation:** set wait time to 3 to handle its slow animation ([00935cb](https://github.com/ffxiv-teamcraft/simulator/commit/00935cb))
+
+
+
 ### [3.5.8](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.7...v3.5.8) (2024-07-02)
 
 
