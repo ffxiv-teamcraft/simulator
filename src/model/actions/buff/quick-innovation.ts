@@ -20,6 +20,10 @@ export class QuickInnovation extends BuffAction {
     );
   }
 
+  getWaitDuration(): number {
+    return 3;
+  }
+
   getBuff(): Buff {
     return Buff.INNOVATION;
   }
