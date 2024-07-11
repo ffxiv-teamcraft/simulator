@@ -131,6 +131,18 @@ describe('Craft simulator tests', () => {
     expect(simulation2.progression).toBe(3897);
   });
 
+  it('Should compute flooring accurately using DT rotation', () => {
+    const simulation = new Simulation(
+      generateRecipe(685, 6300, 11400, 167, 147),
+      [new Reflect(), new Innovation(), new PreparatoryTouch(), new PrudentTouch()],
+      generateStats(94, 3957, 3896, 563)
+    );
+
+    simulation.run(true);
+
+    expect(simulation.quality).toBe(2610);
+  });
+
   it('Should combo RefinedTouch with BasicTouch', () => {
     const simulation = new Simulation(
       generateRecipe(517, 1000, 5200, 121, 105),

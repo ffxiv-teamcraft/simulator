@@ -40,7 +40,7 @@ export abstract class QualityAction extends GeneralAction {
       buffMult += 0.5;
     }
 
-    buffMod = Math.fround((buffMod * buffMult * (100 + iqMod * 10)) / 100);
+    buffMod = (buffMod * buffMult * (100 + iqMod * 10)) / 100;
 
     const efficiency = Math.fround(potency * buffMod);
 
