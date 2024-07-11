@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.10](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.9...v3.5.10) (2024-07-11)
+
+
+### Bug Fixes
+
+* **quality:** better buffMod rounding logic ([3f3d150](https://github.com/ffxiv-teamcraft/simulator/commit/3f3d150)), closes [#81](https://github.com/ffxiv-teamcraft/simulator/issues/81)
+
+
+
 ### [3.5.9](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.8...v3.5.9) (2024-07-07)
 
 
