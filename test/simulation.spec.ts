@@ -33,6 +33,7 @@ import { TrainedPerfection } from '../src/model/actions/other/trained-perfection
 import { HastyTouch } from '../src/model/actions/quality/hasty-touch';
 import { DaringTouch } from '../src/model/actions/quality/daring-touch';
 import { RefinedTouch } from '../src/model/actions/quality/refined-touch';
+import { ImmaculateMend } from '../src/model/actions/other/immaculate-mend';
 
 describe('Craft simulator tests', () => {
   it('Should handle Reflect properly', () => {
@@ -141,6 +142,38 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.quality).toBe(2610);
+
+    const simulation2 = new Simulation(
+      generateRecipe(685, 6300, 11400, 167, 147),
+      [
+        new Reflect(),
+        new Innovation(),
+        new PreparatoryTouch(),
+        new PrudentTouch(),
+        new GreatStrides(),
+        new PreparatoryTouch(),
+        new GreatStrides(),
+        new Innovation(),
+        new PreparatoryTouch(),
+        new ImmaculateMend(),
+        new GreatStrides(),
+        new ByregotsBlessing(),
+        new WasteNot(),
+        new Veneration(),
+        new Groundwork(),
+        new Groundwork(),
+        new Groundwork(),
+        new Groundwork(),
+        new Veneration(),
+        new Groundwork(),
+      ],
+      generateStats(100, 4045, 3902, 601)
+    );
+
+    simulation2.run(true);
+
+    expect(simulation2.quality).toBe(11400);
+    expect(simulation2.progression).toBe(6585);
   });
 
   it('Should combo RefinedTouch with BasicTouch', () => {
