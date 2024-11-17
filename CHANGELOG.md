@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.12](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.11...v3.5.12) (2024-11-17)
+
+
+### Bug Fixes
+
+* **quality:** add missing fround in base quality formula ([a3ade24](https://github.com/ffxiv-teamcraft/simulator/commit/a3ade24))
+
+
+
 ### [3.5.11](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.10...v3.5.11) (2024-07-14)
 
 
