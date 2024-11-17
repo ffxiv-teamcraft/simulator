@@ -94,8 +94,8 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.steps[0].addedQuality).toBe(897);
-    expect(simulation.steps[1].addedQuality).toBe(358);
-    expect(simulation.steps[2].addedQuality).toBe(388);
+    expect(simulation.steps[1].addedQuality).toBe(359);
+    expect(simulation.steps[2].addedQuality).toBe(389);
     expect(simulation.steps[6].addedQuality).toBe(1255);
     expect(simulation.steps[7].addedQuality).toBe(1435);
     expect(simulation.steps[9].addedQuality).toBe(1614);
@@ -174,6 +174,35 @@ describe('Craft simulator tests', () => {
 
     expect(simulation2.quality).toBe(11400);
     expect(simulation2.progression).toBe(6585);
+
+    const simulation3 = new Simulation(
+      generateStarRecipe(710, 7500, 16500, 170, 150, 90, 75),
+      [
+        new Reflect(),
+        new Manipulation(),
+        new WasteNotII(),
+        new PreparatoryTouch(), // sim says 691, should be 693
+        new Innovation(),
+        new PreparatoryTouch(), // sim says 1209, should be 1213
+        new PreparatoryTouch(), // sim says 1382, should be 1387
+        new PreparatoryTouch(), // sim says 1555, should be 1560
+        new ByregotsBlessing(), // sim says 2592, should be 2601
+        new Veneration(),
+        new Groundwork(),
+        new WasteNotII(),
+        new Groundwork(),
+        new Groundwork(),
+        new Veneration(),
+        new Groundwork(),
+        new Groundwork(),
+      ],
+      generateStats(100, 5408, 5255, 630)
+    );
+
+    simulation3.run(true);
+
+    expect(simulation3.quality).toBe(8321);
+    expect(simulation3.progression).toBe(7775);
   });
 
   it('Should combo RefinedTouch with BasicTouch', () => {
@@ -615,7 +644,7 @@ describe('Craft simulator tests', () => {
 
     simulation3.run(true);
 
-    expect(simulation3.steps[3].addedQuality).toBe(663);
+    expect(simulation3.steps[3].addedQuality).toBe(660);
   });
 
   it('Should fail if required quality is not met', () => {

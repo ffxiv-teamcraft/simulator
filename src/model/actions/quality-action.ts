@@ -42,7 +42,7 @@ export abstract class QualityAction extends GeneralAction {
 
     buffMod = (buffMod * buffMult * (100 + iqMod * 10)) / 100;
 
-    const efficiency = Math.fround(potency * buffMod);
+    const efficiency = Math.floor(potency * buffMod);
 
     simulation.quality += Math.floor((qualityIncrease * conditionMod * efficiency) / 100);
 
