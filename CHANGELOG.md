@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.13](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.12...v3.5.13) (2024-12-02)
+
+
+### Bug Fixes
+
+* **quality:** add missing fround efficiency formula because 100 * 2.55 != 255 in JS ([3776fe9](https://github.com/ffxiv-teamcraft/simulator/commit/3776fe9))
+
+
+
 ### [3.5.12](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.11...v3.5.12) (2024-11-17)
 
 
