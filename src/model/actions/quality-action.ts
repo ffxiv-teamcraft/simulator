@@ -3,6 +3,7 @@ import { GeneralAction } from './general-action';
 import { ActionType } from './action-type';
 import { Buff } from '../buff.enum';
 import { StepState } from '../step-state';
+import { BasicTouch } from './quality/basic-touch';
 
 export abstract class QualityAction extends GeneralAction {
   public getType(): ActionType {
@@ -42,7 +43,7 @@ export abstract class QualityAction extends GeneralAction {
 
     buffMod = (buffMod * buffMult * (100 + iqMod * 10)) / 100;
 
-    const efficiency = Math.floor(potency * buffMod);
+    const efficiency = Math.fround(potency * buffMod);
 
     simulation.quality += Math.floor((qualityIncrease * conditionMod * efficiency) / 100);
 
