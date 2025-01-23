@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.14](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.13...v3.5.14) (2025-01-23)
+
+
+### Bug Fixes
+
+* **quality:** add missing fround efficiency formula for hybrid actions too ([cf2c263](https://github.com/ffxiv-teamcraft/simulator/commit/cf2c263))
+
+
+
 ### [3.5.13](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.12...v3.5.13) (2024-12-02)
 
 
