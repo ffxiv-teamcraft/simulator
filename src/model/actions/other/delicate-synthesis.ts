@@ -58,8 +58,8 @@ export class DelicateSynthesis extends GeneralAction {
   private executeQuality(simulation: Simulation): void {
     let buffMod = this.getBaseBonus(simulation);
     let conditionMod = this.getBaseCondition(simulation);
-    const potency = this.getPotency(simulation, 'quality');
-    const qualityIncrease = this.getBaseQuality(simulation);
+    const potency = this.getPotency(simulation);
+    const qualityIncrease = Math.floor(this.getBaseQuality(simulation));
 
     switch (simulation.state) {
       case StepState.EXCELLENT:
@@ -75,7 +75,7 @@ export class DelicateSynthesis extends GeneralAction {
         break;
     }
 
-    buffMod += (simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0) / 10;
+    const iqMod = simulation.getBuff(Buff.INNER_QUIET)?.stacks || 0;
 
     let buffMult = 1;
     if (simulation.hasBuff(Buff.GREAT_STRIDES)) {
@@ -86,13 +86,15 @@ export class DelicateSynthesis extends GeneralAction {
       buffMult += 0.5;
     }
 
-    buffMod = Math.fround(buffMod) * Math.fround(buffMult);
+    buffMod = (buffMod * buffMult * (100 + iqMod * 10)) / 100;
 
     const efficiency = Math.fround(potency * buffMod);
 
     simulation.quality += Math.floor((qualityIncrease * conditionMod * efficiency) / 100);
 
-    simulation.addInnerQuietStacks(1);
+    if (simulation.crafterStats.level >= 11) {
+      simulation.addInnerQuietStacks(1);
+    }
   }
 
   getBaseCPCost(simulationState: Simulation): number {

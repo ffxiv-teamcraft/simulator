@@ -666,6 +666,38 @@ describe('Craft simulator tests', () => {
     expect(simulation4.steps[8].addedQuality).toBe(652);
     expect(simulation4.steps[9].addedQuality).toBe(864);
     expect(simulation4.steps[10].addedQuality).toBe(1094);
+
+    const simulation5 = new Simulation(
+      generateStarRecipe(710, 4125, 12000, 170, 150, 90, 75),
+      [
+        new Reflect(),
+        new Innovation(),
+        new WasteNotII(),
+        new DelicateSynthesis(),
+        new DelicateSynthesis(),
+        new DelicateSynthesis(),
+        new ImmaculateMend(),
+        new TrainedPerfection(),
+        new GreatStrides(),
+        new Innovation(),
+        new PreparatoryTouch(),
+        new DelicateSynthesis(),
+        new GreatStrides(),
+        new PreparatoryTouch(),
+        new GreatStrides(),
+        new Innovation(),
+        new PreparatoryTouch(),
+        new GreatStrides(),
+        new ByregotsBlessing(),
+      ],
+      generateStats(100, 5408, 5313, 722)
+    );
+
+    simulation5.run(true);
+
+    expect(simulation5.steps[3].addedQuality).toBe(523);
+    expect(simulation5.steps[4].addedQuality).toBe(567);
+    expect(simulation5.steps[5].addedQuality).toBe(611);
   });
 
   it('Should fail if required quality is not met', () => {
