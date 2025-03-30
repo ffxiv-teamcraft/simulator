@@ -177,7 +177,7 @@ export abstract class CraftingAction {
     const stats = simulation.crafterStats;
     const baseValue = (stats.craftsmanship * 10) / simulation.recipe.progressDivider + 2;
     if (Tables.LEVEL_TABLE[stats.level] <= simulation.recipe.rlvl) {
-      return Math.floor(
+      return Math.fround(
         baseValue * (simulation.recipe.progressModifier || 100) * Math.fround(0.01)
       );
     }

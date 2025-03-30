@@ -591,6 +591,16 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.progression).toBe(378);
+
+    const simulation2 = new Simulation(
+      generateStarRecipe(740, 9000, 18700, 170, 150, 90, 75),
+      [new BasicSynthesis()],
+      generateStats(100, 5406, 4662, 633)
+    );
+
+    simulation2.run(true);
+
+    expect(simulation2.progression).toBe(345);
   });
 
   it('Quality Buff flooring', () => {
