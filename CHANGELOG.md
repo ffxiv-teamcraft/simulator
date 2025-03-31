@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.16](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.15...v3.5.16) (2025-03-31)
+
+
+### Bug Fixes
+
+* **progress:** add missing flooring after efficiency fround ([2517e31](https://github.com/ffxiv-teamcraft/simulator/commit/2517e31))
+
+
+
 ### [3.5.15](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.14...v3.5.15) (2025-03-30)
 
 
