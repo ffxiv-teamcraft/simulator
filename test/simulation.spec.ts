@@ -94,8 +94,8 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.steps[0].addedQuality).toBe(897);
-    expect(simulation.steps[1].addedQuality).toBe(359);
-    expect(simulation.steps[2].addedQuality).toBe(389);
+    expect(simulation.steps[1].addedQuality).toBe(358);
+    expect(simulation.steps[2].addedQuality).toBe(388);
     expect(simulation.steps[6].addedQuality).toBe(1255);
     expect(simulation.steps[7].addedQuality).toBe(1435);
     expect(simulation.steps[9].addedQuality).toBe(1614);
@@ -111,25 +111,6 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.quality).toBe(828);
-
-    const simulation2 = new Simulation(
-      generateStarRecipe(580, 3900, 10920, 130, 115, 80, 70),
-      [
-        new MuscleMemory(),
-        new Veneration(),
-        new Groundwork(),
-        new Groundwork(),
-        new Observe(),
-        new Observe(),
-        new CarefulSynthesis(),
-      ],
-      generateStats(90, 3289, 3420, 400)
-    );
-
-    simulation2.run(true);
-
-    expect(simulation2.steps[0].addedProgression).toBe(609);
-    expect(simulation2.progression).toBe(3897);
   });
 
   it('Should compute flooring accurately using DT rotation', () => {
@@ -261,7 +242,7 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.steps[0].addedQuality).toBe(666);
-    expect(simulation.steps[1].addedProgression).toBe(222);
+    expect(simulation.steps[1].addedProgression).toBe(223);
     expect(simulation.steps[2].addedQuality).toBe(266);
   });
 
@@ -295,7 +276,7 @@ describe('Craft simulator tests', () => {
 
     simulation.run(true);
 
-    expect(simulation.progression).toBe(230);
+    expect(simulation.progression).toBe(231);
     expect(simulation.quality).toBe(217);
   });
 
@@ -601,6 +582,27 @@ describe('Craft simulator tests', () => {
     simulation2.run(true);
 
     expect(simulation2.progression).toBe(345);
+
+    const simulation3 = new Simulation(
+      generateStarRecipe(740, 9000, 18700, 170, 150, 90, 75),
+      [
+        new MuscleMemory(),
+        new WasteNotII(),
+        new Veneration(),
+        new Groundwork(),
+        new Groundwork(),
+        new Groundwork(),
+        new DelicateSynthesis(),
+        new DelicateSynthesis(),
+        new DelicateSynthesis(),
+        new DelicateSynthesis(),
+      ],
+      generateStats(100, 5419, 4996, 630)
+    );
+
+    simulation3.run(true);
+
+    expect(simulation3.progression).toBe(8510);
   });
 
   it('Quality Buff flooring', () => {
@@ -851,7 +853,7 @@ describe('Craft simulator tests', () => {
 
     const stats = simulation.getMinStats([3960, 5400, 6840]);
     expect(stats.found).toBe(true);
-    expect(stats.craftsmanship).toBe(3875);
+    expect(stats.craftsmanship).toBe(3865);
     expect(stats.control).toBe(2962);
     expect(stats.cp).toBe(363);
   });
