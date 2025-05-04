@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.6.0](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.16...v3.6.0) (2025-05-04)
+
+
+### Features
+
+* **actions:** add Material Miracle from cosmic exploration ([6390a86](https://github.com/ffxiv-teamcraft/simulator/commit/6390a86))
+
+
+
 ### [3.5.16](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.15...v3.5.16) (2025-03-31)
 
 
