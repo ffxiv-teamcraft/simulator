@@ -37,6 +37,7 @@ import { TrainedPerfection } from './actions/other/trained-perfection';
 import { DaringTouch } from './actions/quality/daring-touch';
 import { QuickInnovation } from './actions/buff/quick-innovation';
 import { ImmaculateMend } from './actions/other/immaculate-mend';
+import { MaterialMiracle } from './actions/other/material-miracle';
 
 export class CraftingActionsRegistry {
   private static ACTION_IMPORT_NAMES: { short: string; full: string }[] = [
@@ -143,6 +144,7 @@ export class CraftingActionsRegistry {
     { name: 'CarefulObservation', action: new CarefulObservation() },
     { name: 'DelicateSynthesis', action: new DelicateSynthesis() },
     { name: 'RemoveFinalAppraisal', action: new RemoveFinalAppraisal() },
+    { name: 'MaterialMiracle', action: new MaterialMiracle() },
   ];
 
   public static getActionsByType(type: ActionType): CraftingAction[] {
