@@ -858,7 +858,7 @@ describe('Craft simulator tests', () => {
     expect(stats.cp).toBe(363);
   });
 
-  it('Should use the enhanced Good modifier with Splendorous tools', () => {
+  it('Should use the enhanced Good modifier with Relic tools', () => {
     const simulation = new Simulation(
       generateRecipe(1, 9, 80, 50, 30),
       [new Observe(), new BasicTouch()],
