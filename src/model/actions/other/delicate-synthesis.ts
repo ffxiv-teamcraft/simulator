@@ -69,7 +69,7 @@ export class DelicateSynthesis extends GeneralAction {
         conditionMod *= 0.5;
         break;
       case StepState.GOOD:
-        conditionMod *= simulation.crafterStats.splendorous ? 1.75 : 1.5;
+        conditionMod *= simulation.crafterStats.relicTool ? 1.75 : 1.5;
         break;
       default:
         break;
