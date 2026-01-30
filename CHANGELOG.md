@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.7.0](https://github.com/ffxiv-teamcraft/simulator/compare/v3.6.0...v3.7.0) (2026-01-30)
+
+
+### Features
+
+* **actions:** add Stellar Steady Hand from cosmic exploration ([022ce90](https://github.com/ffxiv-teamcraft/simulator/commit/022ce90))
+* **simulator:** rename splendorous to relic tool ([#82](https://github.com/ffxiv-teamcraft/simulator/issues/82)) ([fbc0837](https://github.com/ffxiv-teamcraft/simulator/commit/fbc0837))
+
+
+
 ## [3.6.0](https://github.com/ffxiv-teamcraft/simulator/compare/v3.5.16...v3.6.0) (2025-05-04)
 
 
