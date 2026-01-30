@@ -21,7 +21,7 @@ export class StellarSteadyHand extends BuffAction {
   }
 
   getIds(): number[] {
-    return [46846, 46846, 46846, 46846, 46846, 46846, 46846, 46846];
+    return [46843, 46843, 46843, 46843, 46843, 46843, 46843, 46843];
   }
 
   getInitialStacks(): number {
