@@ -23,4 +23,5 @@ export enum Buff {
   EXPEDIENCE,
 
   TRAINED_PERFECTION,
+  STELLAR_STEADY_HAND,
 }

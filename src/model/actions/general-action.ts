@@ -19,6 +19,9 @@ export abstract class GeneralAction extends CraftingAction {
   }
 
   _getSuccessRate(simulationState: Simulation): number {
+    if (simulationState.hasBuff(Buff.STELLAR_STEADY_HAND)) {
+      return 100;
+    }
     return this.getBaseSuccessRate(simulationState);
   }
 
