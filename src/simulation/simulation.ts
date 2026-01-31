@@ -547,6 +547,11 @@ export class Simulation {
       this.state = StepState.GOOD;
       return;
     }
+    // If current state is ROBUST, then next one is STURDY
+    if (this.state === StepState.ROBUST) {
+      this.state = StepState.STURDY;
+      return;
+    }
 
     // LV 63 Trait for improved Good chances (Quality Assurance)
     const goodChance = this.crafterStats.level >= 63 ? 0.25 : 0.2;
@@ -574,6 +579,9 @@ export class Simulation {
             break;
           case StepState.STURDY:
             rate = 0.15;
+            break;
+          case StepState.ROBUST:
+            rate = 0.1;
             break;
           case StepState.MALLEABLE:
             rate = 0.12;

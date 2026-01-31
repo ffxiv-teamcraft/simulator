@@ -12,7 +12,7 @@ export abstract class GeneralAction extends CraftingAction {
     if (simulationState.hasBuff(Buff.WASTE_NOT) || simulationState.hasBuff(Buff.WASTE_NOT_II)) {
       divider *= 2;
     }
-    if (simulationState.state === StepState.STURDY) {
+    if (simulationState.state === StepState.STURDY || simulationState.state === StepState.ROBUST) {
       divider *= 2;
     }
     return Math.ceil(this.getBaseDurabilityCost(simulationState) / divider);

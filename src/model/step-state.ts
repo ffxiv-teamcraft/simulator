@@ -12,4 +12,5 @@ export enum StepState {
   MALLEABLE, // Good, but for Progress. Doesn't proc Intensive/Precise.
   PRIMED, // Next status is +2 duration
   GOOD_OMEN, // Next step is GOOD condition
+  ROBUST, // Reduces loss of durability by 50% (like Sturdy) and next step is Sturdy
 }
