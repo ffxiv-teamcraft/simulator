@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.7.3](https://github.com/ffxiv-teamcraft/simulator/compare/v3.7.2...v3.7.3) (2026-01-31)
+
+
+### Bug Fixes
+
+* support for new ROBUST step state ([4b2949f](https://github.com/ffxiv-teamcraft/simulator/commit/4b2949f))
+
+
+
 ### [3.7.2](https://github.com/ffxiv-teamcraft/simulator/compare/v3.7.1...v3.7.2) (2026-01-30)
 
 
