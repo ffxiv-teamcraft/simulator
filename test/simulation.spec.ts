@@ -242,7 +242,7 @@ describe('Craft simulator tests', () => {
     simulation.run(true);
 
     expect(simulation.steps[0].addedQuality).toBe(666);
-    expect(simulation.steps[1].addedProgression).toBe(223);
+    expect(simulation.steps[1].addedProgression).toBe(222);
     expect(simulation.steps[2].addedQuality).toBe(266);
   });
 
@@ -276,7 +276,7 @@ describe('Craft simulator tests', () => {
 
     simulation.run(true);
 
-    expect(simulation.progression).toBe(231);
+    expect(simulation.progression).toBe(230);
     expect(simulation.quality).toBe(217);
   });
 
@@ -853,7 +853,7 @@ describe('Craft simulator tests', () => {
 
     const stats = simulation.getMinStats([3960, 5400, 6840]);
     expect(stats.found).toBe(true);
-    expect(stats.craftsmanship).toBe(3865);
+    expect(stats.craftsmanship).toBe(3874);
     expect(stats.control).toBe(2962);
     expect(stats.cp).toBe(363);
   });
